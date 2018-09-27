@@ -1,0 +1,15 @@
+<h1>Welcome </h1>
+<button class="btn btn-primary" (click)="onLog()" id="logBtn">View Log</button>
+<div id="logTable" hidden>
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Action Type</th>
+        <th>Time</tr>
+    <tr *ngFor="let user of users">
+        <td>{{ user.userName }}</td>
+        <td>{{ user.actionType }}</td>
+        <td>{{ user.createdAt }}</td>
+    </tr>
+</table>
+</div>

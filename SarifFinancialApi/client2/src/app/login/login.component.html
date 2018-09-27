@@ -1,0 +1,42 @@
+<h3>Login</h3>
+<form #addUserForm="ngForm">
+  <div class="horizontalgap" style="width:10px">
+<div class="form-group">
+  <label for="username">Username</label>
+  <input type="text" class="form-control" id="username" placeholder="Enter your username"
+         required [(ngModel)]="username" name="username" #usernam="ngModel">
+
+</div>
+</div>
+
+  <div [hidden]="usernam.valid || usernam.pristine"
+       class="alert alert-danger">
+    Username is required
+  </div>
+
+  <div class="form-group">
+    <div class="horizontalgap" style="width:10px">
+    <label for="password">Password</label>
+    <input type="text" class="form-control" id="password" placeholder="Enter your password"
+           required [(ngModel)]="password" name="password" #passw="ngModel">
+
+  </div>
+
+    <div [hidden]="passw.valid || passw.pristine"
+         class="alert alert-danger">
+      Password is required
+    </div>
+  </div>
+  <p>
+
+  </p>
+  <div class="form-group">
+    <button class="btn btn-primary" (click)="onSubmit()" [disabled]="!addUserForm.form.valid">Login</button>
+
+  </div>
+  <div class="col col-sm-12">
+    <h2> {{invalidIndicator }} </h2>
+  </div>
+
+
+</form>
