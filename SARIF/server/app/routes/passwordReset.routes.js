@@ -6,4 +6,6 @@ module.exports = function(app) {
 
     app.post('/api/resetPassword', reset.sendInfo);
 
+    app.post('/api/emailSend', reset.sendEmail);
+
 }

@@ -24,6 +24,7 @@ export class AddUserComponent implements OnInit {
   emailExist = 0;
   passwordAcceptable = 0;
   passwordError = 0;
+  access = 1;
 
   constructor(
     private userService: UserService,
@@ -36,6 +37,7 @@ export class AddUserComponent implements OnInit {
   ) { }
   ngOnInit() {
     this.viewUsers();
+    this.userAccess();
     }
 
   viewUsers() {
@@ -128,6 +130,15 @@ export class AddUserComponent implements OnInit {
         this.router.navigate(['user/' + userId]);
       }
     );
+  }
+
+  userAccess(){
+    if(this.comp.getRole() === 'admin') {
+      this.access = 0;
+    }
+    else {
+      this.access = 1;
+    }
   }
 
   sort(n) {

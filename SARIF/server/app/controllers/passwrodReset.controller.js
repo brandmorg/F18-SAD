@@ -1,6 +1,7 @@
 const db = require('../config/db.config.js');
 const sequelize = require('sequelize');
 const Users = db.users;
+const nodemailer = require('nodemailer');
 
 /*exports.getData = (req, res) => {
 
@@ -30,3 +31,37 @@ exports.sendInfo = (req, res) => {
     })
 
 };
+
+exports.sendEmail = (req, res) => {
+  let username = req.body.userName;
+  Users.findOne({where: {userName: username}}).then(function (user) {
+      if(user){
+          let email = user.email;
+
+          var transporter = nodemailer.createTransport({
+              service: 'gmail',
+              auth: {
+                  user: 'sariffinancialbot@gmail.com',
+                  pass: 'ilikemoney123'
+              }
+          })
+
+          var mailOptions = {
+              from: 'sariffinancialbot@gmail.com',
+              to: email,
+              subject: 'Sarif Financial password reset',
+              text: 'Click on the link below to verify your email:'
+          };
+
+          transporter.sendMail(mailOptions, function (error, info) {
+              if(error){
+                  console.log(error);
+              }
+              else{
+                  console.log('Email sent: ' + info.response);
+                  res.json(email);
+              }
+          })
+      }
+  })
+}

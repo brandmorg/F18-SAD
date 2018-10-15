@@ -23,14 +23,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.DECIMAL,
             allowNull: true,
         },
-        Reference: {
-            type: Sequelize.INTEGER,
-            allowNull: true,
-        },
-        FileID: {
-            type: Sequelize.INTEGER,
-            allowNull: true,
-        }
+
     }
     );
 

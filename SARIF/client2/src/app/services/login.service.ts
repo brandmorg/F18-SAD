@@ -13,6 +13,7 @@ const httpOptions = {
 export class LoginService {
   private customersUrl = 'http://localhost:8080/api/users';
   private resetURL = 'http://localhost:8080/api/resetPassword';
+  private emailURL = 'http://localhost:8080/api/emailSend';
   private loginUrl = 'http://localhost:8080/api/loginVerify';
   private sessionURL = 'http://localhost:8080/api/checkSession';
   constructor(
@@ -23,6 +24,9 @@ export class LoginService {
   }
   resetPasswordSend (username): Observable<any> {
     return this.http.post(this.resetURL, {username: username}, httpOptions);
+  }
+  sendEmail (username): Observable<any> {
+    return this.http.post(this.emailURL, {userName: username}, httpOptions);
   }
   getSession (): Observable<any> {
     return this.http.get(this.sessionURL, httpOptions);

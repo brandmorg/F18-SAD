@@ -14,9 +14,14 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: true,
         },
-
+        Reference: {
+            type: Sequelize.INTEGER,
+            allowNull: true,
+        },
+        FileID: {
+            type: Sequelize.INTEGER,
+            allowNull: true,
+        }
     });
-
-
     return Journal;
 }

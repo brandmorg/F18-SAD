@@ -63,17 +63,32 @@ function initial(){
         {
             userName: "admin",
             userPassword: "password",
-            userRole: "admin"
+            userRole: "admin",
+            securityQ: "What is your favorite color?",
+            securityA: "Blue",
+            email: "abbot@ksu.com",
+            firstName: "Bud",
+            lastName: "Abbot"
         },
         {
             userName: "manager",
             userPassword: "password",
-            userRole: "manager"
+            userRole: "manager",
+            securityQ: "What is your favorite color?",
+            securityA: "Blue",
+            email: "costello@ksu.com",
+            firstName: "Lou",
+            lastName: "Costello"
         },
         {
             userName: "accountant",
             userPassword: "password",
-            userRole: "accountant"
+            userRole: "accountant",
+            securityQ: "What is your favorite color?",
+            securityA: "Blue",
+            email: "bonnie@ksu.com",
+            firstName: "Bonnie",
+            lastName: "Parker"
 
         },
         {
@@ -81,8 +96,22 @@ function initial(){
             userPassword: "password",
             userRole: "accountant",
             securityQ: "What is your favorite color?",
-            securityA: "Blue"
+            securityA: "Blue",
+            email: "clyde@ksu.com",
+            firstName: "Clyde",
+            lastName: "Barrow"
+        },
+        {
+            userName: "Tyler",
+            userPassword: "password",
+            userRole: "accountant",
+            securityQ: "What is your favorite color?",
+            securityA: "Blue",
+            email: "wtgambrell@gmail.com",
+            firstName: "Tyler",
+            lastName: "Gambrell"
         }
+
 
     ]
 
