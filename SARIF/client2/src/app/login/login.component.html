@@ -1,49 +1,46 @@
-
-<form #addUserForm="ngForm" >
+<form #addUserForm="ngForm">
 
   <div id="center2">
     <div id="height">
       <h3>Login</h3>
-  <div class="horizontalgap" style="width:250px">
-<div class="form-group">
-  <label class ='required' for="username">Username</label>
-  <input type="text" class="form-control" id="username" placeholder="Username"
-         required [(ngModel)]="username" name="username" #usernam="ngModel">
+      <div class="horizontalgap" style="width:250px">
+        <div class="form-group">
+          <label class='required' for="username">Username</label>
+          <input type="text" class="form-control" id="username" placeholder="Username" required [(ngModel)]="username"
+            name="username" #usernam="ngModel">
 
-</div>
-</div>
+        </div>
+      </div>
 
-  <div [hidden]="usernam.valid || usernam.pristine"
-       class="alert alert-danger" style="width: 250px;">
-    Username is required
-  </div>
+      <div [hidden]="usernam.valid || usernam.pristine" class="alert alert-danger" style="width: 250px;">
+        Username is required
+      </div>
 
 
-    <div class="horizontalgap" style="width:250px">
+      <div class="horizontalgap" style="width:250px">
+        <div class="form-group">
+          <label class='required' for="password">Password</label>
+          <input type="text" class="form-control" id="password" placeholder="Password" required [(ngModel)]="password"
+            name="password" #passw="ngModel">
+
+        </div>
+      </div>
+
+      <div [hidden]="passw.valid || passw.pristine" style="width: 250px; height: 30px">
+        <label class="alert alert-danger" style="width:250px; padding-top: 6px;"> Password is required </label>
+      </div>
+
+      <p>
+
+      </p>
       <div class="form-group">
-    <label class ='required'  for="password">Password</label>
-    <input type="text" class="form-control" id="password" placeholder="Password"
-           required [(ngModel)]="password" name="password" #passw="ngModel">
+        <button class="btn btn-primary" (click)="onSubmit()" [disabled]="!addUserForm.form.valid">Login</button>
+        <button class="btn btn-link" (click)="toggler()" id="button1">Register</button>
 
       </div>
-    </div>
-
-      <div [hidden]="passw.valid || passw.pristine"
-          style="width: 250px; height: 30px">
-      <label class="alert alert-danger" style="width:250px; padding-top: 6px;"> Password is required </label>
-    </div>
-
-  <p>
-
-  </p>
-  <div class="form-group">
-    <button class="btn btn-primary" (click)="onSubmit()" [disabled]="!addUserForm.form.valid">Login</button>
-    <button class="btn btn-link" (click)="toggler()" id="button1" >Register</button>
-
-  </div>
-  <div [hidden]="notLogged" class="alert alert-danger"  style="width: 250px;">
-    Incorrect username or password
-  </div>
+      <div [hidden]="notLogged" class="alert alert-danger" style="width: 250px;">
+        Incorrect username or password
+      </div>
     </div>
   </div>
 

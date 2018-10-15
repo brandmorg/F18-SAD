@@ -1,4 +1,3 @@
-
 <form #adminForm="ngForm">
   <div>
   <div class="sidenav">
@@ -6,7 +5,7 @@
       <h2> {{indicator}} </h2>
       <button class="btn btn-link" (click)="logOut()" id="button1" *ngIf="access == 1">User list</button>
       <button class="btn btn-link" (click)="logOut()" id="button2" *ngIf="access == 1">User log</button>
-      <button class="btn btn-link" (click)="logOut()" id="button3" >Chart of accounts</button>
+      <button class="btn btn-link" (click)="chartOfAccounts()" id="button3" >Chart of accounts</button>
       <button class="btn btn-link" (click)="logOut()" id="button4" >Journal</button>
       <button class="btn btn-link" (click)="logOut()" id="button5" >Log out</button>
     </div>
@@ -39,15 +38,15 @@
       </table>
       </div>
       
-      <div id="usersTable" hidden>
-        <table>
+      <div id="showUsersTable" hidden>
+        <table id="usersTable">
           <tr>
-            <th>User Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>User Role</th>
-            <th>Active</th>
+            <th (click)="sort(0)">User Id</th>
+            <th (click)="sort(1)">First Name</th>
+            <th (click)="sort(2)">Last Name</th>
+            <th (click)="sort(3)">Email</th>
+            <th (click)="sort(4)">User Role</th>
+            <th (click)="sort(5)">Active</th>
           </tr>
           <tr *ngFor="let user of users">
             <td>{{ user.userId }}</td>

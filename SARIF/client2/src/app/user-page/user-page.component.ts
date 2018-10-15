@@ -52,7 +52,7 @@ export class UserPageComponent implements OnInit {
     this.logData.findAll().subscribe(
       (userLog) => {
         document.getElementById("logTable").hidden = false; //Unhide table after onLog click
-        document.getElementById("usersTable").hidden = true;
+        document.getElementById("showUsersTable").hidden = true;
         this.logs = userLog;
       }
     )
@@ -62,7 +62,7 @@ export class UserPageComponent implements OnInit {
     this.userData.findAll().subscribe(
       (user) => {
         document.getElementById("logTable").hidden = true; //Unhide table after onLog click
-        document.getElementById("usersTable").hidden = false;
+        document.getElementById("showUsersTable").hidden = false;
         this.users = user;
       }
     )
@@ -75,7 +75,7 @@ export class UserPageComponent implements OnInit {
       (getEditUser) => {
         this.editUser = getEditUser;
         document.getElementById("editUser").hidden = false; //Unhide table after onLog click
-        document.getElementById("usersTable").hidden = true;
+        document.getElementById("showUsersTable").hidden = true;
         this.router.navigate(['user/' + userId]);
       }
     )
@@ -83,5 +83,50 @@ export class UserPageComponent implements OnInit {
 
   createUser() {
     this.router.navigate(['AddUser']);
+  }
+
+  chartOfAccounts() {
+    this.router.navigate(['AddAccount'])
+  }
+
+  sort(n) {
+    var table, rows, switching, shouldSwitch, x, y, switchCount = 0;
+    table = document.getElementById("usersTable");
+    switching = true;
+    // Set the sorting direction to ascending:
+    let dir = "asc";
+    while (switching) {
+      switching = false;
+      rows = table.rows;
+
+      for (var i = 1; i < (rows.length - 1); i++) {
+        shouldSwitch = false;
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+
+        if (dir == "asc") {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        } else if (dir == "desc") {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+      }
+
+      if (shouldSwitch) {
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        switchCount++;
+      } else {
+        if (switchCount == 0 && dir == "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
   }
 }

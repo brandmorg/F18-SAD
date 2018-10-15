@@ -42,4 +42,15 @@ delSession(){
     this.sessionSt.clear('id');
     this.sessionSt.clear('userRole');
 }
+
+
+findAccount(found) {
+    this.sessionSt.store('accountName', found);
+}
+getAccount() {
+    return this.sessionSt.retrieve('accountName');
+}
+delAccount() {
+    this.sessionSt.clear('accountName');
+}
 }

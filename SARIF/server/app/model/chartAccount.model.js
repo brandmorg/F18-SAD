@@ -40,7 +40,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         comment: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         accountName: {
             type: Sequelize.STRING,

@@ -9,5 +9,8 @@ module.exports = function(app) {
     app.get('/api/chartOfAccounts', accounts.findAll);
 
     // Retrieve a single account by Id
-    app.get('/api/chartOfAccounts/:account', accounts.findById);
+    app.get('/api/chartOfAccounts/:caId', accounts.findById);
+
+    // update a single account with Id
+    app.put('/api/chartOfAccounts', accounts.update);
 }
