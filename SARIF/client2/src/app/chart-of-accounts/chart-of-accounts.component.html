@@ -1,0 +1,187 @@
+<button class="btn btn-info btn-lg" (click)="createAccount()" id='createAccountBtn'>Create Account</button>
+<input [(ngModel)]="searchText" placeholder="Search Accounts">
+<div id="createAccountModal" class="modal">
+  <div class="modal-content">
+    <form #addAccountForm="ngForm">
+
+      <!-- Modal for account creation -->
+      <div class="form-group">
+        <label for="accountName">Account Name</label>
+        <input type="text" class="form-control" id="accountName" placeholder="Account Name" required [(ngModel)]="CoA.accountName"
+          name="accountName" #accountNam="ngModel">
+      </div>
+      <div [hidden]="accountNam.valid || accountNam.pristine" class="alert alert-danger" style="width: 250px;">
+        Account Name is required
+      </div>
+
+      <div class="form-group">
+        <label for="accountNumber">Account Number</label>
+        <input type="text" class="form-control" id="accountNumber" placeholder="Account Number" required [(ngModel)]="CoA.accountNumber"
+          name="accountNumber" #accountNumbe="ngModel">
+      </div>
+      <div [hidden]="accountNumbe.valid || accountNumbe.pristine" class="alert alert-danger" style="width: 250px;">
+        Account Number is required
+      </div>
+      <div *ngIf="isNegativeNumber(CoA.accountNumber)" class="alert alert-danger" style="width: 250px;">
+        Account Number must be greater than 0
+      </div>
+
+      <div class="form-group">
+        <label for="accountType">Account Type</label>
+        <select required [(ngModel)]="CoA.accountType" name="accountType" #accountType="ngModel">
+          <option>Assets</option>
+          <option>Revenue</option>
+          <option>Expenses</option>
+          <option>Liability</option>
+          <option>Equity</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="accountSubType">Account Subtype</label>
+        <select required [(ngModel)]="CoA.accountSubType" name="accountSubType" #accountSubType="ngModel">
+          <option>Assets current</option>
+          <option>Expenses current</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="reportType">Report Type</label>
+        <select required [(ngModel)]="CoA.reportType" name="reportType" #reportType="ngModel">
+          <option>Balance Sheet</option>
+          <option>Income Statement</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" id="originalBalance" placeholder="Account Balance" required [(ngModel)]="CoA.originalBalance"
+          name="originalBalance" #balance="ngModel">
+      </div>
+      <div [hidden]="balance.valid || balance.pristine" class="alert alert-danger" style="width: 250px;">
+        Account Balance is required
+      </div> 
+
+      <div class="form-group">
+        <label for="active">Active</label>
+        <select required [(ngModel)]="CoA.active" name="active" #activeInactive="ngModel">
+          <option>Active</option>
+          <option>Inactive</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" id="comment" placeholder="Account Description" required [(ngModel)]="CoA.comment"
+          name="comment" #description="ngModel" required>
+      </div>
+      <div [hidden]="description.valid || description.pristine" class="alert alert-danger" style="width: 250px;">
+        Account Description is required
+      </div>
+
+
+      <button (click)="submit()" id="submitBtn" [disabled]="!addAccountForm.form.valid">Submit</button>
+      <input type="reset">
+      <button (click)="close()" id="closeModalBtn">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal for account update -->
+<div id="editAccountModal" class="modal">
+  <div class="modal-content">
+    <form #editAccountForm="ngForm">
+      <div class="form-group">
+        <label for="accountName">Current Account Name: {{ accountData.accountName }}</label>
+        <input type="text" class="form-control" id="accountName" placeholder="Give Account Name" required [(ngModel)]="editCoA.accountName"
+          name="accountName" #accountName="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="accountNumber">Account Number</label>
+        <input type="text" class="form-control" id="accountNumber" placeholder="Give Account Number" required
+          [(ngModel)]="editCoA.accountNumber" name="accountNumber" #accountNumber="ngModel">
+      </div>
+      <div *ngIf="isNegativeNumber(editCoA.accountNumber)" class="alert alert-danger" style="width: 250px;">
+        Account Number must be greater than 0
+      </div>
+
+      <div class="form-group">
+        <label for="accountType">Account Type</label>
+        <select required [(ngModel)]="editCoA.accountType" name="accountType" #accountType="ngModel">
+          <option>Assets</option>
+          <option>Revenue</option>
+          <option>Expenses</option>
+          <option>Liability</option>
+          <option>Equity</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="accountSubType">Account Subtype</label>
+        <select required [(ngModel)]="editCoA.accountSubType" name="accountSubType" #accountSubType="ngModel">
+          <option>Assets current</option>
+          <option>Expenses current</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="reportType">Report Type</label>
+        <select required [(ngModel)]="editCoA.reportType" name="reportType" #reportType="ngModel">
+          <option>Balance Sheet</option>
+          <option>Income Statement</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" id="originalBalance" placeholder="Give Account Balance" required
+          [(ngModel)]="editCoA.originalBalance" name="originalBalance" #originalBalance="ngModel">
+      </div>
+
+      <div class="form-group">
+        <label for="active">Active</label>
+        <select required [(ngModel)]="editCoA.active" name="active" #active="ngModel">
+          <option>Active</option>
+          <option>Inactive</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" id="comment" placeholder="Account Comments" required [(ngModel)]="editCoA.comment"
+          name="comment" #comment="ngModel">
+      </div>
+      <button (click)="submitEdit()" id="submitEditBtn">Submit</button>
+      <button (click)="close()" id="closeModalBtn">Cancel</button>
+    </form>
+  </div>
+</div>
+
+
+
+
+<div class="form-group">
+  <table id="accountTable">
+    <tr>
+      <th (click)="sort(0)">Account Number</th>
+      <th (click)="sort(1)">Account Name</th>
+      <th (click)="sort(2)">Account Type</th>
+      <th (click)="sort(3)">Account Subtype</th>
+      <th (click)="sort(4)">Normal Side</th>
+      <th (click)="sort(5)">Report Type</th>
+      <th (click)="sort(6)">Original Balance</th>
+      <th (click)="sort(7)">Current Balance</th>
+      <th>Account Description</th>
+      <th (click)="sort(9)">Active</th>
+    </tr>
+    <tr *ngFor="let account of accounts | filter : searchText">
+      <td>{{ account.accountNumber }}</td>
+      <td>{{ account.accountName }}</td>
+      <td>{{ account.accountType }}</td>
+      <td>{{ account.accountSubType }}</td>
+      <td>{{ account.normalSide }}</td>
+      <td>{{ account.reportType }}</td>
+      <td>{{ account.originalBalance }}</td>
+      <td>{{ account.currentBalance }}</td>
+      <td>{{ account.comment }}</td>
+      <td>{{ account.active }}</td>
+      <button class="btn btn-primary" (click)="getAccount(account.caId)">{{ account.caId }}</button>
+    </tr>
+  </table>
+</div>

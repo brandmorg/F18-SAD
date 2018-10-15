@@ -1,8 +1,19 @@
-td {
-    border-bottom:1px solid black;
+td, th {
+  border: 1px solid #6e7d93;
+  text-align: left;
+  padding: 8px;
 }
-table, h3, h2 {
+
+tr:nth-child(even) {
+  background-color: #6e7d93;
+}
+table, h3, h2, td {
     color: white;
+} 
+#accountTable {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
 
 .sidenav {

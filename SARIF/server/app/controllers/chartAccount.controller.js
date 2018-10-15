@@ -22,10 +22,9 @@ exports.findAll = (req, res) => {
 
 // Find a log by Id
 exports.findById = (req, res) => {
-    ChartAccount.findById(req.params.accountName).then(account => {
+    ChartAccount.findById(req.params.caId).then(account => {
         res.json(account);
     })
-
 };
 
 exports.update = (req, res) => {
