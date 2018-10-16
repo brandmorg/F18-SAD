@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CoA } from '../chart-of-accounts';
 import { AppComponent } from '../app.component';
 import { CoAService } from '../services/coa.service';
 import { UserLogService } from '../services/user-log.service';
-import { isEmpty } from 'rxjs/operators';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-chart-of-accounts',
@@ -11,13 +11,14 @@ import { isEmpty } from 'rxjs/operators';
   styleUrls: ['./chart-of-accounts.component.css']
 })
 export class ChartOfAccountsComponent implements OnInit {
+  @ViewChild('addAccountForm') public accountForm: NgForm;
+  @ViewChild('editAccountForm') public editForm: NgForm;
   CoA = new CoA();
   editCoA = new CoA();
   accounts = [];
   accountData = [];
   accountId: number;
   temp = [];
-  x: boolean;
 
   constructor(
     private coaService: CoAService,
@@ -26,11 +27,7 @@ export class ChartOfAccountsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.coaService.findAll().subscribe(
-      (account) => {
-        this.accounts = account;
-      }
-    )
+    this.viewAccounts();
 
 
     //Closes modal when user clicks outside of modal
@@ -43,8 +40,14 @@ export class ChartOfAccountsComponent implements OnInit {
       if (event.target == editAccountModal) {
         editAccountModal.style.display = "none";
       }
+      
     }
-
+  }
+  viewAccounts() {
+    this.coaService.findAll().subscribe(
+      (account) => {
+        this.accounts = account;
+      })
   }
 
   //Opens modal
@@ -72,12 +75,13 @@ export class ChartOfAccountsComponent implements OnInit {
 
     //Set the current balance to the original balance
     this.CoA.currentBalance = this.CoA.originalBalance;
+
     this.editCoA = this.CoA;
+
     //Check to see if another account exists with same number or name
     this.coaService.findAll().subscribe(
       (account) => {
         this.temp = account;
-        this.x = false;
         for (var i = 0; i < this.temp.length; i++) {
           //Check for account name
           if (this.temp[i].accountName == this.CoA.accountName) {
@@ -96,8 +100,8 @@ export class ChartOfAccountsComponent implements OnInit {
             //Close modal
             let modal = document.getElementById("createAccountModal");
             modal.style.display = "none";
-            location.reload();
-            return;
+            this.accountForm.reset();
+            this.viewAccounts();
           });
       })
   }
@@ -106,8 +110,10 @@ export class ChartOfAccountsComponent implements OnInit {
   close() {
     let modal = document.getElementById("createAccountModal");
     modal.style.display = "none";
+    this.accountForm.reset();
     let editModal = document.getElementById("editAccountModal");
     editModal.style.display = "none";
+    this.editForm.reset();
   }
 
   //Get account info to edit and load modal
@@ -116,6 +122,7 @@ export class ChartOfAccountsComponent implements OnInit {
     this.coaService.getAccount(this.accountId)
       .subscribe((account) => {
         this.accountData = account;
+        console.log(this.accountData)
       });
     let modal = document.getElementById("editAccountModal");
     modal.style.display = "block";
@@ -149,47 +156,25 @@ export class ChartOfAccountsComponent implements OnInit {
         for (var i = 0; i < this.temp.length; i++) {
           //Check for account name
           if (this.temp[i].accountName == this.editCoA.accountName) {
-            console.log("account name found");
             return window.alert("Account with same account name found. Enter different account name.");
           }
           //Check for account number
           if (this.temp[i].accountNumber == this.editCoA.accountNumber) {
-            console.log("account number found");
             return window.alert("Account with the same account number found. Enter a different account number.")
           }
         }
         //If account name and number not found, create the account
-        console.log('not found');
         this.coaService.updateAccount(this.editCoA)
           .subscribe(() => {
             alert("Account updated");
-            console.log(this.editCoA);
             this.logData.create(this.comp.getUserName(), 'Updated account ' + this.editCoA.accountName).subscribe();
             let modal = document.getElementById("editAccountModal");
             modal.style.display = "none";
-            location.reload();
-            return;
+            this.viewAccounts();
           });
       })
   }
-  // search() {
-  //   this.coaService.findAll().subscribe(
-  //     (account) => {
-  //       this.temp = account;
-  //       for (var i = 0; i < this.temp.length; i++) {
-  //         //Check for account name
-  //         if (this.temp[i].accountName == this.search) {
-  //           console.log("account name found");
-  //           return window.alert("Account with same account name found. Enter different account name.");
-  //         }
-  //         //Check for account number
-  //         if (this.temp[i].accountNumber == this.search) {
-  //           console.log("account number found");
-  //           return window.alert("Account with the same account number found. Enter a different account number.")
-  //         }
-  //       }
-  //     })
-  // }
+
   sort(n) {
     var table, rows, switching, shouldSwitch, x, y, switchCount = 0;
     table = document.getElementById("accountTable");
