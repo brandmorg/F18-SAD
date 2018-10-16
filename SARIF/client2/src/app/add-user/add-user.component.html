@@ -159,7 +159,7 @@
          <div *ngIf="passwordError == 1" class="alert alert-danger"  style="width: 250px;">
            Password is not acceptable
          </div>
-         <button (click)="submitEdit();" id="submitBtn5" [disabled]="!editUserForm.form.valid || submitOverride == 1" >Submit</button>
+         <button (click)="submitEdit();" id="submitBtn5" [disabled]="!editUserForm.form.valid " >Submit</button>
          <button (click)="resetUpdate()" id="closeModalBtn3">Reset</button>
        <button (click)="close2();" id="closeModalBtn2">Cancel</button>
        </div>

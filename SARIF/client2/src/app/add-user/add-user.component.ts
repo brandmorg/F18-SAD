@@ -290,10 +290,6 @@ export class AddUserComponent implements OnInit {
 
   }
 
-  onChange(){
-    this.submitOverride = 1;
-  }
-
 
   //Get account info to edit and load modal
   getUserInfo(id: number) {
@@ -302,6 +298,8 @@ export class AddUserComponent implements OnInit {
       .subscribe((user) => {
         this.userInfo = user;
         this.resetUpdate();
+        this.user2 = this.userInfo;
+        this.submitOverride = 0;
         if(this.userInfo.active == 0){
           this.userActive = "inactive";
         }
@@ -311,7 +309,7 @@ export class AddUserComponent implements OnInit {
       });
     let modal = document.getElementById('updateUserModal');
     modal.style.display = 'block';
-    this.submitOverride = 0;
+
 
   }
 }
