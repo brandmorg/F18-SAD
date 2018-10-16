@@ -192,7 +192,7 @@ export class ChartOfAccountsComponent implements OnInit {
   // }
   sort(n) {
     var table, rows, switching, shouldSwitch, x, y, switchCount = 0;
-    table = document.getElementById("accountTable");
+    table = document.getElementById("Table");
     switching = true;
     // Set the sorting direction to ascending:
     let dir = "asc";

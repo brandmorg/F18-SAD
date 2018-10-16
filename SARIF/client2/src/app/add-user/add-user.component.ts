@@ -31,19 +31,20 @@ export class AddUserComponent implements OnInit {
   //for editing users
   userID: number;
   userInfo = new User();
+  userInfo2 = new User();
   userActive = "sss";
   userActive2 = " ";
-  submitOverride = 1;
+  submitOverride: boolean;
 
   constructor(
-    private userService: UserService,
     private router: Router,
     private location: Location,
     private logData: UserLogService,
     private comp: AppComponent,
     private data: SharedDataService,
     private userData: UserService,
-  ) { }
+  ) {
+  }
   ngOnInit() {
     this.viewUsers();
     this.userAccess();
@@ -89,16 +90,19 @@ export class AddUserComponent implements OnInit {
 
   compareUserNameUpdate(event){
     this.user2.userName = event;
-    if (this.user2.userName == this.userInfo.userName) {
-      this.usernameExist = 1;
-    }
-    else {
-      this.userData.compareUsername(this.user2.userName).subscribe(response => {
-        console.log("button changed");
-        this.usernameExist = response;
-        console.log(this.usernameExist);
-      });
-    }
+    console.log(this.user2.userName);
+      console.log(this.userInfo2.userName);
+      if(this.user2.userName == this.userInfo2.userName){
+        this.usernameExist = 1;
+        console.log("worked");
+      }
+      else {
+        this.userData.compareUsername(this.user2.userName).subscribe(response => {
+          console.log("button changed");
+          this.usernameExist = response;
+          console.log(this.usernameExist);
+        });
+      }
   }
 
 //check if the Email already exists
@@ -129,7 +133,7 @@ export class AddUserComponent implements OnInit {
     } else if (this.usernameExist !== 1 || this.emailExist !==1 ){
       console.log("cannot continue");
     } else {
-      this.userService.addUser(this.user)
+      this.userData.addUser(this.user)
         .subscribe(() => {
           this.viewUsers();
           this.close();
@@ -138,21 +142,22 @@ export class AddUserComponent implements OnInit {
         });
     }
   }
-
-  submitEdit(): void {
-    if(this.passwordAcceptable != 1){
+//submit an edit
+  submitEdit(){
+    if (this.passwordAcceptable !== 1){
       this.passwordError = 1;
     } else if (this.usernameExist !== 1 || this.emailExist !==1 ){
-      console.log("cannot continue");
-    } else {
+
+    }
+    else {
       if(this.userActive2 === "active"){
         this.user2.active = 1;
       }
       else{
         this.user2.active = 0;
       }
-      this.user2.userId = this.userInfo.userId;
-      this.userService.updateUser(this.user2)
+      this.user2.userId = this.userInfo2.userId;
+      this.userData.updateUser(this.user2)
         .subscribe(() => {
           this.viewUsers();
           this.close2();
@@ -229,7 +234,7 @@ export class AddUserComponent implements OnInit {
 
   sort(n) {
     var table, rows, switching, shouldSwitch, x, y, switchCount = 0;
-    table = document.getElementById("usersTable");
+    table = document.getElementById("userTable");
     switching = true;
     // Set the sorting direction to ascending:
     let dir = "asc";
@@ -268,20 +273,20 @@ export class AddUserComponent implements OnInit {
     }
   }
   resetUpdate() {
-    this.user2.userName = this.userInfo.userName;
-    this.user2.firstName = this.userInfo.firstName;
-    this.user2.lastName = this.userInfo.lastName;
-    this.user2.userPassword = this.userInfo.userPassword;
-    this.user2.email = this.userInfo.email;
-    this.user2.securityQ = this.userInfo.securityQ;
-    this.user2.securityA = this.userInfo.securityA;
-    if(this.userInfo.active == 0){
+    this.user2.userName = this.userInfo2.userName;
+    this.user2.firstName = this.userInfo2.firstName;
+    this.user2.lastName = this.userInfo2.lastName;
+    this.user2.userPassword = this.userInfo2.userPassword;
+    this.user2.email = this.userInfo2.email;
+    this.user2.securityQ = this.userInfo2.securityQ;
+    this.user2.securityA = this.userInfo2.securityA;
+    if(this.userInfo2.active == 0){
       this.userActive2 = "inactive"
     }
     else{
       this.userActive2 = "active";
     }
-    this.user2.userRole = this.userInfo.userRole;
+    this.user2.userRole = this.userInfo2.userRole;
     this.emailExist = 1;
     this.usernameExist = 1;
 
@@ -289,27 +294,31 @@ export class AddUserComponent implements OnInit {
 
 
   }
-
+  changeUserName(){
+    this.usernameExist = 1;
+    this.submitOverride = false;
+  }
 
   //Get account info to edit and load modal
   getUserInfo(id: number) {
-    this.userID = +id;
+    this.userID = id;
     this.userData.getUser(this.userID)
       .subscribe((user) => {
-        this.userInfo = user;
-        this.resetUpdate();
-        this.user2 = this.userInfo;
-        this.submitOverride = 0;
-        if(this.userInfo.active == 0){
+        this.userInfo2 = user;
+
+
+        console.log(this.userInfo2.userName);
+        console.log(this.user2.userName);
+
+        if(this.userInfo2.active == 0){
           this.userActive = "inactive";
         }
         else{
           this.userActive = "active";
         }
-      });
-    let modal = document.getElementById('updateUserModal');
-    modal.style.display = 'block';
-
-
+        let modal = document.getElementById('updateUserModal');
+        modal.style.display = 'block';
+      }
+      );
   }
 }
