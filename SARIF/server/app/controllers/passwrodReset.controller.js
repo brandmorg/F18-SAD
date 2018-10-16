@@ -31,7 +31,6 @@ exports.sendInfo = (req, res) => {
     })
 
 };
-
 exports.sendEmail = (req, res) => {
   let username = req.body.userName;
   Users.findOne({where: {userName: username}}).then(function (user) {

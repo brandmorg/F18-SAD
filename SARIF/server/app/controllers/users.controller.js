@@ -38,7 +38,9 @@ exports.compareEmail = (req, res) => {
 
 // Fetch all Customers
 exports.findAll = (req, res) => {
-    Users.findAll().then(users => {
+    Users.findAll( {where: {},
+    order: [['userId', 'ASC']]}).then(users => {
+
         // Send all customers to Client
         res.json(users);
     });

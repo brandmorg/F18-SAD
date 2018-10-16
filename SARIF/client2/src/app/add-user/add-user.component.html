@@ -1,3 +1,5 @@
+
+<!-- Create user form-->
 <div id="new_user" class="modal">
 <div class="modal-content">
 
@@ -61,6 +63,7 @@
         </div>
 
         <button (click)="submit();" id="submitBtn" [disabled]="!addUserForm.form.valid" >Submit</button>
+        <input type="reset">
         <button (click)="close(); addUserForm.reset()" id="closeModalBtn">Cancel</button>
       </div>
 
@@ -89,9 +92,100 @@
     </div>
 </div>
 
+<!-- Update User form-->
+<div id="updateUserModal" class="modal">
+   <div class="modal-content">
+     <form #editUserForm="ngForm">
+       <div class="rightContent">
+       <div class="form-group">
+         <label for="userNam">User Name</label>
+         <input type="text" class="form-control" id="userNam"  placeholder="username" (ngModelChange)="compareUserNameUpdate($event)" required [(ngModel)]="user2.userName"
+                value="{{userInfo.userName}}"  name="userName2" >
+       </div>
+       <div class="form-group">
+         <label for="password2">Password</label>
+         <input type="text" class="form-control" id="password2"  placeholder="Password" (ngModelChange)="checkPasswordUpdate($event)" required [(ngModel)]="user2.userPassword"
+                value="{{userInfo.userPassword}}"  name="password" >
+         <label for="password" class="warning">Password must be at least 8 characters long</label>
+         <label for="password" class="warning">Includes at least one of the following: #,$,%,&,*,+ </label>
+         <label for="password" class="warning">Includes at least one number</label>
+       </div>
+         <div class="form-group">
+           <label for="firstName2">First Name</label>
+           <input type="text" class="form-control" id="firstName2" placeholder="First Name" required [(ngModel)]="user2.firstName"
+                  value="{{userInfo.firstName}}" name="firstName" >
+         </div>
 
+         <div class="form-group">
+           <label for="email2">email</label>
+           <input type="text" class="form-control" id="email2" (ngModelChange)="compareEmailUpdate($event)" placeholder="email" required [(ngModel)]="user2.email"
+                  value="{{userInfo.email}}"name="email" >
+         </div>
 
+         <div class="form-group">
+           <label for="userRole2">Role: </label>
+           <select class="form-control" required [(ngModel)]="user2.userRole" id="userRole2" value="{{userInfo.userRole}}" name="roleType" >
+             <option>accountant</option>
+             <option>manager</option>
+             <option>admin</option>
+           </select>
+         </div>
 
+         <div class="form-group">
+           <label for="securityQ2">Security Question: </label>
+           <select class="form-control" required [(ngModel)]="user2.securityQ" id="securityQ2" value="{{userInfo.securityQ}}" name="SecurityQ" >
+             <option>What is your favorite color?</option>
+             <option>Where did you go to high school?</option>
+             <option>What is your favorite movie?</option>
+           </select>
+         </div>
+
+         <div class="form-group">
+           <label for="securityQ2">Active:</label>
+           <select class="activel" required [(ngModel)]="userActive2" id="active1" value="{{userActive}}" name="active" >
+             <option>active</option>
+             <option>inactive</option>
+           </select>
+         </div>
+
+         <div *ngIf="usernameExist == 2" class="alert alert-danger"  style="width: 250px;">
+           Username already exists
+         </div>
+
+         <div *ngIf="emailExist == 2" class="alert alert-danger"  style="width: 250px;">
+           Email already exists
+         </div>
+
+         <div *ngIf="passwordError == 1" class="alert alert-danger"  style="width: 250px;">
+           Password is not acceptable
+         </div>
+         <button (click)="submitEdit();" id="submitBtn5" [disabled]="!editUserForm.form.valid || submitOverride == 1" >Submit</button>
+         <button (click)="resetUpdate()" id="closeModalBtn3">Reset</button>
+       <button (click)="close2();" id="closeModalBtn2">Cancel</button>
+       </div>
+
+       <div class="leftContent">
+         <div class="form-group">
+           <label for="passwordAgain2">Re-enter Password</label>
+           <input type="text" class="form-control" id="passwordAgain2" placeholder="Password" required [(ngModel)]="user2.userPassword"
+                  value="{{userInfo.userPassword}}" name="password2" >
+         </div>
+         <div class="form-group" style="margin-top:112px;">
+           <label for="lastName2">Last Name</label>
+           <input type="text" class="form-control" id="lastName2" placeholder="Last Name" required [(ngModel)]="user2.lastName"
+                  value="{{userInfo.lastName}}" name="lastName">
+         </div>
+         <div class="form-group" style="margin-top:188px;">
+           <label for="answer2">Answer</label>
+           <input type="text" class="form-control" id="answer2" placeholder="Answer" required [(ngModel)]="user2.securityA"
+                  value="{{userInfo.securityA}}" name="password3" >
+         </div>
+       </div>
+     </form>
+   </div>
+</div>
+
+<!-- Display User list form-->
 
 <button class="btn btn-info btn-lg" (click)="createUser()" *ngIf="access == 1">Create User</button>
 
@@ -117,8 +211,9 @@
       <td>{{ user.userRole }}</td>
       <td>{{ user.securityQ }}</td>
       <td>{{ user.securityA }}</td>
-      <td>{{ user.active }}</td>
-      <button class="btn btn-primary" (click)="getUser(user.userId)">{{ user.userId }}</button>
+      <td *ngIf="user.active == 0">inactive</td>
+      <td *ngIf="user.active == 1">active</td>
+      <button class="btn btn-primary" (click)="getUserInfo(user.userId)">Edit</button>
     </tr>
   </table>
 </div>
