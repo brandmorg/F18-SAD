@@ -27,7 +27,7 @@
 
       <div class="form-group">
         <label for="accountType">Account Type</label>
-        <select required [(ngModel)]="CoA.accountType" name="accountType" #accountType="ngModel">
+        <select required [(ngModel)]="CoA.accountType" name="accountType" #accountType="ngModel" >
           <option>Assets</option>
           <option>Revenue</option>
           <option>Expenses</option>
@@ -89,13 +89,13 @@
   <div class="modal-content">
     <form #editAccountForm="ngForm">
       <div class="form-group">
-        <label for="accountName">Current Account Name: {{ accountData.accountName }}</label>
-        <input type="text" class="form-control" id="accountName" placeholder="Give Account Name" required [(ngModel)]="editCoA.accountName"
+        <label for="accountName">Current Account Name:</label>
+        <input type="text" class="form-control" id="accountName" placeholder="{{ accountData.accountName}}" required [(ngModel)]="editCoA.accountName"
           name="accountName" #accountName="ngModel">
       </div>
       <div class="form-group">
         <label for="accountNumber">Account Number</label>
-        <input type="text" class="form-control" id="accountNumber" placeholder="Give Account Number" required
+        <input type="text" class="form-control" id="accountNumber" placeholder="{{ accountData.accountNumber }}" required
           [(ngModel)]="editCoA.accountNumber" name="accountNumber" #accountNumber="ngModel">
       </div>
       <div *ngIf="isNegativeNumber(editCoA.accountNumber)" class="alert alert-danger" style="width: 250px;">
@@ -103,7 +103,7 @@
       </div>
 
       <div class="form-group">
-        <label for="accountType">Account Type</label>
+        <label for="accountType">Account Type: {{ accountData.accountType}}</label>
         <select required [(ngModel)]="editCoA.accountType" name="accountType" #accountType="ngModel">
           <option>Assets</option>
           <option>Revenue</option>
@@ -114,7 +114,7 @@
       </div>
 
       <div class="form-group">
-        <label for="accountSubType">Account Subtype</label>
+        <label for="accountSubType">Account Subtype: {{ accountData.accountSubType}}</label>
         <select required [(ngModel)]="editCoA.accountSubType" name="accountSubType" #accountSubType="ngModel">
           <option>Subtype 1</option>
           <option>Subtype 2</option>
@@ -122,7 +122,7 @@
       </div>
 
       <div class="form-group">
-        <label for="reportType">Report Type</label>
+        <label for="reportType">Report Type: {{ accountData.reportType}}</label>
         <select required [(ngModel)]="editCoA.reportType" name="reportType" #reportType="ngModel">
           <option>Subtype 1</option>
           <option>Subtype 2</option>
@@ -130,12 +130,12 @@
       </div>
 
       <div class="form-group">
-        <input type="text" class="form-control" id="originalBalance" placeholder="Give Account Balance" required
+        <input type="text" class="form-control" id="originalBalance" placeholder="{{ accountData.originalBalance }}" required
           [(ngModel)]="editCoA.originalBalance" name="originalBalance" #originalBalance="ngModel">
       </div>
 
       <div class="form-group">
-        <label for="active">Active</label>
+        <label for="active">Active: {{ accountData.active}}</label>
         <select required [(ngModel)]="editCoA.active" name="active" #active="ngModel">
           <option>Active</option>
           <option>Inactive</option>
@@ -143,7 +143,7 @@
       </div>
 
       <div class="form-group">
-        <input type="text" class="form-control" id="comment" placeholder="Account Comments" required [(ngModel)]="editCoA.comment"
+        <input type="text" class="form-control" id="comment" placeholder="{{ accountData.comment }}" required [(ngModel)]="editCoA.comment"
           name="comment" #comment="ngModel">
       </div>
       <button (click)="submitEdit()" id="submitEditBtn">Submit</button>

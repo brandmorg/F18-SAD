@@ -24,11 +24,9 @@ export class UserDetailsComponent implements OnInit {
   ) { }
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
-    console.log(id);
     this.userService.getUser(id).subscribe(
       (user) => {
         this.data = user;
-        console.log(this.data);
       }
     )
   }
@@ -38,8 +36,6 @@ export class UserDetailsComponent implements OnInit {
     userData = this.data;
     this.userService.updateUser(userData)
       .subscribe(() => {
-        console.log("User Updated Successfully");
-        console.log(userData);
         this.logData.create(this.comp.getUserName(), 'Updated user').subscribe();
         this.router.navigate(['UserPage']);
       })
