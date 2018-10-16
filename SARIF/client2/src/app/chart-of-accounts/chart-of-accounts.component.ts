@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CoA } from '../chart-of-accounts';
 import { AppComponent } from '../app.component';
 import { CoAService } from '../services/coa.service';
 import { UserLogService } from '../services/user-log.service';
-import { isEmpty } from 'rxjs/operators';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-chart-of-accounts',
@@ -12,19 +11,19 @@ import { isEmpty } from 'rxjs/operators';
   styleUrls: ['./chart-of-accounts.component.css']
 })
 export class ChartOfAccountsComponent implements OnInit {
+  @ViewChild('addAccountForm') public accountForm: NgForm;
+  @ViewChild('editAccountForm') public editForm: NgForm;
   CoA = new CoA();
   editCoA = new CoA();
   accounts = [];
   accountData = [];
   accountId: number;
   temp = [];
-  currentpage = 0;
 
   constructor(
     private coaService: CoAService,
     private logData: UserLogService,
     private comp: AppComponent,
-    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -41,6 +40,7 @@ export class ChartOfAccountsComponent implements OnInit {
       if (event.target == editAccountModal) {
         editAccountModal.style.display = "none";
       }
+      
     }
   }
   viewAccounts() {
@@ -75,7 +75,9 @@ export class ChartOfAccountsComponent implements OnInit {
 
     //Set the current balance to the original balance
     this.CoA.currentBalance = this.CoA.originalBalance;
+
     this.editCoA = this.CoA;
+
     //Check to see if another account exists with same number or name
     this.coaService.findAll().subscribe(
       (account) => {
@@ -98,7 +100,8 @@ export class ChartOfAccountsComponent implements OnInit {
             //Close modal
             let modal = document.getElementById("createAccountModal");
             modal.style.display = "none";
-            this.currentpage = 1;
+            this.accountForm.reset();
+            this.viewAccounts();
           });
       })
   }
@@ -107,8 +110,10 @@ export class ChartOfAccountsComponent implements OnInit {
   close() {
     let modal = document.getElementById("createAccountModal");
     modal.style.display = "none";
+    this.accountForm.reset();
     let editModal = document.getElementById("editAccountModal");
     editModal.style.display = "none";
+    this.editForm.reset();
   }
 
   //Get account info to edit and load modal
@@ -117,6 +122,7 @@ export class ChartOfAccountsComponent implements OnInit {
     this.coaService.getAccount(this.accountId)
       .subscribe((account) => {
         this.accountData = account;
+        console.log(this.accountData)
       });
     let modal = document.getElementById("editAccountModal");
     modal.style.display = "block";
@@ -164,10 +170,7 @@ export class ChartOfAccountsComponent implements OnInit {
             this.logData.create(this.comp.getUserName(), 'Updated account ' + this.editCoA.accountName).subscribe();
             let modal = document.getElementById("editAccountModal");
             modal.style.display = "none";
-            // this.router.navigateByUrl('/UserPage', {skipLocationChange: true}).then(() =>
-            // this.router.navigate['AddAccount']);
-            location.reload();
-            this.currentpage = 1;
+            this.viewAccounts();
           });
       })
   }
