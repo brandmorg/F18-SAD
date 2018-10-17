@@ -210,8 +210,8 @@
       <td>{{ user.userPassword}}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.userRole }}</td>
-      <td>{{ user.updatedAt }}</td>
-      <td>{{ user.createdAt }}</td>
+      <td>{{ user.updatedAt | date: 'MM/dd/yyyy  HH:mm:ss'}}</td>
+      <td>{{ user.createdAt | date: 'MM/dd/yyyy  HH:mm:ss'}}</td>
       <td *ngIf="user.active == 0">inactive</td>
       <td *ngIf="user.active == 1">active</td>
       <button class="btn btn-primary" (click)="getUserInfo(user.userId)">Edit</button>

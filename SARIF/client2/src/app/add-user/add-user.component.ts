@@ -32,7 +32,7 @@ export class AddUserComponent implements OnInit {
   userInfo2 = new User();
   userActive = "sss";
   userActive2 = " ";
-  column = 'userID';
+  column = 'userId';
 
   constructor(
     private router: Router,

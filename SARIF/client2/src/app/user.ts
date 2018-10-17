@@ -1,3 +1,5 @@
+import DateTimeFormat = Intl.DateTimeFormat;
+
 export class User {
   userId: number;
   userName: string;
@@ -9,6 +11,6 @@ export class User {
   securityQ: string;
   securityA: string;
   active: number;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
