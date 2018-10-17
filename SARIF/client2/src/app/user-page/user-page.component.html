@@ -4,6 +4,9 @@
   <div class="sidenav">
     <div class = "container-fluid">
       <h2> {{indicator}} </h2>
+      <div>
+      <button class="btn btn-link" (click)="viewHome()" id="button0" >Home </button>
+      </div>
       <button class="btn btn-link" (click)="viewUserList()" id="button1" *ngIf="access == 1 || access == 2">User list</button>
       <button class="btn btn-link" (click)="viewLog()" id="button2" *ngIf="access == 1">User log</button>
       <button class="btn btn-link" (click)="viewCoA()" id="button3" *ngIf="access == 2" >Chart of accounts</button>
@@ -13,7 +16,8 @@
   </div>
     <div class="right">
       <ng-container [ngSwitch]="currentpage">
-      <app-chart-of-accounts *ngSwitchCase="1"></app-chart-of-accounts>
+        <app-home-screen *ngSwitchCase="0"></app-home-screen>
+        <app-chart-of-accounts *ngSwitchCase="1"></app-chart-of-accounts>
         <app-add-user *ngSwitchCase="2"></app-add-user>
         <app-user-log *ngSwitchCase="3"></app-user-log>
         </ng-container>
