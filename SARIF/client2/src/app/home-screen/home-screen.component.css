@@ -1,0 +1,25 @@
+table, h3, h2, td {
+  color: white;
+}
+
+#image {
+  background-image:url("../../assets/logo.png");
+  background-position: center;
+  background-size: 170px 260px;
+  width: 170px;
+  height: 260px;
+
+}
+
+#center {
+  position: relative;
+  width: 20%;
+  margin: 0 auto;
+}
+
+#center2 {
+  position: relative;
+  padding-top: 20px;
+  width: 100%;
+  margin: 0 auto;
+}

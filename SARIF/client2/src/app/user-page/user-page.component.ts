@@ -66,4 +66,7 @@ export class UserPageComponent implements OnInit {
   viewLog(){
     this.currentpage = 3;
   }
+  viewHome(){
+    this.currentpage = 0;
+  }
 }

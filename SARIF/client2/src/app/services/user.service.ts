@@ -17,6 +17,7 @@ const httpOptions = {
 })
 export class UserService {
   private usersUrl = 'http://localhost:8080/api/users';  // URL to web api
+  private usersSortUrl = 'http://localhost:8080/api/usersSort';
   private compareUserNameURL = 'http://localhost:8080/api/userNameCheck';
   private compareEmailURL = 'http://localhost:8080/api/passwordCheck';
   constructor(
@@ -26,6 +27,11 @@ export class UserService {
   findAll(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl, httpOptions);
   }
+
+  findAllSort(column, direction): Observable<User[]> {
+    return this.http.post<User[]>(this.usersSortUrl, {column: column, direction: direction}, httpOptions);
+  }
+
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl);

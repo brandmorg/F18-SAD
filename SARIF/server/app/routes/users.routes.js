@@ -12,6 +12,8 @@ module.exports = function(app) {
     // Retrieve all users
     app.get('/api/users', users.findAll);
 
+    app.post('/api/usersSort', users.findAllSort);
+
     // Retrieve a single user by Id
     app.get('/api/users/:userId', users.findById);
 

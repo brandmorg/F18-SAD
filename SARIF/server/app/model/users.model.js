@@ -39,7 +39,11 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: true
         },
         lastUpdatePassword: {
-            type: Sequelize.STRING,
+            type: Sequelize.DATE,
+            allowNull: true
+        },
+        passwordExpire: {
+            type: Sequelize.DATE,
             allowNull: true
         },
         //set the starting value of an account to true (1)
