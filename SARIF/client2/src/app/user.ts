@@ -9,4 +9,6 @@ export class User {
   securityQ: string;
   securityA: string;
   active: number;
+  createdAt: string;
+  updatedAt: string;
 }

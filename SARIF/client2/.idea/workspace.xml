@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5a35810b-c502-4cf4-92da-b312b7cf1f49" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/app/add-user/add-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/add-user/add-user.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/add-user/add-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/add-user/add-user.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/user.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/app/controllers/users.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/../server/app/controllers/users.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/app/routes/users.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../server/app/routes/users.routes.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -134,27 +130,27 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="872" />
-          <entry key="html" value="3770" />
-          <entry key="ts" value="6670" />
+          <entry key="html" value="3859" />
+          <entry key="ts" value="6702" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="872" />
-          <entry key="HTML" value="3769" />
+          <entry key="HTML" value="3858" />
           <entry key="JavaScript" value="1" />
-          <entry key="TypeScript" value="6670" />
+          <entry key="TypeScript" value="6702" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/add-user/add-user.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="210" column="31" lean-forward="true" selection-start-line="210" selection-start-column="31" selection-end-line="210" selection-end-column="31" />
+            <state relative-caret-position="457">
+              <caret line="209" column="37" lean-forward="true" selection-start-line="209" selection-start-column="37" selection-end-line="209" selection-end-column="37" />
               <folding>
                 <element signature="n#style#0;n#div#6;n#div#0;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#7;n#div#0;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -175,7 +171,7 @@
         <entry file="file://$PROJECT_DIR$/src/app/user.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+              <caret line="9" column="20" lean-forward="true" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -213,7 +209,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/add-user/add-user.component.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="369">
@@ -327,7 +323,6 @@
         <option value="$PROJECT_DIR$/src/app/user-log/user-log.component.css" />
         <option value="$PROJECT_DIR$/src/app/user-page/user-page.component.ts" />
         <option value="$PROJECT_DIR$/src/app/user-page/user-page.component.css" />
-        <option value="$PROJECT_DIR$/src/app/user.ts" />
         <option value="$PROJECT_DIR$/src/app/app-routing/app-routing.module.ts" />
         <option value="$PROJECT_DIR$/src/app/login-home/login-home.component.html" />
         <option value="$PROJECT_DIR$/src/app/add-user-login/add-user-login.component.css" />
@@ -342,8 +337,9 @@
         <option value="$PROJECT_DIR$/src/app/chart-of-accounts/chart-of-accounts.component.ts" />
         <option value="$PROJECT_DIR$/src/app/login/login.component.html" />
         <option value="$PROJECT_DIR$/src/app/services/user.service.ts" />
-        <option value="$PROJECT_DIR$/src/app/add-user/add-user.component.html" />
         <option value="$PROJECT_DIR$/src/app/add-user/add-user.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/user.ts" />
+        <option value="$PROJECT_DIR$/src/app/add-user/add-user.component.html" />
       </list>
     </option>
   </component>
@@ -362,7 +358,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="411" />
+    <option name="x" value="16" />
+    <option name="y" value="36" />
     <option name="width" value="1303" />
     <option name="height" value="1056" />
   </component>
@@ -457,7 +454,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539742065303" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539745030677" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -528,15 +525,15 @@
       <workItem from="1539215366731" duration="16050000" />
       <workItem from="1539532884360" duration="54089000" />
       <workItem from="1539706656033" duration="4946000" />
-      <workItem from="1539721460975" duration="16463000" />
+      <workItem from="1539721460975" duration="17627000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="175174000" />
+    <option name="totallyTimeSpent" value="176338000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="411" y="0" width="1303" height="1056" extended-state="0" />
+    <frame x="16" y="36" width="1303" height="1056" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.39471638" />
@@ -884,14 +881,24 @@
     <entry file="file://$PROJECT_DIR$/src/app/user.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+          <caret line="9" column="20" lean-forward="true" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/add-user/add-user.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="151" lean-forward="true" selection-start-line="151" selection-end-line="151" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/add-user/add-user.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="210" column="31" lean-forward="true" selection-start-line="210" selection-start-column="31" selection-end-line="210" selection-end-column="31" />
+        <state relative-caret-position="457">
+          <caret line="209" column="37" lean-forward="true" selection-start-line="209" selection-start-column="37" selection-end-line="209" selection-end-column="37" />
           <folding>
             <element signature="n#style#0;n#div#6;n#div#0;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#7;n#div#0;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -903,16 +910,6 @@
             <element signature="n#style#0;n#div#9;n#div#0;n#form#0;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#1;n#form#0;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#div#1;n#form#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/add-user/add-user.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="151" lean-forward="true" selection-start-line="151" selection-end-line="151" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
           </folding>
         </state>
       </provider>

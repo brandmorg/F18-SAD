@@ -199,8 +199,8 @@
       <th (click)="viewUsersSort('userPassword','ASC'); column='userPassword' ">Password</th>
       <th (click)="viewUsersSort('email','ASC'); column='email'">Email</th>
       <th (click)="viewUsersSort('userRole','ASC'); column='userRole' ">User Role</th>
-      <th (click)="viewUsersSort('securityQ','ASC'); column='securityQ'">Security Question</th>
-      <th (click)="viewUsersSort('securityA','ASC'); column='securityA'">Security Answer</th>
+      <th (click)="viewUsersSort('updatedAt','ASC'); column='updatedAt'">Updated at</th>
+      <th (click)="viewUsersSort('createdAt','ASC'); column='createdAt'">Created at</th>
       <th (click)="viewUsersSort('active','ASC'); column='active'">Active</th>
     </tr>
     <tr *ngFor="let user of users">
@@ -210,8 +210,8 @@
       <td>{{ user.userPassword}}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.userRole }}</td>
-      <td>{{ user.securityQ }}</td>
-      <td>{{ user.securityA }}</td>
+      <td>{{ user.updatedAt }}</td>
+      <td>{{ user.createdAt }}</td>
       <td *ngIf="user.active == 0">inactive</td>
       <td *ngIf="user.active == 1">active</td>
       <button class="btn btn-primary" (click)="getUserInfo(user.userId)">Edit</button>
