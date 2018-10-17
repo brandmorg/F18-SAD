@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ec3ea87d-68f5-40e3-aaaf-6edd681a32bf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../client2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client2/src/app/add-user/add-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client2/src/app/add-user/add-user.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client2/src/app/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client2/src/app/user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/users.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/users.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-    </list>
+    <list default="true" id="ec3ea87d-68f5-40e3-aaaf-6edd681a32bf" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -340,7 +334,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539795003223" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539795953709" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../client2" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -389,7 +383,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="437" y="0" width="1258" height="1038" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24557166" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />

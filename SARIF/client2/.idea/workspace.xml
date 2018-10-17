@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5a35810b-c502-4cf4-92da-b312b7cf1f49" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/app/add-user/add-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/add-user/add-user.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/app/model/users.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../server/app/model/users.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/../server/server.js" afterDir="false" />
-    </list>
+    <list default="true" id="5a35810b-c502-4cf4-92da-b312b7cf1f49" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -401,6 +395,13 @@
               <item name="client2" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="chart-of-accounts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="client2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="client2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="home-screen" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -447,7 +448,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539795003270" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539795953783" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -518,16 +519,15 @@
       <workItem from="1539215366731" duration="16050000" />
       <workItem from="1539532884360" duration="54089000" />
       <workItem from="1539706656033" duration="4946000" />
-      <workItem from="1539721460975" duration="25971000" />
+      <workItem from="1539721460975" duration="26475000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="184682000" />
+    <option name="totallyTimeSpent" value="185186000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="7" y="13" width="1303" height="1056" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.39471638" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
