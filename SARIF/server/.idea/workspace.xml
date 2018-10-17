@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="ec3ea87d-68f5-40e3-aaaf-6edd681a32bf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../client2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client2/src/app/add-user/add-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../client2/src/app/add-user/add-user.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client2/src/app/add-user/add-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client2/src/app/add-user/add-user.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client2/src/app/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../client2/src/app/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client2/src/app/services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client2/src/app/services/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/users.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/users.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/users.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/users.routes.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -96,12 +101,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="3614" />
+          <entry key="js" value="3714" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="3614" />
+          <entry key="JavaScript" value="3714" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -191,8 +196,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/users.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="42" selection-start-line="42" selection-end-line="42" />
+            <state relative-caret-position="391">
+              <caret line="50" column="39" selection-start-line="50" selection-start-column="39" selection-end-line="50" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -209,8 +214,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/users.routes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="53" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
+            <state relative-caret-position="408">
+              <caret line="24" column="1" lean-forward="true" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -254,12 +259,12 @@
         <option value="$PROJECT_DIR$/app/model/journalFiles.model.js" />
         <option value="$PROJECT_DIR$/app/controllers/journal.controller.js" />
         <option value="$PROJECT_DIR$/app/controllers/journalAccounts.controller.js" />
-        <option value="$PROJECT_DIR$/app/routes/users.routes.js" />
         <option value="$PROJECT_DIR$/app/model/journalAccounts.model.js" />
         <option value="$PROJECT_DIR$/app/model/journal.model.js" />
         <option value="$PROJECT_DIR$/app/routes/passwordReset.routes.js" />
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/app/controllers/passwrodReset.controller.js" />
+        <option value="$PROJECT_DIR$/app/routes/users.routes.js" />
         <option value="$PROJECT_DIR$/app/controllers/users.controller.js" />
       </list>
     </option>
@@ -279,9 +284,9 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1" />
-    <option name="y" value="1" />
-    <option name="width" value="1918" />
+    <option name="x" value="612" />
+    <option name="y" value="18" />
+    <option name="width" value="1258" />
     <option name="height" value="1038" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -338,7 +343,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539705963044" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539742065199" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../client2" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -378,18 +383,18 @@
       <workItem from="1539532978938" duration="13832000" />
       <workItem from="1539705991970" duration="93000" />
       <workItem from="1539706340170" duration="3028000" />
-      <workItem from="1539721463505" duration="1919000" />
+      <workItem from="1539721463505" duration="4103000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98869000" />
+    <option name="totallyTimeSpent" value="101053000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="1" width="1918" height="1038" extended-state="0" />
+    <frame x="612" y="18" width="1258" height="1038" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16035752" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24557166" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -425,17 +430,6 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/app/controllers/users.controller.js</url>
-          <line>14</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/routes/users.routes.js" />
@@ -686,15 +680,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/users.routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="53" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
+        <state relative-caret-position="408">
+          <caret line="24" column="1" lean-forward="true" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/users.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
+        <state relative-caret-position="391">
+          <caret line="50" column="39" selection-start-line="50" selection-start-column="39" selection-end-line="50" selection-end-column="39" />
         </state>
       </provider>
     </entry>

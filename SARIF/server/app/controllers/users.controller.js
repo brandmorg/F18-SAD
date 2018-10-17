@@ -46,6 +46,16 @@ exports.findAll = (req, res) => {
     });
 };
 
+exports.findAllSort = (req, res) => {
+    let column = req.body.column;
+    let direction = req.body.direction;
+    Users.findAll( {where: {},
+        order: [[column, direction]]}).then(users => {
+        // Send all customers to Client
+        res.json(users);
+    });
+};
+
 // Find a user by Id
 exports.findById = (req, res) => {
     Users.findById(req.params.userId).then(user => {

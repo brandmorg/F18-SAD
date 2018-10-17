@@ -22,7 +22,6 @@ export class AddUserComponent implements OnInit {
   users = [];
   editUser = [];
   active = [];
-  submitted = false;
   usernameExist = 1;
   emailExist = 1;
   passwordAcceptable = 0;
@@ -30,10 +29,10 @@ export class AddUserComponent implements OnInit {
   access = 1;
   //for editing users
   userID: number;
-  userInfo = new User();
   userInfo2 = new User();
   userActive = "sss";
   userActive2 = " ";
+  column = 'userID';
 
   constructor(
     private router: Router,
@@ -45,12 +44,19 @@ export class AddUserComponent implements OnInit {
   ) {
   }
   ngOnInit() {
-    this.viewUsers();
+    this.viewUsersSort('userId', 'ASC');
     this.userAccess();
     }
 
   viewUsers() {
     this.userData.findAll().subscribe(
+      (user) => {
+        this.users = user;
+      }
+    );
+  }
+  viewUsersSort(column: string, direction: string) {
+    this.userData.findAllSort(column, direction).subscribe(
       (user) => {
         this.users = user;
       }
@@ -119,7 +125,7 @@ export class AddUserComponent implements OnInit {
   compareEmailUpdate(event){
     this.user2.email = event;
     this.getOriginalUserID(this.user2.userId);
-    if(this.user2.email == this.userInfo.email){
+    if(this.user2.email == this.userInfo2.email){
       this.emailExist = 1;
     }
     else {
@@ -139,7 +145,7 @@ export class AddUserComponent implements OnInit {
     } else {
       this.userData.addUser(this.user)
         .subscribe(() => {
-          this.viewUsers();
+          this.viewUsersSort(this.column,'ASC');
           this.close();
           this.userForm.reset();
 
@@ -165,7 +171,7 @@ export class AddUserComponent implements OnInit {
       this.user2.userId = this.userInfo2.userId;
       this.userData.updateUser(this.user2)
         .subscribe(() => {
-          this.viewUsers();
+          this.viewUsersSort(this.column,'ASC');
           this.close2();
           this.passwordError = 0;
           this.passwordAcceptable = 1;
@@ -240,46 +246,6 @@ export class AddUserComponent implements OnInit {
     }
   }
 
-  sort(n) {
-    var table, rows, switching, shouldSwitch, x, y, switchCount = 0;
-    table = document.getElementById("userTable");
-    switching = true;
-    // Set the sorting direction to ascending:
-    let dir = "asc";
-    while (switching) {
-      switching = false;
-      rows = table.rows;
-
-      for (var i = 1; i < (rows.length - 1); i++) {
-        shouldSwitch = false;
-        x = rows[i].getElementsByTagName("TD")[n];
-        y = rows[i + 1].getElementsByTagName("TD")[n];
-
-        if (dir == "asc") {
-          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-            shouldSwitch = true;
-            break;
-          }
-        } else if (dir == "desc") {
-          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-            shouldSwitch = true;
-            break;
-          }
-        }
-      }
-
-      if (shouldSwitch) {
-        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-        switching = true;
-        switchCount++;
-      } else {
-        if (switchCount == 0 && dir == "asc") {
-          dir = "desc";
-          switching = true;
-        }
-      }
-    }
-  }
   resetUpdate() {
     this.userData.getUser(this.user2.userId)
       .subscribe(user => {
