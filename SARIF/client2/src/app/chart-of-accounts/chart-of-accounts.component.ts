@@ -57,6 +57,7 @@ export class ChartOfAccountsComponent implements OnInit {
   }
 
   submit() {
+    this.CoA.createdBy = this.comp.getUserName();
     //Check to see if account number is a number
     if (isNaN(this.CoA.accountNumber)) {
       return window.alert("Enter a number for account number");
@@ -95,7 +96,7 @@ export class ChartOfAccountsComponent implements OnInit {
         //If account name and number not found, create the account
         this.coaService.addAccount(this.CoA)
           .subscribe(() => {
-            this.logData.create(this.comp.getUserName(), 'Created account ' + this.CoA.accountName).subscribe();
+            this.logData.create(this.comp.getUserName(), this.CoA.createdBy + 'created account ' + this.CoA.accountName).subscribe();
             window.alert("Account Created");
             //Close modal
             let modal = document.getElementById("createAccountModal");
@@ -122,7 +123,6 @@ export class ChartOfAccountsComponent implements OnInit {
     this.coaService.getAccount(this.accountId)
       .subscribe((account) => {
         this.accountData = account;
-        console.log(this.accountData)
       });
     let modal = document.getElementById("editAccountModal");
     modal.style.display = "block";
