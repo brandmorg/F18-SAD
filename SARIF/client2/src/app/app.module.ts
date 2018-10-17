@@ -16,6 +16,7 @@ import { ChartOfAccountsComponent } from './chart-of-accounts/chart-of-accounts.
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UserLogComponent } from './user-log/user-log.component';
 import { AddUserLoginComponent } from './add-user-login/add-user-login.component';
+import { HomeScreenComponent } from './home-screen/home-screen.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AddUserLoginComponent } from './add-user-login/add-user-login.component
     ResetPasswordComponent,
     UserLogComponent,
     AddUserLoginComponent,
+    HomeScreenComponent,
   ],
   imports: [
     BrowserModule,

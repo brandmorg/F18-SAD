@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
         if (this.user.userId > 0) {
           this.router.navigate(['UserPage']);
           this.logData.create(this.username, 'User successful login').subscribe();
-          this.comp.setSession(this.user.userId, this.user.userName, this.user.userRole);
+          this.comp.setSession(this.user.userId, this.user.userName, this.user.userRole, this.user.firstName, this.user.lastName);
         }
         else {
           this.invalidIndicator = 'Login failed';

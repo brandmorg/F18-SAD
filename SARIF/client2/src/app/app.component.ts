@@ -23,10 +23,12 @@ delCookies(){
     this._cookieService.remove('test');
 }
 
-setSession(id, userName, userRole) {
+setSession(id, userName, userRole, firstName, lastName) {
     this.sessionSt.store('userName', userName);
     this.sessionSt.store('id', id);
     this.sessionSt.store('userRole', userRole);
+    this.sessionSt.store('firstName', firstName);
+    this.sessionSt.store('lastName', lastName);
 }
 getSession(){
     alert(this.sessionSt.retrieve('logged-in'));
@@ -34,8 +36,12 @@ getSession(){
 getUserName(){
     return this.sessionSt.retrieve('userName');
 }
-getRole(){
+  getRole(){
     return this.sessionSt.retrieve('userRole');
+  }
+
+  getFirstName(){
+    return this.sessionSt.retrieve('firstName');
   }
 delSession(){
     this.sessionSt.clear('userName');

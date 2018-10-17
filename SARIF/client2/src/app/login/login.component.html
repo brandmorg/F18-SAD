@@ -20,7 +20,7 @@
       <div class="horizontalgap" style="width:250px">
         <div class="form-group">
           <label class='required' for="password">Password</label>
-          <input type="text" class="form-control" id="password" placeholder="Password" required [(ngModel)]="password"
+          <input type="password" class="form-control" id="password" placeholder="Password" required [(ngModel)]="password"
             name="password" #passw="ngModel">
 
         </div>
@@ -42,10 +42,6 @@
       <div class="form-group">
         <button class="btn btn-link" (click)="toggleReset()" id="button2" >Reset Password</button>
       </div>
-  <div [hidden]="notLogged" class="alert alert-danger"  style="width: 250px;">
-    Incorrect username or password
-  </div>
-
       </div>
       <div [hidden]="notLogged" class="alert alert-danger" style="width: 250px;">
         Incorrect username or password

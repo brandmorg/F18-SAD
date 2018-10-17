@@ -184,6 +184,7 @@
       <th (click)="sort(7)">Current Balance</th>
       <th>Account Description</th>
       <th (click)="sort(9)">Active</th>
+      <th (click)="sort(10)">Created By</th>
     </tr>
     <tr *ngFor="let account of accounts">
       <td>{{ account.accountNumber }}</td>
@@ -196,6 +197,7 @@
       <td>{{ account.currentBalance }}</td>
       <td>{{ account.comment }}</td>
       <td>{{ account.active }}</td>
+      <td>{{ account.createdBy }}</td>
       <button class="btn btn-primary" (click)="getAccount(account.caId)">{{ account.caId }}</button>
     </tr>
   </table>

@@ -22,30 +22,29 @@ export class AddUserComponent implements OnInit {
   users = [];
   editUser = [];
   active = [];
-  submitted = false;
-  usernameExist = 0;
-  emailExist = 0;
+  usernameExist = 1;
+  emailExist = 1;
   passwordAcceptable = 0;
   passwordError = 0;
   access = 1;
   //for editing users
   userID: number;
-  userInfo = new User();
+  userInfo2 = new User();
   userActive = "sss";
   userActive2 = " ";
-  submitOverride = 1;
+  column = 'userId';
 
   constructor(
-    private userService: UserService,
     private router: Router,
     private location: Location,
     private logData: UserLogService,
     private comp: AppComponent,
     private data: SharedDataService,
     private userData: UserService,
-  ) { }
+  ) {
+  }
   ngOnInit() {
-    this.viewUsers();
+    this.viewUsersSort('userId', 'ASC');
     this.userAccess();
     }
 
@@ -56,12 +55,19 @@ export class AddUserComponent implements OnInit {
       }
     );
   }
-
+  viewUsersSort(column: string, direction: string) {
+    this.userData.findAllSort(column, direction).subscribe(
+      (user) => {
+        this.users = user;
+      }
+    );
+  }
+  //open create user screen
   createUser() {
     let modal = document.getElementById("new_user");
     modal.style.display = "block";
   }
-
+  //close create user screen
   close() {
     let modal = document.getElementById("new_user");
     modal.style.display = "none";
@@ -70,14 +76,19 @@ export class AddUserComponent implements OnInit {
    // this.userInfo = null;
   }
 
+  //close update screen
   close2() {
     let editModal = document.getElementById("updateUserModal");
     editModal.style.display = "none";
+    this.emailExist = 1;
+    this.usernameExist = 1;
+    this.passwordError = 0;
+    this.passwordAcceptable = 1;
     this.resetUpdate();
   }
-  //check if the Username already exists
 
 
+  //check if the Username already exists on create screen
   compareUserName(event){
     this.user.userName = event;
     this.userData.compareUsername(this.user.userName).subscribe( response => {
@@ -87,21 +98,24 @@ export class AddUserComponent implements OnInit {
     });
   }
 
+   //check if the Username already exists on update screen
   compareUserNameUpdate(event){
     this.user2.userName = event;
-    if (this.user2.userName == this.userInfo.userName) {
-      this.usernameExist = 1;
-    }
-    else {
-      this.userData.compareUsername(this.user2.userName).subscribe(response => {
-        console.log("button changed");
-        this.usernameExist = response;
-        console.log(this.usernameExist);
-      });
-    }
+    this.getOriginalUserID(this.user2.userId);
+      if(this.user2.userName == this.userInfo2.userName){
+        this.usernameExist = 1;
+        console.log("worked");
+      }
+      else {
+        this.userData.compareUsername(this.user2.userName).subscribe(response => {
+          console.log("button changed");
+          this.usernameExist = response;
+          console.log(this.usernameExist);
+        });
+      }
   }
 
-//check if the Email already exists
+//check if the Email already exists on create screen
   compareEmail(event){
     this.user.email = event;
     this.userData.compareEmail(this.user.email).subscribe( response => {
@@ -109,99 +123,117 @@ export class AddUserComponent implements OnInit {
       console.log(this.emailExist);
     });
   }
-
+//check if the Email already exists on update screen
   compareEmailUpdate(event){
-    this.user.email = event;
-    if(this.user2.email == this.userInfo.email){
+    this.user2.email = event;
+    this.getOriginalUserID(this.user2.userId);
+    if(this.user2.email == this.userInfo2.email){
       this.emailExist = 1;
     }
     else {
-      this.userData.compareEmail(this.user.email).subscribe(response => {
+      this.userData.compareEmail(this.user2.email).subscribe(response => {
         this.emailExist = response;
-        console.log(this.emailExist);
+        console.log(this.userInfo2.email);
+        console.log(response);
       });
     }
   }
 
+  //submit new user
   submit(): void {
     if(this.passwordAcceptable != 1){
       this.passwordError = 1;
     } else if (this.usernameExist !== 1 || this.emailExist !==1 ){
       console.log("cannot continue");
     } else {
-      this.userService.addUser(this.user)
+      this.user.lastUpdatePassword = new Date();
+      this.user.passwordExpire = new Date();
+      this.user.passwordExpire.setDate(this.user.lastUpdatePassword.getDate() + 21)
+      this.userData.addUser(this.user)
         .subscribe(() => {
-          this.viewUsers();
+          this.viewUsersSort(this.column,'ASC');
           this.close();
           this.userForm.reset();
+
 
         });
     }
   }
-
-  submitEdit(): void {
-    if(this.passwordAcceptable != 1){
+//submit an edit
+  submitEdit(){
+    if (this.passwordAcceptable !== 1){
+      console.log("no1");
       this.passwordError = 1;
     } else if (this.usernameExist !== 1 || this.emailExist !==1 ){
-      console.log("cannot continue");
-    } else {
+        console.log("no");
+    }
+    else {
       if(this.userActive2 === "active"){
         this.user2.active = 1;
       }
       else{
         this.user2.active = 0;
       }
-      this.user2.userId = this.userInfo.userId;
-      this.userService.updateUser(this.user2)
+      this.user2.userId = this.userInfo2.userId;
+      this.userData.updateUser(this.user2)
         .subscribe(() => {
-          this.viewUsers();
+          this.viewUsersSort(this.column,'ASC');
           this.close2();
+          this.passwordError = 0;
+          this.passwordAcceptable = 1;
         });
     }
   }
-
+//check if password is appropriate
   checkPassword(event){
     this.user.userPassword = event;
-
-    let length = this.user.userPassword.length;
-    let result = this.user.userPassword.match(/[0-9]+/g);
-    let result2 = this.user.userPassword.match(/[%, #, $, *, &,+]+/g);
-    console.log(result);
-
-    if (this.user.userPassword.length >= 8 && result != null && result2 != null){
+    try {
+      let length = this.user.userPassword.length;
+      let result = this.user.userPassword.match(/[0-9]+/g);
+      let result2 = this.user.userPassword.match(/[%, #, $, *, &,+]+/g);
+      console.log(result);
+      if (this.user.userPassword.length >= 8 && result != null && result2 != null) {
         console.log('password is good');
         this.passwordAcceptable = 1;
         this.passwordError = 0;
 
+      }
+      else {
+        console.log('password is weak');
+        console.log(length);
+        this.passwordAcceptable = 0;
+        this.passwordError = 0;
+      }
     }
-    else{
-      console.log('password is weak');
-      console.log(length);
-      this.passwordAcceptable = 0;
-      this.passwordError = 0;
+    catch (err) {
+      console.log(err);
     }
   }
-
+//check if password is appropriate for update
   checkPasswordUpdate(event){
     this.user2.userPassword = event;
+    try {
+      let length = this.user2.userPassword.length;
+      let result = this.user2.userPassword.match(/[0-9]+/g);
+      let result2 = this.user2.userPassword.match(/[%, #, $, *, &,+]+/g);
+      console.log(result);
 
-    let length = this.user2.userPassword.length;
-    let result = this.user2.userPassword.match(/[0-9]+/g);
-    let result2 = this.user2.userPassword.match(/[%, #, $, *, &,+]+/g);
-    console.log(result);
+        if (this.user2.userPassword.length >= 8 && result != null && result2 != null) {
+          console.log('password is good');
+          this.passwordAcceptable = 1;
+          this.passwordError = 0;
 
-    if (this.user2.userPassword.length >= 8 && result != null && result2 != null){
-      console.log('password is good');
-      this.passwordAcceptable = 1;
-      this.passwordError = 0;
-
-    }
-    else{
-      console.log('password is weak');
-      console.log(length);
-      this.passwordAcceptable = 0;
-      this.passwordError = 0;
-    }
+        }
+        else {
+          console.log('password is weak');
+          console.log(length);
+          this.passwordAcceptable = 0;
+          this.passwordError = 0;
+        }
+      }
+      catch (err) {
+        console.log(err);
+      }
   }
 
 
@@ -218,6 +250,7 @@ export class AddUserComponent implements OnInit {
     );
   }
 
+  //type of user using the page
   userAccess(){
     if(this.comp.getRole() === 'admin') {
       this.access = 0;
@@ -227,89 +260,62 @@ export class AddUserComponent implements OnInit {
     }
   }
 
-  sort(n) {
-    var table, rows, switching, shouldSwitch, x, y, switchCount = 0;
-    table = document.getElementById("usersTable");
-    switching = true;
-    // Set the sorting direction to ascending:
-    let dir = "asc";
-    while (switching) {
-      switching = false;
-      rows = table.rows;
-
-      for (var i = 1; i < (rows.length - 1); i++) {
-        shouldSwitch = false;
-        x = rows[i].getElementsByTagName("TD")[n];
-        y = rows[i + 1].getElementsByTagName("TD")[n];
-
-        if (dir == "asc") {
-          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-            shouldSwitch = true;
-            break;
-          }
-        } else if (dir == "desc") {
-          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-            shouldSwitch = true;
-            break;
-          }
-        }
-      }
-
-      if (shouldSwitch) {
-        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-        switching = true;
-        switchCount++;
-      } else {
-        if (switchCount == 0 && dir == "asc") {
-          dir = "desc";
-          switching = true;
-        }
-      }
-    }
-  }
+  //reset update page
   resetUpdate() {
-    this.user2.userName = this.userInfo.userName;
-    this.user2.firstName = this.userInfo.firstName;
-    this.user2.lastName = this.userInfo.lastName;
-    this.user2.userPassword = this.userInfo.userPassword;
-    this.user2.email = this.userInfo.email;
-    this.user2.securityQ = this.userInfo.securityQ;
-    this.user2.securityA = this.userInfo.securityA;
-    if(this.userInfo.active == 0){
-      this.userActive2 = "inactive"
-    }
-    else{
-      this.userActive2 = "active";
-    }
-    this.user2.userRole = this.userInfo.userRole;
-    this.emailExist = 1;
-    this.usernameExist = 1;
+    this.userData.getUser(this.user2.userId)
+      .subscribe(user => {
+          this.user2 = user;
+          this.userInfo2 = user;
 
 
+          console.log(this.userInfo2.userName);
+          console.log(this.user2.userName);
 
+          if(this.user2.active == 0){
+            this.userActive = "inactive";
+          }
+          else{
+            this.userActive = "active";
+          }
+        }
+      );
+  }
 
+  //retreive the id of the update user unchanged
+  getOriginalUserID(id: number) {
+    this.userID = id;
+    this.userData.getUser(this.userID)
+      .subscribe(user => {
+          this.userInfo2 = user;
+        }
+      );
   }
 
 
   //Get account info to edit and load modal
   getUserInfo(id: number) {
-    this.userID = +id;
+    this.userID = id;
     this.userData.getUser(this.userID)
-      .subscribe((user) => {
-        this.userInfo = user;
-        this.resetUpdate();
-        this.user2 = this.userInfo;
-        this.submitOverride = 0;
-        if(this.userInfo.active == 0){
+      .subscribe(user => {
+        this.user2 = user;
+        this.userInfo2 = user;
+        this.passwordError = 0;
+        this.passwordAcceptable = 1;
+
+        console.log(this.userInfo2.userName);
+        console.log(this.user2.userName);
+
+        if(this.user2.active == 0){
           this.userActive = "inactive";
         }
         else{
           this.userActive = "active";
         }
-      });
-    let modal = document.getElementById('updateUserModal');
-    modal.style.display = 'block';
-
+        let modal = document.getElementById('updateUserModal');
+        modal.style.display = 'block';
+      }
+      );
 
   }
 }
+
