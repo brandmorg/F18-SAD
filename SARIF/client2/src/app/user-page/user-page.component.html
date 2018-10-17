@@ -7,7 +7,7 @@
       <button class="btn btn-link" (click)="viewUserList()" id="button1" *ngIf="access == 1 || access == 2">User list</button>
       <button class="btn btn-link" (click)="viewLog()" id="button2" *ngIf="access == 1">User log</button>
       <button class="btn btn-link" (click)="viewCoA()" id="button3" *ngIf="access == 2" >Chart of accounts</button>
-      <button class="btn btn-link" (click)="logOut()" id="button4" *ngIf="access == 2" >Journal</button>
+      <button class="btn btn-link" (click)="viewJournalEntries()" id="button4" *ngIf="access == 2" >Journal</button>
       <button class="btn btn-link" (click)="logOut()" id="button5" >Log out</button>
     </div>
   </div>
@@ -16,6 +16,7 @@
       <app-chart-of-accounts *ngSwitchCase="1"></app-chart-of-accounts>
         <app-add-user *ngSwitchCase="2"></app-add-user>
         <app-user-log *ngSwitchCase="3"></app-user-log>
+        <app-journal-entries *ngSwitchCase ="4"></app-journal-entries>
         </ng-container>
     </div>
 

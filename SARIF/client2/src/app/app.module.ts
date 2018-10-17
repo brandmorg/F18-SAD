@@ -16,6 +16,9 @@ import { ChartOfAccountsComponent } from './chart-of-accounts/chart-of-accounts.
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UserLogComponent } from './user-log/user-log.component';
 import { AddUserLoginComponent } from './add-user-login/add-user-login.component';
+import { JournalEntriesComponent } from './journal-entries/journal-entries.component';
+// tslint:disable-next-line:max-line-length
+import { MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -30,15 +33,31 @@ import { AddUserLoginComponent } from './add-user-login/add-user-login.component
     ResetPasswordComponent,
     UserLogComponent,
     AddUserLoginComponent,
+    JournalEntriesComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     Ng2Webstorage,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
+  ],
+
+  exports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export class MaterialModule {}

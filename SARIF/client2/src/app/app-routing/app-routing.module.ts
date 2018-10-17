@@ -58,4 +58,4 @@ export const routingComponents = [
   UserDetailsComponent,
   ChartOfAccountsComponent,
   AddUserComponent,
-]
+];
