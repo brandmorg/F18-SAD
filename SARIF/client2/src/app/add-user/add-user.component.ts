@@ -23,8 +23,8 @@ export class AddUserComponent implements OnInit {
   editUser = [];
   active = [];
   submitted = false;
-  usernameExist = 0;
-  emailExist = 0;
+  usernameExist = 1;
+  emailExist = 1;
   passwordAcceptable = 0;
   passwordError = 0;
   access = 1;
@@ -34,7 +34,7 @@ export class AddUserComponent implements OnInit {
   userInfo2 = new User();
   userActive = "sss";
   userActive2 = " ";
-  submitOverride: boolean;
+  submitOverride = 1;
 
   constructor(
     private router: Router,
@@ -74,6 +74,7 @@ export class AddUserComponent implements OnInit {
   close2() {
     let editModal = document.getElementById("updateUserModal");
     editModal.style.display = "none";
+    this.submitOverride = 1;
     this.resetUpdate();
   }
   //check if the Username already exists
@@ -90,8 +91,7 @@ export class AddUserComponent implements OnInit {
 
   compareUserNameUpdate(event){
     this.user2.userName = event;
-    console.log(this.user2.userName);
-      console.log(this.userInfo2.userName);
+    this.getOriginalUserID(this.user2.userId);
       if(this.user2.userName == this.userInfo2.userName){
         this.usernameExist = 1;
         console.log("worked");
@@ -115,14 +115,16 @@ export class AddUserComponent implements OnInit {
   }
 
   compareEmailUpdate(event){
-    this.user.email = event;
+    this.user2.email = event;
+    this.getOriginalUserID(this.user2.userId);
     if(this.user2.email == this.userInfo.email){
       this.emailExist = 1;
     }
     else {
-      this.userData.compareEmail(this.user.email).subscribe(response => {
+      this.userData.compareEmail(this.user2.email).subscribe(response => {
         this.emailExist = response;
-        console.log(this.emailExist);
+        console.log(this.userInfo2.email);
+        console.log(response);
       });
     }
   }
@@ -145,9 +147,10 @@ export class AddUserComponent implements OnInit {
 //submit an edit
   submitEdit(){
     if (this.passwordAcceptable !== 1){
+      console.log("no1");
       this.passwordError = 1;
     } else if (this.usernameExist !== 1 || this.emailExist !==1 ){
-
+        console.log("no");
     }
     else {
       if(this.userActive2 === "active"){
@@ -273,44 +276,48 @@ export class AddUserComponent implements OnInit {
     }
   }
   resetUpdate() {
-    this.user2.userName = this.userInfo2.userName;
-    this.user2.firstName = this.userInfo2.firstName;
-    this.user2.lastName = this.userInfo2.lastName;
-    this.user2.userPassword = this.userInfo2.userPassword;
-    this.user2.email = this.userInfo2.email;
-    this.user2.securityQ = this.userInfo2.securityQ;
-    this.user2.securityA = this.userInfo2.securityA;
-    if(this.userInfo2.active == 0){
-      this.userActive2 = "inactive"
-    }
-    else{
-      this.userActive2 = "active";
-    }
-    this.user2.userRole = this.userInfo2.userRole;
-    this.emailExist = 1;
-    this.usernameExist = 1;
+    this.userData.getUser(this.user2.userId)
+      .subscribe(user => {
+          this.user2 = user;
+          this.userInfo2 = user;
 
 
+          console.log(this.userInfo2.userName);
+          console.log(this.user2.userName);
 
-
+          if(this.user2.active == 0){
+            this.userActive = "inactive";
+          }
+          else{
+            this.userActive = "active";
+          }
+        }
+      );
   }
-  changeUserName(){
-    this.usernameExist = 1;
-    this.submitOverride = false;
+
+  getOriginalUserID(id: number) {
+    this.userID = id;
+    this.userData.getUser(this.userID)
+      .subscribe(user => {
+          this.userInfo2 = user;
+        }
+      );
   }
+
 
   //Get account info to edit and load modal
   getUserInfo(id: number) {
     this.userID = id;
     this.userData.getUser(this.userID)
-      .subscribe((user) => {
+      .subscribe(user => {
+        this.user2 = user;
         this.userInfo2 = user;
 
 
         console.log(this.userInfo2.userName);
         console.log(this.user2.userName);
 
-        if(this.userInfo2.active == 0){
+        if(this.user2.active == 0){
           this.userActive = "inactive";
         }
         else{
@@ -320,5 +327,7 @@ export class AddUserComponent implements OnInit {
         modal.style.display = 'block';
       }
       );
+
   }
 }
+
