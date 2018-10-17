@@ -10,5 +10,6 @@ export class CoA {
     active: string;
     comment: string;
     accountName: string;
+    createdBy: string;
   }
   

@@ -45,7 +45,11 @@ module.exports = (sequelize, Sequelize) => {
         accountName: {
             type: Sequelize.STRING,
             allowNull: false
-        }
+        },
+        createdBy: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
     });
 
     return ChartAccount;
