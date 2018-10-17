@@ -19,6 +19,7 @@ export class AddUserComponent implements OnInit {
   @ViewChild('editUserForm') public editForm: NgForm;
   user = new User();
   user2 = new User();
+  userDisplay = new User();
   users = [];
   editUser = [];
   active = [];
@@ -27,6 +28,7 @@ export class AddUserComponent implements OnInit {
   passwordAcceptable = 0;
   passwordError = 0;
   access = 1;
+  blankSpace = " ";
   //for editing users
   userID: number;
   userInfo2 = new User();
@@ -67,6 +69,9 @@ export class AddUserComponent implements OnInit {
     let modal = document.getElementById("new_user");
     modal.style.display = "block";
   }
+
+
+
   //close create user screen
   close() {
     let modal = document.getElementById("new_user");
@@ -85,6 +90,10 @@ export class AddUserComponent implements OnInit {
     this.passwordError = 0;
     this.passwordAcceptable = 1;
     this.resetUpdate();
+  }
+  close3() {
+    let modal = document.getElementById("viewUserData");
+    modal.style.display = "none";
   }
 
 
@@ -291,7 +300,15 @@ export class AddUserComponent implements OnInit {
       );
   }
 
-
+  viewData(id: number) {
+    this.userID = id;
+    this.userData.getUser(this.userID)
+      .subscribe(user => {
+        this.userDisplay = user;
+        let modal = document.getElementById("viewUserData");
+        modal.style.display = 'block';
+      });
+  }
   //Get account info to edit and load modal
   getUserInfo(id: number) {
     this.userID = id;

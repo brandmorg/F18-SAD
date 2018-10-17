@@ -185,6 +185,62 @@
      </form>
    </div>
 </div>
+<!--Display User details-->
+<div id="viewUserData" class="modal">
+  <div class="modal-content2">
+    <form #viewUserData="ngForm">
+        <table id="display">
+          <tr style=" background-color: white">
+            <th style="color: black; border: none">User Name:</th>
+            <th style="color: black; border: none">{{userDisplay.userName}}</th>
+          </tr>
+          <tr style=" background-color: white">
+            <th style="color: black; border: none">Password:</th>
+            <th style="color: black; border: none">{{userDisplay.userPassword}}</th>
+          </tr>
+          <tr style=" background-color: white">
+            <th style="color: black; border: none">First name:</th>
+            <th style="color: black; border: none">{{userDisplay.firstName}}</th>
+          </tr>
+          <tr style=" background-color: white">
+            <th style="color: black; border: none">Last name:</th>
+            <th style="color: black; border: none">{{userDisplay.lastName}}</th>
+          </tr>
+          <tr style=" background-color: white">
+            <th style="color: black; border: none">email:</th>
+            <th style="color: black; border: none">{{userDisplay.email}}</th>
+          </tr>
+          <tr style=" background-color: white">
+            <th style="color: black; border: none">Role:</th>
+            <th style="color: black; border: none">{{userDisplay.userRole}}</th>
+          </tr>
+          <tr style=" background-color: white">
+            <th style="color: black; border: none">Security Question:</th>
+            <th style="color: black; border: none">{{userDisplay.securityQ}}</th>
+          </tr>
+          <tr style=" background-color: white">
+            <th style="color: black; border: none">Security answer:</th>
+            <th style="color: black; border: none">{{userDisplay.securityA}}</th>
+          </tr>
+          <tr style=" background-color: white">
+            <th style="color: black; border: none">Password expiration:</th>
+            <th style="color: black; border: none">{{userDisplay.passwordExpire | date: 'MM/dd/yyyy  HH:mm:ss'}}</th>
+          </tr>
+          <tr style=" background-color: white">
+            <th style="color: black; border: none">Updated last:</th>
+            <th style="color: black; border: none">{{userDisplay.updatedAt | date: 'MM/dd/yyyy  HH:mm:ss'}}</th>
+          </tr>
+          <tr style=" background-color: white">
+            <th style="color: black; border: none">Created At:</th>
+            <th style="color: black; border: none">{{userDisplay.createdAt | date: 'MM/dd/yyyy  HH:mm:ss'}}</th>
+          </tr>
+
+
+        </table>
+        <button (click)="close3(); " id="closeModalBtn4">Close</button>
+    </form>
+  </div>
+</div>
 
 <!-- Display User list form-->
 
@@ -215,6 +271,7 @@
       <td *ngIf="user.active == 0">inactive</td>
       <td *ngIf="user.active == 1">active</td>
       <button class="btn btn-primary" (click)="getUserInfo(user.userId)">Edit</button>
+      <button class="btn btn-primary" (click)="viewData(user.userId)">More</button>
     </tr>
   </table>
 </div>

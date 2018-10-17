@@ -58,6 +58,14 @@ table, h3, h2, td {
   width: 50%;
 }
 
+.modal-content2 {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 25%;
+}
+
 .rightContent{
   width: 400px;
   z-index: 0;
