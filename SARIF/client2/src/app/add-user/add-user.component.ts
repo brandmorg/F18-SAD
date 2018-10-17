@@ -34,7 +34,6 @@ export class AddUserComponent implements OnInit {
   userInfo2 = new User();
   userActive = "sss";
   userActive2 = " ";
-  submitOverride = 1;
 
   constructor(
     private router: Router,
@@ -74,7 +73,10 @@ export class AddUserComponent implements OnInit {
   close2() {
     let editModal = document.getElementById("updateUserModal");
     editModal.style.display = "none";
-    this.submitOverride = 1;
+    this.emailExist = 1;
+    this.usernameExist = 1;
+    this.passwordError = 0;
+    this.passwordAcceptable = 1;
     this.resetUpdate();
   }
   //check if the Username already exists
@@ -141,6 +143,7 @@ export class AddUserComponent implements OnInit {
           this.close();
           this.userForm.reset();
 
+
         });
     }
   }
@@ -164,6 +167,8 @@ export class AddUserComponent implements OnInit {
         .subscribe(() => {
           this.viewUsers();
           this.close2();
+          this.passwordError = 0;
+          this.passwordAcceptable = 1;
         });
     }
   }
@@ -312,7 +317,8 @@ export class AddUserComponent implements OnInit {
       .subscribe(user => {
         this.user2 = user;
         this.userInfo2 = user;
-
+        this.passwordError = 0;
+        this.passwordAcceptable = 1;
 
         console.log(this.userInfo2.userName);
         console.log(this.user2.userName);
