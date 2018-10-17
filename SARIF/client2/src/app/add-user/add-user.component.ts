@@ -62,12 +62,12 @@ export class AddUserComponent implements OnInit {
       }
     );
   }
-
+  //open create user screen
   createUser() {
     let modal = document.getElementById("new_user");
     modal.style.display = "block";
   }
-
+  //close create user screen
   close() {
     let modal = document.getElementById("new_user");
     modal.style.display = "none";
@@ -76,6 +76,7 @@ export class AddUserComponent implements OnInit {
    // this.userInfo = null;
   }
 
+  //close update screen
   close2() {
     let editModal = document.getElementById("updateUserModal");
     editModal.style.display = "none";
@@ -85,9 +86,9 @@ export class AddUserComponent implements OnInit {
     this.passwordAcceptable = 1;
     this.resetUpdate();
   }
-  //check if the Username already exists
 
 
+  //check if the Username already exists on create screen
   compareUserName(event){
     this.user.userName = event;
     this.userData.compareUsername(this.user.userName).subscribe( response => {
@@ -97,6 +98,7 @@ export class AddUserComponent implements OnInit {
     });
   }
 
+   //check if the Username already exists on update screen
   compareUserNameUpdate(event){
     this.user2.userName = event;
     this.getOriginalUserID(this.user2.userId);
@@ -113,7 +115,7 @@ export class AddUserComponent implements OnInit {
       }
   }
 
-//check if the Email already exists
+//check if the Email already exists on create screen
   compareEmail(event){
     this.user.email = event;
     this.userData.compareEmail(this.user.email).subscribe( response => {
@@ -121,7 +123,7 @@ export class AddUserComponent implements OnInit {
       console.log(this.emailExist);
     });
   }
-
+//check if the Email already exists on update screen
   compareEmailUpdate(event){
     this.user2.email = event;
     this.getOriginalUserID(this.user2.userId);
@@ -137,12 +139,16 @@ export class AddUserComponent implements OnInit {
     }
   }
 
+  //submit new user
   submit(): void {
     if(this.passwordAcceptable != 1){
       this.passwordError = 1;
     } else if (this.usernameExist !== 1 || this.emailExist !==1 ){
       console.log("cannot continue");
     } else {
+      this.user.lastUpdatePassword = new Date();
+      this.user.passwordExpire = new Date();
+      this.user.passwordExpire.setDate(this.user.lastUpdatePassword.getDate() + 21)
       this.userData.addUser(this.user)
         .subscribe(() => {
           this.viewUsersSort(this.column,'ASC');
@@ -178,49 +184,56 @@ export class AddUserComponent implements OnInit {
         });
     }
   }
-
+//check if password is appropriate
   checkPassword(event){
     this.user.userPassword = event;
-
-    let length = this.user.userPassword.length;
-    let result = this.user.userPassword.match(/[0-9]+/g);
-    let result2 = this.user.userPassword.match(/[%, #, $, *, &,+]+/g);
-    console.log(result);
-
-    if (this.user.userPassword.length >= 8 && result != null && result2 != null){
+    try {
+      let length = this.user.userPassword.length;
+      let result = this.user.userPassword.match(/[0-9]+/g);
+      let result2 = this.user.userPassword.match(/[%, #, $, *, &,+]+/g);
+      console.log(result);
+      if (this.user.userPassword.length >= 8 && result != null && result2 != null) {
         console.log('password is good');
         this.passwordAcceptable = 1;
         this.passwordError = 0;
 
+      }
+      else {
+        console.log('password is weak');
+        console.log(length);
+        this.passwordAcceptable = 0;
+        this.passwordError = 0;
+      }
     }
-    else{
-      console.log('password is weak');
-      console.log(length);
-      this.passwordAcceptable = 0;
-      this.passwordError = 0;
+    catch (err) {
+      console.log(err);
     }
   }
-
+//check if password is appropriate for update
   checkPasswordUpdate(event){
     this.user2.userPassword = event;
+    try {
+      let length = this.user2.userPassword.length;
+      let result = this.user2.userPassword.match(/[0-9]+/g);
+      let result2 = this.user2.userPassword.match(/[%, #, $, *, &,+]+/g);
+      console.log(result);
 
-    let length = this.user2.userPassword.length;
-    let result = this.user2.userPassword.match(/[0-9]+/g);
-    let result2 = this.user2.userPassword.match(/[%, #, $, *, &,+]+/g);
-    console.log(result);
+        if (this.user2.userPassword.length >= 8 && result != null && result2 != null) {
+          console.log('password is good');
+          this.passwordAcceptable = 1;
+          this.passwordError = 0;
 
-    if (this.user2.userPassword.length >= 8 && result != null && result2 != null){
-      console.log('password is good');
-      this.passwordAcceptable = 1;
-      this.passwordError = 0;
-
-    }
-    else{
-      console.log('password is weak');
-      console.log(length);
-      this.passwordAcceptable = 0;
-      this.passwordError = 0;
-    }
+        }
+        else {
+          console.log('password is weak');
+          console.log(length);
+          this.passwordAcceptable = 0;
+          this.passwordError = 0;
+        }
+      }
+      catch (err) {
+        console.log(err);
+      }
   }
 
 
@@ -237,6 +250,7 @@ export class AddUserComponent implements OnInit {
     );
   }
 
+  //type of user using the page
   userAccess(){
     if(this.comp.getRole() === 'admin') {
       this.access = 0;
@@ -246,6 +260,7 @@ export class AddUserComponent implements OnInit {
     }
   }
 
+  //reset update page
   resetUpdate() {
     this.userData.getUser(this.user2.userId)
       .subscribe(user => {
@@ -266,6 +281,7 @@ export class AddUserComponent implements OnInit {
       );
   }
 
+  //retreive the id of the update user unchanged
   getOriginalUserID(id: number) {
     this.userID = id;
     this.userData.getUser(this.userID)
