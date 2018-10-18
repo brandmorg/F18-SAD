@@ -28,8 +28,9 @@ export class UserService {
     return this.http.get<User[]>(this.usersUrl, httpOptions);
   }
 
-  findAllSort(column, direction): Observable<User[]> {
-    return this.http.post<User[]>(this.usersSortUrl, {column: column, direction: direction}, httpOptions);
+  findAllSort(column, direction, columnSearch, criteria): Observable<User[]> {
+    return this.http.post<User[]>(this.usersSortUrl, {column: column, direction: direction, columnSearch: columnSearch,
+    criteria: criteria}, httpOptions);
   }
 
 

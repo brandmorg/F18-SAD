@@ -243,8 +243,16 @@
 </div>
 
 <!-- Display User list form-->
+<form class="form-inline" style="left: 8px">
+  <div style="position:  relative;left: 75%;  padding-top: 20px">
+<div class="form-group">
+  <input type="text" class="form-control" id="searchBar"  style="width: 300px; left: 6px" placeholder="Search" (ngModelChange)="viewUsersSort(column,'ASC', columnSearch, $event)" required [(ngModel)]="criteria"
+           name="search" >
+  </div>
+  </div>
+</form>
 
-<button class="btn btn-info btn-lg" (click)="createUser()" *ngIf="access == 1">Create User</button>
+<button class="btn btn-info btn-lg" (click)="createUser()" *ngIf="access == 0">Create User</button>
 
 <div class="form-group">
   <table id="userTable">
@@ -270,7 +278,7 @@
       <td>{{ user.createdAt | date: 'MM/dd/yyyy  HH:mm:ss'}}</td>
       <td *ngIf="user.active == 0">inactive</td>
       <td *ngIf="user.active == 1">active</td>
-      <button class="btn btn-primary" (click)="getUserInfo(user.userId)">Edit</button>
+      <button class="btn btn-primary" (click)="getUserInfo(user.userId)"  *ngIf="access == 0">Edit</button>
       <button class="btn btn-primary" (click)="viewData(user.userId)">More</button>
     </tr>
   </table>

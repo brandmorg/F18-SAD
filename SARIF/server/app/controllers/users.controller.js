@@ -1,5 +1,7 @@
 const db = require('../config/db.config.js');
+const Sequelize = require('sequelize')
 const Users = db.users;
+const Op = Sequelize.Op;
 
 // Post a Customer
 exports.create = (req, res) => {
@@ -49,11 +51,36 @@ exports.findAll = (req, res) => {
 exports.findAllSort = (req, res) => {
     let column = req.body.column;
     let direction = req.body.direction;
-    Users.findAll( {where: {},
-        order: [[column, direction]]}).then(users => {
-        // Send all customers to Client
-        res.json(users);
-    });
+    let columnSearch = req.body.columnSearch;
+    let criteria = req.body.criteria;
+    //if search is set to all and there is criteria input
+    if(columnSearch == 'all' && criteria!= '') {
+        //if a search is entered
+        Users.findAll({
+            where: {
+               [Op.or]: [{userName: {[Op.like]: '%'+ criteria + '%'}},
+                   {userPassword: {[Op.like]: '%'+ criteria + '%'}},
+                   {firstName: {[Op.like]: '%'+ criteria + '%'}},
+                   {lastName: {[Op.like]: '%'+ criteria + '%'}},
+                   {userRole: {[Op.like]: '%'+ criteria + '%'}},
+                   ]
+            },
+            order: [[column, direction]]
+        }).then(users => {
+            // Send all customers to Client
+            res.json(users);
+        });
+    }
+    else{
+        //if search wasnt entered
+        Users.findAll({
+            where: {},
+            order: [[column, direction]]
+        }).then(users => {
+            // Send all customers to Client
+            res.json(users);
+        });
+    }
 };
 
 // Find a user by Id

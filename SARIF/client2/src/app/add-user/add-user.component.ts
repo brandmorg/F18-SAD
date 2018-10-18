@@ -34,7 +34,11 @@ export class AddUserComponent implements OnInit {
   userInfo2 = new User();
   userActive = "sss";
   userActive2 = " ";
+
+  //for search and sort
   column = 'userId';
+  columnSearch = 'all';
+  criteria = '';
 
   constructor(
     private router: Router,
@@ -46,7 +50,7 @@ export class AddUserComponent implements OnInit {
   ) {
   }
   ngOnInit() {
-    this.viewUsersSort('userId', 'ASC');
+    this.viewUsersSort('userId', 'ASC', 'All', null);
     this.userAccess();
     }
 
@@ -57,10 +61,11 @@ export class AddUserComponent implements OnInit {
       }
     );
   }
-  viewUsersSort(column: string, direction: string) {
-    this.userData.findAllSort(column, direction).subscribe(
+  viewUsersSort(column: string, direction: string, columnSearch: string, criteria: string) {
+    this.userData.findAllSort(column, direction, columnSearch, criteria).subscribe(
       (user) => {
         this.users = user;
+        console.log("updated");
       }
     );
   }
@@ -160,7 +165,7 @@ export class AddUserComponent implements OnInit {
       this.user.passwordExpire.setDate(this.user.lastUpdatePassword.getDate() + 21)
       this.userData.addUser(this.user)
         .subscribe(() => {
-          this.viewUsersSort(this.column,'ASC');
+          this.viewUsersSort(this.column,'ASC', this.columnSearch, this.criteria);
           this.close();
           this.userForm.reset();
 
@@ -186,7 +191,7 @@ export class AddUserComponent implements OnInit {
       this.user2.userId = this.userInfo2.userId;
       this.userData.updateUser(this.user2)
         .subscribe(() => {
-          this.viewUsersSort(this.column,'ASC');
+          this.viewUsersSort(this.column,'ASC', this.columnSearch, this.criteria);
           this.close2();
           this.passwordError = 0;
           this.passwordAcceptable = 1;
