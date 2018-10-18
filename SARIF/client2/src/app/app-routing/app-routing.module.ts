@@ -7,10 +7,18 @@ import { AddUserComponent } from '../add-user/add-user.component';
 import { UserDetailsComponent } from '../user-details/user-details.component';
 import { LoginHomeComponent } from '../login-home/login-home.component';
 import { ChartOfAccountsComponent } from '../chart-of-accounts/chart-of-accounts.component';
+import { HomeScreenComponent } from '../home-screen/home-screen.component';
+import { UserLogComponent } from '../user-log/user-log.component';
+
 
 const routes: Routes = [
   {
     path: '',
+    redirectTo: '/loginHome',
+    pathMatch: 'full'
+  },
+  {
+    path: 'loginHome',
     component: LoginHomeComponent
   },
   {
@@ -19,24 +27,35 @@ const routes: Routes = [
   },
   {
     path: 'UserPage',
-    component: UserPageComponent
-  },
-  {
-    path: 'AddUser',
-    component: AddUserComponent
+    component: UserPageComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      },
+      {
+        path: 'home',
+        component: HomeScreenComponent
+      },
+      {
+        path: 'userList',
+        component: AddUserComponent
+      },
+      {
+        path: 'chartOfAccounts',
+        component: ChartOfAccountsComponent
+      },
+      {
+        path: 'userLogs',
+        component: UserLogComponent
+      }
+    ]
   },
   {
     path: 'user/:id',
     component: UserDetailsComponent
   },
-  {
-    path: 'AddAccount',
-    component: ChartOfAccountsComponent
-  },
-  {
-    path: 'addUser',
-    component: AddUserComponent
-  }
 ];
 
 
@@ -58,4 +77,6 @@ export const routingComponents = [
   UserDetailsComponent,
   ChartOfAccountsComponent,
   AddUserComponent,
-]
+  HomeScreenComponent,
+  UserLogComponent
+];

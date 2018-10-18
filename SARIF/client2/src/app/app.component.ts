@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
+import {SharedDataService} from './services/shared-data.service';
 
 @Component({
 
@@ -10,8 +11,14 @@ import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 })
 export class AppComponent {
   title = 'Welcome to Sarif Financial';
+  access = 1;
+
+  indicator = '';
   constructor(private _cookieService: CookieService,
-              private localSt: LocalStorageService, private sessionSt: SessionStorageService) {}
+              private localSt: LocalStorageService,
+              private sessionSt: SessionStorageService,
+              private data: SharedDataService
+  ) {}
 
 setCookies(){
     this._cookieService.put('test', 'testing cookie');
@@ -59,4 +66,6 @@ getAccount() {
 delAccount() {
     this.sessionSt.clear('accountName');
 }
+
+
 }

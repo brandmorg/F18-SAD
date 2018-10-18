@@ -44,29 +44,20 @@ export class UserPageComponent implements OnInit {
   logOut() {
     this.logData.create(this.comp.getUserName(), 'User Logout').subscribe();
     this.comp.delSession();
-    this.router.navigate(['']);
+    this.router.navigate(['loginHome']);
   }
 
-  onLog() {
-    this.logData.findAll().subscribe(
-      (userLog) => {
-        document.getElementById("logTable").hidden = false; //Unhide table after onLog click
-        document.getElementById("showUsersTable").hidden = true;
-        this.logs = userLog;
-      }
-    )
-  }
 
   viewCoA(){
-    this.currentpage = 1;
+    this.router.navigate(['UserPage/chartOfAccounts']);
   }
   viewUserList(){
-    this.currentpage = 2;
+    this.router.navigate(['UserPage/userList']);
   }
   viewLog(){
-    this.currentpage = 3;
+    this.router.navigate(['UserPage/userLogs']);
   }
   viewHome(){
-    this.currentpage = 0;
+    this.router.navigate(['UserPage/home']);
   }
 }
