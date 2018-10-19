@@ -26,6 +26,7 @@ export class ChartOfAccountsComponent implements OnInit {
 
   accountCheck = new CoA();
   accountNameExist = 1;
+  accountNumberExist = 1;
 
 
   constructor(
@@ -188,6 +189,27 @@ export class ChartOfAccountsComponent implements OnInit {
         this.accountNameExist = response;
         console.log(this.accountNameExist);
       });
+    }
+  }
+
+  compareAccountNumberUpdate(event){
+    if(isNaN(event) || event == "") {
+      console.log("not a number");
+      this.accountNumberExist = 3;
+    }else {
+      this.editCoA.accountNumber = event;
+      this.getOriginalAccountID(this.editCoA.caId);
+      if (this.editCoA.accountNumber == this.accountCheck.accountNumber) {
+        this.accountNumberExist = 1;
+        console.log("worked");
+      }
+      else {
+        this.coaService.compareAccountNumber(this.editCoA.accountNumber).subscribe(response => {
+          console.log("button changed");
+          this.accountNumberExist = response;
+          console.log(this.accountNumberExist);
+        });
+      }
     }
   }
 

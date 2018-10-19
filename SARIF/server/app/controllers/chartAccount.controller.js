@@ -34,6 +34,18 @@ exports.compareAccountName = (req, res) => {
         }
     });
 };
+//checks for a similar account number
+exports.compareAccountNumber = (req, res) => {
+    let accountNumber = req.body.accountNumber;
+    ChartAccount.findOne({where: {accountNumber: accountNumber}}).then( account => {
+        if(!account){
+            res.json(1);
+        }
+        else{
+            res.json(2);
+        }
+    });
+};
 
 exports.findAllSort = (req, res) => {
     let column = req.body.column;

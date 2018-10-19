@@ -95,7 +95,7 @@
       </div>
       <div class="form-group">
         <label for="accountNumber">Account Number</label><br>
-        <input type="text" class="form-control" id="accountNumber" value="{{ accountData.accountNumber }}" required
+        <input type="text" class="form-control" id="accountNumber" (ngModelChange)="compareAccountNumberUpdate($event)" value="{{ accountData.accountNumber }}" required
           [(ngModel)]="editCoA.accountNumber" name="accountNumber" #accountNumber="ngModel">
       </div>
       <div *ngIf="isNegativeNumber(editCoA.accountNumber)" class="alert alert-danger" style="width: 250px;">
@@ -149,6 +149,12 @@
 
       <div *ngIf="accountNameExist== 2" class="alert alert-danger"  style="width: 250px;">
         Account Name exists
+      </div>
+      <div *ngIf="accountNumberExist == 3" class="alert alert-danger"  style="width: 250px;">
+        Account Number input must be an integer
+      </div>
+      <div *ngIf="accountNumberExist == 2" class="alert alert-danger"  style="width: 250px;">
+        Account Number exists
       </div>
       <button (click)="submitEdit()" id="submitEditBtn">Submit</button>
       <button (click)="close()" id="closeModalBtn">Cancel</button>

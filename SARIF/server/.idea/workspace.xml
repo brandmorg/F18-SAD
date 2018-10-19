@@ -102,12 +102,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="4424" />
+          <entry key="js" value="4499" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="4424" />
+          <entry key="JavaScript" value="4499" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -179,8 +179,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/chartAccount.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+            <state relative-caret-position="459">
+              <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -215,8 +215,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/chartAccount.routes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+            <state relative-caret-position="238">
+              <caret line="14" column="35" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -266,8 +266,8 @@
         <option value="$PROJECT_DIR$/app/model/chartAccount.model.js" />
         <option value="$PROJECT_DIR$/app/controllers/users.controller.js" />
         <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/app/controllers/chartAccount.controller.js" />
         <option value="$PROJECT_DIR$/app/routes/chartAccount.routes.js" />
+        <option value="$PROJECT_DIR$/app/controllers/chartAccount.controller.js" />
       </list>
     </option>
   </component>
@@ -345,7 +345,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539921189130" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539923811131" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -387,12 +387,12 @@
       <workItem from="1539706340170" duration="3028000" />
       <workItem from="1539721463505" duration="8795000" />
       <workItem from="1539885783415" duration="1457000" />
-      <workItem from="1539895036010" duration="9976000" />
+      <workItem from="1539895036010" duration="11335000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117178000" />
+    <option name="totallyTimeSpent" value="118537000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="278" y="5" width="1471" height="1038" extended-state="0" />
@@ -684,15 +684,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/chartAccount.routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+        <state relative-caret-position="238">
+          <caret line="14" column="35" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/chartAccount.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+        <state relative-caret-position="459">
+          <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
         </state>
       </provider>
     </entry>

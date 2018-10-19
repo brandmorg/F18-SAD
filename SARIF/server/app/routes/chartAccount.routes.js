@@ -12,6 +12,8 @@ module.exports = function(app) {
 
     app.post('/api/accountNameCheck', accounts.compareAccountName);
 
+    app.post('/api/accountNumberCheck', accounts.compareAccountNumber);
+
     // Retrieve a single account by Id
     app.get('/api/chartOfAccounts/:caId', accounts.findById);
 

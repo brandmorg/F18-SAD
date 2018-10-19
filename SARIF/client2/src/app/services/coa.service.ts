@@ -21,6 +21,7 @@ export class CoAService {
   private findAccountNameUrl = 'http://localhost:8080/api/chartOfAccounts/account';
   private chartSortUrl = 'http://localhost:8080/api/chartSort';
   private nameCheckUrl = 'http://localhost:8080/api/accountNameCheck';
+  private numberCheckUrl = 'http://localhost:8080/api/accountNumberCheck';
   constructor(
     private http: HttpClient
   ) { }
@@ -48,7 +49,10 @@ export class CoAService {
   }
 
   compareAccountName(accountName): Observable<any>{
-    return this.http.post<User>(this.nameCheckUrl, {accountName: accountName}, httpOptions);
+    return this.http.post<CoA>(this.nameCheckUrl, {accountName: accountName}, httpOptions);
+  }
+  compareAccountNumber(accountNumber): Observable<any>{
+    return this.http.post<CoA>(this.numberCheckUrl, {accountNumber: accountNumber}, httpOptions);
   }
 
 }
