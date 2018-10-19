@@ -5,8 +5,11 @@ import { UserLogService } from '../services/user-log.service';
 import { Location } from '@angular/common';
 import { AppComponent } from '../app.component';
 import {SharedDataService } from '../services/shared-data.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import { Observable, of,  } from 'rxjs';
+
 
 @Component({
   selector: 'app-add-user',
@@ -17,6 +20,8 @@ import {NgForm} from '@angular/forms';
 export class AddUserComponent implements OnInit {
   @ViewChild('addUserForm') public userForm: NgForm;
   @ViewChild('editUserForm') public editForm: NgForm;
+  private usersUrl = 'http://localhost:8080/api/users';
+
   user = new User();
   user2 = new User();
   userDisplay = new User();
@@ -113,9 +118,9 @@ export class AddUserComponent implements OnInit {
   }
 
    //check if the Username already exists on update screen
-  compareUserNameUpdate(event){
+  async compareUserNameUpdate(event){
     this.user2.userName = event;
-    this.getOriginalUserID(this.user2.userId);
+    await this.getOriginalUserID(this.user2.userId);
       if(this.user2.userName == this.userInfo2.userName){
         this.usernameExist = 1;
         console.log("worked");
@@ -138,9 +143,9 @@ export class AddUserComponent implements OnInit {
     });
   }
 //check if the Email already exists on update screen
-  compareEmailUpdate(event){
+  async compareEmailUpdate(event){
     this.user2.email = event;
-    this.getOriginalUserID(this.user2.userId);
+    await this.getOriginalUserID(this.user2.userId);
     if(this.user2.email == this.userInfo2.email){
       this.emailExist = 1;
     }
@@ -162,7 +167,7 @@ export class AddUserComponent implements OnInit {
     } else {
       this.user.lastUpdatePassword = new Date();
       this.user.passwordExpire = new Date();
-      this.user.passwordExpire.setDate(this.user.lastUpdatePassword.getDate() + 21)
+      this.user.passwordExpire.setDate(this.user.lastUpdatePassword.getDate() + 28)
       this.userData.addUser(this.user)
         .subscribe(() => {
           this.viewUsersSort(this.column,'ASC', this.columnSearch, this.criteria);
@@ -174,7 +179,8 @@ export class AddUserComponent implements OnInit {
     }
   }
 //submit an edit
-  submitEdit(){
+  async submitEdit(){
+    //conditions for input data
     if (this.passwordAcceptable !== 1){
       console.log("no1");
       this.passwordError = 1;
@@ -182,7 +188,16 @@ export class AddUserComponent implements OnInit {
         console.log("no");
     }
     else {
-      if(this.userActive2 === "active"){
+     await this.getOriginalUserID(this.user2.userId);
+      //if password is reset, expire date is reset
+      console.log('Hello');
+      if (this.user2.userPassword !== this.userInfo2.userPassword) {
+        this.user2.lastUpdatePassword = new Date();
+        this.user2.passwordExpire = new Date();
+        this.user2.passwordExpire.setDate(this.user2.lastUpdatePassword.getDate() + 28);
+        console.log('password expiration has been reset');
+      }
+      if (this.userActive2 === "active"){
         this.user2.active = 1;
       }
       else{
@@ -296,13 +311,14 @@ export class AddUserComponent implements OnInit {
   }
 
   //retreive the id of the update user unchanged
-  getOriginalUserID(id: number) {
+  //fixed asyncronous calls
+ async getOriginalUserID(id: number) {
     this.userID = id;
-    this.userData.getUser(this.userID)
-      .subscribe(user => {
-          this.userInfo2 = user;
-        }
-      );
+    let response = await this.userData.getUser(this.userID)
+      .toPromise();
+       this.userInfo2 = response;
+       console.log('userworked');
+       console.log(this.userInfo2.userName);
   }
 
   viewData(id: number) {
@@ -317,7 +333,7 @@ export class AddUserComponent implements OnInit {
   //Get account info to edit and load modal
   getUserInfo(id: number) {
     this.userID = id;
-    this.userData.getUser(this.userID)
+     this.userData.getUser(this.userID)
       .subscribe(user => {
         this.user2 = user;
         this.userInfo2 = user;

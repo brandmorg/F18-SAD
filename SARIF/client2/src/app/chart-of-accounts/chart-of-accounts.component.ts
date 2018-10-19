@@ -176,9 +176,9 @@ export class ChartOfAccountsComponent implements OnInit {
           });
   }
 
-  compareAccountNameUpdate(event){
+  async compareAccountNameUpdate(event){
     this.editCoA.accountName = event;
-    this.getOriginalAccountID(this.editCoA.caId);
+    await this.getOriginalAccountID(this.editCoA.caId);
     if(this.editCoA.accountName == this.accountCheck.accountName){
       this.accountNameExist = 1;
       console.log("worked");
@@ -192,13 +192,13 @@ export class ChartOfAccountsComponent implements OnInit {
     }
   }
 
-  compareAccountNumberUpdate(event){
+  async compareAccountNumberUpdate(event){
     if(isNaN(event) || event == "") {
       console.log("not a number");
       this.accountNumberExist = 3;
     }else {
       this.editCoA.accountNumber = event;
-      this.getOriginalAccountID(this.editCoA.caId);
+      await this.getOriginalAccountID(this.editCoA.caId);
       if (this.editCoA.accountNumber == this.accountCheck.accountNumber) {
         this.accountNumberExist = 1;
         console.log("worked");
@@ -214,13 +214,10 @@ export class ChartOfAccountsComponent implements OnInit {
   }
 
   //gets original account info to compare for update page
-  getOriginalAccountID(id: number) {
+  async getOriginalAccountID(id: number) {
     this.accountId = id;
-    this.coaService.getAccount(this.accountId)
-      .subscribe(account => {
-          this.accountCheck = account;
-        }
-      );
+    let response = await this.coaService.getAccount(this.accountId).toPromise();
+          this.accountCheck = response;
   }
 
   isNegativeNumber(accountNumber) {

@@ -12,9 +12,7 @@
       <td>{{ log.userName }}</td>
       <td>{{ log.actionType }}</td>
       <td></td>
-      <td></td>
-      <td></td>
-      <td>{{ log.createdAt }}</td>
+      <td>{{ log.createdAt | date: 'MM/dd/yyyy  HH:mm:ss'}}</td>
     </tr>
   </table>
 </div>
