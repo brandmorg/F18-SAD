@@ -16,13 +16,16 @@ export class ChartOfAccountsComponent implements OnInit {
   CoA = new CoA();
   editCoA = new CoA();
   accounts = [];
-  accountData = [];
+  accountData = new CoA();
   accountId: number;
   temp = [];
 //input data for search and sort
   column = 'caId';  //sort column
   columnSearch = 'all'; //column that will be searched
   criteria = ''; //search query
+
+  accountCheck = new CoA();
+  accountNameExist = 1;
 
 
   constructor(
@@ -108,14 +111,13 @@ export class ChartOfAccountsComponent implements OnInit {
         this.coaService.addAccount(this.CoA)
           .subscribe(() => {
             this.logData.create(this.comp.getUserName(), this.CoA.createdBy + 'created account ' + this.CoA.accountName).subscribe();
-            window.alert("Account Created");
             //Close modal
             let modal = document.getElementById("createAccountModal");
             modal.style.display = "none";
             this.accountForm.reset();
-            this.viewAccounts();
+            this.viewAccountsSort(this.column,'ASC', this.columnSearch, this.criteria);
           });
-      })
+      });
   }
 
   //Closes modal after clicking on cancel in modal
@@ -134,6 +136,7 @@ export class ChartOfAccountsComponent implements OnInit {
     this.coaService.getAccount(this.accountId)
       .subscribe((account) => {
         this.accountData = account;
+        this.editCoA = account;
       });
     let modal = document.getElementById("editAccountModal");
     modal.style.display = "block";
@@ -161,19 +164,6 @@ export class ChartOfAccountsComponent implements OnInit {
     this.editCoA.currentBalance = this.editCoA.originalBalance;
 
     //Check to see if another account exists with same number or name
-    this.coaService.findAll().subscribe(
-      (account) => {
-        this.temp = account;
-        for (var i = 0; i < this.temp.length; i++) {
-          //Check for account name
-          if (this.temp[i].accountName == this.editCoA.accountName) {
-            return window.alert("Account with same account name found. Enter different account name.");
-          }
-          //Check for account number
-          if (this.temp[i].accountNumber == this.editCoA.accountNumber) {
-            return window.alert("Account with the same account number found. Enter a different account number.")
-          }
-        }
         //If account name and number not found, create the account
         this.coaService.updateAccount(this.editCoA)
           .subscribe(() => {
@@ -181,13 +171,34 @@ export class ChartOfAccountsComponent implements OnInit {
             this.logData.create(this.comp.getUserName(), 'Updated account ' + this.editCoA.accountName).subscribe();
             let modal = document.getElementById("editAccountModal");
             modal.style.display = "none";
-            this.viewAccounts();
+            this.viewAccountsSort(this.column,'ASC', this.columnSearch, this.criteria);
           });
-      })
   }
 
-  stuff(){
+  compareAccountNameUpdate(event){
+    this.editCoA.accountName = event;
+    this.getOriginalAccountID(this.editCoA.caId);
+    if(this.editCoA.accountName == this.accountCheck.accountName){
+      this.accountNameExist = 1;
+      console.log("worked");
+    }
+    else {
+      this.coaService.compareAccountName(this.editCoA.accountName).subscribe(response => {
+        console.log("button changed");
+        this.accountNameExist = response;
+        console.log(this.accountNameExist);
+      });
+    }
+  }
 
+  //gets original account info to compare for update page
+  getOriginalAccountID(id: number) {
+    this.accountId = id;
+    this.coaService.getAccount(this.accountId)
+      .subscribe(account => {
+          this.accountCheck = account;
+        }
+      );
   }
 
   isNegativeNumber(accountNumber) {

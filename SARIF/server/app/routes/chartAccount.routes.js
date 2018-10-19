@@ -10,6 +10,8 @@ module.exports = function(app) {
 
     app.post('/api/chartSort', accounts.findAllSort);
 
+    app.post('/api/accountNameCheck', accounts.compareAccountName);
+
     // Retrieve a single account by Id
     app.get('/api/chartOfAccounts/:caId', accounts.findById);
 

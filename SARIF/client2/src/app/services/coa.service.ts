@@ -20,6 +20,7 @@ export class CoAService {
   private coaUrl = 'http://localhost:8080/api/chartOfAccounts';  // URL to web api
   private findAccountNameUrl = 'http://localhost:8080/api/chartOfAccounts/account';
   private chartSortUrl = 'http://localhost:8080/api/chartSort';
+  private nameCheckUrl = 'http://localhost:8080/api/accountNameCheck';
   constructor(
     private http: HttpClient
   ) { }
@@ -45,4 +46,9 @@ export class CoAService {
     const body = JSON.stringify(account);
     return this.http.put(this.coaUrl, body, httpOptions);
   }
+
+  compareAccountName(accountName): Observable<any>{
+    return this.http.post<User>(this.nameCheckUrl, {accountName: accountName}, httpOptions);
+  }
+
 }

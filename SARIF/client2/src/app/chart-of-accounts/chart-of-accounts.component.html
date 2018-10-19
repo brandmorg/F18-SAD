@@ -90,7 +90,7 @@
     <form #editAccountForm="ngForm">
       <div class="form-group">
         <label for="accountName">Account Name</label><br>
-        <input type="text" class="form-control" id="accountName" value="{{ accountData.accountName}}" required [(ngModel)]="editCoA.accountName"
+        <input type="text" class="form-control" id="accountName" (ngModelChange)="compareAccountNameUpdate($event)" value="{{ accountData.accountName}}" required [(ngModel)]="editCoA.accountName"
           name="accountName" #accountName="ngModel">
       </div>
       <div class="form-group">
@@ -115,7 +115,7 @@
 
       <div class="form-group">
         <label for="accountSubType">Account Subtype: {{ accountData.accountSubType}}</label><br>
-        <select required [(ngModel)]="editCoA.accountSubType" name="accountSubType" #accountSubType="ngModel">
+        <select required [(ngModel)]="editCoA.accountSubType" value="{{accountData.accountSubType}}" name="accountSubType" #accountSubType="ngModel">
           <option>Current Assets</option>
           <option>Property, Plant, and Equipment</option>
           <option>Current Liabilities</option>
@@ -145,6 +145,10 @@
         <label for="comment">Comments</label><br>
         <input type="text" class="form-control" id="comment" value="{{ accountData.comment }}" required [(ngModel)]="editCoA.comment"
           name="comment" #comment="ngModel">
+      </div>
+
+      <div *ngIf="accountNameExist== 2" class="alert alert-danger"  style="width: 250px;">
+        Account Name exists
       </div>
       <button (click)="submitEdit()" id="submitEditBtn">Submit</button>
       <button (click)="close()" id="closeModalBtn">Cancel</button>
