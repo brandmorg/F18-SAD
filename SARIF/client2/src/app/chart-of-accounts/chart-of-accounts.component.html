@@ -1,4 +1,4 @@
-<button class="btn btn-info btn-lg" (click)="createAccount()" id='createAccountBtn'>Create Account</button>
+
 <div id="createAccountModal" class="modal">
   <div class="modal-content">
     <form #addAccountForm="ngForm">
@@ -47,14 +47,6 @@
           <option>Operating Revenues</option>
           <option>Cost of Goods Sold</option>
           <option>Other</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="reportType">Report Type</label><br>
-        <select required [(ngModel)]="CoA.reportType" name="reportType" #reportType="ngModel">
-          <option>Balance Sheet</option>
-          <option>Income Statement</option>
         </select>
       </div>
 
@@ -136,14 +128,6 @@
       </div>
 
       <div class="form-group">
-        <label for="reportType">Report Type: {{ accountData.reportType}}</label><br>
-        <select required [(ngModel)]="editCoA.reportType" name="reportType" #reportType="ngModel">
-          <option>Balance Sheet</option>
-          <option>Income Statement</option>
-        </select>
-      </div>
-
-      <div class="form-group">
         <label for="originalBalance">Original Balance</label><br>
         <input type="text" class="form-control" id="originalBalance" value="{{ accountData.originalBalance }}" required
           [(ngModel)]="editCoA.originalBalance" name="originalBalance" #originalBalance="ngModel">
@@ -168,23 +152,31 @@
   </div>
 </div>
 
+<!--search bar -->
+<form class="form-inline" style="left: 8px">
+  <div style="position:  relative;left: 75%;  padding-top: 20px">
+    <div class="form-group">
+      <input type="text" class="form-control" id="searchBar"  style="width: 300px; left: 6px" placeholder="Search" (ngModelChange)="viewAccountsSort(column,'ASC', columnSearch, $event)" required [(ngModel)]="criteria"
+             name="search" >
+    </div>
+  </div>
+</form>
 
-
+<button class="btn btn-info btn-lg" (click)="createAccount()" id='createAccountBtn'>Create Account</button>
 
 <div class="form-group">
   <table id="accountTable">
     <tr>
-      <th (click)="sort(0)">Account Number</th>
-      <th (click)="sort(1)">Account Name</th>
-      <th (click)="sort(2)">Account Type</th>
-      <th (click)="sort(3)">Account Subtype</th>
-      <th (click)="sort(4)">Normal Side</th>
-      <th (click)="sort(5)">Report Type</th>
-      <th (click)="sort(6)">Original Balance</th>
-      <th (click)="sort(7)">Current Balance</th>
-      <th>Account Description</th>
-      <th (click)="sort(9)">Active</th>
-      <th (click)="sort(10)">Created By</th>
+      <th (click)="viewAccountsSort('accountNumber','ASC',columnSearch,criteria)">Account Number</th>
+      <th (click)="viewAccountsSort('accountName','ASC',columnSearch,criteria)">Account Name</th>
+      <th (click)="viewAccountsSort('accountType','ASC',columnSearch,criteria)">Account Type</th>
+      <th (click)="viewAccountsSort('accountSubType','ASC',columnSearch,criteria)">Account Subtype</th>
+      <th (click)="viewAccountsSort('normalSide','ASC',columnSearch,criteria)">Normal Side</th>
+      <th (click)="viewAccountsSort('originalBalance','ASC',columnSearch,criteria)">Original Balance</th>
+      <th (click)="viewAccountsSort('currentBalance','ASC',columnSearch,criteria)">Current Balance</th>
+      <th (click)="viewAccountsSort('comment','ASC',columnSearch,criteria)">Account Description</th>
+      <th (click)="viewAccountsSort('active','ASC',columnSearch,criteria)">Active</th>
+      <th (click)="viewAccountsSort('createdBy','ASC',columnSearch,criteria)">Created By</th>
     </tr>
     <tr *ngFor="let account of accounts">
       <td>{{ account.accountNumber }}</td>
@@ -192,13 +184,12 @@
       <td>{{ account.accountType }}</td>
       <td>{{ account.accountSubType }}</td>
       <td>{{ account.normalSide }}</td>
-      <td>{{ account.reportType }}</td>
-      <td>{{ account.originalBalance }}</td>
-      <td>{{ account.currentBalance }}</td>
+      <td style="text-align: right;">{{ account.originalBalance }}</td>
+      <td style="text-align: right;">{{ account.currentBalance }}</td>
       <td>{{ account.comment }}</td>
       <td>{{ account.active }}</td>
       <td>{{ account.createdBy }}</td>
-      <button class="btn btn-primary" (click)="getAccount(account.caId)">{{ account.caId }}</button>
+      <button class="btn btn-primary" (click)="getAccount(account.caId)">Edit</button>
     </tr>
   </table>
 </div>

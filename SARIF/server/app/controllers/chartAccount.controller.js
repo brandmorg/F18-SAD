@@ -1,5 +1,7 @@
 const db = require('../config/db.config.js');
 const ChartAccount = db.chartAccount;
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 
 // Post an account
@@ -19,6 +21,42 @@ exports.findAll = (req, res) => {
         res.json(account);
     });
 };
+
+
+exports.findAllSort = (req, res) => {
+    let column = req.body.column;
+    let direction = req.body.direction;
+    let columnSearch = req.body.columnSearch;
+    let criteria = req.body.criteria;
+    //if search is set to all and there is criteria input
+    if(columnSearch == 'all' && criteria!= '') {
+        //if a search is entered
+        ChartAccount.findAll({
+            where: {
+                [Op.or]: [{accountName: {[Op.like]: '%'+ criteria + '%'}},
+                    {accountType: {[Op.like]: '%'+ criteria + '%'}},
+                    {accountSubType: {[Op.like]: '%'+ criteria + '%'}},
+                    {comment : {[Op.like]: '%'+ criteria + '%'}},
+                ]
+            },
+            order: [[column, direction]]
+        }).then(accounts => {
+            // Send all customers to Client
+            res.json(accounts);
+        });
+    }
+    else{
+        //if search wasnt entered
+        ChartAccount.findAll({
+            where: {},
+            order: [[column, direction]]
+        }).then(accounts => {
+            // Send all customers to Client
+            res.json(accounts);
+        });
+    }
+};
+
 
 // Find a log by Id
 exports.findById = (req, res) => {

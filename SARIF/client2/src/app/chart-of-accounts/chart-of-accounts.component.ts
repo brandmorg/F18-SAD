@@ -19,6 +19,11 @@ export class ChartOfAccountsComponent implements OnInit {
   accountData = [];
   accountId: number;
   temp = [];
+//input data for search and sort
+  column = 'caId';  //sort column
+  columnSearch = 'all'; //column that will be searched
+  criteria = ''; //search query
+
 
   constructor(
     private coaService: CoAService,
@@ -27,7 +32,8 @@ export class ChartOfAccountsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.viewAccounts();
+    this.viewAccountsSort('caId','ASC', 'All', null);
+    //this.viewAccounts();
 
 
     //Closes modal when user clicks outside of modal
@@ -40,14 +46,19 @@ export class ChartOfAccountsComponent implements OnInit {
       if (event.target == editAccountModal) {
         editAccountModal.style.display = "none";
       }
-      
-    }
+    };
   }
   viewAccounts() {
     this.coaService.findAll().subscribe(
       (account) => {
         this.accounts = account;
-      })
+      });
+  }
+  viewAccountsSort(column: string, direction: string, columnSearch: string, criteria: string) {
+    this.coaService.findAllSort(column, direction, columnSearch, criteria).subscribe(
+      (account) => {
+        this.accounts = account;
+      });
   }
 
   //Opens modal
@@ -175,45 +186,8 @@ export class ChartOfAccountsComponent implements OnInit {
       })
   }
 
-  sort(n) {
-    var table, rows, switching, shouldSwitch, x, y, switchCount = 0;
-    table = document.getElementById("Table");
-    switching = true;
-    // Set the sorting direction to ascending:
-    let dir = "asc";
-    while (switching) {
-      switching = false;
-      rows = table.rows;
+  stuff(){
 
-      for (var i = 1; i < (rows.length - 1); i++) {
-        shouldSwitch = false;
-        x = rows[i].getElementsByTagName("TD")[n];
-        y = rows[i + 1].getElementsByTagName("TD")[n];
-
-        if (dir == "asc") {
-          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-            shouldSwitch = true;
-            break;
-          }
-        } else if (dir == "desc") {
-          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-            shouldSwitch = true;
-            break;
-          }
-        }
-      }
-
-      if (shouldSwitch) {
-        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-        switching = true;
-        switchCount++;
-      } else {
-        if (switchCount == 0 && dir == "asc") {
-          dir = "desc";
-          switching = true;
-        }
-      }
-    }
   }
 
   isNegativeNumber(accountNumber) {

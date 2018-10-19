@@ -8,6 +8,8 @@ module.exports = function(app) {
     // Retrieve all accounts
     app.get('/api/chartOfAccounts', accounts.findAll);
 
+    app.post('/api/chartSort', accounts.findAllSort);
+
     // Retrieve a single account by Id
     app.get('/api/chartOfAccounts/:caId', accounts.findById);
 

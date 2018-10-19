@@ -257,15 +257,15 @@
 <div class="form-group">
   <table id="userTable">
     <tr>
-      <th (click)="viewUsersSort('userName','ASC'); column='userName' ">User Name</th>
-      <th (click)="viewUsersSort('firstName','ASC'); column='firstName'">First Name</th>
-      <th (click)="viewUsersSort('lastName','ASC'); column='lastName'">Last Name</th>
-      <th (click)="viewUsersSort('userPassword','ASC'); column='userPassword' ">Password</th>
-      <th (click)="viewUsersSort('email','ASC'); column='email'">Email</th>
-      <th (click)="viewUsersSort('userRole','ASC'); column='userRole' ">User Role</th>
-      <th (click)="viewUsersSort('updatedAt','ASC'); column='updatedAt'">Updated at</th>
-      <th (click)="viewUsersSort('createdAt','ASC'); column='createdAt'">Created at</th>
-      <th (click)="viewUsersSort('active','ASC'); column='active'">Active</th>
+      <th (click)="viewUsersSort('userName','ASC',columnSearch,criteria); column='userName' ">User Name</th>
+      <th (click)="viewUsersSort('firstName','ASC',columnSearch,criteria); column='firstName'">First Name</th>
+      <th (click)="viewUsersSort('lastName','ASC',columnSearch,criteria); column='lastName'">Last Name</th>
+      <th (click)="viewUsersSort('userPassword','ASC',columnSearch,criteria); column='userPassword' ">Password</th>
+      <th (click)="viewUsersSort('email','ASC',columnSearch,criteria); column='email'">Email</th>
+      <th (click)="viewUsersSort('userRole','ASC',columnSearch,criteria); column='userRole' ">User Role</th>
+      <th (click)="viewUsersSort('updatedAt','ASC',columnSearch,criteria); column='updatedAt'">Updated at</th>
+      <th (click)="viewUsersSort('createdAt','ASC',columnSearch,criteria); column='createdAt'">Created at</th>
+      <th (click)="viewUsersSort('active','ASC',columnSearch,criteria); column='active'">Active</th>
     </tr>
     <tr *ngFor="let user of users">
       <td>{{ user.userName}}</td>

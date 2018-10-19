@@ -16,7 +16,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         reportType: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         accountNumber: {
             type: Sequelize.INTEGER,

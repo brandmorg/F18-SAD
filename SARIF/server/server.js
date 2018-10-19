@@ -123,7 +123,7 @@ function initial(){
 
 
     for (let i = 0; i < users.length; i++) {
-       // User.create(users[i]);
+        //User.create(users[i]);
     }
 
 }
