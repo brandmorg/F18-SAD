@@ -119,6 +119,7 @@ export class ChartOfAccountsComponent implements OnInit {
             }
           }
           //If account name and number not found, create the account
+          this.CoA.accountName.charAt(0).toLocaleUpperCase();
           this.coaService.addAccount(this.CoA)
             .subscribe(() => {
               this.logData.create(this.comp.getUserName(), this.CoA.createdBy + 'created account ' + this.CoA.accountName).subscribe();
@@ -137,6 +138,9 @@ export class ChartOfAccountsComponent implements OnInit {
     let modal = document.getElementById("createAccountModal");
     modal.style.display = "none";
     this.accountForm.reset();
+
+  }
+  close2(){
     let editModal = document.getElementById("editAccountModal");
     editModal.style.display = "none";
     this.editForm.reset();
@@ -183,6 +187,8 @@ export class ChartOfAccountsComponent implements OnInit {
       console.log('decimal required');
     }
     else {
+      this.editCoA.accountName = this.editCoA.accountName.charAt(0).toLocaleUpperCase() + this.editCoA.accountName.substr(1);
+      console.log('edit made');
       this.coaService.updateAccount(this.editCoA)
         .subscribe(() => {
           this.logData.create(this.comp.getUserName(), 'Updated account ' + this.editCoA.accountName).subscribe();
@@ -244,6 +250,9 @@ export class ChartOfAccountsComponent implements OnInit {
       this.numberHasDecimal = 1;
     }
     else if(isNaN(event)){
+      this.numberHasDecimal = 2;
+    }
+    else if(event < 0){
       this.numberHasDecimal = 2;
     }
     else {
