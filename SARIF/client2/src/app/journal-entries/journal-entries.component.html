@@ -1,132 +1,108 @@
-<button class="btn btn-info btn-lg" (click)="createJournal()" id='createJournalBtn'>Add</button>
-<div id="createJournalModal" class="modal">
-     <div class="modal-content">
-        <form #addJournalForm="ngForm">
+<!-- Start of div -->
+<div>
 
- <!-- Modal for account creation -->
-    <div class="form-group">
-        <label for="journalEntry">Journal Entry</label>
-    </div>
-    
-    <div class="form-group">
-        <input type="text" class="form-control" id="description" placeholder=" Account Title and Description" required [(ngModel)]="CoA.description"
-             name="comment" #description="ngModel" required>
-    </div>
-     <div [hidden]="description.valid || description.pristine" class="alert alert-danger" style="width: 250px;">
-            Description is required
-    </div>
-
-    <div class="form-group">
-            <input type="text" class="form-control" id="comment" placeholder=" Post Reference" required [(ngModel)]="CoA.postReference"
-                 name="postReference" #description="ngModel" required>
-        </div>
-         <div [hidden]="postReference.valid || postReference.pristine" class="alert alert-danger" style="width: 250px;">
-                Post Reference is required
-    </div>
-
-      <div class="form-group">
-        <label for="journalDebit">Debit</label>
-        <input type="text" class="form-control" id="journalDebit" placeholder="journalDebit" required [(ngModel)]="CoA.journalDebit"
-          name="journalDebit" #journalDebit="ngModel">
-      </div>
-      <div [hidden]="journalDebit.valid || journalDebit.pristine" class="alert alert-danger" style="width: 250px;">
-        Debit Amount is required
-      </div>
-      <div *ngIf="isNegativeNumber(CoA.journalDebit)" class="alert alert-danger" style="width: 250px;">
-        Debit Amount must be greater than 0
-      </div>
-
-      <div class="form-group">
-            <label for="accountType">Account Type</label>
-            <select required [(ngModel)]="CoA.accountType" name="accountType" #accountType="ngModel">
-              <option>Assets</option>
-              <option>Revenue</option>
-              <option>Expenses</option>
-              <option>Liability</option>
-              <option>Equity</option>
-            </select>
-        </div>
-
-      <div class="form-group">
-            <label for="journalCredit">Credit</label>
-            <input type="text" class="form-control" id="journalCredit" placeholder="journalCredit" required [(ngModel)]="CoA.journalCredit"
-              name="journalCredit" #journalCredit="ngModel">
-          </div>
-          <div [hidden]="journalCredit.valid || journalCredit.pristine" class="alert alert-danger" style="width: 250px;">
-            Credit Amount is required
-          </div>
-          <div *ngIf="isNegativeNumber(CoA.journalCredit)" class="alert alert-danger" style="width: 250px;">
-            Credit Amount must be greater than 0
-          </div>
-
-      <button (click)="submit()" id="submitBtn" [disabled]="!addAccountForm.form.valid">Submit</button>
-      <input type="reset">
-      <button (click)="close()" id="closeModalBtn">Cancel</button>
-    </form>
-  </div>
-</div>
-
-
-<!-- Modal for account update -->
-<div id="editJournalModal" class="modal">
-        <div class="modal-content">
-          <form #editJournalForm="ngForm">
-            <div class="form-group">
-              <label for="journalEntry">Current Account Name: {{ accountData.journalEntry }}</label>
-              <!-- <input type="text" class="form-control" id="journalEntry" placeholder="Give Account Name" required [(ngModel)]="editCoA.journalEntry"
-                name="journalEntry" #journalEntry="ngModel"> -->
-            </div>
-            <div class="form-group">
-              <label for="journalDebit">Debit</label>
-              <input type="text" class="form-control" id="journalDebit" placeholder="Give Journal Debit" required
-                [(ngModel)]="editCoA.journalDebit" name="journalDebit" #journalDebit="ngModel">
-            </div>
-            <div *ngIf="isNegativeNumber(editCoA.journalDebit)" class="alert alert-danger" style="width: 250px;">
-              Debit Amount must be greater than 0
-            </div>
-      
-            <div class="form-group">
-              <label for="accountType">Account Type</label>
-              <select required [(ngModel)]="editCoA.accountType" name="accountType" #accountType="ngModel">
-                <option>Assets</option>
-                <option>Revenue</option>
-                <option>Expenses</option>
-                <option>Liability</option>
-                <option>Equity</option>
-              </select>
-            </div>
-      
-
-            <!-- <div class="form-group">
-              <input type="text" class="form-control" id="comment" placeholder="Comments" required [(ngModel)]="editCoA.comment"
-                name="comment" #comment="ngModel">
-            </div> -->
+    <div class="columns is-multiline is-mobile">
+        <div class="column is-half">
+            <div class="level-left">
+                <div class="level-item">
+                  <p class="subtitle is-5">
+                    <strong>Journalize</strong> 
+                  </p>
+                </div>
+                <div class="level-item">
+                  <div class="field has-addons">
+                    <p class="control">
+                        <a class="button is-info">Add</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+        </div> 
+        <!-- End of row 1: left column -->
+  
+  
+         <div class="column is-half">
+            <div class="level-right">
+                <div class="field has-addons">
+                    <div class="control">
+                      <input class="input" type="text" placeholder="Search">
+                    </div>
+                    <div class="control">
+                      <a class="button is-info">
+                        Search
+                      </a>
+                    </div>
+                  </div>
+                </div>
+         </div>
+         <!-- End of row 1: right column -->
+        
+         <div class="column is-half">
+           <div class="level-left">
             
-            <button (click)="submitEdit()" id="submitEditBtn">Submit</button>
-            <button (click)="close()" id="closeModalBtn">Cancel</button>
-          </form>
+              <label class="label">Start Date:</label>
+              <p class="buttons">
+                  <a class="button">
+                    <span class="icon is-small">
+                      <i class="fas fa-bold"></i>
+                    </span>
+                  </a>
+
+                  <label class="label">End Date:</label>
+                  <a class="button">
+                    <span class="icon is-small">
+                      <i class="fas fa-italic"></i>
+                    </span>
+                  </a>
+
+                  <a class="button is-info">Filter</a>
+                
+                </p>
+
+              
+                  
+                  
+                  <!-- <p class="control">
+                      <a class="button is-info">
+                        Filter
+                      </a>
+                    </p> -->
+                   
+
+           </div>
         </div>
-      </div>
-      
-<!-- Creates the table on the Journal Page -->
-<div class="form-group">
-     <table id="journalTable">
-         <tr>
-            <th (click)="sort(0)">Date</th>
-             <th (click)="sort(1)">Type</th>
-             <th (click)="sort(2)">Creator</th>
-             <th (click)="sort(3)">Accounts</th>
-             <th (click)="sort(4)">Debit</th>
-             <th (click)="sort(5)">Credit</th>
-        </tr>
-        <tr *ngFor="let journal of journal">
-             <td>{{ journal.date }}</td>
-             <td>{{ journal.type }}</td>
-             <td>{{ journal.creator }}</td>
-             <td>{{ journal.accounts }}</td>
-             <td>{{ journal.debit }}</td>
-             <td>{{ journal.credit }}</td>
-            <button class="btn btn-primary" (click)="getJournal(journal.caId)">{{ journal.caId }}</button>
-         </tr>
-     </table>
- </div>
+        <!-- End of row 2: left column -->
+
+        <div class="column is-half">
+          <div class="level-right">
+           <p class="level-item"><strong>All</strong></p>
+           <p class="level-item"><a>Approved</a></p>
+           <p class="level-item"><a>Needs Approval</a></p>
+           <p class="level-item"><a>Rejected</a></p>
+          </div>
+        </div>
+        <!-- End of row 2: right column -->
+  
+      </div>   
+
+
+<table class="table is-bordered is-striped is-narrow is-hoverable">
+  <thead>
+    <tr>
+      <th><abbr title="Log"></abbr>Log</th>
+      <th><abbr title="Type"></abbr>Type</th>
+      <th><abbr title="Creator"></abbr>Creator</th>
+      <th><abbr title="Accounts"></abbr>Accounts</th>
+      <th><abbr title="Debit"></abbr>Debit</th>
+      <th><abbr title="Credit"></abbr>Credit</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  </tbody>
+</table>
+
+<!-- </div> -->
+   
+<!-- End of whole container -->
+</div> 

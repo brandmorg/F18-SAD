@@ -17,6 +17,10 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { UserLogComponent } from './user-log/user-log.component';
 import { AddUserLoginComponent } from './add-user-login/add-user-login.component';
 import { JournalEntriesComponent } from './journal-entries/journal-entries.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+library.add(fas);
 // tslint:disable-next-line:max-line-length
 import { MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule } from '@angular/material';
 
@@ -48,6 +52,7 @@ import { MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule, Mat
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
+    FontAwesomeModule,
   ],
 
   exports: [

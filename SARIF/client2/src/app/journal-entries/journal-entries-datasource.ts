@@ -15,7 +15,6 @@ export interface JournalEntriesItem {
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: JournalEntriesItem[] = [
-  // {type: 'Hydrogen', creator: 'admin', accounts: 'payable', debit: 10, credit: 100},
 ];
 
 /**

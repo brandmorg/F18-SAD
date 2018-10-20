@@ -10,16 +10,24 @@ import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 })
 export class AppComponent {
   title = 'Welcome to Sarif Financial';
+
+selectedFile = null;
+  onFileSelector(event) {
+     this.selectedFile = event.target.file[0];
+  }
+  onUpload() {
+
+  }
   constructor(private _cookieService: CookieService,
               private localSt: LocalStorageService, private sessionSt: SessionStorageService) {}
 
-setCookies(){
+setCookies() {
     this._cookieService.put('test', 'testing cookie');
 }
-getCookie(){
+getCookie() {
     alert(this._cookieService.get('test'));
 }
-delCookies(){
+delCookies() {
     this._cookieService.remove('test');
 }
 
@@ -28,16 +36,16 @@ setSession(id, userName, userRole) {
     this.sessionSt.store('id', id);
     this.sessionSt.store('userRole', userRole);
 }
-getSession(){
+getSession() {
     alert(this.sessionSt.retrieve('logged-in'));
 }
-getUserName(){
+getUserName() {
     return this.sessionSt.retrieve('userName');
 }
-getRole(){
+getRole() {
     return this.sessionSt.retrieve('userRole');
   }
-delSession(){
+delSession() {
     this.sessionSt.clear('userName');
     this.sessionSt.clear('id');
     this.sessionSt.clear('userRole');
