@@ -9,6 +9,7 @@ import { LoginHomeComponent } from '../login-home/login-home.component';
 import { ChartOfAccountsComponent } from '../chart-of-accounts/chart-of-accounts.component';
 import { HomeScreenComponent } from '../home-screen/home-screen.component';
 import { UserLogComponent } from '../user-log/user-log.component';
+import { JournalizeComponent } from '../journalize/journalize.component';
 
 
 const routes: Routes = [
@@ -49,8 +50,12 @@ const routes: Routes = [
       {
         path: 'userLogs',
         component: UserLogComponent
+      },
+      {
+        path: 'journal',
+        component: JournalizeComponent
       }
-    ]
+      ]
   },
   {
     path: 'user/:id',

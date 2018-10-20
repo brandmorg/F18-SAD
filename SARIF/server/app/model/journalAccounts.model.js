@@ -15,11 +15,11 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        DebitAmmount: {
+        DebitAmount: {
             type: Sequelize.DECIMAL,
             allowNull: true,
         },
-        CreditAmmount: {
+        CreditAmount: {
             type: Sequelize.DECIMAL,
             allowNull: true,
         },

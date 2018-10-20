@@ -43,6 +43,8 @@ db.sequelize.sync({force: true}).then(() => {
 
 app.set('trust proxy', true)
 
+require('./app/routes/journal.routes')(app);
+require('./app/routes/journalAccounts.routes')(app);
 require('./app/routes/passwordReset.routes')(app);
 require('./app/routes/chartAccount.routes')(app);
 require('./app/routes/login.routes.js')(app);

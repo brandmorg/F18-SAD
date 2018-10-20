@@ -18,6 +18,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
             allowNull: true,
         },
+        CreatedBy:{
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
         FileID: {
             type: Sequelize.INTEGER,
             allowNull: true,

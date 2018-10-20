@@ -60,4 +60,7 @@ export class UserPageComponent implements OnInit {
   viewHome(){
     this.router.navigate(['UserPage/home']);
   }
+  viewJournal(){
+    this.router.navigate(['UserPage/journal']);
+  }
 }

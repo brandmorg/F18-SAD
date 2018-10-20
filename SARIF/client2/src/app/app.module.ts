@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule, routingComponents } from './app-routing/app-routing.module';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Ng2Webstorage } from 'ngx-webstorage';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { UserPageComponent } from './user-page/user-page.component';
@@ -17,6 +16,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { UserLogComponent } from './user-log/user-log.component';
 import { AddUserLoginComponent } from './add-user-login/add-user-login.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
+import { JournalizeComponent } from './journalize/journalize.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +32,7 @@ import { HomeScreenComponent } from './home-screen/home-screen.component';
     UserLogComponent,
     AddUserLoginComponent,
     HomeScreenComponent,
+    JournalizeComponent,
   ],
   imports: [
     BrowserModule,

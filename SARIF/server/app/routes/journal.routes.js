@@ -6,7 +6,7 @@ module.exports = function(app) {
     app.post('/api/journal', journal.create);
 
     // Retrieve all journals
-    app.get('/api/jourmal', journal.findAll);
+    app.get('/api/journal', journal.findAll);
 
     // Update a journal
     app.put('/api/users', journal.update);
