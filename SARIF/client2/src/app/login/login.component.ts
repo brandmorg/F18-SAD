@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   notLogged: Boolean = true;
   invalidIndicator = '';
   user: User;
+  isActive = 1;
 
 
   constructor(
@@ -44,13 +45,22 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['UserPage']);
           this.logData.create(this.username, 'User successful login').subscribe();
           this.comp.setSession(this.user.userId, this.user.userName, this.user.userRole, this.user.firstName, this.user.lastName);
+          this.isActive = 1;
+        }
+        else if(this.user.userId == -2){
+          this.isActive = 2;
         }
         else {
           this.invalidIndicator = 'Login failed';
+          this.isActive = 1;
           this.notLogged = false;
         }
       }
     );
+  }
+  //error goes away when changes are put into input
+  resetError(){
+    this.isActive = 1;
   }
 
   toggler() {

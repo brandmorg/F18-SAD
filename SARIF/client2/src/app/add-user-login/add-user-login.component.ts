@@ -15,6 +15,7 @@ export class AddUserLoginComponent implements OnInit {
 
   user = new User();
   submitted = false;
+  emailExist = 1;
 
   constructor(
     private userService: UserService,
@@ -33,7 +34,6 @@ export class AddUserLoginComponent implements OnInit {
   }
 
   addUser() {
-    this.submitted = true;
     this.save();
   }
 
@@ -41,17 +41,31 @@ export class AddUserLoginComponent implements OnInit {
     this.data.changeToggle(1);
   }
 
-  private save(): void {
-    this.user.userName = "[pending]";
-    this.user.userPassword = "[pending]";
-    this.user.userRole = "accountant";
-    this.user.securityQ = "[pending]";
-    this.user.securityA = "[pending]";
-    this.user.active = 0;
-    this.userService.addUser(this.user)
-      .subscribe(() => {
-        this.logData.create(this.comp.getUserName(), 'Created user ' + this.user.firstName).subscribe();
-      });
+  //check if the Email already exists on create screen
+  compareEmail(event) {
+    this.user.email = event;
+    this.userService.compareEmail(this.user.email).subscribe( response => {
+      this.emailExist = response;
+      console.log(this.emailExist);
+    });
   }
 
-}
+  private save(): void {
+    if (this.emailExist == 2) {
+      console.log('cannot continue');
+    }
+    else {
+        this.user.userName = "[pending]";
+        this.user.userPassword = "[pending]";
+        this.user.userRole = "accountant";
+        this.user.securityQ = "[pending]";
+        this.user.securityA = "[pending]";
+        this.user.active = 0;
+        this.userService.addUser(this.user)
+          .subscribe(() => {
+            this.logData.create(this.comp.getUserName(), 'Created user ' + this.user.firstName).subscribe();
+            this.submitted = true;
+          });
+      }
+    }
+  }

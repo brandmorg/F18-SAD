@@ -25,8 +25,11 @@ export class ChartOfAccountsComponent implements OnInit {
   criteria = ''; //search query
 
   accountCheck = new CoA();
+
+  //variables to indicate conditions are met
   accountNameExist = 1;
   accountNumberExist = 1;
+  numberHasDecimal = 1;
 
 
   constructor(
@@ -67,6 +70,7 @@ export class ChartOfAccountsComponent implements OnInit {
 
   //Opens modal
   createAccount() {
+    this.numberHasDecimal = 1;
     let modal = document.getElementById("createAccountModal");
     modal.style.display = "block";
   }
@@ -76,11 +80,13 @@ export class ChartOfAccountsComponent implements OnInit {
     //Check to see if account number is a number
     if (isNaN(this.CoA.accountNumber)) {
       return window.alert("Enter a number for account number");
-    };
+    }
+    ;
     //Check to see if account balance is a number
     if (isNaN(this.CoA.originalBalance)) {
       return window.alert("Enter a number for the balance");
-    };
+    }
+    ;
     //Set asset and revenue account types to normal side debit
     if (this.CoA.accountType == "Assets" || this.CoA.accountType == "Revenue") {
       this.CoA.normalSide = "Debit";
@@ -95,30 +101,35 @@ export class ChartOfAccountsComponent implements OnInit {
     this.editCoA = this.CoA;
 
     //Check to see if another account exists with same number or name
-    this.coaService.findAll().subscribe(
-      (account) => {
-        this.temp = account;
-        for (var i = 0; i < this.temp.length; i++) {
-          //Check for account name
-          if (this.temp[i].accountName == this.CoA.accountName) {
-            return window.alert("Account with same account name found. Enter different account name.");
+    if (this.numberHasDecimal == 2) {
+      console.log('cannot continue');
+    }
+    else {
+      this.coaService.findAll().subscribe(
+        (account) => {
+          this.temp = account;
+          for (var i = 0; i < this.temp.length; i++) {
+            //Check for account name
+            if (this.temp[i].accountName == this.CoA.accountName) {
+              return window.alert("Account with same account name found. Enter different account name.");
+            }
+            //Check for account number
+            if (this.temp[i].accountNumber == this.CoA.accountNumber) {
+              return window.alert("Account with the same account number found. Enter a different account number.")
+            }
           }
-          //Check for account number
-          if (this.temp[i].accountNumber == this.CoA.accountNumber) {
-            return window.alert("Account with the same account number found. Enter a different account number.")
-          }
-        }
-        //If account name and number not found, create the account
-        this.coaService.addAccount(this.CoA)
-          .subscribe(() => {
-            this.logData.create(this.comp.getUserName(), this.CoA.createdBy + 'created account ' + this.CoA.accountName).subscribe();
-            //Close modal
-            let modal = document.getElementById("createAccountModal");
-            modal.style.display = "none";
-            this.accountForm.reset();
-            this.viewAccountsSort(this.column,'ASC', this.columnSearch, this.criteria);
-          });
-      });
+          //If account name and number not found, create the account
+          this.coaService.addAccount(this.CoA)
+            .subscribe(() => {
+              this.logData.create(this.comp.getUserName(), this.CoA.createdBy + 'created account ' + this.CoA.accountName).subscribe();
+              //Close modal
+              let modal = document.getElementById("createAccountModal");
+              modal.style.display = "none";
+              this.accountForm.reset();
+              this.viewAccountsSort(this.column, 'ASC', this.columnSearch, this.criteria);
+            });
+        });
+    }
   }
 
   //Closes modal after clicking on cancel in modal
@@ -133,6 +144,7 @@ export class ChartOfAccountsComponent implements OnInit {
 
   //Get account info to edit and load modal
   getAccount(id: number) {
+    this.numberHasDecimal = 1;
     this.accountId = +id;
     this.coaService.getAccount(this.accountId)
       .subscribe((account) => {
@@ -166,14 +178,19 @@ export class ChartOfAccountsComponent implements OnInit {
 
     //Check to see if another account exists with same number or name
         //If account name and number not found, create the account
-        this.coaService.updateAccount(this.editCoA)
-          .subscribe(() => {
-            alert("Account updated");
-            this.logData.create(this.comp.getUserName(), 'Updated account ' + this.editCoA.accountName).subscribe();
-            let modal = document.getElementById("editAccountModal");
-            modal.style.display = "none";
-            this.viewAccountsSort(this.column,'ASC', this.columnSearch, this.criteria);
-          });
+
+    if(this.numberHasDecimal == 2) {
+      console.log('decimal required');
+    }
+    else {
+      this.coaService.updateAccount(this.editCoA)
+        .subscribe(() => {
+          this.logData.create(this.comp.getUserName(), 'Updated account ' + this.editCoA.accountName).subscribe();
+          let modal = document.getElementById("editAccountModal");
+          modal.style.display = "none";
+          this.viewAccountsSort(this.column, 'ASC', this.columnSearch, this.criteria);
+        });
+    }
   }
 
   async compareAccountNameUpdate(event){
@@ -218,6 +235,40 @@ export class ChartOfAccountsComponent implements OnInit {
     this.accountId = id;
     let response = await this.coaService.getAccount(this.accountId).toPromise();
           this.accountCheck = response;
+  }
+
+  checkDecimal(event){
+    //check if event is number
+    //checks if number is null
+    if(event == null){
+      this.numberHasDecimal = 1;
+    }
+    else if(isNaN(event)){
+      this.numberHasDecimal = 2;
+    }
+    else {
+      let str = event.toString();
+      let str2 = str.substring(Math.max(0, str.length - 3));
+      console.log(str2);
+      //check if there is 2 decimal places
+      if (str2[0] != '.') {
+        this.numberHasDecimal = 2;
+        console.log('no decimal');
+      }
+      else {
+        this.numberHasDecimal = 1;
+        console.log('is decimal');
+      }
+    }
+  }
+
+  resetUpdate() {
+    this.coaService.getAccount(this.editCoA.caId)
+      .subscribe(user => {
+          this.editCoA = user;
+          this.accountCheck = user;
+        }
+      );
   }
 
   isNegativeNumber(accountNumber) {

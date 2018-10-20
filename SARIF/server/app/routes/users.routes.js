@@ -9,6 +9,7 @@ module.exports = function(app) {
 
     app.post('/api/passwordCheck', users.compareEmail);
 
+
     // Retrieve all users
     app.get('/api/users', users.findAll);
 

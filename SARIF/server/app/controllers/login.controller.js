@@ -24,6 +24,15 @@ exports.sendData = (req, res) => {
             res.json(user);
 
         }
+        else if(user.active == 0){
+            let user = {
+                userId: -2,
+                username: "temp",
+                userPassword: "Temp",
+                userRole: "Temp"
+            }
+            res.json(user);
+        }
         else if (user.userPassword != password){
             let user = {
                 userId: -1,
@@ -33,6 +42,7 @@ exports.sendData = (req, res) => {
             }
             res.json(user);
         }
+
         else{
             res.json(user);
         }

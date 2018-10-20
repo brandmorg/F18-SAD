@@ -52,7 +52,7 @@
 
       <div class="form-group">
           <label for="originalBalance">Original Balance</label><br>
-        <input type="text" class="form-control" id="originalBalance" placeholder="Account Balance" required [(ngModel)]="CoA.originalBalance"
+        <input type="text" class="form-control" id="originalBalance" (ngModelChange)="checkDecimal($event)" placeholder="Account Balance" required [(ngModel)]="CoA.originalBalance"
           name="originalBalance" #balance="ngModel">
       </div>
       <div [hidden]="balance.valid || balance.pristine" class="alert alert-danger" style="width: 250px;">
@@ -74,6 +74,10 @@
       </div>
       <div [hidden]="description.valid || description.pristine" class="alert alert-danger" style="width: 250px;">
         Account Description is required
+      </div>
+
+      <div *ngIf="numberHasDecimal==2" class="alert alert-danger" style="width: 250px;">
+        Balance must be in decimal format
       </div>
 
 
@@ -129,7 +133,7 @@
 
       <div class="form-group">
         <label for="originalBalance">Original Balance</label><br>
-        <input type="text" class="form-control" id="originalBalance" value="{{ accountData.originalBalance }}" required
+        <input type="text" class="form-control" id="originalBalance" (ngModelChange)="checkDecimal($event)" value="{{ accountData.originalBalance }}" required
           [(ngModel)]="editCoA.originalBalance" name="originalBalance" #originalBalance="ngModel">
       </div>
 
@@ -156,7 +160,12 @@
       <div *ngIf="accountNumberExist == 2" class="alert alert-danger"  style="width: 250px;">
         Account Number exists
       </div>
+      <div *ngIf="numberHasDecimal==2" class="alert alert-danger" style="width: 250px;">
+        Balance must be in decimal format
+      </div>
+
       <button (click)="submitEdit()" id="submitEditBtn">Submit</button>
+      <button (click)="resetUpdate()" id="closeModalBtn3">Reset</button>
       <button (click)="close()" id="closeModalBtn">Cancel</button>
     </form>
   </div>

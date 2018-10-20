@@ -28,7 +28,7 @@
 
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="string" class="form-control" id="email"
+          <input type="string" (ngModelChange)="compareEmail($event)" class="form-control" id="email"
                  placeholder="Give User's Email"
                  required
                  [(ngModel)]="user.email" name="email" #email="ngModel">
@@ -36,6 +36,10 @@
                class="alert alert-danger">
             Email is required
           </div>
+        </div>
+
+        <div *ngIf="emailExist == 2" class="alert alert-danger"  style="width: 250px;">
+          Email already exists
         </div>
 
         <div class="btn-group btn-group-sm">
@@ -52,5 +56,6 @@
         <button type="button" class="btn btn-dark" (click)="goBack(); addUserForm.reset()">Continue</button>
       </div>
     </div>
+
   </div>
 </div>

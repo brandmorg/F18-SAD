@@ -20,6 +20,7 @@ export class UserService {
   private usersSortUrl = 'http://localhost:8080/api/usersSort';
   private compareUserNameURL = 'http://localhost:8080/api/userNameCheck';
   private compareEmailURL = 'http://localhost:8080/api/passwordCheck';
+  private getActiveURL = 'http://localhost:8080/api/getActive';
   constructor(
     private http: HttpClient
   ) { }
@@ -70,6 +71,5 @@ export class UserService {
   compareEmail(email): Observable<any>{
     return this.http.post<User>(this.compareEmailURL, {email: email}, httpOptions);
   }
-
-  
+  //check if user is active
 }

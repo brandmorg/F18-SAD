@@ -38,6 +38,7 @@ exports.compareEmail = (req, res) => {
     });
 };
 
+
 // Fetch all Customers
 exports.findAll = (req, res) => {
     Users.findAll( {where: {},
