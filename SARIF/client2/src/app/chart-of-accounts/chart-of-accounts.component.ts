@@ -119,7 +119,7 @@ export class ChartOfAccountsComponent implements OnInit {
             }
           }
           //If account name and number not found, create the account
-          this.CoA.accountName.charAt(0).toLocaleUpperCase();
+          this.CoA.accountName = this.CoA.accountName.charAt(0).toLocaleUpperCase() + this.CoA.accountName.substr(1);
           this.coaService.addAccount(this.CoA)
             .subscribe(() => {
               this.logData.create(this.comp.getUserName(), this.CoA.createdBy + 'created account ' + this.CoA.accountName).subscribe();

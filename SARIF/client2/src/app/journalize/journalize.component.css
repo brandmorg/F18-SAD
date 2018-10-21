@@ -33,7 +33,13 @@ table, h3, h2, td {
   font-weight:400;
   color: black;
   border: none;
-
+}
+.accountsinput{
+  color: black;
+  border: none;
+}
+.trbackground{
+  background-color: white;
 }
 
 .modal {

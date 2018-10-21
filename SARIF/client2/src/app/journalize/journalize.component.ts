@@ -19,9 +19,13 @@ export class JournalizeComponent implements OnInit {
 
   journalNew = new Journal();
   journals = []; //list of journal entries
-  journalAccounts = []; //list of journal accounts
+
+  journalAccountsDebit = []; //list of Debit journal accounts
+  journalAccountsCredit = []; //list of Debit journal accounts
+
+  accounts = [];//list of total accounts
   debitAccounts = [];
-  credtAccounts = [];
+  creditAccounts = [];
 
   criteria= '';
 
@@ -40,6 +44,7 @@ export class JournalizeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getAccounts();
     this.viewJournals();
   }
 
@@ -50,10 +55,34 @@ export class JournalizeComponent implements OnInit {
       }
     );
   }
+  async getAccounts() {
+    this.debitAccounts = [];
+    this.creditAccounts = [];
+    let result = await this.coaService.findAll().toPromise();
+    this.accounts = result;
+    console.log("Hello");
+    for(let account of this.accounts){
+      if(account.normalSide == 'Debit'){
+        this.debitAccounts.push(account.accountName);
+        console.log("Debit: " + account.accountName)
+      }
+      else{
+        this.creditAccounts.push(account.accountName);
+        console.log("Credit: " + account.accountName)
+      }
+    }
+  }
+
 
   openCreateJournal() {
+    this.loadAccountInput();
     let modal = document.getElementById("createJournalEntry");
     modal.style.display = "block";
+  }
+ //creates new starting array for inputs in create form
+  loadAccountInput(){
+    this.journalAccountsDebit[0] = new JournalAccount();
+    this.journalAccountsCredit[0] = new JournalAccount();
   }
 
   close() {
@@ -74,7 +103,7 @@ export class JournalizeComponent implements OnInit {
     console.log(response);
     this.close();
   }
-
+  //create a random set of characters for reference
   makeRandomRef(){
     let text = "";
     let poss = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
