@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         Date: {
-            type: Sequelize.STRING,
+            type: Sequelize.DATE,
             allowNull: true,
         },
         Description: {
@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: true,
         },
         Reference: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
             allowNull: true,
         },
         CreatedBy:{
@@ -24,6 +24,10 @@ module.exports = (sequelize, Sequelize) => {
         },
         FileID: {
             type: Sequelize.INTEGER,
+            allowNull: true,
+        },
+        acceptance: {
+            type: Sequelize.STRING,
             allowNull: true,
         }
     });

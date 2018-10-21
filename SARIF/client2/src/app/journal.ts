@@ -1,8 +1,9 @@
 export class Journal {
   JId: number;
-  Date: string;
+  Date: Date;
   Description: string;
-  Reference: number;
+  Reference: string;
   CreatedBy: string;
   FileID: number;
+  acceptance: string;
 }

@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule, routingComponents } from './app-routing/app-routing.module';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Ng2Webstorage } from 'ngx-webstorage';
+import { MyDatePickerModule } from 'mydatepicker';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { UserPageComponent } from './user-page/user-page.component';
@@ -39,7 +40,8 @@ import { JournalizeComponent } from './journalize/journalize.component';
     FormsModule,
     AppRoutingModule,
     Ng2Webstorage,
-    HttpClientModule
+    HttpClientModule,
+    MyDatePickerModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

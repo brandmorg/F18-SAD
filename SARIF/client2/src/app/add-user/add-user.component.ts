@@ -20,7 +20,6 @@ import { Observable, of,  } from 'rxjs';
 export class AddUserComponent implements OnInit {
   @ViewChild('addUserForm') public userForm: NgForm;
   @ViewChild('editUserForm') public editForm: NgForm;
-  private usersUrl = 'http://localhost:8080/api/users';
 
   user = new User();
   user2 = new User();

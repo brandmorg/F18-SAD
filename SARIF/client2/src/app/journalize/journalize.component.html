@@ -1,3 +1,91 @@
-<p>
-  journalize works!
-</p>
+
+    <div class="column is-half" hidden>
+      <div class="level-right">
+        <p class="level-item"><strong>All</strong></p>
+        <p class="level-item"><a>Approved</a></p>
+        <p class="level-item"><a>Needs Approval</a></p>
+        <p class="level-item"><a>Rejected</a></p>
+      </div>
+    </div>
+    <!-- End of row 2: right column -->
+
+
+
+    <div id="createJournalEntry" class="modal">
+      <div class="modal-content">
+        <form #addJournalForm="ngForm">
+
+          <hr/>
+          <div style="width: 200px">
+            <label>Date</label>
+          <my-date-picker name="myDate" [options]="myDatePickerOptions" [(ngModel)]="model" required></my-date-picker>
+            </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" placeholder="Description" required [(ngModel)]="journalNew.Description"
+                   name="description" >
+          </div>
+          <table id="journalAccountAddTable">
+            <tr >
+              <th class="accountsAdd"><abbr title="Date"></abbr>Account</th>
+              <th class="accountsAdd"><abbr title="Date"></abbr>Debits</th>
+              <th class="accountsAdd"><abbr title="Date"></abbr>Credits</th>
+            </tr>
+          </table>
+
+          <button (click)="submit();" id="submitBtn" [disabled]="!addJournalForm.form.valid" >Submit</button>
+          <button (click)="close(); addJournalForm.reset()" id="closeModalBtn">Cancel</button>
+
+
+
+        </form>
+      </div>
+    </div>
+
+<!--base table-->
+
+    <form class="form-inline" style="left: 8px">
+      <div style="position:  relative;left: 75%;  padding-top: 20px">
+        <div class="form-group">
+          <input type="text" class="form-control" id="searchBar"  style="width: 300px; left: 6px" placeholder="Search" [(ngModel)]="criteria"
+                 name="search" >
+        </div>
+      </div>
+    </form>
+
+    <button class="btn btn-info btn-lg" (click)="openCreateJournal()" >Add Journal</button>
+<div>
+  <table id="journalTable">
+    <thead>
+    <tr>
+      <th colspan="7" class="col-xs-1 text-center">General Journal</th>
+    <tr>
+    <tr>
+      <th><abbr title="Date"></abbr>Date</th>
+      <th><abbr title="Type"></abbr>Type</th>
+      <th><abbr title="Created By"></abbr>Created By</th>
+      <th><abbr title="Accounts"></abbr>Accounts</th>
+      <th><abbr title="Reference"></abbr>REF</th>
+      <th><abbr title="Debit"></abbr>Debit</th>
+      <th><abbr title="Credit"></abbr>Credit</th>
+    </tr>
+    <tr *ngFor="let journal of journals">
+      <td>{{ journal.Date | date: 'MM/dd/yyyy  HH:mm:ss'}}</td>
+      <td></td>
+      <td>{{ journal.CreatedBy }}</td>
+      <td></td>
+      <td>{{ journal.Reference }}</td>
+      <td></td>
+      <td></td>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+
+  <!-- </div> -->
+
+  <!-- End of whole container -->
+</div>
