@@ -3,7 +3,7 @@ export class JournalAccount{
   AccountName: string;
   Type: string;
   NormalSide: string;
-  DebitAmount: string;
-  CreditAmount: string;
+  DebitAmount: number;
+  CreditAmount: number;
   JournalJid: number;
 }

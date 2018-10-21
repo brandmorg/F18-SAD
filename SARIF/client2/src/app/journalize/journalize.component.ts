@@ -27,14 +27,15 @@ export class JournalizeComponent implements OnInit {
   accounts = [];//list of total accounts
   debitAccounts = [];
   creditAccounts = [];
-  totalDebit = 0;
-  totalCredit = 0;
+  totalDebit: number = 0.00;
+  totalCredit: number = 0.00;
 
   criteria= '';
 
   //error variables
   fieldsFilled = 0;
   fieldsFilled2 = 0;
+  totalsmatch = 1;
 
   myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'dd.mm.yyyy',
@@ -79,6 +80,34 @@ export class JournalizeComponent implements OnInit {
       }
     }
   }
+  getDebitTotal(){
+    this.totalsmatch = 1;
+    this.totalDebit = 0.00;
+    for(let account of this.journalAccountsDebit){
+      if(isNaN(account.DebitAmount) || account.DebitAmount == null){
+
+      }
+      else{
+
+        this.totalDebit  = +this.totalDebit + +account.DebitAmount;
+
+      }
+    }
+  }
+  getCreditTotal(){
+    this.totalsmatch = 1;
+    this.totalCredit = 0.00;
+    for(let account of this.journalAccountsCredit){
+      if(isNaN(account.CreditAmount) || account.CreditAmount == null){
+
+      }
+      else{
+        this.totalCredit  = +this.totalCredit + +account.CreditAmount;
+
+      }
+    }
+  }
+
   checkBothInputs(): number{
     if(this.checkInputExist() == 1 && this.checkInputExist2() == 1){
       return 1;
@@ -135,6 +164,8 @@ export class JournalizeComponent implements OnInit {
 
     this.journalAccountsDebit = []; //reset journal accounts
     this.journalAccountsCredit = []; //reset journal accounts
+    this.totalDebit = 0;
+    this.totalCredit = 0;
     this.loadAccountInput();
     let modal = document.getElementById("createJournalEntry");
     modal.style.display = "block";
@@ -165,15 +196,20 @@ export class JournalizeComponent implements OnInit {
   }
 
   async submit(){
-    this.journalNew.Date = new Date();
-    this.journalNew.Date.setFullYear(this.model.date.year, this.model.date.month -1, this.model.date.day);
-    this.journalNew.CreatedBy = this.comp.getUserName();
-    this.journalNew.Reference = this.makeRandomRef();
-    console.log(this.journalNew.Date);
-    let response = await this.journalServ.addJournal(this.journalNew).toPromise();
-    this.viewJournals();
-    console.log(response);
-    this.close();
+    if(this.totalDebit != this.totalCredit){
+      this.totalsmatch = 0;
+    }
+    else {
+      this.journalNew.Date = new Date();
+      this.journalNew.Date.setFullYear(this.model.date.year, this.model.date.month - 1, this.model.date.day);
+      this.journalNew.CreatedBy = this.comp.getUserName();
+      this.journalNew.Reference = this.makeRandomRef();
+      console.log(this.journalNew.Date);
+      let response = await this.journalServ.addJournal(this.journalNew).toPromise();
+      this.viewJournals();
+      console.log(response);
+      this.close();
+    }
   }
   //create a random set of characters for reference
   makeRandomRef(){

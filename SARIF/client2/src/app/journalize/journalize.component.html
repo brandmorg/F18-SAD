@@ -44,7 +44,8 @@
               <td class="accountsinput" style=" background-color: white; ">
                 <input type="text" class="form-control" id="DebitAmount" placeholder="Debit" style="text-align: right;"
                        required [ngModelOptions]="{standalone: true}"
-                       [name]="account.DebitAmount" [(ngModel)]="account.DebitAmount">
+
+                       [name]="account.DebitAmount" [(ngModel)]="account.DebitAmount"  (ngModelChange)="getDebitTotal()">
               </td>
               <td class="accountsinput" style=" background-color: white">
                 <input type="text" class="form-control" id="CreditAmount" placeholder="Credit" disabled style="text-align: right;"
@@ -75,6 +76,7 @@
                 <input type="text" class="form-control" id="CreditAmount2" placeholder="Credit" required  style="text-align: right;"
                        [ngModelOptions]="{standalone: true}"
                        [(ngModel)]="account.CreditAmount"
+                       (ngModelChange)="getCreditTotal()"
                        [name]="account.CreditAmount"
                        >
               </td>
@@ -93,6 +95,10 @@
                <td class="accountsinput" style=" background-color: white; text-align: right;" >{{'$'+totalCredit}}</td>
 
              </tr>
+
+          <div *ngIf="totalsmatch == 0" class="alert alert-danger"  style="width: 250px;">
+            Debit and Credits do not match
+          </div>
           <button (click)="submit();" id="submitBtn" [disabled]="checkBothInputs() == 0" >Submit</button>
           <button (click)="close(); addJournalForm.reset()" id="closeModalBtn">Cancel</button>
         </form>
