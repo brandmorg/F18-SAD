@@ -146,6 +146,7 @@ export class ChartOfAccountsComponent implements OnInit {
     this.editForm.reset();
   }
 
+
   //Get account info to edit and load modal
   getAccount(id: number) {
     this.numberHasDecimal = 1;

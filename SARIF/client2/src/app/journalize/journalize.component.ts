@@ -27,8 +27,14 @@ export class JournalizeComponent implements OnInit {
   accounts = [];//list of total accounts
   debitAccounts = [];
   creditAccounts = [];
+  totalDebit = 0;
+  totalCredit = 0;
 
   criteria= '';
+
+  //error variables
+  fieldsFilled = 0;
+  fieldsFilled2 = 0;
 
   myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'dd.mm.yyyy',
@@ -73,18 +79,54 @@ export class JournalizeComponent implements OnInit {
       }
     }
   }
+  checkBothInputs(): number{
+    if(this.checkInputExist() == 1 && this.checkInputExist2() == 1){
+      return 1;
+    }
+    else{
+      return 0;
+    }
+  }
+
+  checkInputExist(): number{
+    for(let account of this.journalAccountsDebit){
+      if(account.AccountName ==undefined || account.DebitAmount==undefined || account.DebitAmount== 0){
+        this.fieldsFilled = 0;
+        break;
+
+      }
+      else{
+        this.fieldsFilled = 1;
+      }
+
+    }
+    return this.fieldsFilled;
+
+  }
+  checkInputExist2(): number{
+    for(let account of this.journalAccountsCredit){
+      if(account.AccountName ==undefined || account.CreditAmount==undefined || account.CreditAmount== 0){
+       this.fieldsFilled2 = 0;
+       break;
+      }
+      else{
+        this.fieldsFilled2 = 1;
+      }
+    }
+    return this.fieldsFilled2
+  }
 
   addDebitInput(){
-    let temp = [];
-    temp = this.journalAccountsDebit;
     let debit = new JournalAccount();
     this.journalAccountsDebit.push(debit);
     console.log(this.journalAccountsDebit[0].AccountName);
+    this.checkInputExist();
   }
 
   addCreditInput(){
     let credit = new JournalAccount();
     this.journalAccountsCredit.push(credit);
+    this.checkInputExist2();
 
   }
 
@@ -108,6 +150,18 @@ export class JournalizeComponent implements OnInit {
     modal.style.display = "none";
     this.journalForm.reset();
 
+  }
+
+  removeDebit(index){
+    if (index > -1) {
+      this.journalAccountsDebit.splice(index, 1);
+    }
+
+  }
+  removeCredit(index){
+    if (index > -1) {
+      this.journalAccountsCredit.splice(index, 1);
+    }
   }
 
   async submit(){

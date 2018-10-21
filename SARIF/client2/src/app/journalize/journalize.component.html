@@ -18,15 +18,15 @@
           <hr/>
           <div style="width: 200px">
             <label>Date</label>
-          <my-date-picker name="myDate" [options]="myDatePickerOptions" [(ngModel)]="model" required></my-date-picker>
+          <my-date-picker name="myDate" [options]="myDatePickerOptions" [(ngModel)]="model"  required></my-date-picker>
             </div>
 
           <div class="form-group">
             <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" placeholder="Description" required [(ngModel)]="journalNew.Description"
+            <input type="text" class="form-control" id="description" placeholder="Description" [(ngModel)]="journalNew.Description"
                    name="description" >
           </div>
-          <table id="journalAccountAddTable">
+          <hr id="journalAccountAddTable">
             <tr >
               <th class="accountsAdd"><abbr title="Date"></abbr>Account</th>
               <th class="accountsAdd"><abbr title="Date"></abbr>Debits</th>
@@ -37,19 +37,21 @@
               <td class="accountsinput" style=" background-color: white">
                 <select id="debitDropDown"  class="form-control" style="width: 200px" required
                         [ngModelOptions]="{standalone: true}"
-
                          [(ngModel)]="account.AccountName" [name]="account.AccountName" #accountSubType="ngModel">
                   <option *ngFor="let accountDeb of debitAccounts">{{accountDeb}}</option>
                 </select>
               </td>
-              <td class="accountsinput" style=" background-color: white">
-                <input type="text" class="form-control" id="DebitAmount" placeholder="Debit"
+              <td class="accountsinput" style=" background-color: white; ">
+                <input type="text" class="form-control" id="DebitAmount" placeholder="Debit" style="text-align: right;"
                        required [ngModelOptions]="{standalone: true}"
                        [name]="account.DebitAmount" [(ngModel)]="account.DebitAmount">
               </td>
               <td class="accountsinput" style=" background-color: white">
-                <input type="text" class="form-control" id="CreditAmount" placeholder="Credit" disabled
+                <input type="text" class="form-control" id="CreditAmount" placeholder="Credit" disabled style="text-align: right;"
                        name="description3" >
+              </td>
+              <td class="accountsinput" style=" background-color: white" *ngIf="journalAccountsDebit.indexOf(account) > 0">
+                <button class="btn btn-danger" (click)="removeDebit(journalAccountsDebit.indexOf(account))" id="removeDebitInput"   >Remove</button>
               </td>
               <td class="accountsinput" style=" background-color: white">
                 <button class="btn btn-info" (click)="addDebitInput()" id="addDebitInput"  *ngIf="journalAccountsDebit.indexOf(account) == journalAccountsDebit.length -1">Add Debit</button>
@@ -60,31 +62,39 @@
               <td class="accountsinput" style=" background-color: white">
               <select id="creditDropDown" class="form-control" style="width: 200px" required
                       [ngModelOptions]="{standalone: true}"
+
                       [(ngModel)]="account.AccountName" [name]="account.AccountName" #accountSubType="ngModel">
                 <option *ngFor="let accountCred of creditAccounts">{{accountCred}}</option>
               </select>
               </td>
               <td class="accountsinput" style=" background-color: white">
-                <input type="text" class="form-control" id="DebitAmount2" placeholder="Debit" disabled
+                <input type="text" class="form-control" id="DebitAmount2" placeholder="Debit" disabled style="text-align: right;"
                        name="description5" >
               </td>
-              <td class="accountsinput" style=" background-color: white">
-                <input type="text" class="form-control" id="CreditAmount2" placeholder="Credit" required
+              <td class="accountsinput" style=" background-color: white; text-align: right;">
+                <input type="text" class="form-control" id="CreditAmount2" placeholder="Credit" required  style="text-align: right;"
                        [ngModelOptions]="{standalone: true}"
                        [(ngModel)]="account.CreditAmount"
-                       [name]="account.CreditAmount" >
+                       [name]="account.CreditAmount"
+                       >
+              </td>
+              <td class="accountsinput" style=" background-color: white" *ngIf="journalAccountsCredit.indexOf(account) > 0">
+                <button class="btn btn-danger" (click)="removeCredit(journalAccountsCredit.indexOf(account))" id="removeCreditInput"   >Remove</button>
               </td>
               <td class="accountsinput" style=" background-color: white">
                 <button class="btn btn-info" (click)="addCreditInput();" id="addCreditInput"  *ngIf="journalAccountsCredit.indexOf(account) == journalAccountsCredit.length -1">Add Credit</button>
               </td>
+
             </tr>
-          </table>
 
-          <button (click)="submit();" id="submitBtn" [disabled]="!addJournalForm.form.valid" >Submit</button>
+             <tr class="trbackground">
+               <td class="accountsinput" style=" background-color: white"></td>
+               <td class="accountsinput" style=" background-color: white; text-align: right;">{{'$'+totalDebit}}</td>
+               <td class="accountsinput" style=" background-color: white; text-align: right;" >{{'$'+totalCredit}}</td>
+
+             </tr>
+          <button (click)="submit();" id="submitBtn" [disabled]="checkBothInputs() == 0" >Submit</button>
           <button (click)="close(); addJournalForm.reset()" id="closeModalBtn">Cancel</button>
-
-
-
         </form>
       </div>
     </div>
@@ -130,8 +140,4 @@
 
     </tbody>
   </table>
-
-  <!-- </div> -->
-
-  <!-- End of whole container -->
 </div>
