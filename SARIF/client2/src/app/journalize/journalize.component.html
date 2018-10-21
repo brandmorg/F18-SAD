@@ -35,23 +35,32 @@
 
             <tr *ngFor="let account of journalAccountsDebit" class="trbackground">
               <td class="accountsinput" style=" background-color: white">
-                <select id="debitDropDown"  class="form-control" style="width: 200px" required   [(ngModel)]="account.AccountName" name="accountSubType" #accountSubType="ngModel">
+                <select id="debitDropDown"  class="form-control" style="width: 200px" required
+                        [ngModelOptions]="{standalone: true}"
+
+                         [(ngModel)]="account.AccountName" [name]="account.AccountName" #accountSubType="ngModel">
                   <option *ngFor="let accountDeb of debitAccounts">{{accountDeb}}</option>
                 </select>
               </td>
               <td class="accountsinput" style=" background-color: white">
-                <input type="text" class="form-control" id="DebitAmount" placeholder="Debit" required [(ngModel)]="account.DebitAmount"
-                       name="description2" >
+                <input type="text" class="form-control" id="DebitAmount" placeholder="Debit"
+                       required [ngModelOptions]="{standalone: true}"
+                       [name]="account.DebitAmount" [(ngModel)]="account.DebitAmount">
               </td>
               <td class="accountsinput" style=" background-color: white">
                 <input type="text" class="form-control" id="CreditAmount" placeholder="Credit" disabled
                        name="description3" >
               </td>
+              <td class="accountsinput" style=" background-color: white">
+                <button class="btn btn-info" (click)="addDebitInput()" id="addDebitInput"  *ngIf="journalAccountsDebit.indexOf(account) == journalAccountsDebit.length -1">Add Debit</button>
+              </td>
             </tr>
 
             <tr *ngFor="let account of journalAccountsCredit" class="trbackground">
               <td class="accountsinput" style=" background-color: white">
-              <select id="creditDropDown" class="form-control" style="width: 200px" required   [(ngModel)]="account.AccountName" name="accountSubType" #accountSubType="ngModel">
+              <select id="creditDropDown" class="form-control" style="width: 200px" required
+                      [ngModelOptions]="{standalone: true}"
+                      [(ngModel)]="account.AccountName" [name]="account.AccountName" #accountSubType="ngModel">
                 <option *ngFor="let accountCred of creditAccounts">{{accountCred}}</option>
               </select>
               </td>
@@ -60,8 +69,13 @@
                        name="description5" >
               </td>
               <td class="accountsinput" style=" background-color: white">
-                <input type="text" class="form-control" id="CreditAmount2" placeholder="Credit" required [(ngModel)]="account.CreditAmount"
-                       name="description6" >
+                <input type="text" class="form-control" id="CreditAmount2" placeholder="Credit" required
+                       [ngModelOptions]="{standalone: true}"
+                       [(ngModel)]="account.CreditAmount"
+                       [name]="account.CreditAmount" >
+              </td>
+              <td class="accountsinput" style=" background-color: white">
+                <button class="btn btn-info" (click)="addCreditInput();" id="addCreditInput"  *ngIf="journalAccountsCredit.indexOf(account) == journalAccountsCredit.length -1">Add Credit</button>
               </td>
             </tr>
           </table>

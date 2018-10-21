@@ -16,6 +16,7 @@ import {AppComponent} from '../app.component';
 })
 export class JournalizeComponent implements OnInit {
   @ViewChild('addJournalForm') public journalForm: NgForm;
+  @ViewChild('journalAccountAddTable') public accountsTable: NgForm;
 
   journalNew = new Journal();
   journals = []; //list of journal entries
@@ -73,8 +74,25 @@ export class JournalizeComponent implements OnInit {
     }
   }
 
+  addDebitInput(){
+    let temp = [];
+    temp = this.journalAccountsDebit;
+    let debit = new JournalAccount();
+    this.journalAccountsDebit.push(debit);
+    console.log(this.journalAccountsDebit[0].AccountName);
+  }
+
+  addCreditInput(){
+    let credit = new JournalAccount();
+    this.journalAccountsCredit.push(credit);
+
+  }
+
 
   openCreateJournal() {
+
+    this.journalAccountsDebit = []; //reset journal accounts
+    this.journalAccountsCredit = []; //reset journal accounts
     this.loadAccountInput();
     let modal = document.getElementById("createJournalEntry");
     modal.style.display = "block";
