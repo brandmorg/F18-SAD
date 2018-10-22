@@ -101,7 +101,10 @@
 
              </tr>
           </table>
-
+          <form enctype="multipart/form-data">
+            <input #folderInput type="file" (change)="selectFile($event.target.files)" >
+          </form>
+          <hr/>
           <div *ngIf="totalsmatch == 0" class="alert alert-danger"  style="width: 340px;">
             Debit and Credits do not match
           </div>

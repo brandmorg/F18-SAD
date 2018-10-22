@@ -9,7 +9,12 @@ module.exports = (sequelize, Sequelize) => {
         FileData: {
             type: Sequelize.BLOB,
             allowNull: true,
+        },
+        JournalID: {
+            type: Sequelize.INTEGER,
+            allowNull: true
         }
+
     });
 
     return JournalFiles;

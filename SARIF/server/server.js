@@ -3,6 +3,7 @@ var express = require('express');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var app = express();
+const multer = require('multer');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json())
 var MemoryStore =session.MemoryStore;
@@ -44,6 +45,7 @@ db.sequelize.sync().then(() => {
 app.set('trust proxy', true)
 
 require('./app/routes/journal.routes')(app);
+require('./app/routes/journalFiles.routes')(app);
 require('./app/routes/journalAccounts.routes')(app);
 require('./app/routes/passwordReset.routes')(app);
 require('./app/routes/chartAccount.routes')(app);

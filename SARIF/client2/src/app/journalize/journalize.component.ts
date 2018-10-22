@@ -8,6 +8,16 @@ import {CoAService} from '../services/coa.service';
 import {NgForm} from '@angular/forms';
 import {IMyDpOptions} from 'mydatepicker';
 import {AppComponent} from '../app.component';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    //'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    "Access-Control-Allow-Headers": '*',
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
+  })
+};
 
 @Component({
   selector: 'app-journalize',
@@ -17,10 +27,9 @@ import {AppComponent} from '../app.component';
 export class JournalizeComponent implements OnInit {
   @ViewChild('addJournalForm') public journalForm: NgForm;
   @ViewChild('journalAccountAddTable') public accountsTable: NgForm;
-
+  private fileUploadURL = 'http://localhost:8080/api/journalFiles';
   journalNew = new Journal();
   journals = []; //list of journal entries
-  journalAccounts = []; //list of all journal Accounts
 
   journalAccountsDebit = []; //list of Debit journal accounts
   journalAccountsCredit = []; //list of Debit journal accounts
@@ -32,6 +41,7 @@ export class JournalizeComponent implements OnInit {
   creditAccounts = [];
   totalDebit: number = 0.00;
   totalCredit: number = 0.00;
+  selectedFile: File;
 
   criteria= '';
 
@@ -54,6 +64,7 @@ export class JournalizeComponent implements OnInit {
     private coaService: CoAService,
     private journalServ: JournalizeService,
     private comp: AppComponent,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -202,6 +213,7 @@ export class JournalizeComponent implements OnInit {
     let modal = document.getElementById("createJournalEntry");
     modal.style.display = "none";
     this.journalForm.reset();
+    this.selectedFile = null;
 
   }
 
@@ -257,10 +269,7 @@ export class JournalizeComponent implements OnInit {
         }
       }
     }
-
   }
-
-
   async submit(){
     if(this.totalDebit != this.totalCredit){
       this.totalsmatch = 0;
@@ -272,6 +281,7 @@ export class JournalizeComponent implements OnInit {
       this.journalNew.CreatedBy = this.comp.getUserName();
       this.journalNew.Reference = this.makeRandomRef();
       console.log(this.journalNew.Date);
+      //sending prinmary journal data
       let response = await this.journalServ.addJournal(this.journalNew).toPromise();
       id = response.JId;
       console.log("id: "+id);
@@ -282,12 +292,23 @@ export class JournalizeComponent implements OnInit {
         await this.journalServ.addJournalAccounts(debitAccounts).toPromise();
         console.log('posted debit');
       }
-
+      //sending credit accounts
       for(let creditAccounts of this.journalAccountsCredit){
         creditAccounts.JournalJId = id;
         creditAccounts.NormalSide = 'Credit';
         await this.journalServ.addJournalAccounts(creditAccounts).toPromise();
         console.log('posted credit');
+      }
+      //sending source file
+
+      if(this.selectedFile != null){
+        let uploadData = new FormData();
+        uploadData.append('file', this.selectedFile);
+        //uploadData.append('#journalId', JSON.stringify(id));
+        console.log('File uploaded: ' + this.selectedFile.name)
+        this.http.post(this.fileUploadURL, uploadData , httpOptions).subscribe( (result) => {
+          console.log('result');
+        });
       }
 
       this.viewJournals();
@@ -304,6 +325,11 @@ export class JournalizeComponent implements OnInit {
       text += poss.charAt(Math.floor(Math.random() * poss.length));
 
     return text;
+  }
+
+  selectFile(files: FileList): void{
+    this.selectedFile = files.item(0);
+    //console.log('selected File' + this.selectedFile.name);
   }
 
 
