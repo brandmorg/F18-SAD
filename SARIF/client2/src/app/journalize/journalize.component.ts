@@ -20,10 +20,13 @@ export class JournalizeComponent implements OnInit {
 
   journalNew = new Journal();
   journals = []; //list of journal entries
+  journalAccounts = []; //list of all journal Accounts
 
   journalAccountsDebit = []; //list of Debit journal accounts
   journalAccountsCredit = []; //list of Debit journal accounts
 
+
+  //Account variables for grabbing a list of accounts
   accounts = [];//list of total accounts
   debitAccounts = [];
   creditAccounts = [];
@@ -56,15 +59,32 @@ export class JournalizeComponent implements OnInit {
   ngOnInit() {
     this.getAccounts();
     this.viewJournals();
+    //this.viewJournalAccounts();
   }
 
   viewJournals() {
     this.journalServ.findAll().subscribe(
       (journal) => {
         this.journals = journal;
+        console.log(this.journals);
       }
     );
   }
+
+
+  getNumberDebits(journalAcc: JournalAccount[]): number{
+    let num = 0;
+    for(let j of journalAcc){
+      if(j.DebitAmount !=null){
+        num++;
+      }
+    }
+    return num;
+
+}
+
+
+
   async getAccounts() {
     this.debitAccounts = [];
     this.creditAccounts = [];
@@ -111,7 +131,7 @@ export class JournalizeComponent implements OnInit {
   }
 
   checkBothInputs(): number{
-    if(this.checkInputExist() == 1 && this.checkInputExist2() == 1){
+    if(this.checkInputExist() == 1 && this.checkInputExist2() == 1 && this.journalNew.Description != null){
       return 1;
     }
     else{
@@ -246,12 +266,30 @@ export class JournalizeComponent implements OnInit {
       this.totalsmatch = 0;
     }
     else {
+      let id: number;
       this.journalNew.Date = new Date();
       this.journalNew.Date.setFullYear(this.model.date.year, this.model.date.month - 1, this.model.date.day);
       this.journalNew.CreatedBy = this.comp.getUserName();
       this.journalNew.Reference = this.makeRandomRef();
       console.log(this.journalNew.Date);
       let response = await this.journalServ.addJournal(this.journalNew).toPromise();
+      id = response.JId;
+      console.log("id: "+id);
+      //post the debit accounts
+      for(let debitAccounts of this.journalAccountsDebit){
+        debitAccounts.JournalJId = id;
+        debitAccounts.NormalSide = 'Debit';
+        await this.journalServ.addJournalAccounts(debitAccounts).toPromise();
+        console.log('posted debit');
+      }
+
+      for(let creditAccounts of this.journalAccountsCredit){
+        creditAccounts.JournalJId = id;
+        creditAccounts.NormalSide = 'Credit';
+        await this.journalServ.addJournalAccounts(creditAccounts).toPromise();
+        console.log('posted credit');
+      }
+
       this.viewJournals();
       console.log(response);
       this.close();

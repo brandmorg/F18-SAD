@@ -44,4 +44,19 @@ export class JournalizeService {
     return this.http.put(this.journalUrl, body, httpOptions);
   }
 
+
+  findAllAccounts(): Observable<JournalAccount[]> {
+    return this.http.get<JournalAccount[]>(this.journalAccountUrl, httpOptions);
+  }
+  getJournaAccountsl(id: number): Observable<any>{
+    return this.http.get(`${this.journalAccountUrl}/${id}`, httpOptions);
+  }
+  addJournalAccounts(journalAccount: JournalAccount): Observable<JournalAccount> {
+    return this.http.post<JournalAccount>(this.journalAccountUrl, journalAccount, httpOptions);
+  }
+  updateJournalAccounts(journalAccount): Observable<any> {
+    const body = JSON.stringify(journalAccount);
+    return this.http.put(this.journalAccountUrl, body, httpOptions);
+  }
+
 }

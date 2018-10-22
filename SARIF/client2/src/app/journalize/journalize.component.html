@@ -132,10 +132,10 @@
 
     <button class="btn btn-info btn-lg" (click)="openCreateJournal()" >Add Journal</button>
 <div>
-  <table id="journalTable">
+  <table id="journalTable" style=" table-layout:fixed">
     <thead>
     <tr>
-      <th colspan="7" class="col-xs-1 text-center">General Journal</th>
+      <th colspan="8" class="col-xs-1 text-center">General Journal</th>
     <tr>
     <tr>
       <th><abbr title="Date"></abbr>Date</th>
@@ -146,18 +146,46 @@
       <th><abbr title="Debit"></abbr>Debit</th>
       <th><abbr title="Credit"></abbr>Credit</th>
     </tr>
-    <tr *ngFor="let journal of journals">
-      <td>{{ journal.Date | date: 'MM/dd/yyyy  HH:mm:ss'}}</td>
-      <td></td>
-      <td>{{ journal.CreatedBy }}</td>
-      <td></td>
-      <td>{{ journal.Reference }}</td>
-      <td></td>
-      <td></td>
-    </tr>
     </thead>
-    <tbody>
 
-    </tbody>
+    <tr *ngFor="let journal of journals">
+      <td style="vertical-align: top"  >{{ journal.Date | date: 'MM/dd/yyyy'}}</td>
+      <td></td>
+      <td style="vertical-align: top" >{{ journal.CreatedBy }}</td>
+      <td>
+        <tr *ngFor="let jaccount of journal.JournalAccounts" style=" background-color: transparent" >
+          <td  class="accountslist2" *ngIf="jaccount.NormalSide == 'Credit'">{{jaccount.AccountName}}</td>
+          <td  class="accountslist" *ngIf="jaccount.NormalSide == 'Debit'">{{jaccount.AccountName}}</td>
+
+       </tr>
+      </td>
+
+      <td style="vertical-align: top">{{ journal.Reference }}</td>
+
+      <td >
+        <tr *ngFor="let jaccount of journal.JournalAccounts; let b = index" style=" background-color: transparent">
+          <td class="accountslist" *ngIf="jaccount.DebitAmount == null">&nbsp;</td>
+          <td class="accountslist" *ngIf="jaccount.DebitAmount != null && b == 0">{{"$"+jaccount.DebitAmount}}</td>
+          <td class="accountslist3"  *ngIf="jaccount.DebitAmount != null && b != 0">{{" "+jaccount.DebitAmount}}</td>
+        </tr>
+      </td>
+
+      <td>
+        <tr *ngFor="let jaccount of journal.JournalAccounts; let i = index" style=" background-color: transparent;">
+          <td class="accountslist" *ngIf="jaccount.CreditAmount == null">&nbsp;</td>
+          <td class="accountslist" *ngIf="jaccount.CreditAmount != null && i == getNumberDebits(journal.JournalAccounts)">{{"$"+jaccount.CreditAmount}}</td>
+          <td class="accountslist3" *ngIf="jaccount.CreditAmount != null && i != getNumberDebits(journal.JournalAccounts)">{{" "+jaccount.CreditAmount}}</td>
+        </tr>
+      </td>
+    <td style="vertical-align: top">
+      <div>
+        <button class="btn btn-info" style="" (click)="stuff()"   >Approve</button>
+      </div>
+      <div>
+        <button class="btn btn-danger" style="width: 95px" (click)="stuff()"   >Decline</button>
+      </div>
+    </td>
+
+    </tr>
   </table>
 </div>

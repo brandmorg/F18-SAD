@@ -3,10 +3,11 @@ td, th {
   text-align: left;
   padding: 8px;
 }
-
 tr:nth-child(even) {
   background-color: #6e7d93;
 }
+
+
 table, h3, h2, td {
   color: white;
 }
@@ -37,6 +38,26 @@ table, h3, h2, td {
 .accountsinput{
   color: black;
   border: none;
+}
+.accountslist{
+  background-color: transparent;
+  border: none;
+}
+.accountslist2{
+  background-color: transparent;
+  text-indent: 25px;
+  border: none;
+}
+.accountslist3{
+  background-color: transparent;
+  text-indent: 8px;
+  border: none;
+}
+.accountslist4{
+  background-color: transparent;
+  text-indent: 8px;
+  border: 1px solid #6e7d93;
+
 }
 .trbackground{
   background-color: white;
@@ -123,3 +144,8 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.row {
+ display: block/* equal height of the children */
+}
+

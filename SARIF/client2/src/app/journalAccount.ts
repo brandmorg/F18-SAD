@@ -5,5 +5,5 @@ export class JournalAccount{
   NormalSide: string;
   DebitAmount: number;
   CreditAmount: number;
-  JournalJid: number;
+  JournalJId: number;
 }

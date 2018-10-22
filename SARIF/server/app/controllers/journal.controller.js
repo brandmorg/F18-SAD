@@ -1,5 +1,6 @@
 const db = require('../config/db.config.js');
 const Journal = db.journal;
+const JournalAccounts = db.journalAccounts
 
 exports.create = (req, res) => {
     // Save to postgres database
@@ -12,7 +13,13 @@ exports.create = (req, res) => {
 
 // Fetch all Customers
 exports.findAll = (req, res) => {
-    Journal.findAll().then(users => {
+    Journal.findAll({
+        include:[
+            {
+                model: JournalAccounts
+            }
+        ]
+    }).then(users => {
         // Send all customers to Client
         res.json(users);
     });
