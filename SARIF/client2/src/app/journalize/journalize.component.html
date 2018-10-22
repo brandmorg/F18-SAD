@@ -27,6 +27,7 @@
                    name="description" >
           </div>
           <hr id="journalAccountAddTable">
+          <table>
             <tr >
               <th class="accountsAdd"><abbr title="Date"></abbr>Account</th>
               <th class="accountsAdd"><abbr title="Date"></abbr>Debits</th>
@@ -37,7 +38,9 @@
               <td class="accountsinput" style=" background-color: white">
                 <select id="debitDropDown"  class="form-control" style="width: 200px" required
                         [ngModelOptions]="{standalone: true}"
-                         [(ngModel)]="account.AccountName" [name]="account.AccountName" #accountSubType="ngModel">
+                         [(ngModel)]="account.AccountName" [name]="account.AccountName"
+                        (ngModelChange)="checkRepeatDebitAccount(); "
+                          #accountSubType="ngModel">
                   <option *ngFor="let accountDeb of debitAccounts">{{accountDeb}}</option>
                 </select>
               </td>
@@ -52,7 +55,7 @@
                        name="description3" >
               </td>
               <td class="accountsinput" style=" background-color: white" *ngIf="journalAccountsDebit.indexOf(account) > 0">
-                <button class="btn btn-danger" (click)="removeDebit(journalAccountsDebit.indexOf(account))" id="removeDebitInput"   >Remove</button>
+                <button class="btn btn-danger" (click)="removeDebit(journalAccountsDebit.indexOf(account)); checkRepeatDebitAccount();" id="removeDebitInput"   >Remove</button>
               </td>
               <td class="accountsinput" style=" background-color: white">
                 <button class="btn btn-info" (click)="addDebitInput()" id="addDebitInput"  *ngIf="journalAccountsDebit.indexOf(account) == journalAccountsDebit.length -1">Add Debit</button>
@@ -64,7 +67,9 @@
               <select id="creditDropDown" class="form-control" style="width: 200px" required
                       [ngModelOptions]="{standalone: true}"
 
-                      [(ngModel)]="account.AccountName" [name]="account.AccountName" #accountSubType="ngModel">
+                      [(ngModel)]="account.AccountName" [name]="account.AccountName"
+                      (ngModelChange)="checkRepeatCreditAccount()"
+                      #accountSubType="ngModel">
                 <option *ngFor="let accountCred of creditAccounts">{{accountCred}}</option>
               </select>
               </td>
@@ -81,7 +86,7 @@
                        >
               </td>
               <td class="accountsinput" style=" background-color: white" *ngIf="journalAccountsCredit.indexOf(account) > 0">
-                <button class="btn btn-danger" (click)="removeCredit(journalAccountsCredit.indexOf(account))" id="removeCreditInput"   >Remove</button>
+                <button class="btn btn-danger" (click)="removeCredit(journalAccountsCredit.indexOf(account)); checkRepeatCreditAccount();" id="removeCreditInput"   >Remove</button>
               </td>
               <td class="accountsinput" style=" background-color: white">
                 <button class="btn btn-info" (click)="addCreditInput();" id="addCreditInput"  *ngIf="journalAccountsCredit.indexOf(account) == journalAccountsCredit.length -1">Add Credit</button>
@@ -95,9 +100,18 @@
                <td class="accountsinput" style=" background-color: white; text-align: right;" >{{'$'+totalCredit}}</td>
 
              </tr>
+          </table>
 
-          <div *ngIf="totalsmatch == 0" class="alert alert-danger"  style="width: 250px;">
+          <div *ngIf="totalsmatch == 0" class="alert alert-danger"  style="width: 340px;">
             Debit and Credits do not match
+          </div>
+
+          <div *ngIf="repeatDebitAccount == 0" class="alert alert-danger"  style="width: 340px;">
+            You have duplicate Debit accounts
+          </div>
+
+          <div *ngIf="repeatCreditAccount == 0" class="alert alert-danger"  style="width: 340px;">
+            You have duplicate Credit accounts
           </div>
           <button (click)="submit();" id="submitBtn" [disabled]="checkBothInputs() == 0" >Submit</button>
           <button (click)="close(); addJournalForm.reset()" id="closeModalBtn">Cancel</button>

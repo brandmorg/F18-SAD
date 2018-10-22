@@ -36,6 +36,8 @@ export class JournalizeComponent implements OnInit {
   fieldsFilled = 0;
   fieldsFilled2 = 0;
   totalsmatch = 1;
+  repeatDebitAccount = 1;
+  repeatCreditAccount = 1;
 
   myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'dd.mm.yyyy',
@@ -119,7 +121,7 @@ export class JournalizeComponent implements OnInit {
 
   checkInputExist(): number{
     for(let account of this.journalAccountsDebit){
-      if(account.AccountName ==undefined || account.DebitAmount==undefined || account.DebitAmount== 0){
+      if(account.AccountName ==undefined || account.DebitAmount==undefined || account.DebitAmount== 0 || isNaN(account.DebitAmount)){
         this.fieldsFilled = 0;
         break;
 
@@ -134,7 +136,7 @@ export class JournalizeComponent implements OnInit {
   }
   checkInputExist2(): number{
     for(let account of this.journalAccountsCredit){
-      if(account.AccountName ==undefined || account.CreditAmount==undefined || account.CreditAmount== 0){
+      if(account.AccountName ==undefined || account.CreditAmount==undefined || account.CreditAmount== 0 || isNaN(account.CreditAmount)){
        this.fieldsFilled2 = 0;
        break;
       }
@@ -161,7 +163,7 @@ export class JournalizeComponent implements OnInit {
 
 
   openCreateJournal() {
-
+    this.totalsmatch = 1;
     this.journalAccountsDebit = []; //reset journal accounts
     this.journalAccountsCredit = []; //reset journal accounts
     this.totalDebit = 0;
@@ -184,16 +186,60 @@ export class JournalizeComponent implements OnInit {
   }
 
   removeDebit(index){
+    this.checkRepeatDebitAccount();
     if (index > -1) {
       this.journalAccountsDebit.splice(index, 1);
     }
 
   }
   removeCredit(index){
+    this.checkRepeatCreditAccount();
     if (index > -1) {
       this.journalAccountsCredit.splice(index, 1);
     }
   }
+
+
+  checkRepeatDebitAccount(){
+    console.log('repeat');
+    for(let acc1 of this.journalAccountsDebit){
+      for(let acc2 of this.journalAccountsDebit){
+        if(this.journalAccountsDebit.indexOf(acc1) == this.journalAccountsDebit.indexOf(acc2)){
+          this.repeatDebitAccount = 1;
+        }
+        else if(acc1.AccountName == acc2.AccountName){
+          this.repeatDebitAccount = 0;
+          console.log('Duplicate');
+          break;
+        }
+        else{
+          this.repeatDebitAccount = 1;
+        }
+      }
+    }
+
+
+  }
+  checkRepeatCreditAccount(){
+    console.log('repeat');
+    for(let acc1 of this.journalAccountsCredit){
+      for(let acc2 of this.journalAccountsCredit){
+        if(this.journalAccountsCredit.indexOf(acc1) == this.journalAccountsCredit.indexOf(acc2)){
+          this.repeatCreditAccount = 1;
+        }
+        else if(acc1.AccountName == acc2.AccountName){
+          this.repeatCreditAccount = 0;
+          console.log('Duplicate');
+          break;
+        }
+        else{
+          this.repeatCreditAccount = 1;
+        }
+      }
+    }
+
+  }
+
 
   async submit(){
     if(this.totalDebit != this.totalCredit){
