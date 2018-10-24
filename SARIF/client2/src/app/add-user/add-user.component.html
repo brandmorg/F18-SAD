@@ -1,96 +1,99 @@
 
 <!-- Create user form-->
 <div id="new_user" class="modal">
-<div class="modal-content">
-
-    <form #addUserForm="ngForm" >
-      <div class="rightContent">
-      <div class="form-group">
-        <label for="userName">User Name</label>
-        <input type="text" class="form-control" id="userName" (ngModelChange)="compareUserName($event)" placeholder="User Name" required [(ngModel)]="user.userName"
-               name="userName" >
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="text" class="form-control" id="password" (ngModelChange)="checkPassword($event)" placeholder="Password" required [(ngModel)]="user.userPassword"
-               name="password" >
-        <label for="password" class="warning">Password must be at least 8 characters long</label>
-        <label for="password" class="warning">Includes at least one of the following: #,$,%,&,*,+ </label>
-        <label for="password" class="warning">Includes at least one number</label>
-      </div>
-
-      <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input type="text" class="form-control" id="firstName" placeholder="First Name" required [(ngModel)]="user.firstName"
-               name="firstName" >
-      </div>
-
-
-      <div class="form-group">
-        <label for="email">email</label>
-        <input type="text" class="form-control" id="email" (ngModelChange)="compareEmail($event)" placeholder="email" required [(ngModel)]="user.email"
-               name="email" >
-      </div>
-
+  <div class="modal-content card">
+  
+      <form #addUserForm="ngForm" >
+        <div class="rightContent">
         <div class="form-group">
-          <label for="userRole">Role: </label>
-          <select class="form-control" required [(ngModel)]="user.userRole" id="userRole" name="roleType" >
-            <option>accountant</option>
-            <option>manager</option>
-            <option>admin</option>
-          </select>
+          <label for="userName">User Name</label>
+          <input type="text" class="form-control" id="userName" (ngModelChange)="compareUserName($event)" placeholder="User Name" required [(ngModel)]="user.userName"
+                 name="userName" >
         </div>
-
         <div class="form-group">
-          <label for="securityQ">Security Question: </label>
-          <select class="form-control" required [(ngModel)]="user.securityQ" id="securityQ" name="SecurityQ" >
-            <option>What is your favorite color?</option>
-            <option>Where did you go to high school?</option>
-            <option>What is your favorite movie?</option>
-          </select>
+          <label for="password">Password</label>
+          <input type="text" class="form-control" id="password" (ngModelChange)="checkPassword($event)" placeholder="Password" required [(ngModel)]="user.userPassword"
+                 name="password" >
+                 <label for="password" class="warning">Password must be at least 8 characters long</label>
+                 <label for="password" class="warning">Includes at least one of the following: #,$,%,&,*,+ </label>
+                 <label for="password" class="warning">Includes at least one number</label>
         </div>
-
-        <div *ngIf="usernameExist == 2" class="alert alert-danger"  style="width: 250px;">
-          Username already exists
-        </div>
-
-        <div *ngIf="emailExist == 2" class="alert alert-danger"  style="width: 250px;">
-          Email already exists
-        </div>
-
-        <div *ngIf="passwordError == 1" class="alert alert-danger"  style="width: 250px;">
-          Password is not acceptable
-        </div>
-
-        <button (click)="submit();" id="submitBtn" [disabled]="!addUserForm.form.valid" >Submit</button>
-        <input type="reset">
-        <button (click)="close(); addUserForm.reset()" id="closeModalBtn">Cancel</button>
-      </div>
-
-      <div class="leftContent">
+  <!-- [hidden]="user.userPassword.valid || userPassword.pristine" -->
         <div class="form-group">
           <label for="passwordAgain">Re-enter Password</label>
           <input type="text" class="form-control" id="passwordAgain" placeholder="Password" required [(ngModel)]="user.userPassword"
                  name="password2" >
         </div>
-        <div class="form-group" style="margin-top:112px;">
+  
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control" id="firstName" placeholder="First Name" required [(ngModel)]="user.firstName"
+                 name="firstName" >
+        </div>
+  
+        <div class="form-group">
           <label for="lastName">Last Name</label>
           <input type="text" class="form-control" id="lastName" placeholder="Last Name" required [(ngModel)]="user.lastName"
                  name="lastName">
         </div>
-
-        <div class="form-group" style="margin-top:188px;">
-          <label for="answer">Answer</label>
-          <input type="text" class="form-control" id="answer" placeholder="Answer" required [(ngModel)]="user.securityA"
-                 name="password3" >
+  
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email" (ngModelChange)="compareEmail($event)" placeholder="Email" required [(ngModel)]="user.email"
+                 name="email" >
         </div>
-
+  
+          <div class="form-group">
+            <label for="userRole">Role: </label>
+            <select class="form-control" required [(ngModel)]="user.userRole" id="userRole" name="roleType" >
+              <option>Accountant</option>
+              <option>Manager</option>
+              <option>Admin</option>
+              <option>User</option>
+            </select>
+          </div>
+  
+          <div class="form-group">
+            <label for="securityQ">Security Question: </label>
+            <select class="form-control" required [(ngModel)]="user.securityQ" id="securityQ" name="SecurityQ" >
+              <option>What is your favorite color?</option>
+              <option>Where did you go to high school?</option>
+              <option>What is your favorite movie?</option>
+            </select>
+          </div>
+  
+          <div class="form-group">
+            <label for="answer">Answer</label>
+            <input type="text" class="form-control" id="answer" placeholder="Answer" required [(ngModel)]="user.securityA"
+                   name="password3" >
+          </div>
+  
+          <div *ngIf="usernameExist == 2" class="alert alert-danger"  style="width: 250px;">
+            Username already exists
+          </div>
+  
+          <div *ngIf="emailExist == 2" class="alert alert-danger"  style="width: 250px;">
+            Email already exists
+          </div>
+  
+          <div *ngIf="passwordError == 1" class="alert alert-danger"  style="width: 250px;">
+            Password is not acceptable
+          </div>
+  
+          <button (click)="submit();" id="submitBtn"  style="margin-right: 10px" [disabled]="!addUserForm.form.valid" >Submit</button>
+          <input  style="margin-right: 10px" type="reset">
+          <button (click)="close(); addUserForm.reset()" id="closeModalBtn">Cancel</button>
+        </div>
+      
+  <!--
+      Moved right hand to vertical
+  -->
+  
+      </form>
+  
+  
       </div>
-    </form>
-
-
-    </div>
-</div>
+  </div>
 
 <!-- Update User form-->
 <div id="updateUserModal" class="modal">
