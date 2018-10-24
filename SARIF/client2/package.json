@@ -21,11 +21,13 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "angular2-cookie": "^1.2.6",
+    "angular2-text-mask": "^9.0.0",
     "angular4-datepicker": "^1.0.1",
     "core-js": "^2.5.4",
     "mydatepicker": "^2.6.6",
     "ngx-webstorage": "^2.0.1",
     "rxjs": "^6.0.0",
+    "text-mask-addons": "^3.8.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

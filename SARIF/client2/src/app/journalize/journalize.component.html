@@ -42,13 +42,13 @@
                         (ngModelChange)="checkRepeatDebitAccount(); "
                           #accountSubType="ngModel">
                   <option disabled>Debits:</option>
-                  <option *ngFor="let accountDeb of debitAccounts">{{accountDeb}}</option>
+                  <option *ngFor="let accountDeb of debitAccounts">{{accountDeb }}</option>
                   <option disabled>Credits:</option>
                   <option *ngFor="let accountCred of creditAccounts">{{accountCred}}</option>
                 </select>
               </td>
               <td class="accountsinput" style=" background-color: white; ">
-                <input type="text" class="form-control" id="DebitAmount" placeholder="Debit" style="text-align: right;"
+                <input type="text" class="form-control" [textMask]="{mask: currencyMask}" id="DebitAmount" placeholder="Debit" style="text-align: right;"
                        required [ngModelOptions]="{standalone: true}"
 
                        [name]="account.DebitAmount" [(ngModel)]="account.DebitAmount"  (ngModelChange)="getDebitTotal()">
@@ -188,10 +188,11 @@
       </td>
     <td style="vertical-align: top">
       <div>
-        <button class="btn btn-info" style="" (click)="stuff()"   >Approve</button>
+        <button class="btn btn-info" style="" (click)="approveJournal(journal)"  *ngIf="journal.acceptance == null" >Approve</button>
       </div>
+      <label *ngIf="journal.acceptance != null">{{journal.acceptance}}</label>
       <div>
-        <button class="btn btn-danger" style="width: 95px" (click)="stuff()"   >Decline</button>
+        <button class="btn btn-danger" style="width: 95px" (click)="stuff()"  *ngIf="journal.acceptance == null" >Decline</button>
       </div>
     </td>
 

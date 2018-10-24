@@ -9,7 +9,7 @@ module.exports = function(app) {
     app.get('/api/journal', journal.findAll);
 
     // Update a journal
-    app.put('/api/users', journal.update);
+    app.put('/api/journal', journal.update);
 
     // Retrieve a single journal by Id
     app.get('/api/journal:entry', journal.findById);

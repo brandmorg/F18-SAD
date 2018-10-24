@@ -20,6 +20,7 @@ import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { JournalizeComponent } from './journalize/journalize.component';
 import { GeneralLedgerComponent } from './general-ledger/general-ledger.component';
 import { IndividualLedgerComponent } from './individual-ledger/individual-ledger.component';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { IndividualLedgerComponent } from './individual-ledger/individual-ledger
     AppRoutingModule,
     Ng2Webstorage,
     HttpClientModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    TextMaskModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

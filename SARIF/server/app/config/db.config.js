@@ -24,6 +24,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 //Models/tables
+db.generalLedger = require('../model/generalLedger.model')(sequelize, Sequelize);
 db.journalFiles = require('../model/journalFiles.model')(sequelize, Sequelize);
 db.journalAccounts = require('../model/journalAccounts.model')(sequelize, Sequelize);
 db.journal = require('../model/journal.model')(sequelize, Sequelize);

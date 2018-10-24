@@ -44,6 +44,7 @@ db.sequelize.sync().then(() => {
 
 app.set('trust proxy', true)
 
+require('./app/routes/generalLedger.routes')(app);
 require('./app/routes/journal.routes')(app);
 require('./app/routes/journalFiles.routes')(app);
 require('./app/routes/journalAccounts.routes')(app);

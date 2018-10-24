@@ -1,20 +1,32 @@
 
 
 <div class="form-group">
-<table >
-  <thead>
-  <tr>
-    <th colspan="8" class="col-xs-1 text-center">General Journal</th>
-  <tr>
-  <tr>
-    <th><abbr title="Date"></abbr>Date</th>
-    <th><abbr title="Type"></abbr>Number</th>
-    <th><abbr title="Created By"></abbr>Description</th>
-    <th><abbr title="Accounts"></abbr>REF</th>
-    <th><abbr title="Reference"></abbr>Debit</th>
-    <th><abbr title="Debit"></abbr>Credit</th>
-    <th><abbr title="Credit"></abbr>Balance</th>
-  </tr>
-  </thead>
+  <table id="ledgerTable" style=" table-layout:fixed">
+    <tr>
+      <th colspan="9" class="col-xs-1 text-center">General Ledger</th>
+    <tr>
+    <tr>
+      <th >Account Number</th>
+      <th >Account Name</th>
+      <th >Account Type</th>
+      <th >Account Subtype</th>
+      <th >Normal Side</th>
+      <th >Original Balance</th>
+      <th >Current Balance</th>
+      <th >Account Description</th>
+      <th >Active</th>
+    </tr>
+    <tr *ngFor="let account of accounts">
+      <td>{{ account.accountNumber }}</td>
+      <td>
+        <button class="btn btn-link" style="color: white" (click)="stuff()" id="button1" >{{ account.accountName }}</button></td>
+      <td>{{ account.accountType }}</td>
+      <td>{{ account.accountSubType }}</td>
+      <td>{{ account.normalSide }}</td>
+      <td style="text-align: right;">{{ account.originalBalance }}</td>
+      <td style="text-align: right;">{{ account.currentBalance }}</td>
+      <td>{{ account.comment }}</td>
+      <td>{{ account.active }}</td>
+    </tr>
   </table>
-  </div>
+</div>

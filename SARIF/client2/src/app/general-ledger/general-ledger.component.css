@@ -6,7 +6,11 @@ td, th {
 tr:nth-child(even) {
   background-color: #6e7d93;
 }
-
+#ledgerTable {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
 table, h3, h2, td {
   color: white;

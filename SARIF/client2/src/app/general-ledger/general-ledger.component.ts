@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CoAService} from '../services/coa.service';
 
 @Component({
   selector: 'app-general-ledger',
@@ -6,10 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./general-ledger.component.css']
 })
 export class GeneralLedgerComponent implements OnInit {
+  accounts = [];
 
-  constructor() { }
+  constructor(
+    private coaService: CoAService,
+  ) { }
 
   ngOnInit() {
+    this.viewAccounts();
+  }
+
+  viewAccounts() {
+    this.coaService.findAll().subscribe(
+      (account) => {
+        this.accounts = account;
+      });
+  }
+  stuff(){
+
   }
 
 }

@@ -1,14 +1,17 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { UserService } from '../services/user.service';
 import { JournalizeService} from '../services/journalize.service';
+import { GeneralLedgerService } from '../services/general-ledger.service';
 import { Journal } from '../journal';
 import { JournalAccount } from '../journalAccount';
 import { CoA } from '../chart-of-accounts';
+import {GeneralLedger } from '../generalLedger';
 import {CoAService} from '../services/coa.service';
 import {NgForm} from '@angular/forms';
 import {IMyDpOptions} from 'mydatepicker';
 import {AppComponent} from '../app.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -57,12 +60,27 @@ export class JournalizeComponent implements OnInit {
     editableDateField: false
   };
 
+  private currencyMask = createNumberMask({
+    prefix: '',
+    suffix: '',
+    includeThousandsSeparator: false,
+    //thousandsSeparatorSymbol: ',',
+    allowDecimal: true,
+    decimalSymbol: '.',
+    decimalLimit: 2,
+    integerLimit: null,
+    requireDecimal: false,
+    allowNegative: false,
+    allowLeadingZeroes: false
+  });
+
   model: any = {date: {year: 2018, month: 10, day: 9}};
 
 
   constructor(
     private coaService: CoAService,
     private journalServ: JournalizeService,
+    private ledgerServ: GeneralLedgerService,
     private comp: AppComponent,
     private http: HttpClient
   ) { }
@@ -142,7 +160,7 @@ export class JournalizeComponent implements OnInit {
   }
 
   checkBothInputs(): number{
-    if(this.checkInputExist() == 1 && this.checkInputExist2() == 1 && this.journalNew.Description != null){
+    if(this.checkInputExist() == 1 && this.checkInputExist2() == 1 && this.journalNew.Description != null && this.journalNew.Description != ''){
       return 1;
     }
     else{
@@ -351,6 +369,44 @@ export class JournalizeComponent implements OnInit {
     this.selectedFile = files.item(0);
     //console.log('selected File' + this.selectedFile.name);
   }
+
+
+  //posting journal
+async approveJournal(journal){
+
+    for(let account of journal.JournalAccounts){
+      for(let CoA of this.accounts ){
+        let ledger = new GeneralLedger();
+        if(account.AccountName == CoA.accountName){
+          ledger.Date = journal.Date;
+          ledger.AccountNumber = CoA.accountNumber;
+          ledger.AccountName = account.AccountName;
+          ledger.NormalSide = CoA.normalSide;
+          ledger.CreditAmount = account.CreditAmount;
+          ledger.DebitAmount = account.DebitAmount;
+          await this.ledgerServ.addLedger(ledger).toPromise();
+          console.log('ledger entries added');
+          break;
+        }
+
+      }
+    }
+    journal.acceptance = 'Approved';
+    let journaltemp = new Journal();
+    journaltemp.JId = journal.JId;
+    journaltemp.acceptance = journal.acceptance;
+    journaltemp.Description = journal.Description;
+    journaltemp.Date = journal.Date;
+    journaltemp.Reference = journal.Reference;
+    journaltemp.CreatedBy = journal.CreatedBy;
+    console.log(journaltemp);
+    this.journalServ.updateJournal(journaltemp).subscribe((result) => {
+      console.log(result);
+    });
+
+}
+
+
 
 
 
