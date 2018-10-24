@@ -60,6 +60,14 @@ const routes: Routes = [
       {
         path: 'generalLedger',
         component: GeneralLedgerComponent
+      },
+      {
+        path: 'ledger',
+        component: IndividualLedgerComponent
+      },
+      {
+        path: 'ledger/:term',
+        component: IndividualLedgerComponent
       }
       ]
   },

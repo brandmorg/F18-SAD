@@ -11,6 +11,8 @@ import {NgForm} from '@angular/forms';
 import {IMyDpOptions} from 'mydatepicker';
 import {AppComponent} from '../app.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Router } from '@angular/router';
+import {SharedDataService } from '../services/shared-data.service';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 const httpOptions = {
@@ -78,11 +80,13 @@ export class JournalizeComponent implements OnInit {
 
 
   constructor(
+    private router: Router,
     private coaService: CoAService,
     private journalServ: JournalizeService,
     private ledgerServ: GeneralLedgerService,
     private comp: AppComponent,
-    private http: HttpClient
+    private http: HttpClient,
+    private data: SharedDataService
   ) { }
 
   ngOnInit() {
@@ -384,6 +388,8 @@ async approveJournal(journal){
           ledger.NormalSide = CoA.normalSide;
           ledger.CreditAmount = account.CreditAmount;
           ledger.DebitAmount = account.DebitAmount;
+          ledger.Reference = journal.Reference;
+          ledger.Description = journal.Description;
           await this.ledgerServ.addLedger(ledger).toPromise();
           console.log('ledger entries added');
           break;
@@ -406,6 +412,26 @@ async approveJournal(journal){
 
 }
 
+async declineJournal(journal){
+  journal.acceptance = 'Declined';
+  let journaltemp = new Journal();
+  journaltemp.JId = journal.JId;
+  journaltemp.acceptance = journal.acceptance;
+  journaltemp.Description = journal.Description;
+  journaltemp.Date = journal.Date;
+  journaltemp.Reference = journal.Reference;
+  journaltemp.CreatedBy = journal.CreatedBy;
+  console.log(journaltemp);
+  this.journalServ.updateJournal(journaltemp).subscribe((result) => {
+    console.log(result);
+  });
+
+}
+
+viewLedger(accountName){
+    this.data.setAccount(accountName);
+  this.router.navigate(['UserPage/ledger', accountName]);
+}
 
 
 

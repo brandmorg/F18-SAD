@@ -4,6 +4,7 @@ export class GeneralLedger {
   Date: Date;
   AccountName: string;
   Reference: string;
+  Description: string;
   NormalSide: string;
   DebitAmount: number;
   CreditAmount: number;
