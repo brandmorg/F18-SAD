@@ -63,4 +63,7 @@ export class UserPageComponent implements OnInit {
   viewJournal(){
     this.router.navigate(['UserPage/journal']);
   }
+  viewGLedger(){
+    this.router.navigate(['UserPage/generalLedger']);
+  }
 }

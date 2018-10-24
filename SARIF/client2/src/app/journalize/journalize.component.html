@@ -41,7 +41,10 @@
                          [(ngModel)]="account.AccountName" [name]="account.AccountName"
                         (ngModelChange)="checkRepeatDebitAccount(); "
                           #accountSubType="ngModel">
+                  <option disabled>Debits:</option>
                   <option *ngFor="let accountDeb of debitAccounts">{{accountDeb}}</option>
+                  <option disabled>Credits:</option>
+                  <option *ngFor="let accountCred of creditAccounts">{{accountCred}}</option>
                 </select>
               </td>
               <td class="accountsinput" style=" background-color: white; ">
@@ -70,6 +73,9 @@
                       [(ngModel)]="account.AccountName" [name]="account.AccountName"
                       (ngModelChange)="checkRepeatCreditAccount()"
                       #accountSubType="ngModel">
+                <option disabled>Debits:</option>
+                <option *ngFor="let accountDeb of debitAccounts">{{accountDeb}}</option>
+                <option disabled>Credits:</option>
                 <option *ngFor="let accountCred of creditAccounts">{{accountCred}}</option>
               </select>
               </td>
@@ -110,11 +116,11 @@
           </div>
 
           <div *ngIf="repeatDebitAccount == 0" class="alert alert-danger"  style="width: 340px;">
-            You have duplicate Debit accounts
+            You have duplicate accounts
           </div>
 
           <div *ngIf="repeatCreditAccount == 0" class="alert alert-danger"  style="width: 340px;">
-            You have duplicate Credit accounts
+            You have duplicate accounts
           </div>
           <button (click)="submit();" id="submitBtn" [disabled]="checkBothInputs() == 0" >Submit</button>
           <button (click)="close(); addJournalForm.reset()" id="closeModalBtn">Cancel</button>

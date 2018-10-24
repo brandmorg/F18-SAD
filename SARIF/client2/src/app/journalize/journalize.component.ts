@@ -214,6 +214,8 @@ export class JournalizeComponent implements OnInit {
     modal.style.display = "none";
     this.journalForm.reset();
     this.selectedFile = null;
+    this.repeatDebitAccount = 1;
+    this.repeatCreditAccount = 1;
 
   }
 
@@ -242,10 +244,19 @@ export class JournalizeComponent implements OnInit {
         else if(acc1.AccountName == acc2.AccountName){
           this.repeatDebitAccount = 0;
           console.log('Duplicate');
-          break;
+          return;
         }
         else{
           this.repeatDebitAccount = 1;
+        }
+        for(let acc3 of this.journalAccountsCredit){
+          if(acc1.AccountName == acc3.AccountName){
+            this.repeatDebitAccount = 0;
+            return;
+          }
+          else{
+            this.repeatDebitAccount = 1;
+          }
         }
       }
     }
@@ -262,7 +273,16 @@ export class JournalizeComponent implements OnInit {
         else if(acc1.AccountName == acc2.AccountName){
           this.repeatCreditAccount = 0;
           console.log('Duplicate');
-          break;
+          return;
+        }
+        else{
+          this.repeatCreditAccount = 1;
+        }
+      }
+      for(let acc3 of this.journalAccountsDebit){
+        if(acc1.AccountName == acc3.AccountName){
+          this.repeatCreditAccount = 0;
+          return;
         }
         else{
           this.repeatCreditAccount = 1;

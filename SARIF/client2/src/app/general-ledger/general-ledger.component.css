@@ -1,0 +1,13 @@
+td, th {
+  border: 1px solid #6e7d93;
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #6e7d93;
+}
+
+
+table, h3, h2, td {
+  color: white;
+}

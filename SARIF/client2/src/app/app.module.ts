@@ -18,6 +18,8 @@ import { UserLogComponent } from './user-log/user-log.component';
 import { AddUserLoginComponent } from './add-user-login/add-user-login.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { JournalizeComponent } from './journalize/journalize.component';
+import { GeneralLedgerComponent } from './general-ledger/general-ledger.component';
+import { IndividualLedgerComponent } from './individual-ledger/individual-ledger.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { JournalizeComponent } from './journalize/journalize.component';
     AddUserLoginComponent,
     HomeScreenComponent,
     JournalizeComponent,
+    GeneralLedgerComponent,
+    IndividualLedgerComponent,
   ],
   imports: [
     BrowserModule,

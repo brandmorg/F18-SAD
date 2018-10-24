@@ -10,6 +10,8 @@ import { ChartOfAccountsComponent } from '../chart-of-accounts/chart-of-accounts
 import { HomeScreenComponent } from '../home-screen/home-screen.component';
 import { UserLogComponent } from '../user-log/user-log.component';
 import { JournalizeComponent } from '../journalize/journalize.component';
+import { GeneralLedgerComponent } from '../general-ledger/general-ledger.component';
+import { IndividualLedgerComponent } from '../individual-ledger/individual-ledger.component';
 
 
 const routes: Routes = [
@@ -54,6 +56,10 @@ const routes: Routes = [
       {
         path: 'journal',
         component: JournalizeComponent
+      },
+      {
+        path: 'generalLedger',
+        component: GeneralLedgerComponent
       }
       ]
   },
