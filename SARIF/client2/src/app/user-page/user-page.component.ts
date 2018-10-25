@@ -18,9 +18,9 @@ export class UserPageComponent implements OnInit {
   logs = [];
   currentpage = 0;
 
-  constructor(private router: Router, 
-    private loginService: LoginService, 
-    private comp: AppComponent, 
+  constructor(private router: Router,
+    private loginService: LoginService,
+    private comp: AppComponent,
     private logData: UserLogService,
     private userData: UserService,
     ) { }
@@ -30,13 +30,11 @@ export class UserPageComponent implements OnInit {
   }
   onOpened() {
       this.indicator = this.comp.getUserName();
-      if(this.comp.getRole() === 'admin'){
+      if (this.comp.getRole() === 'admin') {
         this.access = 1;
-      }
-      else if(this.comp.getRole() === 'manager') {
+      } else if (this.comp.getRole() === 'manager') {
         this.access = 2;
-      }
-      else{
+      } else {
         this.access = 3;
       }
   }
@@ -48,19 +46,23 @@ export class UserPageComponent implements OnInit {
   }
 
 
-  viewCoA(){
+  viewCoA() {
     this.router.navigate(['UserPage/chartOfAccounts']);
   }
-  viewUserList(){
+  viewUserList() {
     this.router.navigate(['UserPage/userList']);
   }
-  viewLog(){
+  viewLog() {
     this.router.navigate(['UserPage/userLogs']);
   }
-  viewHome(){
+  viewHome() {
     this.router.navigate(['UserPage/home']);
   }
-  viewJournal(){
+  viewJournal() {
     this.router.navigate(['UserPage/journal']);
+  }
+
+  viewTrialBalance() {
+    this.router.navigate(['UserPage/trialBalance']);
   }
 }

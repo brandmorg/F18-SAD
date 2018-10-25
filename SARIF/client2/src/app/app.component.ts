@@ -20,13 +20,13 @@ export class AppComponent {
               private data: SharedDataService
   ) {}
 
-setCookies(){
+setCookies() {
     this._cookieService.put('test', 'testing cookie');
 }
-getCookie(){
+getCookie() {
     alert(this._cookieService.get('test'));
 }
-delCookies(){
+delCookies() {
     this._cookieService.remove('test');
 }
 
@@ -37,20 +37,20 @@ setSession(id, userName, userRole, firstName, lastName) {
     this.sessionSt.store('firstName', firstName);
     this.sessionSt.store('lastName', lastName);
 }
-getSession(){
+getSession() {
     alert(this.sessionSt.retrieve('logged-in'));
 }
-getUserName(){
+getUserName() {
     return this.sessionSt.retrieve('userName');
 }
-  getRole(){
+  getRole() {
     return this.sessionSt.retrieve('userRole');
   }
 
-  getFirstName(){
+  getFirstName() {
     return this.sessionSt.retrieve('firstName');
   }
-delSession(){
+delSession() {
     this.sessionSt.clear('userName');
     this.sessionSt.clear('id');
     this.sessionSt.clear('userRole');

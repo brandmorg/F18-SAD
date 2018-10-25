@@ -18,6 +18,7 @@ import { UserLogComponent } from './user-log/user-log.component';
 import { AddUserLoginComponent } from './add-user-login/add-user-login.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { JournalizeComponent } from './journalize/journalize.component';
+import { TrialBalanceComponent } from './trial-balance/trial-balance.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { JournalizeComponent } from './journalize/journalize.component';
     AddUserLoginComponent,
     HomeScreenComponent,
     JournalizeComponent,
+    TrialBalanceComponent,
   ],
   imports: [
     BrowserModule,
