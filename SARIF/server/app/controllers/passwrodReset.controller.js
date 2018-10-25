@@ -38,18 +38,37 @@ exports.sendEmail = (req, res) => {
           let email = user.email;
 
           var transporter = nodemailer.createTransport({
+            host: 'mail.privateemail.com',
+            port: 465,
+            secure: true,
+            auth: {
+                user: 'admin@sarif.financial',
+                pass: 'da73ko!RfKXOKJ@',
+              }
+          });
+          /*
+           *
+              var transporter = nodemailer.createTransport({
               service: 'gmail',
               auth: {
                   user: 'sariffinancialbot@gmail.com',
                   pass: 'ilikemoney123'
-              }
-          })
-
+           var smtpTransport = nodemailer.createTransport('SMTP',{
+               host: 'mail.sarif.financial'
+               port: '25'
+               secure: 'false'
+               auth: {
+                   user: 'admin'
+                   pass: 'da73ko!RfKXOKJ@'
+               }
+           };
+           *
+          */
           var mailOptions = {
-              from: 'sariffinancialbot@gmail.com',
+              from: 'admin@sarif.financial',
               to: email,
               subject: 'Sarif Financial password reset',
-              text: 'Click on the link below to verify your email:'
+              text: 'A password reset was requested for your account. \n\nPlease click on the link below to verify your email:' // Generate link, consider email template
           };
 
           transporter.sendMail(mailOptions, function (error, info) {
