@@ -66,4 +66,8 @@ export class UserPageComponent implements OnInit {
   viewGLedger(){
     this.router.navigate(['UserPage/generalLedger']);
   }
+  viewTrialBalance(){
+    this.router.navigate(['UserPage/trial-balance'])
+
+  }
 }

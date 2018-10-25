@@ -53,8 +53,7 @@ export class IndividualLedgerComponent implements OnInit {
 
   }
   calculateTotal(accountID): number{
-    let tot = this.total;
-    let num = this.total;
+    let num = 0;
     for(let account of this.accountList2){
       if(account.NormalSide == 'Debit') {
 

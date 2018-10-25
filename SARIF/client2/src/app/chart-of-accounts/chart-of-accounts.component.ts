@@ -94,9 +94,9 @@ export class ChartOfAccountsComponent implements OnInit {
     else {
       this.CoA.normalSide = "Credit";
     }
-
-    //Set the current balance to the original balance
-    this.CoA.currentBalance = this.CoA.originalBalance;
+    //current balance may be set to 0 but this is not confirmed
+    //Set the current balance to 0
+    this.CoA.currentBalance = 0;
 
     this.editCoA = this.CoA;
 

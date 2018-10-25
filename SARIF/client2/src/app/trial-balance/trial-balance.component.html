@@ -1,0 +1,27 @@
+<div class="form-group">
+  <table id="ledgerTable" style=" table-layout:fixed">
+    <tr>
+      <th colspan="4" class="col-xs-1 text-center">Trial Balance</th>
+    <tr>
+    <tr>
+      <th >Title of Account</th>
+      <th >Account Number</th>
+      <th >Debit Balance</th>
+      <th >Credit Balance</th>
+    </tr>
+    <tr *ngFor="let account of accounts">
+      <td>{{ account.accountName }}</td>
+      <td>{{ account.accountNumber }}</td>
+      <td *ngIf="account.normalSide == 'Debit'" style="text-align: right;">{{ account.currentBalance }}</td>
+      <td *ngIf="account.normalSide == 'Debit'" style="text-align: right;">&nbsp;</td>
+      <td *ngIf="account.normalSide == 'Credit'" style="text-align: right;">&nbsp;</td>
+      <td *ngIf="account.normalSide == 'Credit'" style="text-align: right;">{{ account.currentBalance }}</td>
+    </tr>
+    <tr>
+      <th ></th>
+      <th ></th>
+      <th style="text-align: right;">{{debitTotal}}</th>
+      <th style="text-align: right;">{{creditTotal}}</th>
+    </tr>
+  </table>
+</div>

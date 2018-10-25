@@ -12,6 +12,7 @@ import { UserLogComponent } from '../user-log/user-log.component';
 import { JournalizeComponent } from '../journalize/journalize.component';
 import { GeneralLedgerComponent } from '../general-ledger/general-ledger.component';
 import { IndividualLedgerComponent } from '../individual-ledger/individual-ledger.component';
+import { TrialBalanceComponent } from '../trial-balance/trial-balance.component';
 
 
 const routes: Routes = [
@@ -68,6 +69,10 @@ const routes: Routes = [
       {
         path: 'ledger/:term',
         component: IndividualLedgerComponent
+      },
+      {
+        path: 'trial-balance',
+        component: TrialBalanceComponent
       }
       ]
   },
