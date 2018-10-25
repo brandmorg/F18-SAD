@@ -12,6 +12,15 @@
       <th >Credit</th>
       <th >Balance</th>
     </tr>
+    <tr>
+      <th ></th>
+      <th ></th>
+      <th ></th>
+      <th ></th>
+      <th ></th>
+      <th ></th>
+      <th >{{displayTotal}}</th>
+    </tr>
     <tr *ngFor="let account of accountList2">
       <td>{{ account.Date | date: 'MM/dd/yyyy'}}</td>
       <td>{{ account.AccountNumber }}</td>
@@ -19,6 +28,7 @@
       <td>{{ account.Reference}}</td>
       <td>{{ account.DebitAmount }}</td>
       <td>{{ account.CreditAmount }}</td>
+      <td>{{calculateTotal(account.glId)}}</td>
     </tr>
   </table>
 </div>
