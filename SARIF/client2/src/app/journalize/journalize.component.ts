@@ -392,9 +392,33 @@ async approveJournal(journal){
           ledger.Description = journal.Description;
           await this.ledgerServ.addLedger(ledger).toPromise();
           console.log('ledger entries added');
+          //put if statement here for updating current balance for CoA
+          if(ledger.NormalSide == 'Debit'){
+            if(ledger.DebitAmount != null){
+              CoA.currentBalance = +CoA.currentBalance + +ledger.DebitAmount;
+              await this.coaService.updateAccount(CoA).toPromise();
+
+            }
+            else{
+              CoA.currentBalance = +CoA.currentBalance - +ledger.CreditAmount;
+              await this.coaService.updateAccount(CoA).toPromise();
+            }
+          }
+          //credit normal side
+          else{
+            if(ledger.DebitAmount != null){
+              CoA.currentBalance = +CoA.currentBalance - +ledger.DebitAmount;
+              await this.coaService.updateAccount(CoA).toPromise();
+
+            }
+            else{
+              CoA.currentBalance = +CoA.currentBalance + +ledger.CreditAmount;
+              await this.coaService.updateAccount(CoA).toPromise();
+
+            }
+          }
           break;
         }
-
       }
     }
     journal.acceptance = 'Approved';

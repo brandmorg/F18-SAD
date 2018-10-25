@@ -27,7 +27,8 @@ export class IndividualLedgerComponent implements OnInit {
   ngOnInit() {
 
     this.viewLedger();
-    this.getAccount();
+      this.getAccount();
+
   }
 
   async getAccount(){

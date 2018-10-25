@@ -19,16 +19,16 @@
       <th ></th>
       <th ></th>
       <th ></th>
-      <th >{{displayTotal}}</th>
+      <th style="text-align: right;">{{displayTotal}}</th>
     </tr>
     <tr *ngFor="let account of accountList2">
       <td>{{ account.Date | date: 'MM/dd/yyyy'}}</td>
       <td>{{ account.AccountNumber }}</td>
       <td>{{ account.Description }}</td>
       <td>{{ account.Reference}}</td>
-      <td>{{ account.DebitAmount }}</td>
-      <td>{{ account.CreditAmount }}</td>
-      <td>{{calculateTotal(account.glId)}}</td>
+      <td style="text-align: right;">{{ account.DebitAmount }}</td>
+      <td style="text-align: right;">{{ account.CreditAmount }}</td>
+      <td style="text-align: right;">{{calculateTotal(account.glId)}}</td>
     </tr>
   </table>
 </div>
