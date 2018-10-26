@@ -9,7 +9,7 @@
       <th >Debit Balance</th>
       <th >Credit Balance</th>
     </tr>
-    <tr *ngFor="let account of accounts">
+    <tr *ngFor="let account of accountsArranged">
       <td>{{ account.accountName }}</td>
       <td>{{ account.accountNumber }}</td>
       <td *ngIf="account.normalSide == 'Debit'" style="text-align: right;">{{ account.currentBalance }}</td>
