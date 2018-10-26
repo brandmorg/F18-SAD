@@ -42,3 +42,43 @@ exports.update = (req, res) => {
         res.status(200).json({msg:"updated successfully a journal with id = " + id});
     });
 };
+
+exports.findAllSort = (req, res) => {
+    let column = req.body.column;
+    let direction = req.body.direction;
+    let columnSearch = req.body.columnSearch;
+    let criteria = req.body.criteria;
+    //if search is set to all and there is criteria input
+    if(columnSearch == 'all' && criteria!= '') {
+        //if a search is entered
+        Journal.findAll(
+            /*{
+            where: {
+
+                [Op.or]: [{userName: {[Op.like]: '%'+ criteria + '%'}},
+                    {userPassword: {[Op.like]: '%'+ criteria + '%'}},
+                    {firstName: {[Op.like]: '%'+ criteria + '%'}},
+                    {lastName: {[Op.like]: '%'+ criteria + '%'}},
+                    {userRole: {[Op.like]: '%'+ criteria + '%'}},
+                ]
+            },
+            order: [[column, direction]]
+        }
+        */
+            ).then(users => {
+            // Send all customers to Client
+            res.json(users);
+        }
+        );
+    }
+    else{
+        //if search wasnt entered
+        Journal.findAll({
+            where: {},
+            order: [[column, direction]]
+        }).then(users => {
+            // Send all customers to Client
+            res.json(users);
+        });
+    }
+};

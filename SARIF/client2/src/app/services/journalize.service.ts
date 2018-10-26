@@ -21,6 +21,7 @@ const httpOptions = {
 })
 export class JournalizeService {
   private journalUrl = 'http://localhost:8080/api/journal';
+  private journalSort = 'http://localhost:8080/api/journalSort';
   private journalAccountUrl = 'http://localhost:8080/api/journalAccount';
 
   //'/api/journal'
@@ -33,6 +34,14 @@ export class JournalizeService {
   findAll(): Observable<Journal[]> {
     return this.http.get<Journal[]>(this.journalUrl, httpOptions);
   }
+
+  findAllSort(column, direction, columnSearch, criteria): Observable<Journal[]> {
+    return this.http.post<Journal[]>(this.journalSort, {column: column, direction: direction, columnSearch: columnSearch,
+      criteria: criteria}, httpOptions);
+  }
+
+
+
   getJournal(id: number): Observable<any>{
     return this.http.get(`${this.journalUrl}/${id}`, httpOptions);
   }

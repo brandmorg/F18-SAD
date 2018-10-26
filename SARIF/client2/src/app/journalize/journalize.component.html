@@ -135,11 +135,23 @@
         <div class="form-group">
           <input type="text" class="form-control" id="searchBar"  style="width: 300px; left: 6px" placeholder="Search" [(ngModel)]="criteria"
                  name="search" >
+
         </div>
       </div>
     </form>
 
     <button class="btn btn-info btn-lg" (click)="openCreateJournal()" >Add Journal</button>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="float: right; margin-right: 8%">
+      <label class="btn btn-secondary">
+        <input type="radio" name="options" id="option1" autocomplete="off" checked>Approved
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="options" id="option2" autocomplete="off">Rejected
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="options" id="option3" autocomplete="off">Pending
+      </label>
+    </div>
 <div>
   <table id="journalTable" style=" table-layout:fixed">
     <thead>
