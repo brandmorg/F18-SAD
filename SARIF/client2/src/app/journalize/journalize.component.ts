@@ -312,12 +312,14 @@ export class JournalizeComponent implements OnInit {
       }
     }
   }
+  //posting and updating tables including: journal and journal accounts
   async submit(){
     if(this.totalDebit != this.totalCredit){
       this.totalsmatch = 0;
     }
     else {
       let id: number;
+      //sets the input date
       this.journalNew.Date = new Date();
       this.journalNew.Date.setFullYear(this.model.date.year, this.model.date.month - 1, this.model.date.day);
       this.journalNew.CreatedBy = this.comp.getUserName();
@@ -331,13 +333,27 @@ export class JournalizeComponent implements OnInit {
       for(let debitAccounts of this.journalAccountsDebit){
         debitAccounts.JournalJId = id;
         debitAccounts.NormalSide = 'Debit';
+        //set account type
+        for(let acc of this.accounts){
+          if(acc.accountName == debitAccounts.AccountName){
+            debitAccounts.Type = acc.accountType;
+            break;
+          }
+        }
         await this.journalServ.addJournalAccounts(debitAccounts).toPromise();
         console.log('posted debit');
       }
-      //sending credit accounts
+      //post credit accounts
       for(let creditAccounts of this.journalAccountsCredit){
         creditAccounts.JournalJId = id;
         creditAccounts.NormalSide = 'Credit';
+        //set account type
+        for(let acc of this.accounts){
+          if(acc.accountName == creditAccounts.AccountName){
+            creditAccounts.Type = acc.accountType;
+            break;
+          }
+        }
         await this.journalServ.addJournalAccounts(creditAccounts).toPromise();
         console.log('posted credit');
       }

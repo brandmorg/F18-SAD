@@ -159,14 +159,18 @@
 
     <tr *ngFor="let journal of journals">
       <td style="vertical-align: top"  >{{ journal.Date | date: 'MM/dd/yyyy'}}</td>
-      <td></td>
+      <td>
+        <tr *ngFor="let jaccount of journal.JournalAccounts" style=" background-color: transparent">
+         <td class="accountslist2">{{jaccount.Type}}</td>
+        </tr>
+      </td>
       <td style="vertical-align: top" >{{ journal.CreatedBy }}</td>
       <td>
         <tr *ngFor="let jaccount of journal.JournalAccounts" style=" background-color: transparent" >
-          <td  class="accountslist2" *ngIf="jaccount.NormalSide == 'Credit'">
-            <button class="btn btn-link" style="color: white" (click)="viewLedger(jaccount.AccountName)" id="button1" >{{ jaccount.AccountName }}</button></td>
+          <td  class="accountslist2" *ngIf="jaccount.NormalSide == 'Credit'" >
+            <button class="hover" style="color: white" (click)="viewLedger(jaccount.AccountName)" id="button1" >{{ jaccount.AccountName }}</button></td>
           <td  class="accountslist" *ngIf="jaccount.NormalSide == 'Debit'">
-            <button class="btn btn-link" style="color: white" (click)="viewLedger(jaccount.AccountName)" id="button2" >{{ jaccount.AccountName }}</button>
+            <button class="hover" style="color: white" (click)="viewLedger(jaccount.AccountName)" id="button2" >{{ jaccount.AccountName }}</button>
           </td>
 
        </tr>

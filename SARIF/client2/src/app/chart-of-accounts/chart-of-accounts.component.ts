@@ -88,7 +88,7 @@ export class ChartOfAccountsComponent implements OnInit {
     }
     ;
     //Set asset and revenue account types to normal side debit
-    if (this.CoA.accountType == "Assets" || this.CoA.accountType == "Revenue") {
+    if (this.CoA.accountType == "Assets" || this.CoA.accountType == "Expenses") {
       this.CoA.normalSide = "Debit";
     }
     else {

@@ -11,6 +11,10 @@ tr:nth-child(even) {
 table, h3, h2, td {
   color: white;
 }
+button.link { background:none;border:none; }
+
+button.hover { background:none;border:none; }
+
 #journalTable {
   font-family: arial, sans-serif;
   border-collapse: collapse;

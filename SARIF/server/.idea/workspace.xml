@@ -135,30 +135,30 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="2c4000ba9e3636067ab022414a79d444" value="1" />
-          <entry key="js" value="35" />
+          <entry key="js" value="36" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JavaScript" value="35" />
+          <entry key="JavaScript" value="36" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="1171" />
+          <entry key="js" value="1172" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="1171" />
+          <entry key="JavaScript" value="1172" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="476">
@@ -167,11 +167,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/journal.controller.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/model/journalAccounts.model.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+            <state relative-caret-position="255">
+              <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -287,7 +287,6 @@
         <option value="$PROJECT_DIR$/app/model/journalFiles.model.js" />
         <option value="$PROJECT_DIR$/app/controllers/journalFiles.controller.js" />
         <option value="$PROJECT_DIR$/app/routes/journalFiles.routes.js" />
-        <option value="$PROJECT_DIR$/app/model/journalAccounts.model.js" />
         <option value="$PROJECT_DIR$/app/model/generalLedger.js" />
         <option value="$PROJECT_DIR$/app/routes/generalLedger.routes.js" />
         <option value="$PROJECT_DIR$/app/config/db.config.js" />
@@ -298,6 +297,7 @@
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/app/routes/chartAccount.routes.js" />
         <option value="$PROJECT_DIR$/app/controllers/chartAccount.controller.js" />
+        <option value="$PROJECT_DIR$/app/model/journalAccounts.model.js" />
       </list>
     </option>
   </component>
@@ -315,7 +315,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="131" />
     <option name="y" value="81" />
     <option name="width" value="1551" />
@@ -428,15 +428,15 @@
       <workItem from="1540227408312" duration="12735000" />
       <workItem from="1540404395310" duration="5298000" />
       <workItem from="1540444411767" duration="822000" />
-      <workItem from="1540494410432" duration="599000" />
+      <workItem from="1540494410432" duration="1210000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="153851000" />
+    <option name="totallyTimeSpent" value="154462000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="131" y="81" width="1551" height="930" extended-state="1" />
+    <frame x="131" y="81" width="1551" height="930" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21395037" />
@@ -606,13 +606,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/model/generalLedger.js" />
-    <entry file="file://$PROJECT_DIR$/app/model/journalAccounts.model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="26" lean-forward="true" selection-end-line="34" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/journalFiles.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -697,6 +690,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/model/journalAccounts.model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
         </state>
       </provider>
     </entry>
