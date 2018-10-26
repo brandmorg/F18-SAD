@@ -1,0 +1,32 @@
+
+
+<div class="form-group">
+  <table id="ledgerTable" style=" table-layout:fixed">
+    <tr>
+      <th colspan="9" class="col-xs-1 text-center">General Ledger</th>
+    <tr>
+    <tr>
+      <th >Account Number</th>
+      <th >Account Name</th>
+      <th >Account Type</th>
+      <th >Account Subtype</th>
+      <th >Normal Side</th>
+      <th >Original Balance</th>
+      <th >Current Balance</th>
+      <th >Account Description</th>
+      <th >Active</th>
+    </tr>
+    <tr *ngFor="let account of accounts">
+      <td>{{ account.accountNumber }}</td>
+      <td>
+        <button class="btn btn-link" style="color: #fab82a" (click)="viewLedger(account.accountName)" id="button1" >{{ account.accountName }}</button></td>
+      <td>{{ account.accountType }}</td>
+      <td>{{ account.accountSubType }}</td>
+      <td>{{ account.normalSide }}</td>
+      <td style="text-align: right;">{{ account.originalBalance }}</td>
+      <td style="text-align: right;">{{ account.currentBalance }}</td>
+      <td>{{ account.comment }}</td>
+      <td>{{ account.active }}</td>
+    </tr>
+  </table>
+</div>

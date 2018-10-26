@@ -256,8 +256,8 @@
 </form>
 
 <button class="btn btn-info btn-lg" (click)="createUser()" *ngIf="access == 0">Create User</button>
-
 <div class="form-group">
+
   <table id="userTable">
     <tr>
       <th (click)="viewUsersSort('userName','ASC',columnSearch,criteria); column='userName' ">User Name</th>
@@ -286,7 +286,7 @@
     </tr>
   </table>
 </div>
-
+<!--
 <div id="editUser">
   <table>
     <tr *ngFor="let edit of editUser">
@@ -294,5 +294,6 @@
     </tr>
   </table>
 </div>
+-->
 
 

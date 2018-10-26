@@ -35,9 +35,9 @@ exports.findById = (req, res) => {
 // Update a Customer
 exports.update = (req, res) => {
     let user = req.body;
-    let id = req.body.JAId;
+    let id = req.body.JId;
     Journal.update(user,
-        { where: {JAId: id} }
+        { where: {JId: id}}
     ).then(() => {
         res.status(200).json({msg:"updated successfully a journal with id = " + id});
     });

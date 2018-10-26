@@ -41,11 +41,14 @@
                          [(ngModel)]="account.AccountName" [name]="account.AccountName"
                         (ngModelChange)="checkRepeatDebitAccount(); "
                           #accountSubType="ngModel">
-                  <option *ngFor="let accountDeb of debitAccounts">{{accountDeb}}</option>
+                  <option disabled>Debits:</option>
+                  <option *ngFor="let accountDeb of debitAccounts">{{accountDeb }}</option>
+                  <option disabled>Credits:</option>
+                  <option *ngFor="let accountCred of creditAccounts">{{accountCred}}</option>
                 </select>
               </td>
               <td class="accountsinput" style=" background-color: white; ">
-                <input type="text" class="form-control" id="DebitAmount" placeholder="Debit" style="text-align: right;"
+                <input type="text" class="form-control" [textMask]="{mask: currencyMask}" id="DebitAmount" placeholder="Debit" style="text-align: right;"
                        required [ngModelOptions]="{standalone: true}"
 
                        [name]="account.DebitAmount" [(ngModel)]="account.DebitAmount"  (ngModelChange)="getDebitTotal()">
@@ -70,6 +73,9 @@
                       [(ngModel)]="account.AccountName" [name]="account.AccountName"
                       (ngModelChange)="checkRepeatCreditAccount()"
                       #accountSubType="ngModel">
+                <option disabled>Debits:</option>
+                <option *ngFor="let accountDeb of debitAccounts">{{accountDeb}}</option>
+                <option disabled>Credits:</option>
                 <option *ngFor="let accountCred of creditAccounts">{{accountCred}}</option>
               </select>
               </td>
@@ -110,11 +116,11 @@
           </div>
 
           <div *ngIf="repeatDebitAccount == 0" class="alert alert-danger"  style="width: 340px;">
-            You have duplicate Debit accounts
+            You have duplicate accounts
           </div>
 
           <div *ngIf="repeatCreditAccount == 0" class="alert alert-danger"  style="width: 340px;">
-            You have duplicate Credit accounts
+            You have duplicate accounts
           </div>
           <button (click)="submit();" id="submitBtn" [disabled]="checkBothInputs() == 0" >Submit</button>
           <button (click)="close(); addJournalForm.reset()" id="closeModalBtn">Cancel</button>
@@ -157,8 +163,11 @@
       <td style="vertical-align: top" >{{ journal.CreatedBy }}</td>
       <td>
         <tr *ngFor="let jaccount of journal.JournalAccounts" style=" background-color: transparent" >
-          <td  class="accountslist2" *ngIf="jaccount.NormalSide == 'Credit'">{{jaccount.AccountName}}</td>
-          <td  class="accountslist" *ngIf="jaccount.NormalSide == 'Debit'">{{jaccount.AccountName}}</td>
+          <td  class="accountslist2" *ngIf="jaccount.NormalSide == 'Credit'">
+            <button class="btn btn-link" style="color: white" (click)="viewLedger(jaccount.AccountName)" id="button1" >{{ jaccount.AccountName }}</button></td>
+          <td  class="accountslist" *ngIf="jaccount.NormalSide == 'Debit'">
+            <button class="btn btn-link" style="color: white" (click)="viewLedger(jaccount.AccountName)" id="button2" >{{ jaccount.AccountName }}</button>
+          </td>
 
        </tr>
       </td>
@@ -182,10 +191,11 @@
       </td>
     <td style="vertical-align: top">
       <div>
-        <button class="btn btn-info" style="" (click)="stuff()"   >Approve</button>
+        <button class="btn btn-info" style="" (click)="approveJournal(journal)"  *ngIf="journal.acceptance == null" >Approve</button>
       </div>
+      <label *ngIf="journal.acceptance != null">{{journal.acceptance}}</label>
       <div>
-        <button class="btn btn-danger" style="width: 95px" (click)="stuff()"   >Decline</button>
+        <button class="btn btn-danger" style="width: 95px" (click)="declineJournal(journal)"  *ngIf="journal.acceptance == null" >Decline</button>
       </div>
     </td>
 

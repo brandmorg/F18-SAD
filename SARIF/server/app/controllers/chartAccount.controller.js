@@ -47,6 +47,13 @@ exports.compareAccountNumber = (req, res) => {
     });
 };
 
+exports.getByName = (req, res) =>{
+    let name = req.body.accountName;
+    ChartAccount.findOne({where: {accountName: name}}).then(account => {
+        res.json(account);
+    })
+}
+
 exports.findAllSort = (req, res) => {
     let column = req.body.column;
     let direction = req.body.direction;
