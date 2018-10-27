@@ -41,7 +41,7 @@ export class AddUserLoginComponent implements OnInit {
     this.data.changeToggle(1);
   }
 
-  //check if the Email already exists on create screen
+  // check if the Email already exists on create screen
   compareEmail(event) {
     this.user.email = event;
     this.userService.compareEmail(this.user.email).subscribe( response => {
@@ -51,15 +51,15 @@ export class AddUserLoginComponent implements OnInit {
   }
 
   private save(): void {
-    if (this.emailExist == 2) {
+    if (this.emailExist === 2) {
       console.log('cannot continue');
     }
     else {
-        this.user.userName = "[pending]";
-        this.user.userPassword = "[pending]";
-        this.user.userRole = "accountant";
-        this.user.securityQ = "[pending]";
-        this.user.securityA = "[pending]";
+        this.user.userName = '[pending]';
+        this.user.userPassword = '[pending]';
+        this.user.userRole = 'Accountant';
+        this.user.securityQ = '[pending]';
+        this.user.securityA = '[pending]';
         this.user.active = 0;
         this.userService.addUser(this.user)
           .subscribe(() => {

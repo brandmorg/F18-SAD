@@ -28,11 +28,11 @@ export class GeneralLedgerComponent implements OnInit {
       });
   }
 
-  viewLedger(accountName){
+  viewLedger(accountName) {
     this.data.setAccount(accountName);
     this.router.navigate(['UserPage/ledger', accountName]);
   }
-  stuff(){
+  stuff() {
 
   }
 
