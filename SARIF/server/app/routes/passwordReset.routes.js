@@ -1,6 +1,6 @@
 module.exports = function(app) {
 
-    var reset = require('../controllers/passwrodReset.controller.js');
+    var reset = require('../controllers/passwordReset.controller.js');
 
     //app.route('/api/loginVerify').get(login.getData).post(login.sendData);
 

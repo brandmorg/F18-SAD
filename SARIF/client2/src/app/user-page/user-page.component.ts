@@ -33,10 +33,10 @@ export class UserPageComponent implements OnInit {
       if (this.comp.getRole() === 'Admin') {
         this.access = 1;
       }
-      else if(this.comp.getRole() === 'Manager') {
+      else if (this.comp.getRole() === 'Manager') {
         this.access = 2;
       }
-      else{
+      else {
         this.access = 3;
       }
   }
@@ -67,7 +67,7 @@ export class UserPageComponent implements OnInit {
     this.router.navigate(['UserPage/generalLedger']);
   }
   viewTrialBalance() {
-    this.router.navigate(['UserPage/trial-balance'])
+    this.router.navigate(['UserPage/trial-balance']);
 
   }
 }

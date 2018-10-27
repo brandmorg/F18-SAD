@@ -46,11 +46,11 @@ export class ChartOfAccountsComponent implements OnInit {
     // Closes modal when user clicks outside of modal
     window.onclick = function (event) {
       let createAccountModal = document.getElementById('createAccountModal');
-      if (event.target == createAccountModal) {
+      if (event.target === createAccountModal) {
         createAccountModal.style.display = 'none';
       }
       let editAccountModal = document.getElementById('editAccountModal');
-      if (event.target == editAccountModal) {
+      if (event.target === editAccountModal) {
         editAccountModal.style.display = 'none';
       }
     };
@@ -81,19 +81,21 @@ export class ChartOfAccountsComponent implements OnInit {
     if (isNaN(this.CoA.accountNumber)) {
       return window.alert('Enter a number for account number');
     }
-    ;
+
     // Check to see if account balance is a number
     if (isNaN(this.CoA.originalBalance)) {
       return window.alert('Enter a number for the balance');
     }
-    ;
+
     // Set asset and revenue account types to normal side debit
-    if (this.CoA.accountType == 'Assets' || this.CoA.accountType == 'Revenue') {
+    if (this.CoA.accountType === 'Assets' || this.CoA.accountType === 'Revenue') {
       this.CoA.normalSide = 'Debit';
     }
+
     else {
       this.CoA.normalSide = 'Credit';
     }
+
     // current balance may be set to 0 but this is not confirmed
     // Set the current balance to 0
     this.CoA.currentBalance = 0;
@@ -101,7 +103,7 @@ export class ChartOfAccountsComponent implements OnInit {
     this.editCoA = this.CoA;
 
     // Check to see if another account exists with same number or name
-    if (this.numberHasDecimal == 2) {
+    if (this.numberHasDecimal === 2) {
       console.log('cannot continue');
     }
     else {
@@ -110,11 +112,11 @@ export class ChartOfAccountsComponent implements OnInit {
           this.temp = account;
           for (var i = 0; i < this.temp.length; i++) {
             // Check for account name
-            if (this.temp[i].accountName == this.CoA.accountName) {
+            if (this.temp[i].accountName === this.CoA.accountName) {
               return window.alert('Account with same account name found. Enter different account name.');
             }
             // Check for account number
-            if (this.temp[i].accountNumber == this.CoA.accountNumber) {
+            if (this.temp[i].accountNumber === this.CoA.accountNumber) {
               return window.alert('Account with the same account number found. Enter a different account number.')
             }
           }
@@ -140,7 +142,7 @@ export class ChartOfAccountsComponent implements OnInit {
     this.accountForm.reset();
 
   }
-  close2(){
+  close2() {
     let editModal = document.getElementById('editAccountModal');
     editModal.style.display = 'none';
     this.editForm.reset();
@@ -163,7 +165,7 @@ export class ChartOfAccountsComponent implements OnInit {
   submitEdit() {
     if ((this.editCoA.accountNumber != null) && isNaN(this.editCoA.accountNumber)) {
       return window.alert('Enter a number for account number');
-    };
+    }
     if ((this.editCoA.originalBalance != null) && isNaN(this.editCoA.originalBalance)) {
       return window.alert('Enter a number for the balance');
     }
@@ -172,7 +174,7 @@ export class ChartOfAccountsComponent implements OnInit {
     this.editCoA.caId = this.accountId;
 
     // Set asset and revenue account types to normal side debit
-    if (this.editCoA.accountType == 'Assets' || this.editCoA.accountType == 'Revenue') {
+    if (this.editCoA.accountType === 'Assets' || this.editCoA.accountType === 'Revenue') {
       this.editCoA.normalSide = 'Debit';
     }
     else {
@@ -184,7 +186,7 @@ export class ChartOfAccountsComponent implements OnInit {
     // Check to see if another account exists with same number or name
         // If account name and number not found, create the account
 
-    if(this.numberHasDecimal == 2) {
+    if (this.numberHasDecimal === 2) {
       console.log('decimal required');
     }
     else {
@@ -200,10 +202,10 @@ export class ChartOfAccountsComponent implements OnInit {
     }
   }
 
-  async compareAccountNameUpdate(event){
+  async compareAccountNameUpdate(event) {
     this.editCoA.accountName = event;
     await this.getOriginalAccountID(this.editCoA.caId);
-    if(this.editCoA.accountName == this.accountCheck.accountName){
+    if (this.editCoA.accountName === this.accountCheck.accountName) {
       this.accountNameExist = 1;
       console.log('worked');
     }
@@ -216,14 +218,14 @@ export class ChartOfAccountsComponent implements OnInit {
     }
   }
 
-  async compareAccountNumberUpdate(event){
-    if(isNaN(event) || event == '') {
+  async compareAccountNumberUpdate(event) {
+    if (isNaN(event) || event === '') {
       console.log('not a number');
       this.accountNumberExist = 3;
-    }else {
+    } else {
       this.editCoA.accountNumber = event;
       await this.getOriginalAccountID(this.editCoA.caId);
-      if (this.editCoA.accountNumber == this.accountCheck.accountNumber) {
+      if (this.editCoA.accountNumber === this.accountCheck.accountNumber) {
         this.accountNumberExist = 1;
         console.log('worked');
       }
@@ -244,16 +246,16 @@ export class ChartOfAccountsComponent implements OnInit {
           this.accountCheck = response;
   }
 
-  checkDecimal(event){
+  checkDecimal(event) {
     // check if event is number
     // checks if number is null
-    if(event == null){
+    if (event === null) {
       this.numberHasDecimal = 1;
     }
-    else if(isNaN(event)){
+    else if (isNaN(event)) {
       this.numberHasDecimal = 2;
     }
-    else if(event < 0){
+    else if (event < 0) {
       this.numberHasDecimal = 2;
     }
     else {
@@ -261,7 +263,7 @@ export class ChartOfAccountsComponent implements OnInit {
       let str2 = str.substring(Math.max(0, str.length - 3));
       console.log(str2);
       // check if there is 2 decimal places
-      if (str2[0] != '.') {
+      if (str2[0] !== '.') {
         this.numberHasDecimal = 2;
         console.log('no decimal');
       }

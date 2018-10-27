@@ -9,9 +9,9 @@ const nodemailer = require('nodemailer');
 
 exports.sendInfo = (req, res) => {
     let username = req.body.username;
-    var returnString = {exists: 0, question: " ", answer: " " }
+    var returnString = {exists: 0, question: ' ', answer: ' ' }
     var   access = 1;
-    console.log("connection made")
+    console.log('connection made')
     Users.findOne({where: {userName: username}}).then(function (user) {
         if (!user){
             access = 0;
@@ -26,7 +26,7 @@ exports.sendInfo = (req, res) => {
             returnString.answer = user.securityA;
             res.json(returnString);
         }
-        console.log("connection made");
+        console.log('connection made');
 
     })
 
