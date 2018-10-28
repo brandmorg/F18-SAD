@@ -35,9 +35,9 @@ export class JournalizeService {
     return this.http.get<Journal[]>(this.journalUrl, httpOptions);
   }
 
-  findAllSort(column, direction, columnSearch, criteria): Observable<Journal[]> {
+  findAllSort(column, direction, columnSearch, criteria, approvalType): Observable<Journal[]> {
     return this.http.post<Journal[]>(this.journalSort, {column: column, direction: direction, columnSearch: columnSearch,
-      criteria: criteria}, httpOptions);
+      criteria: criteria, approvalType: approvalType}, httpOptions);
   }
 
 

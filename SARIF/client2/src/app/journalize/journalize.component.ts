@@ -49,6 +49,10 @@ export class JournalizeComponent implements OnInit {
   totalCredit: number = 0.00;
   selectedFile: File;
 
+ //search functions.
+  column = 'JId';
+  columnSearch = 'all';
+  approvalType = 'all';
   criteria= '';
 
   //error variables
@@ -92,13 +96,27 @@ export class JournalizeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.journals = [];
+    this.journals.length = 0;
     this.getAccounts();
-    this.viewJournals();
+    //this.viewJournals();
+    this.viewJournalsSort('JId', 'ASC', 'All', null, 'all');
     //this.viewJournalAccounts();
   }
 
   viewJournals() {
     this.journalServ.findAll().subscribe(
+      (journal) => {
+        this.journals = journal;
+        console.log(this.journals);
+      }
+    );
+  }
+  //this.viewUsersSort('userId', 'ASC', 'All', null);
+
+
+  viewJournalsSort(column: string, direction: string, columnSearch: string, criteria: string, approvalType: string) {
+    this.journalServ.findAllSort(column, direction, columnSearch, criteria, approvalType).subscribe(
       (journal) => {
         this.journals = journal;
         console.log(this.journals);
@@ -476,6 +494,11 @@ async declineJournal(journal){
 viewLedger(accountName){
     this.data.setAccount(accountName);
   this.router.navigate(['UserPage/ledger', accountName]);
+}
+
+setApprovalType(type){
+    this.approvalType = type;
+  this.viewJournalsSort('JId', 'ASC', 'all', '', this.approvalType);
 }
 
 

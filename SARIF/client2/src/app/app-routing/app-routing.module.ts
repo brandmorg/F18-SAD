@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { UserPageComponent } from '../user-page/user-page.component';
 import { AddUserComponent } from '../add-user/add-user.component';
-import { UserDetailsComponent } from '../user-details/user-details.component';
 import { LoginHomeComponent } from '../login-home/login-home.component';
 import { ChartOfAccountsComponent } from '../chart-of-accounts/chart-of-accounts.component';
 import { HomeScreenComponent } from '../home-screen/home-screen.component';
@@ -75,11 +74,7 @@ const routes: Routes = [
         component: TrialBalanceComponent
       }
       ]
-  },
-  {
-    path: 'user/:id',
-    component: UserDetailsComponent
-  },
+  }
 ];
 
 
@@ -98,7 +93,6 @@ export class AppRoutingModule { }
 export const routingComponents = [
   LoginHomeComponent,
   UserPageComponent,
-  UserDetailsComponent,
   ChartOfAccountsComponent,
   AddUserComponent,
   HomeScreenComponent,

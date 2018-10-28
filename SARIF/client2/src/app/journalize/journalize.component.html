@@ -134,6 +134,7 @@
       <div style="position:  relative;left: 75%;  padding-top: 20px">
         <div class="form-group">
           <input type="text" class="form-control" id="searchBar"  style="width: 300px; left: 6px" placeholder="Search" [(ngModel)]="criteria"
+                 (ngModelChange)="viewJournalsSort(column, 'ASC', columnSearch, $event, approvalType)"
                  name="search" >
 
         </div>
@@ -143,13 +144,13 @@
     <button class="btn btn-info btn-lg" (click)="openCreateJournal()" >Add Journal</button>
     <div class="btn-group btn-group-toggle" data-toggle="buttons" style="float: right; margin-right: 8%">
       <label class="btn btn-secondary">
-        <input type="radio" name="options" id="option1" autocomplete="off" checked>Approved
+        <input type="radio" name="options" id="option1" autocomplete="off" checked (click)="setApprovalType('Approved')">Approved
       </label>
       <label class="btn btn-secondary">
-        <input type="radio" name="options" id="option2" autocomplete="off">Rejected
+        <input type="radio" name="options" id="option2" autocomplete="off" (click)="setApprovalType('Declined')">Declined
       </label>
       <label class="btn btn-secondary">
-        <input type="radio" name="options" id="option3" autocomplete="off">Pending
+        <input type="radio" name="options" id="option3" autocomplete="off" (click)="setApprovalType(null)">Pending
       </label>
     </div>
 <div>
