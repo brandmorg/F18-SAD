@@ -54,7 +54,6 @@ button.hover { background:none;border:none; }
 }
 .accountslist3{
   background-color: transparent;
-  text-indent: 8px;
   border: none;
 }
 .accountslist4{
@@ -151,5 +150,9 @@ input:checked + .slider:before {
 
 .row {
  display: block/* equal height of the children */
+}
+
+.tableAlign{
+  margin-left: auto;
 }
 

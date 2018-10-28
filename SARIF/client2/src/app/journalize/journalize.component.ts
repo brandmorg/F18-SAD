@@ -73,6 +73,7 @@ export class JournalizeComponent implements OnInit {
     decimalLimit: 2,
     integerLimit: null,
     requireDecimal: false,
+    precision: 2,
     allowNegative: false,
     allowLeadingZeroes: false
   });

@@ -12,16 +12,16 @@
     <tr *ngFor="let account of accountsArranged">
       <td>{{ account.accountName }}</td>
       <td>{{ account.accountNumber }}</td>
-      <td *ngIf="account.normalSide == 'Debit'" style="text-align: right;">{{ account.currentBalance }}</td>
+      <td *ngIf="account.normalSide == 'Debit'" style="text-align: right;">{{ account.currentBalance | number : '1.2-2'}}</td>
       <td *ngIf="account.normalSide == 'Debit'" style="text-align: right;">&nbsp;</td>
       <td *ngIf="account.normalSide == 'Credit'" style="text-align: right;">&nbsp;</td>
-      <td *ngIf="account.normalSide == 'Credit'" style="text-align: right;">{{ account.currentBalance }}</td>
+      <td *ngIf="account.normalSide == 'Credit'" style="text-align: right;">{{ account.currentBalance | number : '1.2-2'}}</td>
     </tr>
     <tr>
       <th ></th>
       <th ></th>
-      <th style="text-align: right;">{{debitTotal}}</th>
-      <th style="text-align: right;">{{creditTotal}}</th>
+      <th style="text-align: right;">{{debitTotal | number : '1.2-2'}}</th>
+      <th style="text-align: right;">{{creditTotal | number : '1.2-2'}}</th>
     </tr>
   </table>
 </div>

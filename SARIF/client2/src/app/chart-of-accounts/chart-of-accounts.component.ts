@@ -4,6 +4,7 @@ import { AppComponent } from '../app.component';
 import { CoAService } from '../services/coa.service';
 import { UserLogService } from '../services/user-log.service';
 import {NgForm} from '@angular/forms';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 @Component({
   selector: 'app-chart-of-accounts',
@@ -30,6 +31,22 @@ export class ChartOfAccountsComponent implements OnInit {
   accountNameExist = 1;
   accountNumberExist = 1;
   numberHasDecimal = 1;
+
+//currencyMask
+  private currencyMask = createNumberMask({
+    prefix: '',
+    suffix: '',
+    includeThousandsSeparator: false,
+    //thousandsSeparatorSymbol: ',',
+    allowDecimal: true,
+    decimalSymbol: '.',
+    decimalLimit: 2,
+    integerLimit: null,
+    requireDecimal: false,
+    precision: 2,
+    allowNegative: false,
+    allowLeadingZeroes: false
+  });
 
 
   constructor(
@@ -244,33 +261,6 @@ export class ChartOfAccountsComponent implements OnInit {
           this.accountCheck = response;
   }
 
-  checkDecimal(event){
-    //check if event is number
-    //checks if number is null
-    if(event == null){
-      this.numberHasDecimal = 1;
-    }
-    else if(isNaN(event)){
-      this.numberHasDecimal = 2;
-    }
-    else if(event < 0){
-      this.numberHasDecimal = 2;
-    }
-    else {
-      let str = event.toString();
-      let str2 = str.substring(Math.max(0, str.length - 3));
-      console.log(str2);
-      //check if there is 2 decimal places
-      if (str2[0] != '.') {
-        this.numberHasDecimal = 2;
-        console.log('no decimal');
-      }
-      else {
-        this.numberHasDecimal = 1;
-        console.log('is decimal');
-      }
-    }
-  }
 
   resetUpdate() {
     this.coaService.getAccount(this.editCoA.caId)

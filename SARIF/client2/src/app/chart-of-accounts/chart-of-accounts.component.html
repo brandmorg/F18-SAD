@@ -53,7 +53,7 @@
 
       <div class="form-group">
           <label for="originalBalance">Original Balance</label><br>
-        <input type="text" class="form-control" id="originalBalance" (ngModelChange)="checkDecimal($event)" placeholder="Account Balance" required [(ngModel)]="CoA.originalBalance"
+        <input type="text" class="form-control" id="originalBalance" [textMask]="{mask: currencyMask}" placeholder="Account Balance" required [(ngModel)]="CoA.originalBalance"
           name="originalBalance" #balance="ngModel">
       </div>
       <div [hidden]="balance.valid || balance.pristine" class="alert alert-danger" style="width: 250px;">
@@ -101,7 +101,7 @@
       </div>
       <div class="form-group">
         <label for="accountNumber">Account Number</label><br>
-        <input type="text" class="form-control" id="accountNumber"
+        <input type="text" [textMask]="{mask: currencyMask}" class="form-control" id="accountNumber"
                (ngModelChange)="compareAccountNumberUpdate($event)" value="{{ accountData.accountNumber }}" required
           [(ngModel)]="editCoA.accountNumber" name="accountNumber" #accountNumber="ngModel">
       </div>
@@ -136,7 +136,7 @@
 
       <div class="form-group">
         <label for="originalBalance">Original Balance</label><br>
-        <input type="text" class="form-control" id="originalBalance" (ngModelChange)="checkDecimal($event)" value="{{ accountData.originalBalance }}" required
+        <input type="text" [textMask]="{mask: currencyMask}" class="form-control" id="originalBalance"  value="{{ accountData.originalBalance }}" required
           [(ngModel)]="editCoA.originalBalance" name="originalBalance" #originalBalance="ngModel">
       </div>
 
@@ -207,7 +207,7 @@
       <td>{{ account.accountSubType }}</td>
       <td>{{ account.normalSide }}</td>
       <td style="text-align: right;">{{ account.originalBalance }}</td>
-      <td style="text-align: right;">{{ account.currentBalance }}</td>
+      <td style="text-align: right;">{{ account.currentBalance | number : '1.2-2'}}</td>
       <td>{{ account.comment }}</td>
       <td>{{ account.active }}</td>
       <td>{{ account.createdBy }}</td>
