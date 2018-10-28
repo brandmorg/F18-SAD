@@ -61,7 +61,7 @@
       </div> 
 
       <div class="form-group">
-        <label for="active">Active</label>
+        <label for="active">Status</label>
         <select required [(ngModel)]="CoA.active" name="active" #activeInactive="ngModel">
           <option>Active</option>
           <option>Inactive</option>
@@ -127,7 +127,7 @@
           <option>Property, Plant, and Equipment</option>
           <option>Current Liabilities</option>
           <option>Long-term Liabilities</option>
-          <option>Stocholders' Equity</option>
+          <option>Stockholders' Equity</option>
           <option>Operating Revenues</option>
           <option>Cost of Goods Sold</option>
           <option>Other</option>
@@ -141,7 +141,7 @@
       </div>
 
       <div class="form-group">
-        <label for="active">Active: {{ accountData.active}}</label><br>
+        <label for="active">Status: {{ accountData.active}}</label><br>
         <select required [(ngModel)]="editCoA.active" name="active" #active="ngModel">
           <option>Active</option>
           <option>Inactive</option>
@@ -197,7 +197,7 @@
       <th (click)="viewAccountsSort('originalBalance','ASC',columnSearch,criteria)">Original Balance</th>
       <th (click)="viewAccountsSort('currentBalance','ASC',columnSearch,criteria)">Current Balance</th>
       <th (click)="viewAccountsSort('comment','ASC',columnSearch,criteria)">Account Description</th>
-      <th (click)="viewAccountsSort('active','ASC',columnSearch,criteria)">Active</th>
+      <th (click)="viewAccountsSort('active','ASC',columnSearch,criteria)">Status</th>
       <th (click)="viewAccountsSort('createdBy','ASC',columnSearch,criteria)">Created By</th>
     </tr>
     <tr *ngFor="let account of accounts">

@@ -1,96 +1,99 @@
 
 <!-- Create user form-->
 <div id="new_user" class="modal">
-<div class="modal-content">
-
-    <form #addUserForm="ngForm" >
-      <div class="rightContent">
-      <div class="form-group">
-        <label for="userName">User Name</label>
-        <input type="text" class="form-control" id="userName" (ngModelChange)="compareUserName($event)" placeholder="User Name" required [(ngModel)]="user.userName"
-               name="userName" >
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="text" class="form-control" id="password" (ngModelChange)="checkPassword($event)" placeholder="Password" required [(ngModel)]="user.userPassword"
-               name="password" >
-        <label for="password" class="warning">Password must be at least 8 characters long</label>
-        <label for="password" class="warning">Includes at least one of the following: #,$,%,&,*,+ </label>
-        <label for="password" class="warning">Includes at least one number</label>
-      </div>
-
-      <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input type="text" class="form-control" id="firstName" placeholder="First Name" required [(ngModel)]="user.firstName"
-               name="firstName" >
-      </div>
-
-
-      <div class="form-group">
-        <label for="email">email</label>
-        <input type="text" class="form-control" id="email" (ngModelChange)="compareEmail($event)" placeholder="email" required [(ngModel)]="user.email"
-               name="email" >
-      </div>
-
+  <div class="modal-content card">
+  
+      <form #addUserForm="ngForm" >
+        <div class="rightContent">
         <div class="form-group">
-          <label for="userRole">Role: </label>
-          <select class="form-control" required [(ngModel)]="user.userRole" id="userRole" name="roleType" >
-            <option>accountant</option>
-            <option>manager</option>
-            <option>admin</option>
-          </select>
+          <label for="userName">Username</label>
+          <input type="text" class="form-control" id="userName" (ngModelChange)="compareUserName($event)" placeholder="Username" required [(ngModel)]="user.userName"
+                 name="userName" >
         </div>
-
         <div class="form-group">
-          <label for="securityQ">Security Question: </label>
-          <select class="form-control" required [(ngModel)]="user.securityQ" id="securityQ" name="SecurityQ" >
-            <option>What is your favorite color?</option>
-            <option>Where did you go to high school?</option>
-            <option>What is your favorite movie?</option>
-          </select>
+          <label for="password">Password</label>
+          <input type="text" class="form-control" id="password" (ngModelChange)="checkPassword($event)" placeholder="Password" required [(ngModel)]="user.userPassword"
+                 name="password" >
+                 <label for="password" class="warning">Password must be at least 8 characters long</label>
+                 <label for="password" class="warning">Includes at least one of the following: #,$,%,&,*,+ </label>
+                 <label for="password" class="warning">Includes at least one number</label>
         </div>
-
-        <div *ngIf="usernameExist == 2" class="alert alert-danger"  style="width: 250px;">
-          Username already exists
-        </div>
-
-        <div *ngIf="emailExist == 2" class="alert alert-danger"  style="width: 250px;">
-          Email already exists
-        </div>
-
-        <div *ngIf="passwordError == 1" class="alert alert-danger"  style="width: 250px;">
-          Password is not acceptable
-        </div>
-
-        <button (click)="submit();" id="submitBtn" [disabled]="!addUserForm.form.valid" >Submit</button>
-        <input type="reset">
-        <button (click)="close(); addUserForm.reset()" id="closeModalBtn">Cancel</button>
-      </div>
-
-      <div class="leftContent">
+  <!-- [hidden]="user.userPassword.valid || userPassword.pristine" -->
         <div class="form-group">
           <label for="passwordAgain">Re-enter Password</label>
           <input type="text" class="form-control" id="passwordAgain" placeholder="Password" required [(ngModel)]="user.userPassword"
                  name="password2" >
         </div>
-        <div class="form-group" style="margin-top:112px;">
+  
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control" id="firstName" placeholder="First Name" required [(ngModel)]="user.firstName"
+                 name="firstName" >
+        </div>
+  
+        <div class="form-group">
           <label for="lastName">Last Name</label>
           <input type="text" class="form-control" id="lastName" placeholder="Last Name" required [(ngModel)]="user.lastName"
                  name="lastName">
         </div>
-
-        <div class="form-group" style="margin-top:188px;">
-          <label for="answer">Answer</label>
-          <input type="text" class="form-control" id="answer" placeholder="Answer" required [(ngModel)]="user.securityA"
-                 name="password3" >
+  
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email" (ngModelChange)="compareEmail($event)" placeholder="Email" required [(ngModel)]="user.email"
+                 name="email" >
         </div>
-
+  
+          <div class="form-group">
+            <label for="userRole">Role: </label>
+            <select class="form-control" required [(ngModel)]="user.userRole" id="userRole" name="roleType" >
+              <option>Accountant</option>
+              <option>Manager</option>
+              <option>Admin</option>
+              <option>User</option>
+            </select>
+          </div>
+  
+          <div class="form-group">
+            <label for="securityQ">Security Question: </label>
+            <select class="form-control" required [(ngModel)]="user.securityQ" id="securityQ" name="SecurityQ" >
+              <option>What is your favorite color?</option>
+              <option>Where did you go to high school?</option>
+              <option>What is your favorite movie?</option>
+            </select>
+          </div>
+  
+          <div class="form-group">
+            <label for="answer">Answer</label>
+            <input type="text" class="form-control" id="answer" placeholder="Answer" required [(ngModel)]="user.securityA"
+                   name="password3" >
+          </div>
+  
+          <div *ngIf="usernameExist == 2" class="alert alert-danger"  style="width: 250px;">
+            Username already exists
+          </div>
+  
+          <div *ngIf="emailExist == 2" class="alert alert-danger"  style="width: 250px;">
+            Email already exists
+          </div>
+  
+          <div *ngIf="passwordError == 1" class="alert alert-danger"  style="width: 250px;">
+            Password is not acceptable
+          </div>
+  
+          <button (click)="submit();" id="submitBtn"  style="margin-right: 10px" [disabled]="!addUserForm.form.valid" >Submit</button>
+          <input  style="margin-right: 10px" type="reset">
+          <button (click)="close(); addUserForm.reset()" id="closeModalBtn">Cancel</button>
+        </div>
+      
+  <!--
+      Moved right hand to vertical
+  -->
+  
+      </form>
+  
+  
       </div>
-    </form>
-
-
-    </div>
-</div>
+  </div>
 
 <!-- Update User form-->
 <div id="updateUserModal" class="modal">
@@ -99,7 +102,7 @@
        <div class="rightContent">
 
        <div class="form-group">
-         <label for="userNam2">User Name</label>
+         <label for="userNam2">Username</label>
          <input type="text" class="form-control" id="userNam2"  placeholder="username" (ngModelChange)="compareUserNameUpdate($event);" required [(ngModel)]="user2.userName"
                 value="{{user2.userName}}"  name="userName2" >
        </div>
@@ -118,7 +121,7 @@
          </div>
 
          <div class="form-group">
-           <label for="email2">email</label>
+           <label for="email2">Email</label>
            <input type="text" class="form-control" id="email2" (ngModelChange)="compareEmailUpdate($event)" placeholder="email" required [(ngModel)]="user2.email"
                   value="{{user2.email}}"name="email" >
          </div>
@@ -126,9 +129,10 @@
          <div class="form-group">
            <label for="userRole2">Role: </label>
            <select class="form-control" required [(ngModel)]="user2.userRole" id="userRole2" value="{{user2.userRole}}" name="roleType" >
-             <option>accountant</option>
-             <option>manager</option>
-             <option>admin</option>
+            <option>Accountant</option>
+            <option>Manager</option>
+            <option>Admin</option>
+            <option>User</option>
            </select>
          </div>
 
@@ -142,10 +146,10 @@
          </div>
 
          <div class="form-group">
-           <label for="securityQ2">Active:</label>
+           <label for="securityQ2">Status:</label>
            <select class="activel" required [(ngModel)]="userActive2" id="active1" value="{{userActive}}" name="active" >
-             <option>active</option>
-             <option>inactive</option>
+             <option>Active</option>
+             <option>Inactive</option>
            </select>
          </div>
 
@@ -191,7 +195,7 @@
     <form #viewUserData="ngForm">
         <table id="display">
           <tr style=" background-color: white">
-            <th style="color: black; border: none">User Name:</th>
+            <th style="color: black; border: none">Username:</th>
             <th style="color: black; border: none">{{userDisplay.userName}}</th>
           </tr>
           <tr style=" background-color: white">
@@ -207,7 +211,7 @@
             <th style="color: black; border: none">{{userDisplay.lastName}}</th>
           </tr>
           <tr style=" background-color: white">
-            <th style="color: black; border: none">email:</th>
+            <th style="color: black; border: none">Email:</th>
             <th style="color: black; border: none">{{userDisplay.email}}</th>
           </tr>
           <tr style=" background-color: white">
@@ -219,15 +223,15 @@
             <th style="color: black; border: none">{{userDisplay.securityQ}}</th>
           </tr>
           <tr style=" background-color: white">
-            <th style="color: black; border: none">Security answer:</th>
+            <th style="color: black; border: none">Security Answer:</th>
             <th style="color: black; border: none">{{userDisplay.securityA}}</th>
           </tr>
           <tr style=" background-color: white">
-            <th style="color: black; border: none">Password expiration:</th>
+            <th style="color: black; border: none">Password Expiration:</th>
             <th style="color: black; border: none">{{userDisplay.passwordExpire | date: 'MM/dd/yyyy  HH:mm:ss'}}</th>
           </tr>
           <tr style=" background-color: white">
-            <th style="color: black; border: none">Updated last:</th>
+            <th style="color: black; border: none">Last Update:</th>
             <th style="color: black; border: none">{{userDisplay.updatedAt | date: 'MM/dd/yyyy  HH:mm:ss'}}</th>
           </tr>
           <tr style=" background-color: white">
@@ -257,15 +261,15 @@
 
   <table id="userTable">
     <tr>
-      <th (click)="viewUsersSort('userName','ASC',columnSearch,criteria); column='userName' ">User Name</th>
+      <th (click)="viewUsersSort('userName','ASC',columnSearch,criteria); column='userName' ">Username</th>
       <th (click)="viewUsersSort('firstName','ASC',columnSearch,criteria); column='firstName'">First Name</th>
       <th (click)="viewUsersSort('lastName','ASC',columnSearch,criteria); column='lastName'">Last Name</th>
       <th (click)="viewUsersSort('userPassword','ASC',columnSearch,criteria); column='userPassword' ">Password</th>
       <th (click)="viewUsersSort('email','ASC',columnSearch,criteria); column='email'">Email</th>
-      <th (click)="viewUsersSort('userRole','ASC',columnSearch,criteria); column='userRole' ">User Role</th>
+      <th (click)="viewUsersSort('userRole','ASC',columnSearch,criteria); column='userRole' ">Role</th>
       <th (click)="viewUsersSort('updatedAt','ASC',columnSearch,criteria); column='updatedAt'">Updated at</th>
       <th (click)="viewUsersSort('createdAt','ASC',columnSearch,criteria); column='createdAt'">Created at</th>
-      <th (click)="viewUsersSort('active','ASC',columnSearch,criteria); column='active'">Active</th>
+      <th (click)="viewUsersSort('active','ASC',columnSearch,criteria); column='active'">Status</th>
     </tr>
     <tr *ngFor="let user of users">
       <td>{{ user.userName}}</td>
@@ -276,8 +280,8 @@
       <td>{{ user.userRole }}</td>
       <td>{{ user.updatedAt | date: 'MM/dd/yyyy  HH:mm:ss'}}</td>
       <td>{{ user.createdAt | date: 'MM/dd/yyyy  HH:mm:ss'}}</td>
-      <td *ngIf="user.active == 0">inactive</td>
-      <td *ngIf="user.active == 1">active</td>
+      <td *ngIf="user.active == 0">Inactive</td>
+      <td *ngIf="user.active == 1">Active</td>
       <button class="btn btn-primary" (click)="getUserInfo(user.userId)"  *ngIf="access == 0">Edit</button>
       <button class="btn btn-primary" (click)="viewData(user.userId)">More</button>
     </tr>
