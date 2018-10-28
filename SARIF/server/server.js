@@ -33,6 +33,9 @@ app.use(function(req, res, next) {
     next();
 })
 
+// angular production build directory
+app.use(express.static('public')); 
+
 const db = require('./app/config/db.config.js');
 
 // force: true will drop the table if it already exists

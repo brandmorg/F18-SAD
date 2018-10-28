@@ -55,7 +55,7 @@ exports.findAllSort = (req, res) => {
     let columnSearch = req.body.columnSearch;
     let criteria = req.body.criteria;
     //if search is set to all and there is criteria input
-    if(columnSearch == 'all' && criteria!= '') {
+    if(columnSearch === 'all' && criteria!= '') {
         //if a search is entered
         Users.findAll({
             where: {

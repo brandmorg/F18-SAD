@@ -7,7 +7,7 @@ const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
-    "Access-Control-Allow-Headers": '*', 
+    'Access-Control-Allow-Headers': '*',
     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
   })
 };
@@ -44,7 +44,7 @@ export class UserService {
   //   return this.http.get<User>(url);
   // }
 
-  getUser(id: number): Observable<any>{
+  getUser(id: number): Observable<any> {
     return this.http.get(`${this.usersUrl}/${id}`, httpOptions);
   }
 
@@ -64,12 +64,12 @@ export class UserService {
     return this.http.put(this.usersUrl, body, httpOptions);
   }
 
-  compareUsername(username): Observable<any>{
+  compareUsername(username): Observable<any> {
     return this.http.post<User>(this.compareUserNameURL, {username: username}, httpOptions);
   }
 
-  compareEmail(email): Observable<any>{
+  compareEmail(email): Observable<any> {
     return this.http.post<User>(this.compareEmailURL, {email: email}, httpOptions);
   }
-  //check if user is active
+  // check if user is active
 }
