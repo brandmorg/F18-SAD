@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { UserService } from '../services/user.service';
 import { JournalizeService} from '../services/journalize.service';
 import { GeneralLedgerService } from '../services/general-ledger.service';
@@ -32,6 +32,7 @@ const httpOptions = {
 export class JournalizeComponent implements OnInit {
   @ViewChild('addJournalForm') public journalForm: NgForm;
   @ViewChild('journalAccountAddTable') public accountsTable: NgForm;
+  @ViewChild('folderInput') public myInputVariable: ElementRef;
   private fileUploadURL = 'http://localhost:8080/api/journalFiles';
   journalNew = new Journal();
   journals = []; //list of journal entries
@@ -42,8 +43,8 @@ export class JournalizeComponent implements OnInit {
 
   //Account variables for grabbing a list of accounts
   accounts = [];//list of total accounts
-  debitAccounts = [];
-  creditAccounts = [];
+  debitAccounts = []; //list of all debit accounts
+  creditAccounts = []; //list of all credit accounts
   totalDebit: number = 0.00;
   totalCredit: number = 0.00;
   selectedFile: File;
@@ -238,6 +239,7 @@ export class JournalizeComponent implements OnInit {
     this.selectedFile = null;
     this.repeatDebitAccount = 1;
     this.repeatCreditAccount = 1;
+    this.myInputVariable.nativeElement.value = "";
 
   }
 
@@ -358,6 +360,7 @@ export class JournalizeComponent implements OnInit {
         console.log('posted credit');
       }
       //sending source file
+      console.log(this.selectedFile.name);
 
       if(this.selectedFile != null){
         let uploadData = new FormData();
@@ -366,6 +369,7 @@ export class JournalizeComponent implements OnInit {
         console.log('File uploaded: ' + this.selectedFile.name)
         this.http.post(this.fileUploadURL, uploadData , httpOptions).subscribe( (result) => {
           console.log('result');
+          this.myInputVariable.nativeElement.value = "";
         });
       }
 

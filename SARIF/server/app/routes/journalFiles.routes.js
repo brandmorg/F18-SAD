@@ -1,3 +1,10 @@
+const db = require('../config/db.config.js');
+const Sequelize = require('sequelize');
+const uploadFiles = db.journalFiles;
+var fs = require('fs');
+
+
+
 
 const multer = require("multer");
 
@@ -23,12 +30,16 @@ module.exports = function(app) {
     // Create a new journal
     app.post('/api/journalFiles', upload.single('file'), (req, res,) => {
         if(!req.file){
-            console.log("no file received")
+            console.log("no file received");
         }
         else{
-            console.log('file received');
-            return res.json({
-                success: true
+            var fileData = fs.readFileSync('../server/uploads/' + req.file.filename);
+            console.log(req.file.filename);
+            uploadFiles.create({
+                FileData: fileData,
+                JournalID: 1
+            }).then(upFile => {
+                res.json('file accepted');
             })
         }
 
