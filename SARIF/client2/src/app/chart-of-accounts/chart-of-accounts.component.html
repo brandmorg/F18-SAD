@@ -206,7 +206,7 @@
       <td>{{ account.accountType }}</td>
       <td>{{ account.accountSubType }}</td>
       <td>{{ account.normalSide }}</td>
-      <td style="text-align: right;">{{ account.originalBalance }}</td>
+      <td style="text-align: right;">{{ account.originalBalance | number : '1.2-2'}}</td>
       <td style="text-align: right;">{{ account.currentBalance | number : '1.2-2'}}</td>
       <td>{{ account.comment }}</td>
       <td>{{ account.active }}</td>
