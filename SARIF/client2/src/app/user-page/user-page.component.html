@@ -11,9 +11,9 @@
       <button class="btn btn-link" (click)="viewLog()" id="button2" *ngIf="access == 1">User log</button>
       <button class="btn btn-link" (click)="viewCoA()" id="button3" >Chart of accounts</button>
       <!--Admin can access the journal just for testing purposes -->
-      <button class="btn btn-link" (click)="viewJournal()" id="button4" *ngIf="access == 1 || access == 2" >Journal</button>
-      <button class="btn btn-link" (click)="viewGLedger()" id="button6" >General Ledger</button>
-      <button class="btn btn-link" (click)="viewTrialBalance()" id="button7" >Trial Balance</button>
+      <button class="btn btn-link" (click)="viewJournal()" id="button4" *ngIf="access == 3 || access == 2" >Journal</button>
+      <button class="btn btn-link" (click)="viewGLedger()" id="button6" *ngIf="access == 3 || access == 2">General Ledger</button>
+      <button class="btn btn-link" (click)="viewTrialBalance()" id="button7" *ngIf="access == 3 || access == 2">Trial Balance</button>
       <button class="btn btn-link" (click)="logOut()" id="button5" >Log out</button>
 
     </div>

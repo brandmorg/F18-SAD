@@ -3,6 +3,8 @@ import {SharedDataService } from '../services/shared-data.service';
 import { GeneralLedgerService } from '../services/general-ledger.service';
 import {CoAService} from '../services/coa.service';
 import {CoA} from '../chart-of-accounts';
+import { GeneralLedger } from '../generalLedger';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-individual-ledger',
@@ -14,18 +16,25 @@ export class IndividualLedgerComponent implements OnInit {
   currentCoA = new CoA();
   accountList = []; //entire list of approved accounts
   accountList2 = []; //list of specified accounts
+  accountListDebitFirst = [];
+  isStartDebit = 0;
   total = 0;
   displayTotal = 0;
+
+
+
+
 
   constructor(
     private data: SharedDataService,
     private cserv: CoAService,
     private ledgerServ: GeneralLedgerService,
     private coaService: CoAService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-
+    this.isStartDebit = 0;
     this.viewLedger();
       this.getAccount();
 
@@ -49,9 +58,29 @@ export class IndividualLedgerComponent implements OnInit {
           this.accountList2.push(acc1);
         }
       }
+      console.log(this.accountList2);
+      //this.getDebitFirst();
     });
 
   }
+  //this forces first balance to be negative for Credit side accounts, will keep for later
+  getDebitFirst(){
+    if(this.accountList2[0].CreditAmount != null){
+      for(let acc of this.accountList2){
+        if(acc.DebitAmount != null){
+          let genled = acc;
+          this.accountList2.splice(this.accountList2.indexOf(acc), 1);
+          this.accountList2.unshift(genled);
+          break;
+        }
+      }
+    }
+  }
+  viewJournal(ref){
+    this.data.setReference(ref);
+    this.router.navigate(['UserPage/journal_info']);
+  }
+
   calculateTotal(accountID): number{
     let num = 0;
     for(let account of this.accountList2){

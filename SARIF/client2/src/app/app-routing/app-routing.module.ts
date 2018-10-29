@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { UserPageComponent } from '../user-page/user-page.component';
 import { AddUserComponent } from '../add-user/add-user.component';
-import { UserDetailsComponent } from '../user-details/user-details.component';
 import { LoginHomeComponent } from '../login-home/login-home.component';
 import { ChartOfAccountsComponent } from '../chart-of-accounts/chart-of-accounts.component';
 import { HomeScreenComponent } from '../home-screen/home-screen.component';
@@ -13,6 +12,7 @@ import { JournalizeComponent } from '../journalize/journalize.component';
 import { GeneralLedgerComponent } from '../general-ledger/general-ledger.component';
 import { IndividualLedgerComponent } from '../individual-ledger/individual-ledger.component';
 import { TrialBalanceComponent } from '../trial-balance/trial-balance.component';
+import { IndividualJournalComponent } from '../individual-journal/individual-journal.component';
 
 
 const routes: Routes = [
@@ -71,15 +71,19 @@ const routes: Routes = [
         component: IndividualLedgerComponent
       },
       {
+        path: 'journal_info',
+        component: IndividualJournalComponent
+      },
+      {
+        path: 'journal_info/:term',
+        component: IndividualJournalComponent
+      },
+      {
         path: 'trial-balance',
         component: TrialBalanceComponent
       }
       ]
-  },
-  {
-    path: 'user/:id',
-    component: UserDetailsComponent
-  },
+  }
 ];
 
 
@@ -98,7 +102,6 @@ export class AppRoutingModule { }
 export const routingComponents = [
   LoginHomeComponent,
   UserPageComponent,
-  UserDetailsComponent,
   ChartOfAccountsComponent,
   AddUserComponent,
   HomeScreenComponent,

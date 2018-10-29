@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class GeneralLedgerComponent implements OnInit {
   accounts = [];
 
+
   constructor(
     private router: Router,
     private coaService: CoAService,

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { UserService } from '../services/user.service';
 import { JournalizeService} from '../services/journalize.service';
 import { GeneralLedgerService } from '../services/general-ledger.service';
@@ -32,6 +32,7 @@ const httpOptions = {
 export class JournalizeComponent implements OnInit {
   @ViewChild('addJournalForm') public journalForm: NgForm;
   @ViewChild('journalAccountAddTable') public accountsTable: NgForm;
+  @ViewChild('folderInput') public myInputVariable: ElementRef;
   private fileUploadURL = 'http://localhost:8080/api/journalFiles';
   journalNew = new Journal();
   journals = []; //list of journal entries
@@ -42,12 +43,16 @@ export class JournalizeComponent implements OnInit {
 
   //Account variables for grabbing a list of accounts
   accounts = [];//list of total accounts
-  debitAccounts = [];
-  creditAccounts = [];
+  debitAccounts = []; //list of all debit accounts
+  creditAccounts = []; //list of all credit accounts
   totalDebit: number = 0.00;
   totalCredit: number = 0.00;
   selectedFile: File;
 
+ //search functions.
+  column = 'JId';
+  columnSearch = 'all';
+  approvalType = 'all';
   criteria= '';
 
   //error variables
@@ -56,6 +61,9 @@ export class JournalizeComponent implements OnInit {
   totalsmatch = 1;
   repeatDebitAccount = 1;
   repeatCreditAccount = 1;
+
+  //user access
+  access = 0;
 
   myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'dd.mm.yyyy',
@@ -72,6 +80,7 @@ export class JournalizeComponent implements OnInit {
     decimalLimit: 2,
     integerLimit: null,
     requireDecimal: false,
+    precision: 2,
     allowNegative: false,
     allowLeadingZeroes: false
   });
@@ -90,13 +99,40 @@ export class JournalizeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.journals = [];
+    this.journals.length = 0;
+    this.onOpened();
     this.getAccounts();
-    this.viewJournals();
+    //this.viewJournals();
+    this.viewJournalsSort('JId', 'ASC', 'All', null, 'all');
     //this.viewJournalAccounts();
   }
 
   viewJournals() {
     this.journalServ.findAll().subscribe(
+      (journal) => {
+        this.journals = journal;
+        console.log(this.journals);
+      }
+    );
+  }
+  //this.viewUsersSort('userId', 'ASC', 'All', null);
+
+  onOpened() {
+    if(this.comp.getRole() === 'admin'){
+      this.access = 1;
+    }
+    else if(this.comp.getRole() === 'manager') {
+      this.access = 2;
+    }
+    else{
+      this.access = 3;
+    }
+  }
+
+
+  viewJournalsSort(column: string, direction: string, columnSearch: string, criteria: string, approvalType: string) {
+    this.journalServ.findAllSort(column, direction, columnSearch, criteria, approvalType).subscribe(
       (journal) => {
         this.journals = journal;
         console.log(this.journals);
@@ -238,6 +274,7 @@ export class JournalizeComponent implements OnInit {
     this.selectedFile = null;
     this.repeatDebitAccount = 1;
     this.repeatCreditAccount = 1;
+    this.myInputVariable.nativeElement.value = "";
 
   }
 
@@ -312,12 +349,14 @@ export class JournalizeComponent implements OnInit {
       }
     }
   }
+  //posting and updating tables including: journal and journal accounts
   async submit(){
     if(this.totalDebit != this.totalCredit){
       this.totalsmatch = 0;
     }
     else {
       let id: number;
+      //sets the input date
       this.journalNew.Date = new Date();
       this.journalNew.Date.setFullYear(this.model.date.year, this.model.date.month - 1, this.model.date.day);
       this.journalNew.CreatedBy = this.comp.getUserName();
@@ -331,17 +370,32 @@ export class JournalizeComponent implements OnInit {
       for(let debitAccounts of this.journalAccountsDebit){
         debitAccounts.JournalJId = id;
         debitAccounts.NormalSide = 'Debit';
+        //set account type
+        for(let acc of this.accounts){
+          if(acc.accountName == debitAccounts.AccountName){
+            debitAccounts.Type = acc.accountType;
+            break;
+          }
+        }
         await this.journalServ.addJournalAccounts(debitAccounts).toPromise();
         console.log('posted debit');
       }
-      //sending credit accounts
+      //post credit accounts
       for(let creditAccounts of this.journalAccountsCredit){
         creditAccounts.JournalJId = id;
         creditAccounts.NormalSide = 'Credit';
+        //set account type
+        for(let acc of this.accounts){
+          if(acc.accountName == creditAccounts.AccountName){
+            creditAccounts.Type = acc.accountType;
+            break;
+          }
+        }
         await this.journalServ.addJournalAccounts(creditAccounts).toPromise();
         console.log('posted credit');
       }
       //sending source file
+      console.log(this.selectedFile.name);
 
       if(this.selectedFile != null){
         let uploadData = new FormData();
@@ -350,6 +404,7 @@ export class JournalizeComponent implements OnInit {
         console.log('File uploaded: ' + this.selectedFile.name)
         this.http.post(this.fileUploadURL, uploadData , httpOptions).subscribe( (result) => {
           console.log('result');
+          this.myInputVariable.nativeElement.value = "";
         });
       }
 
@@ -455,6 +510,11 @@ async declineJournal(journal){
 viewLedger(accountName){
     this.data.setAccount(accountName);
   this.router.navigate(['UserPage/ledger', accountName]);
+}
+
+setApprovalType(type){
+    this.approvalType = type;
+  this.viewJournalsSort('JId', 'ASC', 'all', '', this.approvalType);
 }
 
 

@@ -51,7 +51,7 @@
                 <input type="text" class="form-control" [textMask]="{mask: currencyMask}" id="DebitAmount" placeholder="Debit" style="text-align: right;"
                        required [ngModelOptions]="{standalone: true}"
 
-                       [name]="account.DebitAmount" [(ngModel)]="account.DebitAmount"  (ngModelChange)="getDebitTotal()">
+                       [name]="account.DebitAmount" [(ngModel)]="account.DebitAmount"  (ngModelChange)="getDebitTotal(); ">
               </td>
               <td class="accountsinput" style=" background-color: white">
                 <input type="text" class="form-control" id="CreditAmount" placeholder="Credit" disabled style="text-align: right;"
@@ -102,8 +102,8 @@
 
              <tr class="trbackground">
                <td class="accountsinput" style=" background-color: white"></td>
-               <td class="accountsinput" style=" background-color: white; text-align: right;">{{'$'+totalDebit}}</td>
-               <td class="accountsinput" style=" background-color: white; text-align: right;" >{{'$'+totalCredit}}</td>
+               <td class="accountsinput" style=" background-color: white; text-align: right;" >{{'$' + (totalDebit | number : '1.2-2')}}</td>
+               <td class="accountsinput" style=" background-color: white; text-align: right;" >{{'$' + (totalCredit | number : '1.2-2')}}</td>
 
              </tr>
           </table>
@@ -134,12 +134,25 @@
       <div style="position:  relative;left: 75%;  padding-top: 20px">
         <div class="form-group">
           <input type="text" class="form-control" id="searchBar"  style="width: 300px; left: 6px" placeholder="Search" [(ngModel)]="criteria"
+                 (ngModelChange)="viewJournalsSort(column, 'ASC', columnSearch, $event, approvalType)"
                  name="search" >
+
         </div>
       </div>
     </form>
 
     <button class="btn btn-info btn-lg" (click)="openCreateJournal()" >Add Journal</button>
+    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="float: right; margin-right: 8%">
+      <label class="btn btn-secondary">
+        <input type="radio" name="options" id="option1" autocomplete="off" checked (click)="setApprovalType('Approved')">Approved
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="options" id="option2" autocomplete="off" (click)="setApprovalType('Declined')">Declined
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="options" id="option3" autocomplete="off" (click)="setApprovalType(null)">Pending
+      </label>
+    </div>
 <div>
   <table id="journalTable" style=" table-layout:fixed">
     <thead>
@@ -154,19 +167,24 @@
       <th><abbr title="Reference"></abbr>REF</th>
       <th><abbr title="Debit"></abbr>Debit</th>
       <th><abbr title="Credit"></abbr>Credit</th>
+      <th><abbr title="Credit"></abbr>Status</th>
     </tr>
     </thead>
 
     <tr *ngFor="let journal of journals">
       <td style="vertical-align: top"  >{{ journal.Date | date: 'MM/dd/yyyy'}}</td>
-      <td></td>
+      <td>
+        <tr *ngFor="let jaccount of journal.JournalAccounts" style=" background-color: transparent">
+         <td class="accountslist2">{{jaccount.Type}}</td>
+        </tr>
+      </td>
       <td style="vertical-align: top" >{{ journal.CreatedBy }}</td>
       <td>
         <tr *ngFor="let jaccount of journal.JournalAccounts" style=" background-color: transparent" >
-          <td  class="accountslist2" *ngIf="jaccount.NormalSide == 'Credit'">
-            <button class="btn btn-link" style="color: white" (click)="viewLedger(jaccount.AccountName)" id="button1" >{{ jaccount.AccountName }}</button></td>
+          <td  class="accountslist2" *ngIf="jaccount.NormalSide == 'Credit'" >
+            <button class="hover" style="color: white" (click)="viewLedger(jaccount.AccountName)" id="button1" >{{ jaccount.AccountName }}</button></td>
           <td  class="accountslist" *ngIf="jaccount.NormalSide == 'Debit'">
-            <button class="btn btn-link" style="color: white" (click)="viewLedger(jaccount.AccountName)" id="button2" >{{ jaccount.AccountName }}</button>
+            <button class="hover" style="color: white" (click)="viewLedger(jaccount.AccountName)" id="button2" >{{ jaccount.AccountName }}</button>
           </td>
 
        </tr>
@@ -175,26 +193,31 @@
       <td style="vertical-align: top">{{ journal.Reference }}</td>
 
       <td >
+        <table class="tableAlign">
         <tr *ngFor="let jaccount of journal.JournalAccounts; let b = index" style=" background-color: transparent">
-          <td class="accountslist" *ngIf="jaccount.DebitAmount == null">&nbsp;</td>
-          <td class="accountslist" *ngIf="jaccount.DebitAmount != null && b == 0">{{"$"+jaccount.DebitAmount}}</td>
-          <td class="accountslist3"  *ngIf="jaccount.DebitAmount != null && b != 0">{{" "+jaccount.DebitAmount}}</td>
+          <td class="accountslist"  *ngIf="jaccount.DebitAmount == null"  style="text-align: right;">&nbsp;</td>
+          <td class="accountslist"  *ngIf="jaccount.DebitAmount != null && b == 0"  style="float:right">{{"$"+(jaccount.DebitAmount | number : '1.2-2')}}</td>
+          <td class="accountslist3"  *ngIf="jaccount.DebitAmount != null && b != 0"  style="text-align: right;">{{(jaccount.DebitAmount | number : '1.2-2')}}</td>
         </tr>
+        </table>
       </td>
 
-      <td>
+      <td >
+        <table class="tableAlign">
         <tr *ngFor="let jaccount of journal.JournalAccounts; let i = index" style=" background-color: transparent;">
-          <td class="accountslist" *ngIf="jaccount.CreditAmount == null">&nbsp;</td>
-          <td class="accountslist" *ngIf="jaccount.CreditAmount != null && i == getNumberDebits(journal.JournalAccounts)">{{"$"+jaccount.CreditAmount}}</td>
-          <td class="accountslist3" *ngIf="jaccount.CreditAmount != null && i != getNumberDebits(journal.JournalAccounts)">{{" "+jaccount.CreditAmount}}</td>
+          <td class="accountslist"  *ngIf="jaccount.CreditAmount == null"  style="text-align: right;">&nbsp;</td>
+          <td class="accountslist"  *ngIf="jaccount.CreditAmount != null && i == getNumberDebits(journal.JournalAccounts)"  style="text-align: right;">{{"$"+(jaccount.CreditAmount | number : '1.2-2')}}</td>
+          <td class="accountslist3" *ngIf="jaccount.CreditAmount != null && i != getNumberDebits(journal.JournalAccounts)"  style="text-align: right;">{{(jaccount.CreditAmount | number : '1.2-2')}}</td>
         </tr>
+        </table>
       </td>
     <td style="vertical-align: top">
-      <div>
+      <div *ngIf="access == 2">
         <button class="btn btn-info" style="" (click)="approveJournal(journal)"  *ngIf="journal.acceptance == null" >Approve</button>
       </div>
       <label *ngIf="journal.acceptance != null">{{journal.acceptance}}</label>
-      <div>
+      <label *ngIf="journal.acceptance == null && access == 3">Pending</label>
+      <div *ngIf="access == 2">
         <button class="btn btn-danger" style="width: 95px" (click)="declineJournal(journal)"  *ngIf="journal.acceptance == null" >Decline</button>
       </div>
     </td>

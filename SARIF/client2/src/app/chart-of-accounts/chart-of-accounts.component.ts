@@ -4,6 +4,7 @@ import { AppComponent } from '../app.component';
 import { CoAService } from '../services/coa.service';
 import { UserLogService } from '../services/user-log.service';
 import {NgForm} from '@angular/forms';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 @Component({
   selector: 'app-chart-of-accounts',
@@ -31,6 +32,25 @@ export class ChartOfAccountsComponent implements OnInit {
   accountNumberExist = 1;
   numberHasDecimal = 1;
 
+  //set user access
+  access = 0;
+
+//currencyMask
+  private currencyMask = createNumberMask({
+    prefix: '',
+    suffix: '',
+    includeThousandsSeparator: false,
+    //thousandsSeparatorSymbol: ',',
+    allowDecimal: true,
+    decimalSymbol: '.',
+    decimalLimit: 2,
+    integerLimit: null,
+    requireDecimal: false,
+    precision: 2,
+    allowNegative: false,
+    allowLeadingZeroes: false
+  });
+
 
   constructor(
     private coaService: CoAService,
@@ -39,6 +59,7 @@ export class ChartOfAccountsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.onOpened();
     this.viewAccountsSort('caId','ASC', 'All', null);
     //this.viewAccounts();
 
@@ -86,6 +107,19 @@ export class ChartOfAccountsComponent implements OnInit {
       });
   }
 
+  //sets user access
+  onOpened() {
+    if(this.comp.getRole() === 'admin'){
+      this.access = 1;
+    }
+    else if(this.comp.getRole() === 'manager') {
+      this.access = 2;
+    }
+    else{
+      this.access = 3;
+    }
+  }
+
   //Opens modal
   createAccount() {
     this.numberHasDecimal = 1;
@@ -116,7 +150,7 @@ export class ChartOfAccountsComponent implements OnInit {
 <<<<<<< HEAD
 <<<<<<< HEAD
     //Set asset and revenue account types to normal side debit
-    if (this.CoA.accountType == "Assets" || this.CoA.accountType == "Revenue") {
+    if (this.CoA.accountType == "Assets" || this.CoA.accountType == "Expenses") {
       this.CoA.normalSide = "Debit";
 =======
     // Set asset and revenue account types to normal side debit
@@ -358,6 +392,7 @@ export class ChartOfAccountsComponent implements OnInit {
           this.accountCheck = response;
   }
 
+<<<<<<< HEAD
   checkDecimal(event){
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -403,6 +438,8 @@ export class ChartOfAccountsComponent implements OnInit {
       }
     }
   }
+=======
+>>>>>>> Tyler-G-ledger
 
   resetUpdate() {
     this.coaService.getAccount(this.editCoA.caId)
