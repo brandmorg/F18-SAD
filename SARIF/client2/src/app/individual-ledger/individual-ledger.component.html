@@ -1,7 +1,9 @@
 <div class="form-group">
   <table id="ledgerTable" style=" table-layout:fixed">
     <tr>
-      <th colspan="7" class="col-xs-1 text-center">{{account}}</th>
+      <th colspan="7" >
+        <label>{{'Account #: '+ currentCoA.accountNumber}}</label>
+        <label style="margin: auto; padding-left: 40%">{{account}}</label></th>
     <tr>
     <tr>
       <th >Date</th>
@@ -25,7 +27,7 @@
       <td>{{ account.Date | date: 'MM/dd/yyyy'}}</td>
       <td>{{ account.AccountNumber }}</td>
       <td>{{ account.Description }}</td>
-      <td>{{ account.Reference}}</td>
+      <td (click)="viewJournal(account.Reference)">{{ account.Reference}}</td>
       <td style="text-align: right;">{{ account.DebitAmount | number : '1.2-2' }}</td>
       <td style="text-align: right;">{{ account.CreditAmount | number : '1.2-2'}}</td>
       <td style="text-align: right;">{{calculateTotal(account.glId) | number : '1.2-2'}}</td>

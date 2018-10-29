@@ -21,6 +21,7 @@ import { GeneralLedgerComponent } from './general-ledger/general-ledger.componen
 import { IndividualLedgerComponent } from './individual-ledger/individual-ledger.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { TrialBalanceComponent } from './trial-balance/trial-balance.component';
+import { IndividualJournalComponent } from './individual-journal/individual-journal.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { TrialBalanceComponent } from './trial-balance/trial-balance.component';
     GeneralLedgerComponent,
     IndividualLedgerComponent,
     TrialBalanceComponent,
+    IndividualJournalComponent,
   ],
   imports: [
     BrowserModule,

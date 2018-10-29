@@ -4,6 +4,7 @@ import { GeneralLedgerService } from '../services/general-ledger.service';
 import {CoAService} from '../services/coa.service';
 import {CoA} from '../chart-of-accounts';
 import { GeneralLedger } from '../generalLedger';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-individual-ledger',
@@ -29,6 +30,7 @@ export class IndividualLedgerComponent implements OnInit {
     private cserv: CoAService,
     private ledgerServ: GeneralLedgerService,
     private coaService: CoAService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -73,6 +75,10 @@ export class IndividualLedgerComponent implements OnInit {
         }
       }
     }
+  }
+  viewJournal(ref){
+    this.data.setReference(ref);
+    this.router.navigate(['UserPage/journal_info']);
   }
 
   calculateTotal(accountID): number{

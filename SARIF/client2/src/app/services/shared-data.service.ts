@@ -11,6 +11,8 @@ export class SharedDataService {
 
   accountName = '';
 
+  accountRef = '';
+
 
   constructor() { }
   changeToggle(num: number) {
@@ -22,5 +24,12 @@ export class SharedDataService {
   getAccount(){
     return this.accountName;
   }
+  setReference(ref: string){
+    this.accountRef = ref;
+  }
+  getReference(){
+    return this.accountRef;
+  }
+
 
 }
