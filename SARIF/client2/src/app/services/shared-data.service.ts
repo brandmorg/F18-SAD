@@ -11,16 +11,25 @@ export class SharedDataService {
 
   accountName = '';
 
+  accountRef = '';
+
 
   constructor() { }
   changeToggle(num: number) {
     this.loginToggle.next(num);
   }
-  setAccount(account: string) {
+  setAccount(account: string){
     this.accountName = account;
   }
-  getAccount() {
+  getAccount(){
     return this.accountName;
   }
+  setReference(ref: string){
+    this.accountRef = ref;
+  }
+  getReference(){
+    return this.accountRef;
+  }
+
 
 }

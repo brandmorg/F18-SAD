@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { AddUserComponent } from './add-user/add-user.component';
-//import { UserDetailsComponent } from './user-details/user-details.component';
 import { LoginHomeComponent } from './login-home/login-home.component';
 import { ChartOfAccountsComponent } from './chart-of-accounts/chart-of-accounts.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
@@ -22,6 +21,7 @@ import { GeneralLedgerComponent } from './general-ledger/general-ledger.componen
 import { IndividualLedgerComponent } from './individual-ledger/individual-ledger.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { TrialBalanceComponent } from './trial-balance/trial-balance.component';
+import { IndividualJournalComponent } from './individual-journal/individual-journal.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,6 @@ import { TrialBalanceComponent } from './trial-balance/trial-balance.component';
     LoginComponent,
     UserPageComponent,
     AddUserComponent,
-   // UserDetailsComponent,
     LoginHomeComponent,
     ChartOfAccountsComponent,
     ResetPasswordComponent,
@@ -41,6 +40,7 @@ import { TrialBalanceComponent } from './trial-balance/trial-balance.component';
     GeneralLedgerComponent,
     IndividualLedgerComponent,
     TrialBalanceComponent,
+    IndividualJournalComponent,
   ],
   imports: [
     BrowserModule,

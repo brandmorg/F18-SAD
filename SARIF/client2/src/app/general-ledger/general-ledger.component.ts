@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class GeneralLedgerComponent implements OnInit {
   accounts = [];
 
+
   constructor(
     private router: Router,
     private coaService: CoAService,
@@ -28,11 +29,11 @@ export class GeneralLedgerComponent implements OnInit {
       });
   }
 
-  viewLedger(accountName) {
+  viewLedger(accountName){
     this.data.setAccount(accountName);
     this.router.navigate(['UserPage/ledger', accountName]);
   }
-  stuff() {
+  stuff(){
 
   }
 

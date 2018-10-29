@@ -8,6 +8,8 @@ module.exports = function(app) {
     // Retrieve all journals
     app.get('/api/journal', journal.findAll);
 
+    app.post('/api/journalSort', journal.findAllSort);
+
     // Update a journal
     app.put('/api/journal', journal.update);
 
