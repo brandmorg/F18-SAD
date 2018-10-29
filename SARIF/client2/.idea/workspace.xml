@@ -145,16 +145,17 @@
         <counts>
           <entry key="project.closed" value="2" />
           <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.6" value="4" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="8" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
         <counts>
-          <entry key="Angular2LanguageService" value="8" />
+          <entry key="Angular2LanguageService" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -219,10 +220,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/chart-of-accounts/chart-of-accounts.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
+            <state relative-caret-position="1829">
               <caret line="208" column="82" selection-start-line="208" selection-start-column="82" selection-end-line="208" selection-end-column="82" />
               <folding>
                 <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -273,16 +274,16 @@
         <entry file="file://$PROJECT_DIR$/src/app/add-user/add-user.component.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="4216">
-              <caret line="248" column="126" selection-start-line="248" selection-start-column="111" selection-end-line="248" selection-end-column="128" />
+              <caret line="248" column="6" selection-start-line="248" selection-start-column="6" selection-end-line="248" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/chart-of-accounts/chart-of-accounts.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
+            <state relative-caret-position="4998">
+              <caret line="294" lean-forward="true" selection-start-line="294" selection-end-line="294" />
               <folding>
                 <element signature="e#0#61#0" expanded="true" />
               </folding>
@@ -448,10 +449,10 @@
         <option value="$PROJECT_DIR$/src/app/individual-journal/individual-journal.component.html" />
         <option value="$PROJECT_DIR$/src/app/journalize/journalize.component.ts" />
         <option value="$PROJECT_DIR$/src/app/journalize/journalize.component.html" />
-        <option value="$PROJECT_DIR$/src/app/chart-of-accounts/chart-of-accounts.component.ts" />
         <option value="$PROJECT_DIR$/src/app/trial-balance/trial-balance.component.html" />
         <option value="$PROJECT_DIR$/src/app/user-page/user-page.component.html" />
         <option value="$PROJECT_DIR$/src/app/chart-of-accounts/chart-of-accounts.component.html" />
+        <option value="$PROJECT_DIR$/src/app/chart-of-accounts/chart-of-accounts.component.ts" />
       </list>
     </option>
   </component>
@@ -469,10 +470,10 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="41" />
-    <option name="y" value="65" />
-    <option name="width" value="1218" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="185" />
+    <option name="y" value="72" />
+    <option name="width" value="1551" />
     <option name="height" value="930" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -481,12 +482,25 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="client2" type="b2602c69:ProjectViewProjectNode" />
               <item name="client2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="client2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="client2" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="client2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="client2" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="client2" type="b2602c69:ProjectViewProjectNode" />
@@ -572,15 +586,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540839816598" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../server" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="C:\Users\tyler_000\Desktop\SarifFinancialApi\client\node_modules\tslint" />
@@ -661,17 +673,18 @@
       <workItem from="1540494410591" duration="13909000" />
       <workItem from="1540740451331" duration="23443000" />
       <workItem from="1540838702887" duration="894000" />
+      <workItem from="1540840426061" duration="167000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="364757000" />
+    <option name="totallyTimeSpent" value="364924000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25746268" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16151386" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -977,6 +990,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/user-page/user-page.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="111" selection-start-line="15" selection-start-column="111" selection-end-line="15" selection-end-column="111" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/trial-balance/trial-balance.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1006,17 +1026,7 @@
     <entry file="file://$PROJECT_DIR$/src/app/add-user/add-user.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4216">
-          <caret line="248" column="126" selection-start-line="248" selection-start-column="111" selection-end-line="248" selection-end-column="128" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/chart-of-accounts/chart-of-accounts.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#61#0" expanded="true" />
-          </folding>
+          <caret line="248" column="6" selection-start-line="248" selection-start-column="6" selection-end-line="248" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -1078,16 +1088,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/user-page/user-page.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="111" selection-start-line="15" selection-start-column="111" selection-end-line="15" selection-end-column="111" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/chart-of-accounts/chart-of-accounts.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
+        <state relative-caret-position="1829">
           <caret line="208" column="82" selection-start-line="208" selection-start-column="82" selection-end-line="208" selection-end-column="82" />
           <folding>
             <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -1099,6 +1102,16 @@
             <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#form#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#5;n#tr#1;n#table#0;n#div#2;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#6;n#tr#1;n#table#0;n#div#2;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/chart-of-accounts/chart-of-accounts.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4998">
+          <caret line="294" lean-forward="true" selection-start-line="294" selection-end-line="294" />
+          <folding>
+            <element signature="e#0#61#0" expanded="true" />
           </folding>
         </state>
       </provider>

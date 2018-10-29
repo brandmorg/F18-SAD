@@ -66,8 +66,6 @@ export class ChartOfAccountsComponent implements OnInit {
 
     //Closes modal when user clicks outside of modal
     window.onclick = function (event) {
-<<<<<<< HEAD
-<<<<<<< HEAD
       let createAccountModal = document.getElementById("createAccountModal");
       if (event.target == createAccountModal) {
         createAccountModal.style.display = "none";
@@ -75,22 +73,6 @@ export class ChartOfAccountsComponent implements OnInit {
       let editAccountModal = document.getElementById("editAccountModal");
       if (event.target == editAccountModal) {
         editAccountModal.style.display = "none";
-=======
-      let createAccountModal = document.getElementById('createAccountModal');
-=======
-      let createAccountModal = document.getElementById("createAccountModal");
->>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
-      if (event.target == createAccountModal) {
-        createAccountModal.style.display = "none";
-      }
-      let editAccountModal = document.getElementById("editAccountModal");
-      if (event.target == editAccountModal) {
-<<<<<<< HEAD
-        editAccountModal.style.display = 'none';
->>>>>>> parent of 2bcaf777... Spelling and tslint fixes
-=======
-        editAccountModal.style.display = "none";
->>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
       }
     };
   }
@@ -134,63 +116,25 @@ export class ChartOfAccountsComponent implements OnInit {
       return window.alert("Enter a number for account number");
     }
     ;
-<<<<<<< HEAD
-<<<<<<< HEAD
     //Check to see if account balance is a number
-=======
-    // Check to see if account balance is a number
->>>>>>> parent of 2bcaf777... Spelling and tslint fixes
-=======
-    //Check to see if account balance is a number
->>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
     if (isNaN(this.CoA.originalBalance)) {
       return window.alert("Enter a number for the balance");
     }
     ;
-<<<<<<< HEAD
-<<<<<<< HEAD
     //Set asset and revenue account types to normal side debit
     if (this.CoA.accountType == "Assets" || this.CoA.accountType == "Expenses") {
       this.CoA.normalSide = "Debit";
-=======
-    // Set asset and revenue account types to normal side debit
-    if (this.CoA.accountType == 'Assets' || this.CoA.accountType == 'Revenue') {
-      this.CoA.normalSide = 'Debit';
->>>>>>> parent of 2bcaf777... Spelling and tslint fixes
-=======
-    //Set asset and revenue account types to normal side debit
-    if (this.CoA.accountType == "Assets" || this.CoA.accountType == "Revenue") {
-      this.CoA.normalSide = "Debit";
->>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
     }
     else {
       this.CoA.normalSide = "Credit";
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
     //current balance may be set to 0 but this is not confirmed
     //Set the current balance to 0
-=======
-    // current balance may be set to 0 but this is not confirmed
-    // Set the current balance to 0
->>>>>>> parent of 2bcaf777... Spelling and tslint fixes
-=======
-    //current balance may be set to 0 but this is not confirmed
-    //Set the current balance to 0
->>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
     this.CoA.currentBalance = 0;
 
     this.editCoA = this.CoA;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     //Check to see if another account exists with same number or name
-=======
-    // Check to see if another account exists with same number or name
->>>>>>> parent of 2bcaf777... Spelling and tslint fixes
-=======
-    //Check to see if another account exists with same number or name
->>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
     if (this.numberHasDecimal == 2) {
       console.log('cannot continue');
     }
@@ -199,8 +143,6 @@ export class ChartOfAccountsComponent implements OnInit {
         (account) => {
           this.temp = account;
           for (var i = 0; i < this.temp.length; i++) {
-<<<<<<< HEAD
-<<<<<<< HEAD
             //Check for account name
             if (this.temp[i].accountName == this.CoA.accountName) {
               return window.alert("Account with same account name found. Enter different account name.");
@@ -208,22 +150,6 @@ export class ChartOfAccountsComponent implements OnInit {
             //Check for account number
             if (this.temp[i].accountNumber == this.CoA.accountNumber) {
               return window.alert("Account with the same account number found. Enter a different account number.")
-=======
-            // Check for account name
-=======
-            //Check for account name
->>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
-            if (this.temp[i].accountName == this.CoA.accountName) {
-              return window.alert("Account with same account name found. Enter different account name.");
-            }
-            //Check for account number
-            if (this.temp[i].accountNumber == this.CoA.accountNumber) {
-<<<<<<< HEAD
-              return window.alert('Account with the same account number found. Enter a different account number.')
->>>>>>> parent of 2bcaf777... Spelling and tslint fixes
-=======
-              return window.alert("Account with the same account number found. Enter a different account number.")
->>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
             }
           }
           //If account name and number not found, create the account
@@ -249,18 +175,8 @@ export class ChartOfAccountsComponent implements OnInit {
 
   }
   close2(){
-<<<<<<< HEAD
-<<<<<<< HEAD
     let editModal = document.getElementById("editAccountModal");
     editModal.style.display = "none";
-=======
-    let editModal = document.getElementById('editAccountModal');
-    editModal.style.display = 'none';
->>>>>>> parent of 2bcaf777... Spelling and tslint fixes
-=======
-    let editModal = document.getElementById("editAccountModal");
-    editModal.style.display = "none";
->>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
     this.editForm.reset();
   }
 
@@ -280,15 +196,7 @@ export class ChartOfAccountsComponent implements OnInit {
 
   submitEdit() {
     if ((this.editCoA.accountNumber != null) && isNaN(this.editCoA.accountNumber)) {
-<<<<<<< HEAD
-<<<<<<< HEAD
       return window.alert("Enter a number for account number");
-=======
-      return window.alert('Enter a number for account number');
->>>>>>> parent of 2bcaf777... Spelling and tslint fixes
-=======
-      return window.alert("Enter a number for account number");
->>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
     };
     if ((this.editCoA.originalBalance != null) && isNaN(this.editCoA.originalBalance)) {
       return window.alert("Enter a number for the balance");
@@ -297,21 +205,9 @@ export class ChartOfAccountsComponent implements OnInit {
     //Set the account Id correctly to chosen account
     this.editCoA.caId = this.accountId;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     //Set asset and revenue account types to normal side debit
     if (this.editCoA.accountType == "Assets" || this.editCoA.accountType == "Revenue") {
       this.editCoA.normalSide = "Debit";
-=======
-    // Set asset and revenue account types to normal side debit
-    if (this.editCoA.accountType == 'Assets' || this.editCoA.accountType == 'Revenue') {
-      this.editCoA.normalSide = 'Debit';
->>>>>>> parent of 2bcaf777... Spelling and tslint fixes
-=======
-    //Set asset and revenue account types to normal side debit
-    if (this.editCoA.accountType == "Assets" || this.editCoA.accountType == "Revenue") {
-      this.editCoA.normalSide = "Debit";
->>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
     }
     else {
       this.editCoA.normalSide = "Credit";
@@ -320,7 +216,7 @@ export class ChartOfAccountsComponent implements OnInit {
     this.editCoA.currentBalance = this.editCoA.originalBalance;
 
     //Check to see if another account exists with same number or name
-        //If account name and number not found, create the account
+    //If account name and number not found, create the account
 
     if(this.numberHasDecimal == 2) {
       console.log('decimal required');
@@ -355,18 +251,8 @@ export class ChartOfAccountsComponent implements OnInit {
   }
 
   async compareAccountNumberUpdate(event){
-<<<<<<< HEAD
-<<<<<<< HEAD
     if(isNaN(event) || event == "") {
       console.log("not a number");
-=======
-    if(isNaN(event) || event == '') {
-      console.log('not a number');
->>>>>>> parent of 2bcaf777... Spelling and tslint fixes
-=======
-    if(isNaN(event) || event == "") {
-      console.log("not a number");
->>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
       this.accountNumberExist = 3;
     }else {
       this.editCoA.accountNumber = event;
@@ -389,57 +275,9 @@ export class ChartOfAccountsComponent implements OnInit {
   async getOriginalAccountID(id: number) {
     this.accountId = id;
     let response = await this.coaService.getAccount(this.accountId).toPromise();
-          this.accountCheck = response;
+    this.accountCheck = response;
   }
 
-<<<<<<< HEAD
-  checkDecimal(event){
-<<<<<<< HEAD
-<<<<<<< HEAD
-    //check if event is number
-    //checks if number is null
-=======
-    // check if event is number
-    // checks if number is null
->>>>>>> parent of 2bcaf777... Spelling and tslint fixes
-=======
-    //check if event is number
-    //checks if number is null
->>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
-    if(event == null){
-      this.numberHasDecimal = 1;
-    }
-    else if(isNaN(event)){
-      this.numberHasDecimal = 2;
-    }
-    else if(event < 0){
-      this.numberHasDecimal = 2;
-    }
-    else {
-      let str = event.toString();
-      let str2 = str.substring(Math.max(0, str.length - 3));
-      console.log(str2);
-<<<<<<< HEAD
-<<<<<<< HEAD
-      //check if there is 2 decimal places
-=======
-      // check if there is 2 decimal places
->>>>>>> parent of 2bcaf777... Spelling and tslint fixes
-=======
-      //check if there is 2 decimal places
->>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
-      if (str2[0] != '.') {
-        this.numberHasDecimal = 2;
-        console.log('no decimal');
-      }
-      else {
-        this.numberHasDecimal = 1;
-        console.log('is decimal');
-      }
-    }
-  }
-=======
->>>>>>> Tyler-G-ledger
 
   resetUpdate() {
     this.coaService.getAccount(this.editCoA.caId)
@@ -454,3 +292,4 @@ export class ChartOfAccountsComponent implements OnInit {
     return (accountNumber < 0);
   }
 }
+
