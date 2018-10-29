@@ -51,7 +51,7 @@
                 <input type="text" class="form-control" [textMask]="{mask: currencyMask}" id="DebitAmount" placeholder="Debit" style="text-align: right;"
                        required [ngModelOptions]="{standalone: true}"
 
-                       [name]="account.DebitAmount" [(ngModel)]="account.DebitAmount"  (ngModelChange)="getDebitTotal()">
+                       [name]="account.DebitAmount" [(ngModel)]="account.DebitAmount"  (ngModelChange)="getDebitTotal(); ">
               </td>
               <td class="accountsinput" style=" background-color: white">
                 <input type="text" class="form-control" id="CreditAmount" placeholder="Credit" disabled style="text-align: right;"
@@ -212,11 +212,12 @@
         </table>
       </td>
     <td style="vertical-align: top">
-      <div>
+      <div *ngIf="access == 2">
         <button class="btn btn-info" style="" (click)="approveJournal(journal)"  *ngIf="journal.acceptance == null" >Approve</button>
       </div>
       <label *ngIf="journal.acceptance != null">{{journal.acceptance}}</label>
-      <div>
+      <label *ngIf="journal.acceptance == null && access == 3">Pending</label>
+      <div *ngIf="access == 2">
         <button class="btn btn-danger" style="width: 95px" (click)="declineJournal(journal)"  *ngIf="journal.acceptance == null" >Decline</button>
       </div>
     </td>

@@ -184,7 +184,7 @@
   </div>
 </form>
 
-<button class="btn btn-info btn-lg" (click)="createAccount()" id='createAccountBtn'>Create Account</button>
+<button class="btn btn-info btn-lg" (click)="createAccount()" id='createAccountBtn' *ngIf="access == 1">Create Account</button>
 
 <div class="form-group">
   <table id="accountTable">
@@ -211,7 +211,7 @@
       <td>{{ account.comment }}</td>
       <td>{{ account.active }}</td>
       <td>{{ account.createdBy }}</td>
-      <button class="btn btn-primary" (click)="getAccount(account.caId)">Edit</button>
+      <button class="btn btn-primary" (click)="getAccount(account.caId)" *ngIf="access == 1">Edit</button>
     </tr>
   </table>
 </div>

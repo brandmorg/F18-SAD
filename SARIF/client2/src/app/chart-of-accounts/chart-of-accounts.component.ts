@@ -32,6 +32,9 @@ export class ChartOfAccountsComponent implements OnInit {
   accountNumberExist = 1;
   numberHasDecimal = 1;
 
+  //set user access
+  access = 0;
+
 //currencyMask
   private currencyMask = createNumberMask({
     prefix: '',
@@ -56,6 +59,7 @@ export class ChartOfAccountsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.onOpened();
     this.viewAccountsSort('caId','ASC', 'All', null);
     //this.viewAccounts();
 
@@ -83,6 +87,19 @@ export class ChartOfAccountsComponent implements OnInit {
       (account) => {
         this.accounts = account;
       });
+  }
+
+  //sets user access
+  onOpened() {
+    if(this.comp.getRole() === 'admin'){
+      this.access = 1;
+    }
+    else if(this.comp.getRole() === 'manager') {
+      this.access = 2;
+    }
+    else{
+      this.access = 3;
+    }
   }
 
   //Opens modal

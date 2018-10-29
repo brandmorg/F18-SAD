@@ -62,6 +62,9 @@ export class JournalizeComponent implements OnInit {
   repeatDebitAccount = 1;
   repeatCreditAccount = 1;
 
+  //user access
+  access = 0;
+
   myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'dd.mm.yyyy',
     editableDateField: false
@@ -98,6 +101,7 @@ export class JournalizeComponent implements OnInit {
   ngOnInit() {
     this.journals = [];
     this.journals.length = 0;
+    this.onOpened();
     this.getAccounts();
     //this.viewJournals();
     this.viewJournalsSort('JId', 'ASC', 'All', null, 'all');
@@ -113,6 +117,18 @@ export class JournalizeComponent implements OnInit {
     );
   }
   //this.viewUsersSort('userId', 'ASC', 'All', null);
+
+  onOpened() {
+    if(this.comp.getRole() === 'admin'){
+      this.access = 1;
+    }
+    else if(this.comp.getRole() === 'manager') {
+      this.access = 2;
+    }
+    else{
+      this.access = 3;
+    }
+  }
 
 
   viewJournalsSort(column: string, direction: string, columnSearch: string, criteria: string, approvalType: string) {
