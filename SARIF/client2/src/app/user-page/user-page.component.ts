@@ -33,7 +33,11 @@ export class UserPageComponent implements OnInit {
       if(this.comp.getRole() === 'admin'){
         this.access = 1;
       }
+<<<<<<< HEAD
       else if(this.comp.getRole() === 'manager') {
+=======
+      else if(this.comp.getRole() === 'Manager') {
+>>>>>>> parent of 2bcaf777... Spelling and tslint fixes
         this.access = 2;
       }
       else{
@@ -66,7 +70,11 @@ export class UserPageComponent implements OnInit {
   viewGLedger(){
     this.router.navigate(['UserPage/generalLedger']);
   }
+<<<<<<< HEAD
   viewTrialBalance(){
+=======
+  viewTrialBalance() {
+>>>>>>> parent of 2bcaf777... Spelling and tslint fixes
     this.router.navigate(['UserPage/trial-balance'])
 
   }
