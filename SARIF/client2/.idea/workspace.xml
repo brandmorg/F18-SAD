@@ -190,11 +190,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/journalize/journalize.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1802">
-              <caret line="121" column="9" selection-start-line="120" selection-start-column="2" selection-end-line="130" selection-end-column="3" />
+            <state relative-caret-position="284">
+              <caret line="396" column="27" selection-start-line="396" selection-start-column="27" selection-end-line="396" selection-end-column="27" />
               <folding>
                 <element signature="e#0#71#0" expanded="true" />
               </folding>
@@ -279,7 +279,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/chart-of-accounts/chart-of-accounts.component.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="4998">
@@ -447,12 +447,12 @@
         <option value="$PROJECT_DIR$/src/app/individual-journal/individual-journal.component.css" />
         <option value="$PROJECT_DIR$/src/app/individual-journal/individual-journal.component.ts" />
         <option value="$PROJECT_DIR$/src/app/individual-journal/individual-journal.component.html" />
-        <option value="$PROJECT_DIR$/src/app/journalize/journalize.component.ts" />
         <option value="$PROJECT_DIR$/src/app/journalize/journalize.component.html" />
         <option value="$PROJECT_DIR$/src/app/trial-balance/trial-balance.component.html" />
         <option value="$PROJECT_DIR$/src/app/user-page/user-page.component.html" />
         <option value="$PROJECT_DIR$/src/app/chart-of-accounts/chart-of-accounts.component.html" />
         <option value="$PROJECT_DIR$/src/app/chart-of-accounts/chart-of-accounts.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/journalize/journalize.component.ts" />
       </list>
     </option>
   </component>
@@ -470,10 +470,10 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="185" />
-    <option name="y" value="72" />
-    <option name="width" value="1551" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="41" />
+    <option name="y" value="65" />
+    <option name="width" value="1218" />
     <option name="height" value="930" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -673,18 +673,18 @@
       <workItem from="1540494410591" duration="13909000" />
       <workItem from="1540740451331" duration="23443000" />
       <workItem from="1540838702887" duration="894000" />
-      <workItem from="1540840426061" duration="167000" />
+      <workItem from="1540840426061" duration="787000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="364924000" />
+    <option name="totallyTimeSpent" value="365544000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="41" y="65" width="1218" height="930" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16151386" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26165804" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -693,7 +693,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6010417" visible="true" weight="0.21149674" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6010417" visible="true" weight="0.24497488" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -973,16 +973,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/journalize/journalize.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1802">
-          <caret line="121" column="9" selection-start-line="120" selection-start-column="2" selection-end-line="130" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#71#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/user-page/user-page.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -1112,6 +1102,16 @@
           <caret line="294" lean-forward="true" selection-start-line="294" selection-end-line="294" />
           <folding>
             <element signature="e#0#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/journalize/journalize.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="396" column="27" selection-start-line="396" selection-start-column="27" selection-end-line="396" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#71#0" expanded="true" />
           </folding>
         </state>
       </provider>

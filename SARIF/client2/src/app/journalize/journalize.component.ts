@@ -395,7 +395,6 @@ export class JournalizeComponent implements OnInit {
         console.log('posted credit');
       }
       //sending source file
-      console.log(this.selectedFile.name);
 
       if(this.selectedFile != null){
         let uploadData = new FormData();
