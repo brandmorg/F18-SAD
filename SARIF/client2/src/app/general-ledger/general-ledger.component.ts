@@ -19,11 +19,19 @@ export class GeneralLedgerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.viewAccounts();
+    //this.viewAccounts();
+    this.viewAccountsSort('caId','ASC', 'All', null);
   }
 
   viewAccounts() {
     this.coaService.findAll().subscribe(
+      (account) => {
+        this.accounts = account;
+      });
+  }
+
+  viewAccountsSort(column: string, direction: string, columnSearch: string, criteria: string) {
+    this.coaService.findAllSort(column, direction, columnSearch, criteria).subscribe(
       (account) => {
         this.accounts = account;
       });
