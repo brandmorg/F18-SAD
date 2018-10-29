@@ -34,10 +34,14 @@ export class UserPageComponent implements OnInit {
         this.access = 1;
       }
 <<<<<<< HEAD
+<<<<<<< HEAD
       else if(this.comp.getRole() === 'manager') {
 =======
       else if(this.comp.getRole() === 'Manager') {
 >>>>>>> parent of 2bcaf777... Spelling and tslint fixes
+=======
+      else if(this.comp.getRole() === 'manager') {
+>>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
         this.access = 2;
       }
       else{
@@ -71,10 +75,14 @@ export class UserPageComponent implements OnInit {
     this.router.navigate(['UserPage/generalLedger']);
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   viewTrialBalance(){
 =======
   viewTrialBalance() {
 >>>>>>> parent of 2bcaf777... Spelling and tslint fixes
+=======
+  viewTrialBalance(){
+>>>>>>> parent of fd2c519c... Updated spelling and formatting issues and  inconsistencies
     this.router.navigate(['UserPage/trial-balance'])
 
   }
