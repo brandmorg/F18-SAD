@@ -7,6 +7,7 @@ const multer = require('multer');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json())
 var MemoryStore =session.MemoryStore;
+const path = require('path');
 
 const cors = require('cors')
 const corsOptions = {
