@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { AddUserComponent } from './add-user/add-user.component';
-//import { UserDetailsComponent } from './user-details/user-details.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 import { LoginHomeComponent } from './login-home/login-home.component';
 import { ChartOfAccountsComponent } from './chart-of-accounts/chart-of-accounts.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
@@ -30,7 +30,7 @@ import { TrialBalanceComponent } from './trial-balance/trial-balance.component';
     LoginComponent,
     UserPageComponent,
     AddUserComponent,
-   // UserDetailsComponent,
+    UserDetailsComponent,
     LoginHomeComponent,
     ChartOfAccountsComponent,
     ResetPasswordComponent,

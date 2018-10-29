@@ -16,10 +16,10 @@ export class SharedDataService {
   changeToggle(num: number) {
     this.loginToggle.next(num);
   }
-  setAccount(account: string) {
+  setAccount(account: string){
     this.accountName = account;
   }
-  getAccount() {
+  getAccount(){
     return this.accountName;
   }
 

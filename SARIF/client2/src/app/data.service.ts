@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 
 import { Http, Headers, RequestOptions } from '@angular/http';
-// import 'rxjs/add/operator/map';
+//import 'rxjs/add/operator/map';
 import { map} from 'rxjs/operators';
 
 @Injectable()
 export class DataService {
 
-  uri = 'http://localhost:3000';
+  uri = 'http://localhost:3000'
 
-  result: any;
+  result:any;
 
   constructor(private _http: Http) { }
 
