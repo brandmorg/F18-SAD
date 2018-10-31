@@ -13,7 +13,12 @@ import {Router} from '@angular/router';
 export class IndividualJournalComponent implements OnInit {
 
    thisJournal  = Journal;
-  private journals = [];
+   /*
+    * THIS SHOULD BE PRIVATE BUT WON'T COMPILE
+    *
+    * SHOULD BE REWORKED TO ACCOUNT FOR THIS
+    */
+   journals = [];
 
   constructor(
     private journalServ: JournalizeService,
