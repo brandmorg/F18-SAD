@@ -10,3 +10,5 @@ Thumbs.db
 # Ingnore folder named 'node_module333s'
 node_modules333/
 
+# Dist 
+# /Dist
