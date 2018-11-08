@@ -27,7 +27,9 @@
       <td>{{ account.Date | date: 'MM/dd/yyyy'}}</td>
       <td>{{ account.AccountNumber }}</td>
       <td>{{ account.Description }}</td>
-      <td (click)="viewJournal(account.Reference)">{{ account.Reference}}</td>
+      <td >
+        <button class="btn btn-link" (click)="viewJournal(account.Reference)">{{account.Reference}}</button>
+      </td>
       <td style="text-align: right;">{{ account.DebitAmount | number : '1.2-2' }}</td>
       <td style="text-align: right;">{{ account.CreditAmount | number : '1.2-2'}}</td>
       <td style="text-align: right;">{{calculateTotal(account.glId) | number : '1.2-2'}}</td>

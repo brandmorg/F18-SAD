@@ -21,11 +21,7 @@
           <my-date-picker name="myDate" [options]="myDatePickerOptions" [(ngModel)]="model"  required></my-date-picker>
             </div>
 
-          <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" placeholder="Description" [(ngModel)]="journalNew.Description"
-                   name="description" >
-          </div>
+
           <hr id="journalAccountAddTable">
           <table>
             <tr >
@@ -35,8 +31,8 @@
             </tr>
 
             <tr *ngFor="let account of journalAccountsDebit" class="trbackground">
-              <td class="accountsinput" style=" background-color: black">
-                <select id="debitDropDown"  class="form-control" style="width: 200px" required
+              <td class="accountsinput" style=" background-color: white">
+                <select id="debitDropDown"  class="form-control" style="width: 230px" required
                         [ngModelOptions]="{standalone: true}"
                          [(ngModel)]="account.AccountName" [name]="account.AccountName"
                         (ngModelChange)="checkRepeatDebitAccount(); "
@@ -66,8 +62,8 @@
             </tr>
 
             <tr *ngFor="let account of journalAccountsCredit" class="trbackground">
-              <td class="accountsinput" style=" background-color: white">
-              <select id="creditDropDown" class="form-control" style="width: 200px" required
+              <td class="accountsinput" style=" background-color: white; left: 30px ">
+              <select id="creditDropDown" class="form-control" style="position:relative; width: 200px; left: 30px" required
                       [ngModelOptions]="{standalone: true}"
 
                       [(ngModel)]="account.AccountName" [name]="account.AccountName"
@@ -107,6 +103,11 @@
 
              </tr>
           </table>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" placeholder="Description (optional)" [(ngModel)]="journalNew.Description"
+                   name="description" >
+          </div>
           <form enctype="multipart/form-data">
             <input #folderInput type="file" (change)="selectFile($event.target.files)" >
           </form>
@@ -142,19 +143,22 @@
     </form>
 
     <button class="btn btn-info btn-lg" (click)="openCreateJournal()" >Add Journal</button>
-    <div class="btn-group btn-group-toggle" data-toggle="buttons" style="float: right; margin-right: 8%">
-      <label class="btn btn-secondary">
-        <input type="radio" name="options" id="option1" autocomplete="off" checked (click)="setApprovalType('Approved')">Approved
-      </label>
-      <label class="btn btn-secondary">
-        <input type="radio" name="options" id="option2" autocomplete="off" (click)="setApprovalType('Declined')">Declined
-      </label>
-      <label class="btn btn-secondary">
-        <input type="radio" name="options" id="option3" autocomplete="off" (click)="setApprovalType(null)">Pending
-      </label>
+    <div class="btn-group" style="float: right; margin-right: 8%">
+
+        <button type="button" class="btn btn-primary" name="options"   (click)="setApprovalType('all')">All</button>
+
+
+        <button type="button" class="btn btn-primary" name="options"  (click)="setApprovalType('Approved')">Approved</button>
+
+
+        <button type="button" class="btn btn-primary" name="options"  (click)="setApprovalType('Declined')">Declined</button>
+
+
+        <button type="button" class="btn btn-primary" name="options" (click)="setApprovalType(null)">Pending</button>
+
     </div>
 <div>
-  <table id="journalTable" style=" table-layout:fixed">
+  <table id="journalTable" >
     <thead>
     <tr>
       <th colspan="8" class="col-xs-1 text-center">General Journal</th>
@@ -171,23 +175,29 @@
     </tr>
     </thead>
 
-    <tr *ngFor="let journal of journals">
+    <tr *ngFor="let journal of journals | paginate: { itemsPerPage: 5, currentPage: currPage }">
       <td style="vertical-align: top"  >{{ journal.Date | date: 'MM/dd/yyyy'}}</td>
       <td>
         <tr *ngFor="let jaccount of journal.JournalAccounts" style=" background-color: transparent">
          <td class="accountslist2">{{jaccount.Type}}</td>
         </tr>
+    <tr style=" background-color: transparent">
+      <td class="accountslist">&nbsp;</td>
+    </tr>
       </td>
       <td style="vertical-align: top" >{{ journal.CreatedBy }}</td>
       <td>
         <tr *ngFor="let jaccount of journal.JournalAccounts" style=" background-color: transparent" >
           <td  class="accountslist2" *ngIf="jaccount.NormalSide == 'Credit'" >
-            <button class="hover" style="color: dodgerblue" (click)="viewLedger(jaccount.AccountName)" id="button1" >{{ jaccount.AccountName }}</button></td>
+            <button class="btn btn-link " style="color: dodgerblue" (click)="viewLedger(jaccount.AccountName)" id="button1" >{{ jaccount.AccountName }}</button></td>
           <td  class="accountslist" *ngIf="jaccount.NormalSide == 'Debit'">
-            <button class="hover" style="color: dodgerblue" (click)="viewLedger(jaccount.AccountName)" id="button2" >{{ jaccount.AccountName }}</button>
+            <button class="btn btn-link " style="color: dodgerblue" (click)="viewLedger(jaccount.AccountName)" id="button2" >{{ jaccount.AccountName }}</button>
           </td>
-
        </tr>
+        <tr style=" background-color: transparent">
+          <td class="accountslist" *ngIf="journal.Description != null">{{'Description: ' + journal.Description}}</td>
+          <td class="accountslist" *ngIf="journal.Description == null">{{'Description: none'}}</td>
+        </tr>
       </td>
 
       <td style="vertical-align: top">{{ journal.Reference }}</td>
@@ -199,6 +209,9 @@
           <td class="accountslist"  *ngIf="jaccount.DebitAmount != null && b == 0"  style="float:right">{{"$"+(jaccount.DebitAmount | number : '1.2-2')}}</td>
           <td class="accountslist3"  *ngIf="jaccount.DebitAmount != null && b != 0"  style="text-align: right;">{{(jaccount.DebitAmount | number : '1.2-2')}}</td>
         </tr>
+          <tr style=" background-color: transparent">
+            <td class="accountslist">&nbsp;</td>
+          </tr>
         </table>
       </td>
 
@@ -209,6 +222,9 @@
           <td class="accountslist"  *ngIf="jaccount.CreditAmount != null && i == getNumberDebits(journal.JournalAccounts)"  style="text-align: right;">{{"$"+(jaccount.CreditAmount | number : '1.2-2')}}</td>
           <td class="accountslist3" *ngIf="jaccount.CreditAmount != null && i != getNumberDebits(journal.JournalAccounts)"  style="text-align: right;">{{(jaccount.CreditAmount | number : '1.2-2')}}</td>
         </tr>
+          <tr style=" background-color: transparent">
+            <td class="accountslist">&nbsp;</td>
+          </tr>
         </table>
       </td>
     <td style="vertical-align: top">
@@ -224,4 +240,5 @@
 
     </tr>
   </table>
+  <pagination-controls (pageChange)="currPage = $event"></pagination-controls>
 </div>

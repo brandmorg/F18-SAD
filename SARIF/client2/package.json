@@ -25,6 +25,7 @@
     "angular4-datepicker": "^1.0.1",
     "core-js": "^2.5.4",
     "mydatepicker": "^2.6.6",
+    "ngx-pagination": "^3.2.1",
     "ngx-webstorage": "^2.0.1",
     "rxjs": "^6.0.0",
     "text-mask-addons": "^3.8.0",

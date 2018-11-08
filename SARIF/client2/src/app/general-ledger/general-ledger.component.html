@@ -16,7 +16,7 @@
       <th >Account Description</th>
       <th >Active</th>
     </tr>
-    <tr *ngFor="let account of accounts">
+    <tr *ngFor="let account of accounts | paginate: { itemsPerPage: 10, currentPage: currPage }">
       <td>{{ account.accountNumber }}</td>
       <td>
         <button class="btn btn-link" style="color: dodgerblue" (click)="viewLedger(account.accountName)" id="button1" >{{ account.accountName }}</button></td>
@@ -29,4 +29,5 @@
       <td>{{ account.active }}</td>
     </tr>
   </table>
+  <pagination-controls (pageChange)="currPage = $event"></pagination-controls>
 </div>

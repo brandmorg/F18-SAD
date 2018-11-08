@@ -22,6 +22,7 @@ import { IndividualLedgerComponent } from './individual-ledger/individual-ledger
 import { TextMaskModule } from 'angular2-text-mask';
 import { TrialBalanceComponent } from './trial-balance/trial-balance.component';
 import { IndividualJournalComponent } from './individual-journal/individual-journal.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { IndividualJournalComponent } from './individual-journal/individual-jour
     Ng2Webstorage,
     HttpClientModule,
     MyDatePickerModule,
-    TextMaskModule
+    TextMaskModule,
+    NgxPaginationModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

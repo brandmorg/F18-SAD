@@ -65,6 +65,9 @@ export class JournalizeComponent implements OnInit {
   //user access
   access = 0;
 
+  //current page
+  currPage = 1;
+
   myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'dd.mm.yyyy',
     editableDateField: false
@@ -157,7 +160,7 @@ export class JournalizeComponent implements OnInit {
   async getAccounts() {
     this.debitAccounts = [];
     this.creditAccounts = [];
-    let result = await this.coaService.findAll().toPromise();
+    let result = await this.coaService.findAllSort('accountName','ASC', 'All', null).toPromise();
     this.accounts = result;
     console.log("Hello");
     for(let account of this.accounts){
@@ -200,7 +203,7 @@ export class JournalizeComponent implements OnInit {
   }
 
   checkBothInputs(): number{
-    if(this.checkInputExist() == 1 && this.checkInputExist2() == 1 && this.journalNew.Description != null && this.journalNew.Description != ''){
+    if(this.checkInputExist() == 1 && this.checkInputExist2() == 1){
       return 1;
     }
     else{

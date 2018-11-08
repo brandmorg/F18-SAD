@@ -9,7 +9,7 @@ tr:nth-child(even) {
 
 
 table, h3, h2, td {
-  color: white;
+  color: black;
 }
 #journalTable {
   font-family: arial, sans-serif;

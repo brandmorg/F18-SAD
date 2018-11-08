@@ -273,11 +273,13 @@
       <th (click)="viewUsersSort('createdAt','ASC',columnSearch,criteria); column='createdAt'">Created at</th>
       <th (click)="viewUsersSort('active','ASC',columnSearch,criteria); column='active'">Active</th>
     </tr>
-    <tr *ngFor="let user of users">
-      <td>{{ user.userName}}</td>
+    <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: currPage }  ">
+      <td *ngIf="user.userName != '[pending]'">{{ user.userName}}</td>
+      <td *ngIf="user.userName == '[pending]'" style="color: red">{{ user.userName}}</td>
       <td>{{ user.firstName }}</td>
       <td>{{ user.lastName }}</td>
-      <td>{{ user.userPassword}}</td>
+      <td *ngIf="user.userPassword != '[pending]'">{{ user.userPassword}}</td>
+      <td *ngIf="user.userPassword == '[pending]'" style="color: red">{{ user.userPassword}}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.userRole }}</td>
       <td>{{ user.updatedAt | date: 'MM/dd/yyyy  HH:mm:ss'}}</td>
@@ -288,6 +290,7 @@
       <button class="btn btn-primary" (click)="viewData(user.userId)">More</button>
     </tr>
   </table>
+  <pagination-controls (pageChange)="currPage = $event"></pagination-controls>
 </div>
 <!--
 <div id="editUser">

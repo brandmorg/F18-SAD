@@ -44,6 +44,9 @@ export class AddUserComponent implements OnInit {
   columnSearch = 'all';
   criteria = '';
 
+  //current page
+  currPage = 1;
+
   constructor(
     private router: Router,
     private location: Location,

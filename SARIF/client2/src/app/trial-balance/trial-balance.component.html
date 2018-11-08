@@ -1,16 +1,21 @@
 <div class="form-group" style="margin: auto; width: 50%;">
   <table id="ledgerTable" style=" table-layout:fixed">
     <tr>
-      <th colspan="4" class="col-xs-1 text-center">Trial Balance</th>
+      <th colspan="4" >
+        <label>{{'Date: ' + (currentDate | date: 'MM/dd/yyyy')}}</label>
+        <label style="margin: auto; padding-left: 33%">Trial balance</label>
+      </th>
     <tr>
     <tr>
-      <th >Title of Account</th>
-      <th >Account Number</th>
-      <th >Debit Balance</th>
-      <th >Credit Balance</th>
+      <th >Account</th>
+      <th >Number</th>
+      <th >Debit </th>
+      <th >Credit </th>
     </tr>
     <tr *ngFor="let account of accountsArranged">
-      <td>{{ account.accountName }}</td>
+      <td>
+        <button class="btn btn-link" (click)="viewLedger(account.accountName)">{{account.accountName}}</button>
+      </td>
       <td>{{ account.accountNumber }}</td>
       <td *ngIf="account.normalSide == 'Debit'" style="text-align: right;">{{ account.currentBalance | number : '1.2-2'}}</td>
       <td *ngIf="account.normalSide == 'Debit'" style="text-align: right;">&nbsp;</td>

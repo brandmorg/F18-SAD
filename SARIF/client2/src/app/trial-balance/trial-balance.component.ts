@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {CoAService} from '../services/coa.service';
 import {CoA} from '../chart-of-accounts';
+import {SharedDataService} from '../services/shared-data.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-trial-balance',
@@ -12,6 +14,7 @@ export class TrialBalanceComponent implements OnInit {
   accountsArranged = [];
   debitTotal = 0;
   creditTotal = 0;
+  currentDate: Date;
 
   assetslist = [];
   liabilitiesList = [];
@@ -21,9 +24,12 @@ export class TrialBalanceComponent implements OnInit {
 
   constructor(
     private cserv: CoAService,
+    private data: SharedDataService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
+    this.currentDate = new Date();
     this.debitTotal = 0;
     this.creditTotal = 0;
     this.viewAccounts();
@@ -94,6 +100,12 @@ export class TrialBalanceComponent implements OnInit {
       }
     }
 
+  }
+
+  //route to account ledger
+  viewLedger(accountName){
+    this.data.setAccount(accountName);
+    this.router.navigate(['UserPage/ledger', accountName]);
   }
 
 }

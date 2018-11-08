@@ -4,6 +4,7 @@ import { AppComponent } from '../app.component';
 import { CoAService } from '../services/coa.service';
 import { UserLogService } from '../services/user-log.service';
 import {NgForm} from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 @Component({
@@ -34,6 +35,11 @@ export class ChartOfAccountsComponent implements OnInit {
 
   //set user access
   access = 0;
+
+  //number of accounts listed on a page at a time
+  quantity = 10;
+  //current page
+  currPage = 1;
 
 //currencyMask
   private currencyMask = createNumberMask({
@@ -113,12 +119,12 @@ export class ChartOfAccountsComponent implements OnInit {
     this.CoA.createdBy = this.comp.getUserName();
     //Check to see if account number is a number
     if (isNaN(this.CoA.accountNumber)) {
-      return window.alert("Enter a number for account number");
+      return;
     }
     ;
     //Check to see if account balance is a number
     if (isNaN(this.CoA.originalBalance)) {
-      return window.alert("Enter a number for the balance");
+      return;
     }
     ;
     //Set asset and revenue account types to normal side debit
@@ -145,11 +151,11 @@ export class ChartOfAccountsComponent implements OnInit {
           for (var i = 0; i < this.temp.length; i++) {
             //Check for account name
             if (this.temp[i].accountName == this.CoA.accountName) {
-              return window.alert("Account with same account name found. Enter different account name.");
+              return;
             }
             //Check for account number
             if (this.temp[i].accountNumber == this.CoA.accountNumber) {
-              return window.alert("Account with the same account number found. Enter a different account number.")
+              return;
             }
           }
           //If account name and number not found, create the account

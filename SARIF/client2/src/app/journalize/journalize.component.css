@@ -156,3 +156,8 @@ input:checked + .slider:before {
   margin-left: auto;
 }
 
+.btn-link{
+  line-height: .4;
+}
+
+

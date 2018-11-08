@@ -5,7 +5,7 @@ td, th {
 }
 
 tr:nth-child(even) {
-  background-color: #d0d3d6;
+  background-color: #e0e3e6;
 }
 table, h3, h2, td {
     color: black;

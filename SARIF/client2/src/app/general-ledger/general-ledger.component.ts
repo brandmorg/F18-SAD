@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 export class GeneralLedgerComponent implements OnInit {
   accounts = [];
 
+  //current page
+  currPage = 1;
+
 
   constructor(
     private router: Router,

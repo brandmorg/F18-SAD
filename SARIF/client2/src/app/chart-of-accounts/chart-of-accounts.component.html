@@ -200,7 +200,7 @@
       <th (click)="viewAccountsSort('active','ASC',columnSearch,criteria)">Active</th>
       <th (click)="viewAccountsSort('createdBy','ASC',columnSearch,criteria)">Created By</th>
     </tr>
-    <tr *ngFor="let account of accounts">
+    <tr *ngFor="let account of accounts | paginate: { itemsPerPage: 10, currentPage: currPage }  ">
       <td>{{ account.accountNumber }}</td>
       <td>{{ account.accountName }}</td>
       <td>{{ account.accountType }}</td>
@@ -214,4 +214,6 @@
       <button class="btn btn-primary" (click)="getAccount(account.caId)" *ngIf="access == 1">Edit</button>
     </tr>
   </table>
+
+  <pagination-controls (pageChange)="currPage = $event"></pagination-controls>
 </div>
