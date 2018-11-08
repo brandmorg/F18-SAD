@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
 
 
   constructor(
-    private router: Router, 
-    private loginService: LoginService, 
+    private router: Router,
+    private loginService: LoginService,
     private comp: AppComponent,
     private logData: UserLogService,
     private home: LoginHomeComponent,
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
           this.comp.setSession(this.user.userId, this.user.userName, this.user.userRole, this.user.firstName, this.user.lastName);
           this.isActive = 1;
         }
-        else if(this.user.userId == -2){
+        else if (this.user.userId === -2) {
           this.isActive = 2;
         }
         else {
@@ -58,8 +58,8 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-  //error goes away when changes are put into input
-  resetError(){
+  // error goes away when changes are put into input
+  resetError() {
     this.isActive = 1;
   }
 
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  toggleReset(){
+  toggleReset() {
     this.data.changeToggle(3);
 
   }

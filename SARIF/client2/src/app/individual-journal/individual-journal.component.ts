@@ -12,8 +12,9 @@ import {Router} from '@angular/router';
 })
 export class IndividualJournalComponent implements OnInit {
 
-   thisJournal  = Journal;
-  private journals = [];
+   thisJournal: Journal;
+ 
+   private journals = [];
 
   constructor(
     private journalServ: JournalizeService,

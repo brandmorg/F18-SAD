@@ -7,6 +7,7 @@ const multer = require('multer');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json())
 var MemoryStore =session.MemoryStore;
+const path = require('path');
 
 const cors = require('cors')
 const corsOptions = {
@@ -33,6 +34,9 @@ app.use(function(req, res, next) {
     next();
 })
 
+// angular production build directory
+app.use(express.static('public')); 
+
 const db = require('./app/config/db.config.js');
 
 // force: true will drop the table if it already exists
@@ -44,6 +48,9 @@ db.sequelize.sync().then(() => {
 
 app.set('trust proxy', true)
 
+/*
+// require('./server/api')(app, config);
+*/
 require('./app/routes/generalLedger.routes')(app);
 require('./app/routes/journal.routes')(app);
 require('./app/routes/journalFiles.routes')(app);
@@ -55,6 +62,7 @@ require('./app/routes/users.routes.js')(app);
 require('./app/routes/log.routes.js')(app);
 
 // Create a Server
+/*
 var server = app.listen(8080, function () {
 
     let host = server.address().address
@@ -62,6 +70,31 @@ var server = app.listen(8080, function () {
 
     console.log("App listening at http://%s:%s", host, port);
 })
+*/
+
+////////////////////////////
+// Set port
+const port = process.env.PORT || '8080';
+app.set('port', port);
+
+// Set static path to Angular app in dist
+// Don't run in dev
+if (process.env.NODE_ENV !== 'dev') {
+  app.use('/', express.static(path.join(__dirname, '/dist')));
+}
+
+// Pass routing to Angular app
+// Don't run in dev
+if (process.env.NODE_ENV !== 'dev') {
+    app.get('*', function(req, res) {
+      res.sendFile(path.join(__dirname, '/dist/index.html'));
+    });
+  }
+  
+app.listen(port, () => console.log(`Server running on localhost:${port}`));
+
+//////////////////////
+
 
 function initial(){
 

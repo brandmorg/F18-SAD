@@ -36,7 +36,8 @@ export class ChartOfAccountsComponent implements OnInit {
   access = 0;
 
 //currencyMask
-  private currencyMask = createNumberMask({
+/////EDITED 10/31 BECAUSE THE MASK WAS TOO SPOOKY
+  public currencyMask = createNumberMask({
     prefix: '',
     suffix: '',
     includeThousandsSeparator: false,
