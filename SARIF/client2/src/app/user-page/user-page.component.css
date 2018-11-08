@@ -23,7 +23,7 @@ table, h3, h2, td {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #161616;
+  background-color: #4171cb;
   overflow-x: hidden;
   padding-top: 20px;
   float: left;
@@ -31,4 +31,8 @@ table, h3, h2, td {
 
 .right{
   margin-left: 200px;
+}
+
+.btn-link{
+  color: white;
 }

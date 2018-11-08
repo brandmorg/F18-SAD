@@ -12,7 +12,7 @@ body::before {
 		height:100%;
 		background-color: #EAEAEA;
 		background-image: 
-		radial-gradient(circle farthest-side at top right, transparent, #20232B), radial-gradient(ellipse farthest-corner at 0% 100%, transparent, #868079);
+		radial-gradient(circle farthest-side at top right, transparent, white), radial-gradient(ellipse farthest-corner at 0% 100%, transparent, white);
 		animation:bg-change 10s infinite;
 }
 

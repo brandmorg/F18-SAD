@@ -129,10 +129,10 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="3" />
-          <entry key="project.open.time.0" value="2" />
+          <entry key="project.open.time.0" value="3" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.3" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -225,9 +225,9 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="170" />
-    <option name="y" value="101" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="193" />
+    <option name="y" value="95" />
     <option name="width" value="1551" />
     <option name="height" value="930" />
   </component>
@@ -237,9 +237,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -280,6 +277,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -334,16 +333,18 @@
       <workItem from="1540227408312" duration="6021000" />
       <workItem from="1540840413811" duration="610000" />
       <workItem from="1540852089012" duration="243000" />
+      <workItem from="1541709826787" duration="695000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="141657000" />
+    <option name="totallyTimeSpent" value="142352000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="170" y="101" width="1551" height="930" extended-state="0" />
+    <frame x="193" y="95" width="1551" height="930" extended-state="1" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24690554" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25016767" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />

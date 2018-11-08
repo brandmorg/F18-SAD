@@ -7,10 +7,10 @@ td, th {
   padding: 8px;
 }
 tr:nth-child(even) {
-  background-color: #6e7d93;
+  background-color: #e0e3e6;
 }
 table, h3, h2, td {
-  color: white;
+  color: black;
 }
 
 

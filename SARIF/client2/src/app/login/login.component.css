@@ -1,12 +1,12 @@
 h2{
-    color: white;
+    color: black;
 }
 
 h3{
-    color: white;
+    color: black;
 }
 
-label.required { color: white; }
+label.required { color: black; }
 
 
 
@@ -29,13 +29,13 @@ label.required { color: white; }
 }
 
 #button1{
-  color: white;
+  color: black;
   position:absolute;
   right:6%;
 }
 
 #button2{
-  color: white;
+  color: black;
   margin: 0 auto;
   position: relative;
   right: -12%;
@@ -43,5 +43,5 @@ label.required { color: white; }
 
 hr{
   width: 250px;
-  border-color: white;
+  border-color: black;
 }

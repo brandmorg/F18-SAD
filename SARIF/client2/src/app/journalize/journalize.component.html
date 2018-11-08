@@ -35,7 +35,7 @@
             </tr>
 
             <tr *ngFor="let account of journalAccountsDebit" class="trbackground">
-              <td class="accountsinput" style=" background-color: white">
+              <td class="accountsinput" style=" background-color: black">
                 <select id="debitDropDown"  class="form-control" style="width: 200px" required
                         [ngModelOptions]="{standalone: true}"
                          [(ngModel)]="account.AccountName" [name]="account.AccountName"
@@ -182,9 +182,9 @@
       <td>
         <tr *ngFor="let jaccount of journal.JournalAccounts" style=" background-color: transparent" >
           <td  class="accountslist2" *ngIf="jaccount.NormalSide == 'Credit'" >
-            <button class="hover" style="color: white" (click)="viewLedger(jaccount.AccountName)" id="button1" >{{ jaccount.AccountName }}</button></td>
+            <button class="hover" style="color: dodgerblue" (click)="viewLedger(jaccount.AccountName)" id="button1" >{{ jaccount.AccountName }}</button></td>
           <td  class="accountslist" *ngIf="jaccount.NormalSide == 'Debit'">
-            <button class="hover" style="color: white" (click)="viewLedger(jaccount.AccountName)" id="button2" >{{ jaccount.AccountName }}</button>
+            <button class="hover" style="color: dodgerblue" (click)="viewLedger(jaccount.AccountName)" id="button2" >{{ jaccount.AccountName }}</button>
           </td>
 
        </tr>
