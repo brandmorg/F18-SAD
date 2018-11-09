@@ -72,4 +72,15 @@ export class UserPageComponent implements OnInit {
   viewTrialBalance() {
     this.router.navigate(['UserPage/trial-balance'])
   }
+  viewIncomeStatement(){
+    this.router.navigate(['UserPage/income_statement'])
+  }
+  viewRetainedEarnings(){
+    this.router.navigate(['UserPage/statement_of_retained_earnings'])
+  }
+  viewBalanceSheet(){
+    this.router.navigate(['UserPage/balance_sheet'])
+  }
+
+
 }

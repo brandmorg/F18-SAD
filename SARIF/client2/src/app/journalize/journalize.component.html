@@ -142,7 +142,7 @@
       </div>
     </form>
 
-    <button class="btn btn-info btn-lg" (click)="openCreateJournal()" >Add Journal</button>
+    <button class="btn btn-info btn-lg" (click)="openCreateJournal()" >Journalize</button>
     <div class="btn-group" style="float: right; margin-right: 8%">
 
         <button type="button" class="btn btn-primary" name="options"   (click)="setApprovalType('all')">All</button>
@@ -179,11 +179,12 @@
       <td style="vertical-align: top"  >{{ journal.Date | date: 'MM/dd/yyyy'}}</td>
       <td>
         <tr *ngFor="let jaccount of journal.JournalAccounts" style=" background-color: transparent">
-         <td class="accountslist2">{{jaccount.Type}}</td>
+         <td class="accountslist2">{{jaccount.Type}}
+         </td>
         </tr>
-    <tr style=" background-color: transparent">
-      <td class="accountslist">&nbsp;</td>
-    </tr>
+        <tr style=" background-color: transparent">
+             <td class="accountslist">&nbsp;</td>
+        </tr>
       </td>
       <td style="vertical-align: top" >{{ journal.CreatedBy }}</td>
       <td>
@@ -191,8 +192,7 @@
           <td  class="accountslist2" *ngIf="jaccount.NormalSide == 'Credit'" >
             <button class="btn btn-link " style="color: dodgerblue" (click)="viewLedger(jaccount.AccountName)" id="button1" >{{ jaccount.AccountName }}</button></td>
           <td  class="accountslist" *ngIf="jaccount.NormalSide == 'Debit'">
-            <button class="btn btn-link " style="color: dodgerblue" (click)="viewLedger(jaccount.AccountName)" id="button2" >{{ jaccount.AccountName }}</button>
-          </td>
+            <button class="btn btn-link " style="color: dodgerblue" (click)="viewLedger(jaccount.AccountName)" id="button2" >{{ jaccount.AccountName }}</button></td>
        </tr>
         <tr style=" background-color: transparent">
           <td class="accountslist" *ngIf="journal.Description != null">{{'Description: ' + journal.Description}}</td>

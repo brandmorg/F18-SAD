@@ -13,6 +13,9 @@ import { GeneralLedgerComponent } from '../general-ledger/general-ledger.compone
 import { IndividualLedgerComponent } from '../individual-ledger/individual-ledger.component';
 import { TrialBalanceComponent } from '../trial-balance/trial-balance.component';
 import { IndividualJournalComponent } from '../individual-journal/individual-journal.component';
+import { IncomeStatementComponent } from '../income-statement/income-statement.component';
+import { RetainedEarningsComponent } from '../retained-earnings/retained-earnings.component';
+import { BalanceSheetComponent } from '../balance-sheet/balance-sheet.component';
 
 
 const routes: Routes = [
@@ -81,6 +84,18 @@ const routes: Routes = [
       {
         path: 'trial-balance',
         component: TrialBalanceComponent
+      },
+      {
+        path: 'income_statement',
+        component: IncomeStatementComponent
+      },
+      {
+        path: 'statement_of_retained_earnings',
+        component: RetainedEarningsComponent
+      },
+      {
+        path: 'balance_sheet',
+        component: BalanceSheetComponent
       }
       ]
   }

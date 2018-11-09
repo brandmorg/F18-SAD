@@ -26,6 +26,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IncomeStatementComponent } from './income-statement/income-statement.component';
 import { RetainedEarningsComponent } from './retained-earnings/retained-earnings.component';
+import { BalanceSheetComponent } from './balance-sheet/balance-sheet.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { RetainedEarningsComponent } from './retained-earnings/retained-earnings
     DashboardComponent,
     IncomeStatementComponent,
     RetainedEarningsComponent,
+    BalanceSheetComponent,
   ],
   imports: [
     BrowserModule,

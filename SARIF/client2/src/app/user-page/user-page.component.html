@@ -19,9 +19,9 @@
       <div class="drop">
       <div class = "container-fluid" *ngIf="dropdownToggle == true" style="background-color: #3944cb; width: 200px; position: relative;">
         <button class="btn btn-link" (click)="viewTrialBalance()" style="white-space: normal">Trial Balance</button>
-        <button class="btn btn-link" (click)="logOut()" >Income Statement</button>
-        <button class="btn btn-link" (click)="logOut()" style="white-space: normal; text-align: left">Statement of Retained Earnings</button>
-        <button class="btn btn-link" (click)="logOut()" style="display: block">Balance Sheet</button>
+        <button class="btn btn-link" (click)="viewIncomeStatement()" >Income Statement</button>
+        <button class="btn btn-link" (click)="viewRetainedEarnings()" style="white-space: normal; text-align: left">Statement of Retained Earnings</button>
+        <button class="btn btn-link" (click)="viewBalanceSheet()" style="display: block">Balance Sheet</button>
         <button class="btn btn-link" (click)="logOut()" style="white-space: normal; text-align: left; display:block" >Post Closing Trial Balance</button>
       </div>
       </div>
@@ -32,8 +32,5 @@
     <div class="right">
       <router-outlet></router-outlet>
     </div>
-
-
   </div>
-
 </form>

@@ -1,3 +1,43 @@
-<p>
-  income-statement works!
-</p>
+<div class="form-group" style="margin: auto; width: 50%;">
+  <table id="ledgerTable" style=" table-layout:fixed">
+    <tr>
+      <th colspan="2" >
+        <label>{{'Date: ' + (currentDate | date: 'MM/dd/yyyy')}}</label>
+        <label style="margin: auto; padding-left: 33%">Income Statement</label>
+      </th>
+    </tr>
+    <tr>
+      <th colspan="2" >Revenues</th>
+    </tr>
+    <tr *ngFor="let accounts of revenueAccounts">
+      <td style="width: 70%;   text-indent: 25px ; position: relative">{{accounts.accountName}}</td>
+      <td style="text-align: right;">{{accounts.currentBalance | number : '1.2-2'}}</td>
+    </tr>
+    <tr>
+      <th >Total Revenues</th>
+      <td style="text-align: right;">{{totalRevenue | number : '1.2-2'}}</td>
+    </tr>
+    <tr >
+      <th colspan="2" >&nbsp;</th>
+    </tr>
+    <tr>
+      <th colspan="2" >Expenses</th>
+    </tr>
+    <tr *ngFor="let accounts of expenseAccounts">
+      <td style=";   text-indent: 25px">{{accounts.accountName}}</td>
+      <td style="text-align: right;">{{accounts.currentBalance | number : '1.2-2'}}</td>
+    </tr>
+    <tr>
+      <th >Total Expenses</th>
+      <td style="text-align: right;">{{totalExpense | number : '1.2-2'}}</td>
+    </tr>
+    <tr >
+      <th colspan="2" >&nbsp;</th>
+    </tr>
+    <tr>
+      <th >Net Income</th>
+      <td style="text-align: right;">{{totalRevenue - totalExpense | number : '1.2-2'}}</td>
+    </tr>
+
+  </table>
+</div>

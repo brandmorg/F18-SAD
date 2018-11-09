@@ -1,0 +1,77 @@
+<div class="form-group" style="margin: auto; width: 50%;">
+  <table id="ledgerTable" style=" table-layout:fixed">
+    <tr>
+      <th colspan="4" >
+        <label>{{'Date: ' + (currentDate | date: 'MM/dd/yyyy')}}</label>
+        <label style="margin: auto; padding-left: 33%">Balance Sheet</label>
+      </th>
+    <tr>
+    <tr>
+    <th colspan="3">Assets</th>
+  </tr>
+    <tr>
+    <td colspan="3">Current Assets</td>
+  </tr>
+    <tr *ngFor="let account of currentAssets">
+      <td style=" text-indent: 25px ">{{account.accountName}}</td>
+      <td style="text-align: right;">{{account.currentBalance | number : '1.2-2'}}</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td >Current Total Assets</td>
+      <td>&nbsp;</td>
+      <td style="text-align: right;">{{totalCurrentAssets | number : '1.2-2'}}</td>
+    </tr>
+    <tr>
+      <td colspan="3">Property Plant & Equipment</td>
+    </tr>
+    <tr *ngFor="let account of property_plant_equip">
+      <td style=" text-indent: 25px ">{{account.accountName}}</td>
+      <td style="text-align: right;">{{account.currentBalance | number : '1.2-2'}}</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td >Property Plant & Equipment, net</td>
+      <td>&nbsp;</td>
+      <td style="text-align: right;">{{totalPropertynum | number : '1.2-2'}}</td>
+    </tr>
+    <tr>
+      <th>Total Assets</th>
+      <td>&nbsp;</td>
+      <td style="text-align: right;">{{totalPropertynum + totalCurrentAssets| number : '1.2-2'}}</td>
+    </tr>
+    <tr>
+      <th colspan="3">Liabilities and Stockholders' Equity</th>
+    </tr>
+    <tr>
+      <th colspan="3">Liabilities</th>
+    </tr>
+    <tr>
+      <td colspan="3">Current Liabilities</td>
+    </tr>
+    <tr *ngFor="let account of currentLiabilities">
+      <td style=" text-indent: 25px ">{{account.accountName}}</td>
+      <td>&nbsp;</td>
+      <td style="text-align: right;">{{account.currentBalance | number : '1.2-2'}}</td>
+    </tr>
+    <tr>
+      <th>Total Liabilities</th>
+      <td>&nbsp;</td>
+      <td style="text-align: right;">{{totalLiabilitnum | number : '1.2-2'}}</td>
+    </tr>
+    <tr>
+      <th colspan="3">Stockholders' Equity</th>
+    </tr>
+    <tr *ngFor="let account of stockholdersEquity">
+      <td style=" text-indent: 25px ">{{account.accountName}}</td>
+      <td>&nbsp;</td>
+      <td style="text-align: right;">{{account.currentBalance | number : '1.2-2'}}</td>
+    <tr>
+      <th >Total StockHolders' Equity</th>
+    </tr>
+    <tr>
+      <th>Total Liabilities & Stockholders' Equity</th>
+    </tr>
+
+  </table>
+</div>
