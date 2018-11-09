@@ -18,6 +18,8 @@ export class UserPageComponent implements OnInit {
   logs = [];
   currentpage = 0;
 
+  dropdownToggle = false;
+
   constructor(private router: Router, 
     private loginService: LoginService, 
     private comp: AppComponent, 

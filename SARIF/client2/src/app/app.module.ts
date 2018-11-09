@@ -23,6 +23,9 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { TrialBalanceComponent } from './trial-balance/trial-balance.component';
 import { IndividualJournalComponent } from './individual-journal/individual-journal.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { IncomeStatementComponent } from './income-statement/income-statement.component';
+import { RetainedEarningsComponent } from './retained-earnings/retained-earnings.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
     IndividualLedgerComponent,
     TrialBalanceComponent,
     IndividualJournalComponent,
+    DashboardComponent,
+    IncomeStatementComponent,
+    RetainedEarningsComponent,
   ],
   imports: [
     BrowserModule,
