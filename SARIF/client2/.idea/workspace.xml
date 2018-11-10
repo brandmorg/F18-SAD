@@ -545,7 +545,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541891937560" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541891985668" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -631,12 +631,12 @@
       <workItem from="1540848998184" duration="865000" />
       <workItem from="1541709771257" duration="10702000" />
       <workItem from="1541742391190" duration="3773000" />
-      <workItem from="1541790561433" duration="29449000" />
+      <workItem from="1541790561433" duration="29497000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="411291000" />
+    <option name="totallyTimeSpent" value="411339000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="76" y="0" width="1876" height="1100" extended-state="0" />
