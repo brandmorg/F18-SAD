@@ -211,6 +211,8 @@ export class ChartOfAccountsComponent implements OnInit {
     //Set the account Id correctly to chosen account
     this.editCoA.caId = this.accountId;
 
+    console.log('previous balance' +this.accountData.currentBalance);
+
     //Set asset and revenue account types to normal side debit
     if (this.editCoA.accountType == "Assets" || this.editCoA.accountType == "Revenue") {
       this.editCoA.normalSide = "Debit";
@@ -218,12 +220,13 @@ export class ChartOfAccountsComponent implements OnInit {
     else {
       this.editCoA.normalSide = "Credit";
     }
-    //Reset current balance to new orignal balance
-    this.editCoA.currentBalance = this.editCoA.originalBalance;
+    //--Code here isnt correct
+        //Reset current balance to new orignal balance
+        //this.editCoA.currentBalance = this.editCoA.originalBalance;
 
     //Check to see if another account exists with same number or name
     //If account name and number not found, create the account
-
+    this.editCoA.currentBalance = this.accountData.currentBalance;
     if(this.numberHasDecimal == 2) {
       console.log('decimal required');
     }

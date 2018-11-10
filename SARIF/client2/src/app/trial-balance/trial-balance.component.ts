@@ -116,12 +116,16 @@ export class TrialBalanceComponent implements OnInit {
     var doc = new jsPDF('p', 'pt');
     var rows = [];
     for(let acc of this.accountsArranged){
+
+
       if(acc.normalSide == 'Debit') {
-        let account = [acc.accountName, acc.accountNumber , acc.currentBalance, ' '];
+       let num = parseFloat(''+Math.round(acc.currentBalance * 100) / 100).toFixed(2);
+        let account = [acc.accountName, acc.accountNumber ,num, ' '];
         rows.push(account);
       }
       else{
-        let account = [acc.accountName, acc.accountNumber, ' ', acc.currentBalance];
+        let num = parseFloat(''+Math.round(acc.currentBalance * 100) / 100).toFixed(2);
+        let account = [acc.accountName, acc.accountNumber, ' ', num];
         rows.push(account);
       }
     }
