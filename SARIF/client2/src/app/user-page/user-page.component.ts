@@ -73,7 +73,7 @@ export class UserPageComponent implements OnInit {
     this.router.navigate(['UserPage/generalLedger']);
   }
   viewTrialBalance() {
-    this.data.setTrialBalance('Trial Balance');
+    this.data.setTrialBalance('Unadjusted Trial Balance');
     this.router.navigate(['UserPage/trial-balance']);
   }
   viewIncomeStatement(){

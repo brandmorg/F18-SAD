@@ -37,7 +37,7 @@ const db = require('./app/config/db.config.js');
 
 // force: true will drop the table if it already exists
 //db.sequelize.sync({force: true}).then(() => {
-db.sequelize.sync().then(() => {
+db.sequelize.sync({force: true}).then(() => {
     console.log('Drop and Resync with { force: true }');
     initial();
 });
@@ -128,7 +128,7 @@ function initial(){
 
 
     for (let i = 0; i < users.length; i++) {
-        //User.create(users[i]);
+        User.create(users[i]);
     }
 
 }

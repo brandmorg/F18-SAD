@@ -15,12 +15,18 @@ export class BalanceSheetComponent implements OnInit {
   currentAssets = [];
   property_plant_equip = [];
   currentLiabilities = [];
+  otherLiabilities = [];
   stockholdersEquity = [];
+  revenueAccounts = [];
+  expenseAccounts = [];
   currentDate: Date;
 
   totalCurrentAssets = 0;
   totalPropertynum = 0;
   totalLiabilitnum = 0;
+  totalEquitynum = 0;
+  totalRevenue = 0;
+  totalExpense = 0;
 
   constructor(
     private cserv: CoAService,
@@ -42,8 +48,11 @@ export class BalanceSheetComponent implements OnInit {
       if(acc.accountSubType == 'Current Assets'){
         this.currentAssets.push(acc);
       }
-      else if(acc.accountSubType == 'Current Liabilities'){
+      else if(acc.accountType == 'Liability' && acc.accountSubType == 'Current Liabilities'){
         this.currentLiabilities.push(acc);
+      }
+      else if(acc.accountType == 'Liability' && acc.accountSubType != 'Current Liabilities'){
+        this.otherLiabilities.push(acc);
       }
       else if(acc.accountSubType =='Property, Plant, and Equipment'){
         this.property_plant_equip.push(acc);
@@ -55,9 +64,34 @@ export class BalanceSheetComponent implements OnInit {
         console.log('neither');
       }
     }
+
+   //calculate retained earnings
+    for(let acc of this.accounts){
+      if(acc.accountType == 'Revenue'){
+        this.revenueAccounts.push(acc);
+      }
+      else if(acc.accountType == 'Expenses' ){
+        this.expenseAccounts.push(acc);
+      }else{
+        console.log('neither')
+      }
+    }
+    for(let acc of this.revenueAccounts){
+      this.totalRevenue = +this.totalRevenue + +acc.currentBalance;
+    }
+
+    for(let acc of this.expenseAccounts){
+      this.totalExpense = +this.totalExpense + +acc.currentBalance;
+    }
+    for(let acc of this.accounts){
+      if(acc.accountName == 'Retained Earnings'){
+        acc.currentBalance = +this.totalRevenue - +this.totalExpense;
+      }
+    }
     this.totalCurrAssets();
     this.totalProperty();
     this.totalLiabilities();
+    this.totalEquity();
   }
 
   totalCurrAssets(){
@@ -73,6 +107,14 @@ export class BalanceSheetComponent implements OnInit {
   totalLiabilities(){
     for(let acc of this.currentLiabilities){
       this.totalLiabilitnum = +this.totalLiabilitnum + +acc.currentBalance
+    }
+    for(let acc of this.otherLiabilities){
+      this.totalLiabilitnum = +this.totalLiabilitnum + +acc.currentBalance
+    }
+  }
+  totalEquity(){
+    for(let acc of this.stockholdersEquity){
+      this.totalEquitynum = +this.totalEquitynum + +acc.currentBalance
     }
   }
 

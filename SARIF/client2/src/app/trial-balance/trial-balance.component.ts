@@ -94,7 +94,12 @@ export class TrialBalanceComponent implements OnInit {
     for(let acc of this.accountsArranged){
       console.log(acc.currentBalance);
       if(acc.normalSide == 'Debit'){
-        this.debitTotal = +this.debitTotal + +acc.currentBalance;
+        if(acc.currentBalance < 0){
+          this.creditTotal = +this.creditTotal - +acc.currentBalance;
+        }
+        else {
+          this.debitTotal = +this.debitTotal + +acc.currentBalance;
+        }
       }
     }
   }
@@ -102,7 +107,12 @@ export class TrialBalanceComponent implements OnInit {
     for(let acc of this.accountsArranged){
       console.log(acc.currentBalance);
       if(acc.normalSide == 'Credit'){
-        this.creditTotal = +this.creditTotal + +acc.currentBalance;
+        if(acc.currentBalance < 0){
+          this.debitTotal = +this.debitTotal - +acc.currentBalance;
+        }
+        else {
+          this.creditTotal = +this.creditTotal + +acc.currentBalance;
+        }
       }
     }
 
@@ -137,7 +147,7 @@ export class TrialBalanceComponent implements OnInit {
 
     doc.autoTable(columns, rows, {startY: 60, columnStyles: {
         0: {columnWidth: 350}, 2: {halign: 'right'}, 3: {halign: 'right'}, }});
-    doc.save('Trial_Balance.pdf');
+    doc.save(this.data.getTrialBalance() + '.pdf');
   }
 
 }

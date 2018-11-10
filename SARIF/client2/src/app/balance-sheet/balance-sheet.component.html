@@ -1,5 +1,5 @@
 <div class="form-group" style="margin: auto; width: 50%;">
-  <table id="ledgerTable" style=" table-layout:fixed">
+  <table id="ledgerTable" style=" width: 70%">
     <tr>
       <th colspan="4" >
         <label>{{'Date: ' + (currentDate | date: 'MM/dd/yyyy')}}</label>
@@ -54,6 +54,11 @@
       <td>&nbsp;</td>
       <td style="text-align: right;">{{account.currentBalance | number : '1.2-2'}}</td>
     </tr>
+    <tr *ngFor="let account of otherLiabilities">
+      <td>{{account.accountName}}</td>
+      <td>&nbsp;</td>
+      <td style="text-align: right;">{{account.currentBalance | number : '1.2-2'}}</td>
+    </tr>
     <tr>
       <th>Total Liabilities</th>
       <td>&nbsp;</td>
@@ -68,9 +73,13 @@
       <td style="text-align: right;">{{account.currentBalance | number : '1.2-2'}}</td>
     <tr>
       <th >Total StockHolders' Equity</th>
+       <td>&nbsp;</td>
+        <td style="text-align: right;">{{totalEquitynum | number : '1.2-2'}}</td>
     </tr>
     <tr>
       <th>Total Liabilities & Stockholders' Equity</th>
+      <td>&nbsp;</td>
+      <td style="text-align: right;">{{totalEquitynum + totalLiabilitnum | number : '1.2-2'}}</td>
     </tr>
 
   </table>
