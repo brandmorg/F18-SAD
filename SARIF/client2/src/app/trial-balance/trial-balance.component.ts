@@ -4,12 +4,15 @@ import {CoA} from '../chart-of-accounts';
 import {SharedDataService} from '../services/shared-data.service';
 import {Router} from '@angular/router';
 
+declare var jsPDF: any;
+
 @Component({
   selector: 'app-trial-balance',
   templateUrl: './trial-balance.component.html',
   styleUrls: ['./trial-balance.component.css']
 })
 export class TrialBalanceComponent implements OnInit {
+
   accounts = [];
   accountsArranged = [];
   debitTotal = 0;
@@ -106,6 +109,28 @@ export class TrialBalanceComponent implements OnInit {
   viewLedger(accountName){
     this.data.setAccount(accountName);
     this.router.navigate(['UserPage/ledger', accountName]);
+  }
+
+  convertPDF(){
+    let columns = ['Account', 'Number', 'Debit', 'Credit'];
+    var doc = new jsPDF('p', 'pt');
+    var rows = [];
+    for(let acc of this.accountsArranged){
+      if(acc.normalSide == 'Debit') {
+        let account = [acc.accountName, acc.accountNumber , acc.currentBalance, ' '];
+        rows.push(account);
+      }
+      else{
+        let account = [acc.accountName, acc.accountNumber, ' ', acc.currentBalance];
+        rows.push(account);
+      }
+    }
+    rows.push([' ', ' ', this.debitTotal, this.creditTotal])
+    doc.text(50, 40, "Trial Balance");
+
+    doc.autoTable(columns, rows, {startY: 60, columnStyles: {
+        0: {columnWidth: 350}, 2: {halign: 'right'}, 3: {halign: 'right'}, }});
+    doc.save('Trial_Balance.pdf');
   }
 
 }

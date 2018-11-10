@@ -28,6 +28,7 @@ import { IncomeStatementComponent } from './income-statement/income-statement.co
 import { RetainedEarningsComponent } from './retained-earnings/retained-earnings.component';
 import { BalanceSheetComponent } from './balance-sheet/balance-sheet.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

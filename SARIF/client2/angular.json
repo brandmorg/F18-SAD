@@ -25,7 +25,10 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jspdf/dist/jspdf.min.js",
+              "node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -64,6 +67,7 @@
             "browserTarget": "client:build"
           }
         },
+
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
@@ -123,5 +127,6 @@
       }
     }
   },
+
   "defaultProject": "client"
 }
