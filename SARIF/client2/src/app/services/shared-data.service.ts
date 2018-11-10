@@ -13,6 +13,8 @@ export class SharedDataService {
 
   accountRef = '';
 
+  trialBalanceType = '';
+
 
   constructor() { }
   changeToggle(num: number) {
@@ -29,6 +31,14 @@ export class SharedDataService {
   }
   getReference(){
     return this.accountRef;
+  }
+
+  setTrialBalance(str: string){
+    this.trialBalanceType = str;
+  }
+
+  getTrialBalance(){
+    return this.trialBalanceType;
   }
 
 

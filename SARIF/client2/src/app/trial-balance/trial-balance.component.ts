@@ -13,6 +13,8 @@ declare var jsPDF: any;
 })
 export class TrialBalanceComponent implements OnInit {
 
+  trialTitle = '';
+
   accounts = [];
   accountsArranged = [];
   debitTotal = 0;
@@ -31,7 +33,8 @@ export class TrialBalanceComponent implements OnInit {
     private router: Router,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(){
+    this.trialTitle = this.data.getTrialBalance();
     this.currentDate = new Date();
     this.debitTotal = 0;
     this.creditTotal = 0;
@@ -130,7 +133,7 @@ export class TrialBalanceComponent implements OnInit {
       }
     }
     rows.push([' ', ' ', this.debitTotal, this.creditTotal])
-    doc.text(50, 40, "Trial Balance");
+    doc.text(50, 40, this.data.getTrialBalance());
 
     doc.autoTable(columns, rows, {startY: 60, columnStyles: {
         0: {columnWidth: 350}, 2: {halign: 'right'}, 3: {halign: 'right'}, }});

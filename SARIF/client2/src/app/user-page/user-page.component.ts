@@ -5,6 +5,7 @@ import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import {AppComponent} from '../app.component';
 import { UserLogService } from '../services/user-log.service';
 import { UserService } from '../services/user.service';
+import {SharedDataService} from '../services/shared-data.service';
 
 @Component({
   providers: [AppComponent],
@@ -20,11 +21,13 @@ export class UserPageComponent implements OnInit {
 
   dropdownToggle = false;
 
-  constructor(private router: Router, 
-    private loginService: LoginService, 
-    private comp: AppComponent, 
-    private logData: UserLogService,
-    private userData: UserService,
+  constructor(
+    private router: Router,
+              private loginService: LoginService,
+              private comp: AppComponent,
+              private logData: UserLogService,
+              private userData: UserService,
+              private data: SharedDataService,
     ) { }
 
   ngOnInit() {
@@ -70,16 +73,25 @@ export class UserPageComponent implements OnInit {
     this.router.navigate(['UserPage/generalLedger']);
   }
   viewTrialBalance() {
-    this.router.navigate(['UserPage/trial-balance'])
+    this.data.setTrialBalance('Trial Balance');
+    this.router.navigate(['UserPage/trial-balance']);
   }
   viewIncomeStatement(){
-    this.router.navigate(['UserPage/income_statement'])
+    this.router.navigate(['UserPage/income_statement']);
   }
   viewRetainedEarnings(){
-    this.router.navigate(['UserPage/statement_of_retained_earnings'])
+    this.router.navigate(['UserPage/statement_of_retained_earnings']);
   }
   viewBalanceSheet(){
-    this.router.navigate(['UserPage/balance_sheet'])
+    this.router.navigate(['UserPage/balance_sheet']);
+  }
+  viewAdjustedTrialBalance() {
+    this.data.setTrialBalance('Adjusted Trial Balance');
+    this.router.navigate(['UserPage/adjusted_trial_balance']);
+  }
+  viewPostClosingTrialBalance() {
+    this.data.setTrialBalance('Post Closing Trial Balance');
+    this.router.navigate(['UserPage/post_closing_trial_balance']);
   }
 
 

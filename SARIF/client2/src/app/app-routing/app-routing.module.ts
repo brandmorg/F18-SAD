@@ -96,6 +96,14 @@ const routes: Routes = [
       {
         path: 'balance_sheet',
         component: BalanceSheetComponent
+      },
+      {
+        path: 'adjusted_trial_balance',
+        component: TrialBalanceComponent
+      },
+      {
+        path: 'post_closing_trial_balance',
+        component: TrialBalanceComponent
       }
       ]
   }
