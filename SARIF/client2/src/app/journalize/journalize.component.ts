@@ -383,20 +383,29 @@ export class JournalizeComponent implements OnInit {
         await this.journalServ.addJournalAccounts(debitAccounts).toPromise();
         console.log('posted debit');
       }
-      //post credit accounts
+      console.log('Debit accounts');
+      console.log(this.journalAccountsDebit);
+
       for(let creditAccounts of this.journalAccountsCredit){
         creditAccounts.JournalJId = id;
         creditAccounts.NormalSide = 'Credit';
         //set account type
+        console.log('accounts:');
+        console.log(this.accounts);
         for(let acc of this.accounts){
           if(acc.accountName == creditAccounts.AccountName){
+
             creditAccounts.Type = acc.accountType;
+            console.log('added account: ' +creditAccounts.Type);
+            console.log('account: ' +acc.accountType);
             break;
           }
         }
         await this.journalServ.addJournalAccounts(creditAccounts).toPromise();
         console.log('posted credit');
       }
+      console.log('credit accounts');
+      console.log(this.journalAccountsCredit);
       //sending source file
 
       if(this.selectedFile != null){

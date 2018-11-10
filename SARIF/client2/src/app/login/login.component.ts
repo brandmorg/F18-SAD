@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    //remove trailing whitespace
+    this.username = this.username.replace(/^\s+|\s+$/g, "");
     this.loginService.sendData(this.username, this.password).subscribe(
       user => {
         this.user = user;

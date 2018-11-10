@@ -160,6 +160,7 @@ export class ChartOfAccountsComponent implements OnInit {
           }
           //If account name and number not found, create the account
           this.CoA.accountName = this.CoA.accountName.charAt(0).toLocaleUpperCase() + this.CoA.accountName.substr(1);
+          this.CoA.accountName = this.CoA.accountName.replace(/^\s+|\s+$/g, "");
           this.coaService.addAccount(this.CoA)
             .subscribe(() => {
               this.logData.create(this.comp.getUserName(), this.CoA.createdBy + 'created account ' + this.CoA.accountName).subscribe();
@@ -232,6 +233,7 @@ export class ChartOfAccountsComponent implements OnInit {
     }
     else {
       this.editCoA.accountName = this.editCoA.accountName.charAt(0).toLocaleUpperCase() + this.editCoA.accountName.substr(1);
+      this.editCoA.accountName = this.editCoA.accountName.replace(/^\s+|\s+$/g, "");
       console.log('edit made');
       this.coaService.updateAccount(this.editCoA)
         .subscribe(() => {
