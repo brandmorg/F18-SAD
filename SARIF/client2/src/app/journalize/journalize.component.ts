@@ -1,4 +1,6 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { Subscription } from 'rxjs';
+import { timer } from 'rxjs'
 import { UserService } from '../services/user.service';
 import { JournalizeService} from '../services/journalize.service';
 import { GeneralLedgerService } from '../services/general-ledger.service';
@@ -36,6 +38,10 @@ export class JournalizeComponent implements OnInit {
   private fileUploadURL = 'http://localhost:8080/api/journalFiles';
   journalNew = new Journal();
   journals = []; //list of journal entries
+  timer = timer(8000);
+
+  private subscription: Subscription;
+
 
   journalAccountsDebit = []; //list of Debit journal accounts
   journalAccountsCredit = []; //list of Debit journal accounts
@@ -49,11 +55,11 @@ export class JournalizeComponent implements OnInit {
   totalCredit: number = 0.00;
   selectedFile: File;
 
- //search functions.
+  //search functions.
   column = 'JId';
   columnSearch = 'all';
   approvalType = 'all';
-  criteria= '';
+  criteria = '';
 
   //error variables
   fieldsFilled = 0;
@@ -99,7 +105,8 @@ export class JournalizeComponent implements OnInit {
     private comp: AppComponent,
     private http: HttpClient,
     private data: SharedDataService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.journals = [];
@@ -119,16 +126,17 @@ export class JournalizeComponent implements OnInit {
       }
     );
   }
+
   //this.viewUsersSort('userId', 'ASC', 'All', null);
 
   onOpened() {
-    if(this.comp.getRole() === 'admin'){
+    if (this.comp.getRole() === 'admin') {
       this.access = 1;
     }
-    else if(this.comp.getRole() === 'manager') {
+    else if (this.comp.getRole() === 'manager') {
       this.access = 2;
     }
-    else{
+    else {
       this.access = 3;
     }
   }
@@ -144,81 +152,82 @@ export class JournalizeComponent implements OnInit {
   }
 
 
-  getNumberDebits(journalAcc: JournalAccount[]): number{
+  getNumberDebits(journalAcc: JournalAccount[]): number {
     let num = 0;
-    for(let j of journalAcc){
-      if(j.DebitAmount !=null){
+    for (let j of journalAcc) {
+      if (j.DebitAmount != null) {
         num++;
       }
     }
     return num;
 
-}
-
+  }
 
 
   async getAccounts() {
     this.debitAccounts = [];
     this.creditAccounts = [];
-    let result = await this.coaService.findAllSort('accountName','ASC', 'All', null).toPromise();
+    let result = await this.coaService.findAllSort('accountName', 'ASC', 'All', null).toPromise();
     this.accounts = result;
     console.log("Hello");
-    for(let account of this.accounts){
-      if(account.normalSide == 'Debit'){
+    for (let account of this.accounts) {
+      if (account.normalSide == 'Debit') {
         this.debitAccounts.push(account.accountName);
         console.log("Debit: " + account.accountName)
       }
-      else{
+      else {
         this.creditAccounts.push(account.accountName);
         console.log("Credit: " + account.accountName)
       }
     }
   }
-  getDebitTotal(){
+
+  getDebitTotal() {
     this.totalsmatch = 1;
     this.totalDebit = 0.00;
-    for(let account of this.journalAccountsDebit){
-      if(isNaN(account.DebitAmount) || account.DebitAmount == null){
+    for (let account of this.journalAccountsDebit) {
+      if (isNaN(account.DebitAmount) || account.DebitAmount == null) {
 
       }
-      else{
+      else {
 
-        this.totalDebit  = +this.totalDebit + +account.DebitAmount;
+        this.totalDebit = +this.totalDebit + +account.DebitAmount;
 
       }
     }
   }
-  getCreditTotal(){
+
+  getCreditTotal() {
     this.totalsmatch = 1;
     this.totalCredit = 0.00;
-    for(let account of this.journalAccountsCredit){
-      if(isNaN(account.CreditAmount) || account.CreditAmount == null){
+    for (let account of this.journalAccountsCredit) {
+      if (isNaN(account.CreditAmount) || account.CreditAmount == null) {
 
       }
-      else{
-        this.totalCredit  = +this.totalCredit + +account.CreditAmount;
+      else {
+        this.totalCredit = +this.totalCredit + +account.CreditAmount;
 
       }
     }
   }
 
-  checkBothInputs(): number{
-    if(this.checkInputExist() == 1 && this.checkInputExist2() == 1){
+  checkBothInputs(): number {
+    if (this.checkInputExist() == 1 && this.checkInputExist2() == 1) {
       return 1;
     }
-    else{
+    else {
       return 0;
     }
   }
 
-  checkInputExist(): number{
-    for(let account of this.journalAccountsDebit){
-      if(account.AccountName ==undefined || account.DebitAmount==undefined || account.DebitAmount== 0 || isNaN(account.DebitAmount)){
+  checkInputExist(): number {
+    for (let account of this.journalAccountsDebit) {
+      if (account.AccountName == undefined || account.DebitAmount == undefined || account.DebitAmount == 0 || isNaN(account.DebitAmount)) {
         this.fieldsFilled = 0;
         break;
 
       }
-      else{
+      else {
         this.fieldsFilled = 1;
       }
 
@@ -226,27 +235,28 @@ export class JournalizeComponent implements OnInit {
     return this.fieldsFilled;
 
   }
-  checkInputExist2(): number{
-    for(let account of this.journalAccountsCredit){
-      if(account.AccountName ==undefined || account.CreditAmount==undefined || account.CreditAmount== 0 || isNaN(account.CreditAmount)){
-       this.fieldsFilled2 = 0;
-       break;
+
+  checkInputExist2(): number {
+    for (let account of this.journalAccountsCredit) {
+      if (account.AccountName == undefined || account.CreditAmount == undefined || account.CreditAmount == 0 || isNaN(account.CreditAmount)) {
+        this.fieldsFilled2 = 0;
+        break;
       }
-      else{
+      else {
         this.fieldsFilled2 = 1;
       }
     }
     return this.fieldsFilled2
   }
 
-  addDebitInput(){
+  addDebitInput() {
     let debit = new JournalAccount();
     this.journalAccountsDebit.push(debit);
     console.log(this.journalAccountsDebit[0].AccountName);
     this.checkInputExist();
   }
 
-  addCreditInput(){
+  addCreditInput() {
     let credit = new JournalAccount();
     this.journalAccountsCredit.push(credit);
     this.checkInputExist2();
@@ -264,8 +274,9 @@ export class JournalizeComponent implements OnInit {
     let modal = document.getElementById("createJournalEntry");
     modal.style.display = "block";
   }
- //creates new starting array for inputs in create form
-  loadAccountInput(){
+
+  //creates new starting array for inputs in create form
+  loadAccountInput() {
     this.journalAccountsDebit[0] = new JournalAccount();
     this.journalAccountsCredit[0] = new JournalAccount();
   }
@@ -281,14 +292,15 @@ export class JournalizeComponent implements OnInit {
 
   }
 
-  removeDebit(index){
+  removeDebit(index) {
     this.checkRepeatDebitAccount();
     if (index > -1) {
       this.journalAccountsDebit.splice(index, 1);
     }
 
   }
-  removeCredit(index){
+
+  removeCredit(index) {
     this.checkRepeatCreditAccount();
     if (index > -1) {
       this.journalAccountsCredit.splice(index, 1);
@@ -296,27 +308,27 @@ export class JournalizeComponent implements OnInit {
   }
 
 
-  checkRepeatDebitAccount(){
+  checkRepeatDebitAccount() {
     console.log('repeat');
-    for(let acc1 of this.journalAccountsDebit){
-      for(let acc2 of this.journalAccountsDebit){
-        if(this.journalAccountsDebit.indexOf(acc1) == this.journalAccountsDebit.indexOf(acc2)){
+    for (let acc1 of this.journalAccountsDebit) {
+      for (let acc2 of this.journalAccountsDebit) {
+        if (this.journalAccountsDebit.indexOf(acc1) == this.journalAccountsDebit.indexOf(acc2)) {
           this.repeatDebitAccount = 1;
         }
-        else if(acc1.AccountName == acc2.AccountName){
+        else if (acc1.AccountName == acc2.AccountName) {
           this.repeatDebitAccount = 0;
           console.log('Duplicate');
           return;
         }
-        else{
+        else {
           this.repeatDebitAccount = 1;
         }
-        for(let acc3 of this.journalAccountsCredit){
-          if(acc1.AccountName == acc3.AccountName){
+        for (let acc3 of this.journalAccountsCredit) {
+          if (acc1.AccountName == acc3.AccountName) {
             this.repeatDebitAccount = 0;
             return;
           }
-          else{
+          else {
             this.repeatDebitAccount = 1;
           }
         }
@@ -325,36 +337,38 @@ export class JournalizeComponent implements OnInit {
 
 
   }
-  checkRepeatCreditAccount(){
+
+  checkRepeatCreditAccount() {
     console.log('repeat');
-    for(let acc1 of this.journalAccountsCredit){
-      for(let acc2 of this.journalAccountsCredit){
-        if(this.journalAccountsCredit.indexOf(acc1) == this.journalAccountsCredit.indexOf(acc2)){
+    for (let acc1 of this.journalAccountsCredit) {
+      for (let acc2 of this.journalAccountsCredit) {
+        if (this.journalAccountsCredit.indexOf(acc1) == this.journalAccountsCredit.indexOf(acc2)) {
           this.repeatCreditAccount = 1;
         }
-        else if(acc1.AccountName == acc2.AccountName){
+        else if (acc1.AccountName == acc2.AccountName) {
           this.repeatCreditAccount = 0;
           console.log('Duplicate');
           return;
         }
-        else{
+        else {
           this.repeatCreditAccount = 1;
         }
       }
-      for(let acc3 of this.journalAccountsDebit){
-        if(acc1.AccountName == acc3.AccountName){
+      for (let acc3 of this.journalAccountsDebit) {
+        if (acc1.AccountName == acc3.AccountName) {
           this.repeatCreditAccount = 0;
           return;
         }
-        else{
+        else {
           this.repeatCreditAccount = 1;
         }
       }
     }
   }
+
   //posting and updating tables including: journal and journal accounts
-  async submit(){
-    if(this.totalDebit != this.totalCredit){
+  async submit() {
+    if (this.totalDebit != this.totalCredit) {
       this.totalsmatch = 0;
     }
     else {
@@ -368,14 +382,14 @@ export class JournalizeComponent implements OnInit {
       //sending prinmary journal data
       let response = await this.journalServ.addJournal(this.journalNew).toPromise();
       id = response.JId;
-      console.log("id: "+id);
+      console.log("id: " + id);
       //post the debit accounts
-      for(let debitAccounts of this.journalAccountsDebit){
+      for (let debitAccounts of this.journalAccountsDebit) {
         debitAccounts.JournalJId = id;
         debitAccounts.NormalSide = 'Debit';
         //set account type
-        for(let acc of this.accounts){
-          if(acc.accountName == debitAccounts.AccountName){
+        for (let acc of this.accounts) {
+          if (acc.accountName == debitAccounts.AccountName) {
             debitAccounts.Type = acc.accountType;
             break;
           }
@@ -386,18 +400,18 @@ export class JournalizeComponent implements OnInit {
       console.log('Debit accounts');
       console.log(this.journalAccountsDebit);
 
-      for(let creditAccounts of this.journalAccountsCredit){
+      for (let creditAccounts of this.journalAccountsCredit) {
         creditAccounts.JournalJId = id;
         creditAccounts.NormalSide = 'Credit';
         //set account type
         console.log('accounts:');
         console.log(this.accounts);
-        for(let acc of this.accounts){
-          if(acc.accountName == creditAccounts.AccountName){
+        for (let acc of this.accounts) {
+          if (acc.accountName == creditAccounts.AccountName) {
 
             creditAccounts.Type = acc.accountType;
-            console.log('added account: ' +creditAccounts.Type);
-            console.log('account: ' +acc.accountType);
+            console.log('added account: ' + creditAccounts.Type);
+            console.log('account: ' + acc.accountType);
             break;
           }
         }
@@ -408,24 +422,25 @@ export class JournalizeComponent implements OnInit {
       console.log(this.journalAccountsCredit);
       //sending source file
 
-      if(this.selectedFile != null){
+      if (this.selectedFile != null) {
         let uploadData = new FormData();
         uploadData.append('file', this.selectedFile);
         //uploadData.append('#journalId', JSON.stringify(id));
         console.log('File uploaded: ' + this.selectedFile.name)
-        this.http.post(this.fileUploadURL, uploadData , httpOptions).subscribe( (result) => {
+        this.http.post(this.fileUploadURL, uploadData, httpOptions).subscribe((result) => {
           console.log('result');
           this.myInputVariable.nativeElement.value = "";
         });
       }
-
       this.viewJournals();
       console.log(response);
       this.close();
+      this.openConfirmationPopup();
     }
   }
+
   //create a random set of characters for reference
-  makeRandomRef(){
+  makeRandomRef() {
     let text = "";
     let poss = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -435,19 +450,19 @@ export class JournalizeComponent implements OnInit {
     return text;
   }
 
-  selectFile(files: FileList): void{
+  selectFile(files: FileList): void {
     this.selectedFile = files.item(0);
     //console.log('selected File' + this.selectedFile.name);
   }
 
 
   //posting journal
-async approveJournal(journal){
+  async approveJournal(journal) {
 
-    for(let account of journal.JournalAccounts){
-      for(let CoA of this.accounts ){
+    for (let account of journal.JournalAccounts) {
+      for (let CoA of this.accounts) {
         let ledger = new GeneralLedger();
-        if(account.AccountName == CoA.accountName){
+        if (account.AccountName == CoA.accountName) {
           ledger.Date = journal.Date;
           ledger.AccountNumber = CoA.accountNumber;
           ledger.AccountName = account.AccountName;
@@ -459,25 +474,25 @@ async approveJournal(journal){
           await this.ledgerServ.addLedger(ledger).toPromise();
           console.log('ledger entries added');
           //put if statement here for updating current balance for CoA
-          if(ledger.NormalSide == 'Debit'){
-            if(ledger.DebitAmount != null){
+          if (ledger.NormalSide == 'Debit') {
+            if (ledger.DebitAmount != null) {
               CoA.currentBalance = +CoA.currentBalance + +ledger.DebitAmount;
               await this.coaService.updateAccount(CoA).toPromise();
 
             }
-            else{
+            else {
               CoA.currentBalance = +CoA.currentBalance - +ledger.CreditAmount;
               await this.coaService.updateAccount(CoA).toPromise();
             }
           }
           //credit normal side
-          else{
-            if(ledger.DebitAmount != null){
+          else {
+            if (ledger.DebitAmount != null) {
               CoA.currentBalance = +CoA.currentBalance - +ledger.DebitAmount;
               await this.coaService.updateAccount(CoA).toPromise();
 
             }
-            else{
+            else {
               CoA.currentBalance = +CoA.currentBalance + +ledger.CreditAmount;
               await this.coaService.updateAccount(CoA).toPromise();
 
@@ -500,36 +515,51 @@ async approveJournal(journal){
       console.log(result);
     });
 
-}
+  }
 
-async declineJournal(journal){
-  journal.acceptance = 'Declined';
-  let journaltemp = new Journal();
-  journaltemp.JId = journal.JId;
-  journaltemp.acceptance = journal.acceptance;
-  journaltemp.Description = journal.Description;
-  journaltemp.Date = journal.Date;
-  journaltemp.Reference = journal.Reference;
-  journaltemp.CreatedBy = journal.CreatedBy;
-  console.log(journaltemp);
-  this.journalServ.updateJournal(journaltemp).subscribe((result) => {
-    console.log(result);
-  });
+  async declineJournal(journal) {
+    journal.acceptance = 'Declined';
+    let journaltemp = new Journal();
+    journaltemp.JId = journal.JId;
+    journaltemp.acceptance = journal.acceptance;
+    journaltemp.Description = journal.Description;
+    journaltemp.Date = journal.Date;
+    journaltemp.Reference = journal.Reference;
+    journaltemp.CreatedBy = journal.CreatedBy;
+    console.log(journaltemp);
+    this.journalServ.updateJournal(journaltemp).subscribe((result) => {
+      console.log(result);
+    });
 
-}
+  }
 
-viewLedger(accountName){
+  viewLedger(accountName) {
     this.data.setAccount(accountName);
-  this.router.navigate(['UserPage/ledger', accountName]);
-}
+    this.router.navigate(['UserPage/ledger', accountName]);
+  }
 
-setApprovalType(type){
+  setApprovalType(type) {
     this.approvalType = type;
-  this.viewJournalsSort('JId', 'ASC', 'all', '', this.approvalType);
-}
+    this.viewJournalsSort('JId', 'ASC', 'all', '', this.approvalType);
+  }
 
 
+  openConfirmationPopup() {
+    var modal = document.getElementById('popupModalConfirm');
+    modal.classList.add('show');
+    this.setTimer();
 
+  }
+  closeConfirmationPopup(){
+    var modal = document.getElementById('popupModalConfirm');
+    modal.classList.remove('show');
+  }
+  setTimer(){
+    var modal = document.getElementById('popupModalConfirm');
+    this.timer.subscribe(() => {
+      modal.classList.remove('show');
+    });
+  }
 
   stuff(){
 
