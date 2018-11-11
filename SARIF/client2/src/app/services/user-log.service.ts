@@ -26,7 +26,18 @@ export class UserLogService {
     return this.http.post(this.log, {userName: username, actionType: actionType}, httpOptions)
   }
 
+  createAccountLog(username, actionType, newData): Observable<any> {
+    return this.http.post(this.log, {userName: username, actionType: actionType, newData: newData}, httpOptions)
+  }
+  updateAccountLog(username, actionType, prevData, newData): Observable<any> {
+    return this.http.post(this.log, {userName: username, actionType: actionType, prevData: prevData, newData: newData}, httpOptions)
+  }
+
   findAll(): Observable<any> {
     return this.http.get(this.log, httpOptions);
+  }
+
+  findByType(actionType: string): Observable<any> {
+    return this.http.get(`${this.log}/${actionType}`, httpOptions);
   }
 }

@@ -1,18 +1,48 @@
-
-
-
 <div>
   <table id="logTable">
     <tr>
       <th>Username</th>
       <th>Action Type</th>
-      <th></th>
+      <th>Description</th>
       <th>Time</th>
     <tr *ngFor="let log of logs">
-      <td>{{ log.userName }}</td>
-      <td>{{ log.actionType }}</td>
-      <td></td>
-      <td>{{ log.createdAt | date: 'MM/dd/yyyy  HH:mm:ss'}}</td>
+      <ng-container *ngIf="log.actionType==='Account created'; else accountUpdated">
+          <td>{{ log.userName }}</td>
+          <td>{{ log.actionType }}</td>
+          <td>
+            <table>
+              <tr>
+                <th>Account Name</th>
+                <th>Account Number</th>
+                <th>Account Type</th>
+                <th>Active</th>
+                <th>Balance</th>
+              </tr>
+              <tr>
+                <td>{{ newAccountData1 }}</td>
+                <!-- <td>{{ newAccountData1.accountNumber }}</td>
+                <td>{{ newAccountData1.accountType }}</td>
+                <td>{{ newAccountData1.active }}</td>
+                <td>{{ newAccountData1.originalBalance }}</td> -->
+              </tr>
+            </table>
+          </td>
+          <td>{{ log.createdAt | date: 'MM/dd/yyyy HH:mm:ss'}}</td>
+      </ng-container>
+      <ng-template #accountUpdated>
+        <ng-container *ngIf="log.actionType=='Account updated'; else elseIf">
+            <td>{{ log.userName }}</td>
+            <td>{{ log.actionType }}</td>
+            <td></td>
+            <td>{{ log.createdAt | date: 'MM/dd/yyyy HH:mm:ss'}}</td>
+        </ng-container>
+      </ng-template>
+      <ng-template #elseIf>
+          <td>{{ log.userName }}</td>
+          <td>{{ log.actionType }}</td>
+          <td></td>
+          <td>{{ log.createdAt | date: 'MM/dd/yyyy HH:mm:ss'}}</td>
+      </ng-template>
     </tr>
   </table>
 </div>

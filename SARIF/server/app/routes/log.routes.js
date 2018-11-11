@@ -10,4 +10,7 @@ module.exports = function(app) {
 
     // Retrieve a single user by Id
     app.get('/api/log/:log', log.findById);
+
+    //Retrieve a log by type
+    app.get('/api/log/:actionType', log.findByType);
 }

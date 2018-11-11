@@ -13,6 +13,14 @@ module.exports = (sequelize, Sequelize) => {
         actionType: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        prevData: {
+            type: Sequelize.STRING,
+            allowNull: true
+        },
+        newData: {
+            type: Sequelize.STRING,
+            allowNull: true
         }
     });
 
