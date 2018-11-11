@@ -93,6 +93,9 @@ export class UserPageComponent implements OnInit {
     this.data.setTrialBalance('Post Closing Trial Balance');
     this.router.navigate(['UserPage/post_closing_trial_balance']);
   }
+  viewDashboard(){
+    this.router.navigate(['UserPage/dashboard']);
+  }
 
 
 }

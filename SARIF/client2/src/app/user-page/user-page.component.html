@@ -7,7 +7,7 @@
       <div>
       <button class="btn btn-link" (click)="viewHome()" id="button0" >Home </button>
       </div>
-      <button class="btn btn-link" (click)="logOut()" >Dashboard</button>
+      <button class="btn btn-link" (click)="viewDashboard()" >Dashboard</button>
       <button class="btn btn-link" (click)="viewUserList()" id="button1" *ngIf="access == 1 || access == 2">User list</button>
       <button class="btn btn-link" (click)="viewLog()" style="display: block" id="button2" *ngIf="access == 1">User log</button>
       <button class="btn btn-link" (click)="viewCoA()" style="display: block" id="button3" >Chart of accounts</button>

@@ -215,7 +215,7 @@ export class ChartOfAccountsComponent implements OnInit {
     console.log('previous balance' +this.accountData.currentBalance);
 
     //Set asset and revenue account types to normal side debit
-    if (this.editCoA.accountType == "Assets" || this.editCoA.accountType == "Revenue") {
+    if (this.editCoA.accountType == "Assets" || this.editCoA.accountType == "Expenses") {
       this.editCoA.normalSide = "Debit";
     }
     else {

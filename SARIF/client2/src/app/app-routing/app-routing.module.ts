@@ -16,6 +16,7 @@ import { IndividualJournalComponent } from '../individual-journal/individual-jou
 import { IncomeStatementComponent } from '../income-statement/income-statement.component';
 import { RetainedEarningsComponent } from '../retained-earnings/retained-earnings.component';
 import { BalanceSheetComponent } from '../balance-sheet/balance-sheet.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -104,6 +105,10 @@ const routes: Routes = [
       {
         path: 'post_closing_trial_balance',
         component: TrialBalanceComponent
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent
       }
       ]
   }
