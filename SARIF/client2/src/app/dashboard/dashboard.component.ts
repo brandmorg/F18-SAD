@@ -116,9 +116,13 @@ export class DashboardComponent implements OnInit {
     console.log('quick ratio: '+ this.quickRatio);
     //calculate Return on Total Assets
     this.returnOnTotalAssets = +this.netIncome / +this.totalAssets;
+
+    this.returnOnTotalAssets = parseFloat((+this.returnOnTotalAssets * 100).toFixed(2));
     console.log('return on total assets: '+ this.returnOnTotalAssets);
     //calculate Return on Equity
     this.returnOnEquity = +this.netIncome / +this.totalEquity;
+
+    this.returnOnEquity = parseFloat((+this.returnOnEquity * 100).toFixed(2));
     console.log('return on equity: '+ this.returnOnEquity);
 
 

@@ -1,3 +1,23 @@
-<p>
-  dashboard works!
-</p>
+<div>
+  <div>
+     <p></p>
+    <table id="display">
+      <tr style=" background-color: white">
+        <td>Current Ratio</td>
+        <td>{{currentRatio | number : '1.2-2'}}</td>
+      </tr>
+      <tr style=" background-color: white">
+        <td>Quick Ratio</td>
+        <td>{{quickRatio | number : '1.2-2'}}</td>
+      </tr>
+      <tr style=" background-color: white">
+        <td>Return on Assets</td>
+        <td>{{(returnOnTotalAssets | number : '1.2-2') + '%'}}</td>
+      </tr>
+      <tr style=" background-color: white">
+        <td>Return on Equity</td>
+        <td>{{(returnOnEquity | number : '1.2-2') + '%'}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
