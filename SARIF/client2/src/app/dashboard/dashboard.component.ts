@@ -10,6 +10,9 @@ import {Router} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
+  public pieChartData:number[] = [300, 500, 100];
+  public pieChartType:string = 'pie';
+
   accounts = [];
   assetslist = [];
   liabilityList = [];

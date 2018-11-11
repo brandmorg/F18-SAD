@@ -27,6 +27,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { IncomeStatementComponent } from './income-statement/income-statement.component';
 import { RetainedEarningsComponent } from './retained-earnings/retained-earnings.component';
 import { BalanceSheetComponent } from './balance-sheet/balance-sheet.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { BalanceSheetComponent } from './balance-sheet/balance-sheet.component';
     HttpClientModule,
     MyDatePickerModule,
     TextMaskModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ChartsModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
