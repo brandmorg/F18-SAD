@@ -72,9 +72,12 @@ export class RetainedEarningsComponent implements OnInit {
 
 
 
-    doc.text(50, 40, this.data.getTrialBalance());
+    doc.setFontSize(12);
+    doc.text(210, 40, 'Statement of Retained Earnings');
+    doc.text(210, 60, 'For the Year Ended ' +this.currentDate.getMonth() +'/'+ this.currentDate.getDate() +'/'+ this.currentDate.getFullYear());
 
-    doc.autoTable(columns, rows, {startY: 60, columnStyles: {
+
+    doc.autoTable(columns, rows, {startY: 68, columnStyles: {
         0: {columnWidth: 350}, 1: {halign: 'right'}}});
     doc.save('Statement of Retained Earnings.pdf');
   }

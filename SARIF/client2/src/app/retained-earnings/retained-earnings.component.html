@@ -1,9 +1,13 @@
 <div class="form-group" style="margin: auto; width: 50%;">
-  <table id="ledgerTable" style=" table-layout:fixed">
+  <table id="ledgerTable" style="width: 70%; table-layout:fixed">
     <tr>
-      <th colspan="2" >
-        <label>{{'Date: ' + (currentDate | date: 'MM/dd/yyyy')}}</label>
-        <label style="margin: auto; padding-left: 33%">Statement of Retained Earnings</label>
+      <th colspan="2" class="text-center">
+       <div>
+        <label>Statement of Retained Earnings</label>
+       </div>
+        <div>
+        <label>{{'For the Year Ended ' + (currentDate | date: 'MM/dd/yyyy')}}</label>
+        </div>
       </th>
     </tr>
     <tr>

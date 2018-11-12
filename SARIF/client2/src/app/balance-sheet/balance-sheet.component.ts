@@ -209,7 +209,11 @@ export class BalanceSheetComponent implements OnInit {
     rows.push(['Total Stockholders Equity', ' ', num2]);
     rows.push(['Total Liabilites & Stockholders Equity', ' ', num3]);
 
-    doc.autoTable(columns, rows, {startY: 60, columnStyles: {
+    doc.setFontSize(12);
+    doc.text(240, 40, 'Balance Sheet');
+    doc.text(240, 60, 'At ' +this.currentDate.getMonth() +'/'+ this.currentDate.getDate() +'/'+ this.currentDate.getFullYear());
+
+    doc.autoTable(columns, rows, {startY: 68, columnStyles: {
         0: {columnWidth: 350}, 1: {halign: 'right'}, 2: {halign: 'right'}, }});
     doc.save('Balance Sheet.pdf');
   }

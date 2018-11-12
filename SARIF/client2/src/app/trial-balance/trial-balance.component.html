@@ -1,9 +1,14 @@
 <div class="form-group" style="margin: auto; width: 50%;">
   <table id="ledgerTable" style=" width: 100%;">
     <tr>
-      <th colspan="4" >
-        <label>{{'Date: ' + (currentDate | date: 'MM/dd/yyyy')}}</label>
-        <label style="margin: auto; padding-left: 33%">{{trialTitle}}</label>
+      <th colspan="4" class="text-center" style="">
+        <div>
+        <label style="">{{trialTitle}}</label>
+        </div>
+        <div>
+        <label>{{'For the Year Ended ' + (currentDate | date: 'MM/dd/yyyy')}}</label>
+          </div>
+
       </th>
     <tr>
     <tr>
