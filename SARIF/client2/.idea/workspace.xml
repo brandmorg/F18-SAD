@@ -251,7 +251,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/individual-journal/individual-journal.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1205">
+            <state relative-caret-position="593">
               <caret line="74" column="35" selection-start-line="74" selection-start-column="35" selection-end-line="74" selection-end-column="35" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -469,7 +469,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="41" />
     <option name="y" value="214" />
     <option name="width" value="1876" />
@@ -566,7 +566,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542046649133" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542046654198" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../server" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -653,15 +653,15 @@
       <workItem from="1541709771257" duration="10702000" />
       <workItem from="1541742391190" duration="3773000" />
       <workItem from="1541790561433" duration="36458000" />
-      <workItem from="1541961521590" duration="37432000" />
+      <workItem from="1541961521590" duration="37718000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="455732000" />
+    <option name="totallyTimeSpent" value="456018000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="41" y="214" width="1876" height="884" extended-state="0" />
+    <frame x="41" y="214" width="1876" height="884" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2863436" />
@@ -1184,7 +1184,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/individual-journal/individual-journal.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1205">
+        <state relative-caret-position="593">
           <caret line="74" column="35" selection-start-line="74" selection-start-column="35" selection-end-line="74" selection-end-column="35" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
