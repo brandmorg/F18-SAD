@@ -7,7 +7,7 @@
       <div class="form-group">
         <label for="accountName">Account Name</label><br>
         <input type="text" class="form-control" id="accountName" style="text-transform: capitalize"
-                placeholder="Account Name" required [(ngModel)]="CoA.accountName"
+               (ngModelChange)="compareAccountNameCreate($event)" placeholder="Account Name" required [(ngModel)]="CoA.accountName"
           name="accountName" #accountNam="ngModel">
       </div>
       <div [hidden]="accountNam.valid || accountNam.pristine" class="alert alert-danger" style="width: 250px;">
@@ -16,7 +16,8 @@
 
       <div class="form-group">
         <label for="accountNumber">Account Number</label><br>
-        <input type="text" class="form-control" id="accountNumber" placeholder="Account Number" required [(ngModel)]="CoA.accountNumber"
+        <input type="text" class="form-control" id="accountNumber"
+               (ngModelChange)="compareAccountNumberCreate($event)" placeholder="Account Number" required [(ngModel)]="CoA.accountNumber"
           name="accountNumber" #accountNumbe="ngModel">
       </div>
       <div [hidden]="accountNumbe.valid || accountNumbe.pristine" class="alert alert-danger" style="width: 250px;">
@@ -70,15 +71,18 @@
 
       <div class="form-group">
         <label for="comment">Comments</label><br>
-        <input type="text" class="form-control" id="comment" placeholder="Account Description" required [(ngModel)]="CoA.comment"
+        <input type="text" class="form-control" id="comment2" placeholder="Account Description" required [(ngModel)]="CoA.comment"
           name="comment" #description="ngModel" required>
       </div>
       <div [hidden]="description.valid || description.pristine" class="alert alert-danger" style="width: 250px;">
         Account Description is required
       </div>
 
-      <div *ngIf="numberHasDecimal==2" class="alert alert-danger" style="width: 250px;">
-        Balance must be in decimal format
+      <div *ngIf="accountNameCreateExist == 2" class="alert alert-danger"  style="width: 250px;">
+        Account Name already exists
+      </div>
+      <div *ngIf="accountNumberCreateExist == 2" class="alert alert-danger"  style="width: 250px;">
+        Account Number already exists
       </div>
 
 
