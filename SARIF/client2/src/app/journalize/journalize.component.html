@@ -1,5 +1,18 @@
 
-    <!-- End of row 2: right column -->
+
+<div id="viewSource" class="modal">
+  <div class="modal-content4" style=" white-space: pre;">
+    <div style=" white-space: pre;">
+    {{documentInfo}}
+    </div>
+    <div  style="position: fixed; bottom: 15%">
+     <button style="position: fixed" (click)="closeFile()">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- End of row 2: right column -->
 
     <div id="popupModalConfirm" class="modal2" (click)="closeConfirmationPopup()">
        <div class="modal-content3">
@@ -195,6 +208,11 @@
         <tr style=" background-color: transparent">
           <td class="accountslist" *ngIf="journal.Description != null">{{'Description: ' + journal.Description}}</td>
           <td class="accountslist" *ngIf="journal.Description == null">{{'Description: none'}}</td>
+        </tr>
+        <tr style=" background-color: transparent" *ngIf="journal.FileID != null && journal.FileID > 0">
+          <td  class="accountslist">
+            <button class="btn btn-link " style="color: dodgerblue" (click)="getJournalFile(journal.FileID)" >View Document</button>
+          </td>
         </tr>
       </td>
 

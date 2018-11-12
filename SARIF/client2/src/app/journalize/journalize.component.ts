@@ -36,11 +36,12 @@ export class JournalizeComponent implements OnInit {
   @ViewChild('journalAccountAddTable') public accountsTable: NgForm;
   @ViewChild('folderInput') public myInputVariable: ElementRef;
   private fileUploadURL = 'http://localhost:8080/api/journalFiles';
+  private fileRetrieve = 'http://localhost:8080/api/retreiveJournalFiles';
   journalNew = new Journal();
   journals = []; //list of journal entries
   timer = timer(8000);
 
-  private subscription: Subscription;
+  documentInfo = '';
 
 
   journalAccountsDebit = []; //list of Debit journal accounts
@@ -372,12 +373,25 @@ export class JournalizeComponent implements OnInit {
       this.totalsmatch = 0;
     }
     else {
+      let fileID= -1;
+
+      if (this.selectedFile != null) {
+        let uploadData = new FormData();
+        uploadData.append('file', this.selectedFile);
+        console.log('File uploaded: ' + this.selectedFile.name)
+        let result = await this.http.post<any>(this.fileUploadURL, uploadData, httpOptions).toPromise();
+        console.log(result);
+        this.myInputVariable.nativeElement.value = "";
+        fileID = result;
+      }
+
       let id: number;
       //sets the input date
       this.journalNew.Date = new Date();
       this.journalNew.Date.setFullYear(this.model.date.year, this.model.date.month - 1, this.model.date.day);
       this.journalNew.CreatedBy = this.comp.getUserName();
       this.journalNew.Reference = this.makeRandomRef();
+      this.journalNew.FileID = fileID;
       console.log(this.journalNew.Date);
       //sending prinmary journal data
       let response = await this.journalServ.addJournal(this.journalNew).toPromise();
@@ -422,16 +436,7 @@ export class JournalizeComponent implements OnInit {
       console.log(this.journalAccountsCredit);
       //sending source file
 
-      if (this.selectedFile != null) {
-        let uploadData = new FormData();
-        uploadData.append('file', this.selectedFile);
-        //uploadData.append('#journalId', JSON.stringify(id));
-        console.log('File uploaded: ' + this.selectedFile.name)
-        this.http.post(this.fileUploadURL, uploadData, httpOptions).subscribe((result) => {
-          console.log('result');
-          this.myInputVariable.nativeElement.value = "";
-        });
-      }
+
       this.viewJournals();
       console.log(response);
       this.close();
@@ -541,6 +546,32 @@ export class JournalizeComponent implements OnInit {
   setApprovalType(type) {
     this.approvalType = type;
     this.viewJournalsSort('JId', 'ASC', 'all', '', this.approvalType);
+  }
+
+
+  getJournalFile(event: number){
+    this.http.post<any>(this.fileRetrieve, {jID: event}, httpOptions).subscribe( result => {
+      console.log(result.FileData.data);
+      var res = result.FileData.data;
+      for(let r of res){
+        if(r == 10){
+          this.documentInfo = this.documentInfo + '\n';
+        }
+        else {
+          let res2 = String.fromCharCode(r);
+          this.documentInfo = this.documentInfo + res2;
+        }
+      }
+      console.log(this.documentInfo);
+
+    });
+    var modal = document.getElementById('viewSource');
+    modal.style.display = "block";
+  }
+  closeFile() {
+    this.documentInfo = '';
+    let modal = document.getElementById("viewSource");
+    modal.style.display = "none";
   }
 
 
