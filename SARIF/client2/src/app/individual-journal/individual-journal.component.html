@@ -1,3 +1,16 @@
+
+<div id="viewSource" class="modal">
+  <div class="modal-content4">
+    <div style="white-space: pre-line;">
+      {{documentInfo}}
+    </div>
+    <div  style="position: fixed; bottom: 15%; ">
+      <button style="position: fixed" (click)="closeFile()">Close</button>
+    </div>
+  </div>
+</div>
+
+
 <div style="padding-top: 20px">
   <table id="journalTable" style=" table-layout:fixed">
     <thead>
@@ -18,27 +31,39 @@
 
     <tr >
       <td style="vertical-align: top"  >{{ thisJournal.Date | date: 'MM/dd/yyyy'}}</td>
-      <td>
+      <td style="vertical-align: top">
+    <table>
     <tr *ngFor="let jaccount of thisJournal.JournalAccounts" style=" background-color: transparent">
       <td class="accountslist2">{{jaccount.Type}}</td>
     </tr>
+    </table>
     </td>
     <td style="vertical-align: top" >{{ thisJournal.CreatedBy }}</td>
     <td>
+    <table>
       <tr *ngFor="let jaccount of thisJournal.JournalAccounts" style=" background-color: transparent" >
         <td  class="accountslist2" *ngIf="jaccount.NormalSide == 'Credit'" >
          {{ jaccount.AccountName }}</td>
         <td  class="accountslist" *ngIf="jaccount.NormalSide == 'Debit'">
           {{ jaccount.AccountName }}
         </td>
-
       </tr>
+      <tr style=" background-color: transparent">
+        <td class="accountslist" *ngIf="thisJournal.Description != null">{{'Description: ' + thisJournal.Description}}</td>
+        <td class="accountslist" *ngIf="thisJournal.Description == null">{{'Description: none'}}</td>
+      </tr>
+      <tr style=" background-color: transparent" *ngIf="thisJournal.FileID != null && thisJournal.FileID > 0">
+        <td  class="accountslist">
+          <button class="btn btn-link " style="color: dodgerblue" (click)="getJournalFile(thisJournal.FileID)" >View Document</button>
+        </td>
+      </tr>
+    </table>
     </td>
 
     <td style="vertical-align: top">{{ thisJournal.Reference }}</td>
 
-    <td >
-      <table class="tableAlign">
+    <td style="vertical-align: top">
+      <table class="tableAlign" style="vertical-align: top">
         <tr *ngFor="let jaccount of thisJournal.JournalAccounts; let b = index" style=" background-color: transparent">
           <td class="accountslist"  *ngIf="jaccount.DebitAmount == null"  style="text-align: right;">&nbsp;</td>
           <td class="accountslist"  *ngIf="jaccount.DebitAmount != null && b == 0"  style="float:right">{{"$"+(jaccount.DebitAmount | number : '1.2-2')}}</td>
@@ -47,8 +72,8 @@
       </table>
     </td>
 
-    <td >
-      <table class="tableAlign">
+    <td style="vertical-align: top">
+      <table class="tableAlign" style="vertical-align: top">
         <tr *ngFor="let jaccount of thisJournal.JournalAccounts; let i = index" style=" background-color: transparent;">
           <td class="accountslist"  *ngIf="jaccount.CreditAmount == null"  style="text-align: right;">&nbsp;</td>
           <td class="accountslist"  *ngIf="jaccount.CreditAmount != null && i == getNumberDebits(thisJournal.JournalAccounts)"  style="text-align: right;">{{"$"+(jaccount.CreditAmount | number : '1.2-2')}}</td>

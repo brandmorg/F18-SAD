@@ -13,6 +13,7 @@ export class GeneralLedgerComponent implements OnInit {
 
   //current page
   currPage = 1;
+  perPage = 10;
 
 
   constructor(
