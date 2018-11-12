@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {UserLogService} from '../services/user-log.service';
+import { UserLogService } from '../services/user-log.service';
 import { CoA } from '../chart-of-accounts';
 import { Logs } from '../logs';
+import { isEmpty } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-log',
@@ -11,8 +12,7 @@ import { Logs } from '../logs';
 export class UserLogComponent implements OnInit {
   logs = [];
   newAccountData = new CoA();
-  createAccountData = new Logs();
-  newAccountData1 = [];
+  oldAccountData = new CoA();
 
   constructor(
     private logData: UserLogService,
@@ -26,20 +26,29 @@ export class UserLogComponent implements OnInit {
     this.logData.findAll().subscribe(
       (userLog) => {
         this.logs = userLog;
-        this.getNewAccount(userLog);
+        this.getAccount(userLog);
       }
     );
   }
 
-  getNewAccount(log: any) {
-    for (var i = 31; i < 35; i++) {
-      var data = JSON.parse(JSON.stringify(log))[i]["newData"];
-      console.log(data)
-      var innerData = JSON.parse(JSON.stringify(data));
-      console.log(innerData);
-      this.newAccountData.accountName = data;
-      //console.log(this.newAccountData);
+  getAccount(log: any) {
+    for (var i = 0; i < log.length; i++) {
+      var dbString = JSON.stringify(log);
+      //Get new data
+      var obj = JSON.parse(dbString)[i].newData;
+      if (obj != null) {
+        console.log(obj)
+        this.newAccountData = JSON.parse(obj);
+        //console.log(this.newAccountData);
+      }
+
+      //Get old account
+      var newObj = JSON.parse(dbString)[i].prevData;
+      if (newObj != null) {
+        //console.log("empty")
+        this.oldAccountData = JSON.parse(newObj);
+        //console.log(this.oldAccountData);
+      }
     }
   }
-
 }
