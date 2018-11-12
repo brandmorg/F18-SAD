@@ -96,7 +96,7 @@ export class JournalizeComponent implements OnInit {
     allowLeadingZeroes: false
   });
 
-  model: any = {date: {year: 2018, month: 10, day: 9}};
+  model: any = {date: {year: 2018, month: 11, day: 12}};
 
 
   constructor(

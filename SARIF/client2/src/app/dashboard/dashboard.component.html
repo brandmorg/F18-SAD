@@ -1,13 +1,15 @@
+
+<h3 style="position: relative; left: 20px">Dashboard</h3>
 <div style="padding-top: 14px">
   <div style=" width: 700px; float: left">
-    <p>Return on Total Assets</p>
+    <p style="position: relative; left: 30px">Return on Total Assets</p>
     <div >
     <canvas baseChart
             [data]="pieChartData"
             [labels]="lineChartLabels"
             [chartType]="pieChartType"></canvas>
     </div>
-    <p>Return on Equity</p>
+    <p style="position: relative; left: 30px">Return on Equity</p>
     <div >
       <canvas baseChart
               [data]="pieChartEquityData"

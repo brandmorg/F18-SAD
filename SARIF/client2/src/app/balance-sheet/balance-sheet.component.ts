@@ -160,7 +160,6 @@ export class BalanceSheetComponent implements OnInit {
     let num6 = +this.totalCurrentAssets + +this.totalPropertynum;
     let num7 = parseFloat(''+Math.round(num6 * 100) / 100).toFixed(2);
     rows.push(['Total Assets', ' ', num7]);
-    doc.text(50, 40, this.data.getTrialBalance());
     rows.push(['Liabilities & Stockholders Equity', ' ', ' ']);
     rows.push(['Liabilities',' ', ' ']);
     rows.push(['Current Liabilities',' ', ' ']);
