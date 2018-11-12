@@ -1,29 +1,53 @@
-<div>
-  <div>
+<div style="padding-top: 14px">
+  <div style=" width: 700px; float: left">
     <p>Return on Total Assets</p>
-    <div style="width: 700px">
+    <div >
     <canvas baseChart
             [data]="pieChartData"
+            [labels]="lineChartLabels"
             [chartType]="pieChartType"></canvas>
     </div>
-     <p></p>
+    <p>Return on Equity</p>
+    <div >
+      <canvas baseChart
+              [data]="pieChartEquityData"
+              [labels]="lineChartEquityLabels"
+              [chartType]="pieChartType"
+              [options]="lineChartOptions"
+              [colors]="colors"></canvas>
+    </div >
+  </div>
+  <div style="float: left">
+    <label>Ratio Analysis</label>
+    <hr>
+    <div class="col-md-12">
     <table id="display">
-      <tr style=" background-color: white">
+      <tr >
+        <td>Gross Profit Margin</td>
+        <td>{{grossProfitMargin}}</td>
+      </tr>
+      <tr >
+        <td>Net Profit Margin</td>
+        <td>{{netProfitMargin}}</td>
+      </tr>
+      <tr >
         <td>Current Ratio</td>
         <td>{{currentRatio | number : '1.2-2'}}</td>
       </tr>
-      <tr style=" background-color: white">
+      <tr >
         <td>Quick Ratio</td>
         <td>{{quickRatio | number : '1.2-2'}}</td>
       </tr>
-      <tr style=" background-color: white">
+      <tr >
         <td>Return on Assets</td>
         <td>{{(returnOnTotalAssets | number : '1.2-2') + '%'}}</td>
       </tr>
-      <tr style=" background-color: white">
+      <tr>
         <td>Return on Equity</td>
         <td>{{(returnOnEquity | number : '1.2-2') + '%'}}</td>
       </tr>
     </table>
+      <hr>
   </div>
+</div>
 </div>

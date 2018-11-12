@@ -3,6 +3,8 @@ import {CoAService} from '../services/coa.service';
 import {SharedDataService} from '../services/shared-data.service';
 import {Router} from '@angular/router';
 
+declare var jsPDF: any;
+
 @Component({
   selector: 'app-balance-sheet',
   templateUrl: './balance-sheet.component.html',
@@ -27,6 +29,8 @@ export class BalanceSheetComponent implements OnInit {
   totalEquitynum = 0;
   totalRevenue = 0;
   totalExpense = 0;
+
+
 
   constructor(
     private cserv: CoAService,
@@ -116,6 +120,98 @@ export class BalanceSheetComponent implements OnInit {
     for(let acc of this.stockholdersEquity){
       this.totalEquitynum = +this.totalEquitynum + +acc.currentBalance
     }
+  }
+
+  convertPDF(){
+    let columns = [' ', ' ', ' ', ' '];
+    var doc = new jsPDF('p', 'pt');
+    var rows = [];
+    rows.push(['Assets', ' ', ' ']);
+    rows.push(['Current Assets', ' ', ' ']);
+    for(let acc of this.currentAssets){
+      if(acc.normalSide == 'Debit') {
+        let num = parseFloat(''+Math.round(acc.currentBalance * 100) / 100).toFixed(2);
+        let account = ['   '+ acc.accountName,num, ' '];
+        rows.push(account);
+      }
+      else{
+        let num = parseFloat(''+Math.round(acc.currentBalance * 100) / 100).toFixed(2);
+        let account = ['   '+ acc.accountName, ' ', num];
+        rows.push(account);
+      }
+    }
+    let num8 = parseFloat(''+Math.round(this.totalCurrentAssets * 100) / 100).toFixed(2);
+    rows.push(['Current Total Assets', ' ', num8]);
+    rows.push(['Property, Plant, & Equipment', ' ', ' ']);
+    for(let acc of this.property_plant_equip){
+      if(acc.normalSide == 'Debit') {
+        let num = parseFloat(''+Math.round(acc.currentBalance * 100) / 100).toFixed(2);
+        let account = ['   '+ acc.accountName,num, ' '];
+        rows.push(account);
+      }
+      else{
+        let num = parseFloat(''+Math.round(acc.currentBalance * 100) / 100).toFixed(2);
+        let account = ['   '+ acc.accountName, ' ', num];
+        rows.push(account);
+      }
+    }
+    let num5 = parseFloat(''+Math.round(this.totalPropertynum * 100) / 100).toFixed(2);
+    rows.push(['Property, Plant, & Equipment, net', ' ', num5]);
+    let num6 = +this.totalCurrentAssets + +this.totalPropertynum;
+    let num7 = parseFloat(''+Math.round(num6 * 100) / 100).toFixed(2);
+    rows.push(['Total Assets', ' ', num7]);
+    doc.text(50, 40, this.data.getTrialBalance());
+    rows.push(['Liabilities & Stockholders Equity', ' ', ' ']);
+    rows.push(['Liabilities',' ', ' ']);
+    rows.push(['Current Liabilities',' ', ' ']);
+    for(let acc of this.currentLiabilities){
+      if(acc.normalSide == 'Debit') {
+        let num = parseFloat(''+Math.round(acc.currentBalance * 100) / 100).toFixed(2);
+        let account = ['   '+ acc.accountName,num, ' '];
+        rows.push(account);
+      }
+      else{
+        let num = parseFloat(''+Math.round(acc.currentBalance * 100) / 100).toFixed(2);
+        let account = ['   '+ acc.accountName, ' ', num];
+        rows.push(account);
+      }
+    }
+    for(let acc of this.otherLiabilities){
+      if(acc.normalSide == 'Debit') {
+        let num = parseFloat(''+Math.round(acc.currentBalance * 100) / 100).toFixed(2);
+        let account = [acc.accountName,num, ' '];
+        rows.push(account);
+      }
+      else{
+        let num = parseFloat(''+Math.round(acc.currentBalance * 100) / 100).toFixed(2);
+        let account = [acc.accountName, ' ', num];
+        rows.push(account);
+      }
+    }
+    let num4 = parseFloat(''+Math.round(this.totalLiabilitnum * 100) / 100).toFixed(2);
+    rows.push(['Total Liabilities',' ', num4]);
+    rows.push(['Stockholders Equity', ' ', ' ']);
+    for(let acc of this.stockholdersEquity){
+      if(acc.normalSide == 'Debit') {
+        let num = parseFloat(''+Math.round(acc.currentBalance * 100) / 100).toFixed(2);
+        let account = ['   '+ acc.accountName,num, ' '];
+        rows.push(account);
+      }
+      else{
+        let num = parseFloat(''+Math.round(acc.currentBalance * 100) / 100).toFixed(2);
+        let account = ['   '+ acc.accountName, ' ', num];
+        rows.push(account);
+      }
+    }
+    let num2 = parseFloat(''+Math.round(this.totalEquitynum * 100) / 100).toFixed(2);
+    let num22 =  +this.totalEquitynum + this.totalLiabilitnum
+    let num3 = parseFloat(''+Math.round(num22 * 100) / 100).toFixed(2);
+    rows.push(['Total Stockholders Equity', ' ', num2]);
+    rows.push(['Total Liabilites & Stockholders Equity', ' ', num3]);
+
+    doc.autoTable(columns, rows, {startY: 60, columnStyles: {
+        0: {columnWidth: 350}, 1: {halign: 'right'}, 2: {halign: 'right'}, }});
+    doc.save('Balance Sheet.pdf');
   }
 
 }

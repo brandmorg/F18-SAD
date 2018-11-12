@@ -10,8 +10,7 @@ import {Router} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  public pieChartData:number[] = [300, 500, 300];
-  public pieChartType:string = 'pie';
+
 
   accounts = [];
   assetslist = [];
@@ -37,6 +36,22 @@ export class DashboardComponent implements OnInit {
   totalEquity = 0;
   totalLiabilities = 0;
   netIncome = 0;
+  salesTotal = 0;
+  netProfitMargin = '';
+  grossProfitMargin = '';
+  public lineChartOptions:any = {
+    responsive: true
+  };
+
+  public lineChartLabels:Array<any> = ['Net Income', 'Total Assets'];
+  public pieChartData:number[] = [0, 0];
+  public pieChartType:string = 'pie';
+
+  public lineChartEquityLabels:Array<any> = ['Net Income', 'Equity'];
+  public pieChartEquityData:number[] = [0, 0];
+  public colors:Array<any> = [{
+    backgroundColor: ['rgba(0,128,0,0.7)', 'rgba(255,0,0,0.7)']}
+  ];
 
   constructor(
     private cserv: CoAService,
@@ -47,6 +62,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.viewAccounts();
+
   }
 
   async viewAccounts() {
@@ -127,6 +143,15 @@ export class DashboardComponent implements OnInit {
 
     this.returnOnEquity = parseFloat((+this.returnOnEquity * 100).toFixed(2));
     console.log('return on equity: '+ this.returnOnEquity);
+
+    //calculate Net Profit margin
+    if(this.salesTotal == 0){
+      this.netProfitMargin = '(Sales unavailable)';
+      this.grossProfitMargin = '(Sales unavailable)';
+    }
+
+    this.pieChartData = [this.netIncome, this.totalAssets];
+    this.pieChartEquityData = [this.netIncome, this.totalEquity];
 
 
   }

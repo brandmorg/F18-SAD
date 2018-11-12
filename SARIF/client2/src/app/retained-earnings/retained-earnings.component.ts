@@ -4,6 +4,8 @@ import {CoAService} from '../services/coa.service';
 import {SharedDataService} from '../services/shared-data.service';
 import {Router} from '@angular/router';
 
+declare var jsPDF: any;
+
 @Component({
   selector: 'app-retained-earnings',
   templateUrl: './retained-earnings.component.html',
@@ -55,6 +57,26 @@ export class RetainedEarningsComponent implements OnInit {
       this.totalExpense = +this.totalExpense + +acc.currentBalance;
     }
     this.netIncome = +this.totalRevenue - +this.totalExpense
+  }
+
+  convertPDF(){
+    let columns = [' ', ' '];
+    var doc = new jsPDF('p', 'pt');
+    var rows = [];
+    let num = parseFloat(''+Math.round(this.netIncome * 100) / 100).toFixed(2);
+    rows.push(['Beg Retained Earnings', '$0.00']);
+    rows.push(['Add: Net Income', num]);
+    rows.push(['Less: Dividends', "0.00"]);
+    let num2 = parseFloat(''+Math.round((this.netIncome - 0) * 100) / 100).toFixed(2);
+    rows.push(['End Retained Earnings', num2]);
+
+
+
+    doc.text(50, 40, this.data.getTrialBalance());
+
+    doc.autoTable(columns, rows, {startY: 60, columnStyles: {
+        0: {columnWidth: 350}, 1: {halign: 'right'}}});
+    doc.save('Statement of Retained Earnings.pdf');
   }
 
 
