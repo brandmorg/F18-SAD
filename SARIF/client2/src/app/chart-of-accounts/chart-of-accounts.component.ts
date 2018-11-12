@@ -19,6 +19,7 @@ export class ChartOfAccountsComponent implements OnInit {
   editCoA = new CoA();
   accounts = [];
   accountData = new CoA();
+  prevData = new CoA();
   accountId: number;
   temp = [];
 //input data for search and sort
@@ -163,7 +164,8 @@ export class ChartOfAccountsComponent implements OnInit {
           this.CoA.accountName = this.CoA.accountName.replace(/^\s+|\s+$/g, "");
           this.coaService.addAccount(this.CoA)
             .subscribe(() => {
-              this.logData.create(this.comp.getUserName(), this.CoA.createdBy + 'created account ' + this.CoA.accountName).subscribe();
+              let accountDataString = JSON.stringify(this.CoA);
+              this.logData.createAccountLog(this.comp.getUserName(), "Account created", accountDataString).subscribe();
               //Close modal
               let modal = document.getElementById("createAccountModal");
               modal.style.display = "none";
@@ -202,6 +204,14 @@ export class ChartOfAccountsComponent implements OnInit {
   }
 
   submitEdit() {
+    var prevDataString = "";
+    this.coaService.getByName(this.editCoA.accountName)
+    .subscribe((account) => {
+      this.prevData = account;
+      prevDataString = JSON.stringify(account);
+    })
+    console.log(this.prevData);
+    
     if ((this.editCoA.accountNumber != null) && isNaN(this.editCoA.accountNumber)) {
       return window.alert("Enter a number for account number");
     };
@@ -213,7 +223,6 @@ export class ChartOfAccountsComponent implements OnInit {
     this.editCoA.caId = this.accountId;
 
     console.log('previous balance' +this.accountData.currentBalance);
-
     //Set asset and revenue account types to normal side debit
     if (this.editCoA.accountType == "Assets" || this.editCoA.accountType == "Expenses") {
       this.editCoA.normalSide = "Debit";
@@ -237,7 +246,8 @@ export class ChartOfAccountsComponent implements OnInit {
       console.log('edit made');
       this.coaService.updateAccount(this.editCoA)
         .subscribe(() => {
-          this.logData.create(this.comp.getUserName(), 'Updated account ' + this.editCoA.accountName).subscribe();
+          var newDataString = JSON.stringify(this.editCoA);
+          this.logData.updateAccountLog(this.comp.getUserName(), 'Account updated', prevDataString, newDataString).subscribe();
           let modal = document.getElementById("editAccountModal");
           modal.style.display = "none";
           this.viewAccountsSort(this.column, 'ASC', this.columnSearch, this.criteria);

@@ -25,3 +25,10 @@ exports.findById = (req, res) => {
         res.json(log);
     })
 };
+
+//Find a log by type
+exports.findByType = (req, res) => {
+    Log.findByType(req.params.actionType).then(log => {
+        res.json(log);
+    })
+}
