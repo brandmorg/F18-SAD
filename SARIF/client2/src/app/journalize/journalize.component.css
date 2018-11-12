@@ -160,4 +160,42 @@ input:checked + .slider:before {
   line-height: .4;
 }
 
+.modal2{
+  position: fixed;
+  z-index: 1;
+  top: -100%;
+  opacity: 0;
+  transition: top 0.4s, opacity 0.4s;
+}
+.modal-content3{
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+
+}
+.modal2.show {
+  z-index: 0;
+  top: 0;
+  opacity: 1;
+}
+
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+.modal-content4{
+  white-space:pre-wrap;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+  height: 90%;
+}
 

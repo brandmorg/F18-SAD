@@ -39,12 +39,19 @@ module.exports = function(app) {
                 FileData: fileData,
                 JournalID: 1
             }).then(upFile => {
-                res.json('file accepted');
+                res.json(upFile.FileId);
             })
         }
 
     });
 
+    app.post('/api/retreiveJournalFiles', (req, res) =>{
+        let ID = req.body.jID;
+        uploadFiles.findOne({where:{FileId: ID }}).then(file => {
+            res.json(file);
+        })
+
+    });
     // Retrieve a single journal by Id
     //app.get('/api/journalFiles:entry', journalFiles.findById);
 }

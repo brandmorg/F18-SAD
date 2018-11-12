@@ -26,7 +26,8 @@
     <tr *ngFor="let account of accountList2">
       <td>{{ account.Date | date: 'MM/dd/yyyy'}}</td>
       <td>{{ account.AccountNumber }}</td>
-      <td>{{ account.Description }}</td>
+      <td *ngIf="account.Description != null">{{ account.Description }}</td>
+      <td *ngIf="account.Description == null">None</td>
       <td >
         <button class="btn btn-link" (click)="viewJournal(account.Reference)">{{account.Reference}}</button>
       </td>
