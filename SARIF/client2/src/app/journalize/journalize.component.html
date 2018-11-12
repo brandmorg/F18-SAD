@@ -1,11 +1,11 @@
 
 
 <div id="viewSource" class="modal">
-  <div class="modal-content4" style=" white-space: pre;">
-    <div style=" white-space: pre;">
+  <div class="modal-content4">
+    <div style="white-space: pre-line;">
     {{documentInfo}}
     </div>
-    <div  style="position: fixed; bottom: 15%">
+    <div  style="position: fixed; bottom: 15%; ">
      <button style="position: fixed" (click)="closeFile()">Close</button>
     </div>
   </div>
@@ -188,17 +188,17 @@
 
     <tr *ngFor="let journal of journals | paginate: { itemsPerPage: 5, currentPage: currPage }">
       <td style="vertical-align: top"  >{{ journal.Date | date: 'MM/dd/yyyy'}}</td>
-      <td>
+      <td style="vertical-align: top">
+        <table>
         <tr *ngFor="let jaccount of journal.JournalAccounts" style=" background-color: transparent">
-         <td class="accountslist2">{{jaccount.Type}}
+         <td class="accountslist2" >{{jaccount.Type}}
          </td>
         </tr>
-        <tr style=" background-color: transparent">
-             <td class="accountslist">&nbsp;</td>
-        </tr>
+      </table>
       </td>
       <td style="vertical-align: top" >{{ journal.CreatedBy }}</td>
       <td>
+       <table>
         <tr *ngFor="let jaccount of journal.JournalAccounts" style=" background-color: transparent" >
           <td  class="accountslist2" *ngIf="jaccount.NormalSide == 'Credit'" >
             <button class="btn btn-link " style="color: dodgerblue" (click)="viewLedger(jaccount.AccountName)" id="button1" >{{ jaccount.AccountName }}</button></td>
@@ -214,12 +214,12 @@
             <button class="btn btn-link " style="color: dodgerblue" (click)="getJournalFile(journal.FileID)" >View Document</button>
           </td>
         </tr>
-      </td>
+      </table>
 
       <td style="vertical-align: top">{{ journal.Reference }}</td>
 
-      <td >
-        <table class="tableAlign">
+      <td style="vertical-align: top">
+        <table class="tableAlign" >
         <tr *ngFor="let jaccount of journal.JournalAccounts; let b = index" style=" background-color: transparent">
           <td class="accountslist"  *ngIf="jaccount.DebitAmount == null"  style="text-align: right;">&nbsp;</td>
           <td class="accountslist"  *ngIf="jaccount.DebitAmount != null && b == 0"  style="float:right">{{"$"+(jaccount.DebitAmount | number : '1.2-2')}}</td>
@@ -231,7 +231,7 @@
         </table>
       </td>
 
-      <td >
+      <td style="vertical-align: top">
         <table class="tableAlign">
         <tr *ngFor="let jaccount of journal.JournalAccounts; let i = index" style=" background-color: transparent;">
           <td class="accountslist"  *ngIf="jaccount.CreditAmount == null"  style="text-align: right;">&nbsp;</td>
@@ -253,8 +253,6 @@
         <button class="btn btn-danger" style="width: 95px" (click)="declineJournal(journal)"  *ngIf="journal.acceptance == null" >Decline</button>
       </div>
     </td>
-
-    </tr>
   </table>
   <pagination-controls (pageChange)="currPage = $event"></pagination-controls>
 </div>
