@@ -44,6 +44,7 @@ export class ChartOfAccountsComponent implements OnInit {
   quantity = 10;
   //current page
   currPage = 1;
+  perPage = 10;
 
 //currencyMask
   private currencyMask = createNumberMask({

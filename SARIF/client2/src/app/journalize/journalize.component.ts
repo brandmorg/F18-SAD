@@ -74,6 +74,7 @@ export class JournalizeComponent implements OnInit {
 
   //current page
   currPage = 1;
+  perPage = 5;
 
   myDatePickerOptions: IMyDpOptions = {
     dateFormat: 'dd.mm.yyyy',

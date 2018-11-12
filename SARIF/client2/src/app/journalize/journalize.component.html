@@ -186,7 +186,7 @@
     </tr>
     </thead>
 
-    <tr *ngFor="let journal of journals | paginate: { itemsPerPage: 5, currentPage: currPage }">
+    <tr *ngFor="let journal of journals | paginate: { itemsPerPage: perPage, currentPage: currPage }">
       <td style="vertical-align: top"  >{{ journal.Date | date: 'MM/dd/yyyy'}}</td>
       <td style="vertical-align: top">
         <table>
@@ -254,5 +254,18 @@
       </div>
     </td>
   </table>
-  <pagination-controls (pageChange)="currPage = $event"></pagination-controls>
+  <div style="display: inline-block">
+    <div style="float: left; width: 100px; position: relative; left: 5px; top: 3px">
+    <p >{{"Per Page:"}}</p>
+    </div>
+    <select id="perPage" class="form-control" style="position:relative; float: left; width: 75px; right: 20px"
+            [(ngModel)]="perPage"
+            name="account">
+      <option>5</option>
+      <option>10</option>
+      <option>15</option>
+      <option>20</option>
+    </select>
+  <pagination-controls style="float: left" (pageChange)="currPage = $event"></pagination-controls>
+  </div>
 </div>

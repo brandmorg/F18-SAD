@@ -46,6 +46,7 @@ export class AddUserComponent implements OnInit {
 
   //current page
   currPage = 1;
+  perPage = 10;
 
   constructor(
     private router: Router,
