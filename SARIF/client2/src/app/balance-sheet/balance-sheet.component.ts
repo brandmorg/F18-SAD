@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CoAService} from '../services/coa.service';
 import {SharedDataService} from '../services/shared-data.service';
 import {Router} from '@angular/router';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 declare var jsPDF: any;
 
@@ -49,19 +50,19 @@ export class BalanceSheetComponent implements OnInit {
     this.accounts = result;
 
     for(let acc of this.accounts){
-      if(acc.accountSubType == 'Current Assets'){
+      if(acc.accountSubType == 'Current Assets' && acc.currentBalance != 0){
         this.currentAssets.push(acc);
       }
-      else if(acc.accountType == 'Liability' && acc.accountSubType == 'Current Liabilities'){
+      else if(acc.accountType == 'Liability' && acc.accountSubType == 'Current Liabilities' && acc.currentBalance != 0){
         this.currentLiabilities.push(acc);
       }
-      else if(acc.accountType == 'Liability' && acc.accountSubType != 'Current Liabilities'){
+      else if(acc.accountType == 'Liability' && acc.accountSubType != 'Current Liabilities' && acc.currentBalance != 0){
         this.otherLiabilities.push(acc);
       }
-      else if(acc.accountSubType =='Property, Plant, and Equipment'){
+      else if(acc.accountSubType =='Property, Plant, and Equipment' && acc.currentBalance != 0){
         this.property_plant_equip.push(acc);
       }
-      else if(acc.accountSubType == "Stocholders' Equity") {
+      else if(acc.accountSubType == "Stocholders' Equity" && acc.currentBalance != 0) {
         this.stockholdersEquity.push(acc);
       }
       else {
@@ -90,7 +91,9 @@ export class BalanceSheetComponent implements OnInit {
     for(let acc of this.accounts){
       if(acc.accountName == 'Retained Earnings'){
         acc.currentBalance = +this.totalRevenue - +this.totalExpense;
+        this.stockholdersEquity.push(acc);
       }
+
     }
     this.totalCurrAssets();
     this.totalProperty();
@@ -120,6 +123,20 @@ export class BalanceSheetComponent implements OnInit {
     for(let acc of this.stockholdersEquity){
       this.totalEquitynum = +this.totalEquitynum + +acc.currentBalance
     }
+  }
+
+  convertNumNegative(num: number){
+    if(num < 0){
+      return Math.abs(num);
+    }
+    else {
+      return num
+    }
+  }
+
+  viewLedger(accountName){
+    this.data.setAccount(accountName);
+    this.router.navigate(['UserPage/ledger', accountName]);
   }
 
   convertPDF(){

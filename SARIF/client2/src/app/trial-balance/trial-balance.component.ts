@@ -40,7 +40,6 @@ export class TrialBalanceComponent implements OnInit {
     this.creditTotal = 0;
     this.viewAccounts();
     console.log('hello');
-
   }
 
   async viewAccounts() {
@@ -65,6 +64,35 @@ export class TrialBalanceComponent implements OnInit {
         this.expensesList.push(acc);
       }
     }
+
+    this.assetslist.sort(function(a, b) {
+      var textA = a.accountNumber;
+      var textB = b.accountNumber;
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
+
+    this.liabilitiesList.sort(function(a, b) {
+      var textA = a.accountNumber;
+      var textB = b.accountNumber;
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
+
+    this.equitList.sort(function(a, b) {
+      var textA = a.accountNumber;
+      var textB = b.accountNumber;
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
+
+    this.revenueList.sort(function(a, b) {
+      var textA = a.accountNumber;
+      var textB = b.accountNumber;
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
+    this.expensesList.sort(function(a, b) {
+      var textA = a.accountNumber;
+      var textB = b.accountNumber;
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
     //put arranged lists into one list
 
     for(let asset of this.assetslist){
@@ -88,6 +116,15 @@ export class TrialBalanceComponent implements OnInit {
 
     this.totalDebit();
     this.totalCredit();
+  }
+
+  convertNumNegative(num: number){
+    if(num < 0){
+      return Math.abs(num);
+    }
+    else {
+      return num
+    }
   }
 
   totalDebit(){

@@ -77,7 +77,7 @@ export class JournalizeComponent implements OnInit {
   perPage = 5;
 
   myDatePickerOptions: IMyDpOptions = {
-    dateFormat: 'dd.mm.yyyy',
+    dateFormat: 'mm.dd.yyyy',
     editableDateField: false
   };
 
@@ -96,7 +96,7 @@ export class JournalizeComponent implements OnInit {
     allowLeadingZeroes: false
   });
 
-  model: any = {date: {year: 2018, month: 11, day: 12}};
+  model: any = {date: {year: 2018,  day: 16, month: 11}};
 
 
   constructor(

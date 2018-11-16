@@ -14,3 +14,11 @@ tr:nth-child(even) {
 table, h3, h2, td {
   color: black;
 }
+
+h6.dblUnderlined { border-bottom: 6px double; }
+
+.newclass{
+  border-bottom:1px solid #000;
+  text-decoration:underline;
+  display:inline-block;
+}

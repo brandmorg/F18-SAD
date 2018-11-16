@@ -14,3 +14,9 @@ tr:nth-child(even) {
 table, h3, h2, td {
   color: black;
 }
+
+.newclass{
+  border-bottom:1px solid #000;
+  text-decoration:underline;
+  display:inline-block;
+}

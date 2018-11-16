@@ -2,8 +2,11 @@
   <table id="ledgerTable" style="width: 70%; table-layout:fixed">
     <tr>
       <th colspan="2" class="text-center">
+        <div>
+          <label style="line-height: 0px">Sarif Financial</label>
+        </div>
        <div>
-        <label>Statement of Retained Earnings</label>
+        <label style="line-height: 0px">Statement of Retained Earnings</label>
        </div>
         <div>
         <label>{{'For the Year Ended ' + (currentDate | date: 'MM/dd/yyyy')}}</label>
@@ -20,11 +23,11 @@
     </tr>
     <tr>
       <td style="width: 70%; ; position: relative">Less: Dividends</td>
-      <td style="text-align: right;">{{(0 | number : '1.2-2')}}</td>
+      <td style="text-align: right;"><u>{{(0 | number : '1.2-2')}}</u></td>
     </tr>
     <tr>
       <th>End Retained Earnings</th>
-      <td style="text-align: right;">{{(netIncome - 0 | number : '1.2-2')}}</td>
+      <td style="text-align: right;"><p class="newclass">{{'$'+(netIncome - 0 | number : '1.2-2')}}</p></td>
     </tr>
   </table>
   <button class="btn btn-primary" (click)="convertPDF()">Download Table</button>

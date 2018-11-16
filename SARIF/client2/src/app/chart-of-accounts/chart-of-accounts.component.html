@@ -128,6 +128,7 @@
         <label for="accountSubType">Account Subtype: {{ accountData.accountSubType}}</label><br>
         <select required [(ngModel)]="editCoA.accountSubType" value="{{accountData.accountSubType}}" name="accountSubType" #accountSubType="ngModel">
           <option>Current Assets</option>
+          <option>Long-term Assets</option>
           <option>Property, Plant, and Equipment</option>
           <option>Current Liabilities</option>
           <option>Long-term Liabilities</option>

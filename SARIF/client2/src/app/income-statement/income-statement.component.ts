@@ -54,6 +54,11 @@ export class IncomeStatementComponent implements OnInit {
     }
   }
 
+  viewLedger(accountName){
+    this.data.setAccount(accountName);
+    this.router.navigate(['UserPage/ledger', accountName]);
+  }
+
   convertPDF(){
     let columns = [' ', ' '];
     var doc = new jsPDF('p', 'pt');

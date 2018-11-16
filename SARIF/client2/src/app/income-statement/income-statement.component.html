@@ -3,7 +3,10 @@
     <tr>
       <th colspan="2" class="text-center">
         <div>
-        <label>Income Statement</label>
+          <label style="line-height: 0px">Sarif Financial</label>
+        </div>
+        <div>
+        <label style="line-height: 0px">Income Statement</label>
         </div>
         <div>
         <label>{{'For the Year Ended ' + (currentDate | date: 'MM/dd/yyyy')}}</label>
@@ -13,13 +16,14 @@
     <tr>
       <th colspan="2" >Revenues</th>
     </tr>
-    <tr *ngFor="let accounts of revenueAccounts">
-      <td style="width: 70%;   text-indent: 25px ; position: relative">{{accounts.accountName}}</td>
-      <td style="text-align: right;">{{accounts.currentBalance | number : '1.2-2'}}</td>
+    <tr *ngFor="let accounts of revenueAccounts; let b = index">
+      <td style="width: 70%;   text-indent: 25px ; position: relative"><button class="btn btn-link" (click)="viewLedger(accounts.accountName)">{{accounts.accountName}}</button></td>
+      <td style="text-align: right;" *ngIf="b == 0">{{'$'+(accounts.currentBalance | number : '1.2-2')}}</td>
+      <td style="text-align: right;" *ngIf="b != 0">{{(accounts.currentBalance | number : '1.2-2')}}</td>
     </tr>
     <tr>
       <th >Total Revenues</th>
-      <td style="text-align: right;">{{totalRevenue | number : '1.2-2'}}</td>
+      <td style="text-align: right;"><u>{{totalRevenue | number : '1.2-2'}}</u></td>
     </tr>
     <tr >
       <th colspan="2" >&nbsp;</th>
@@ -28,19 +32,19 @@
       <th colspan="2" >Expenses</th>
     </tr>
     <tr *ngFor="let accounts of expenseAccounts">
-      <td style=";   text-indent: 25px">{{accounts.accountName}}</td>
+      <td style=";   text-indent: 25px"><button class="btn btn-link" (click)="viewLedger(accounts.accountName)">{{accounts.accountName}}</button></td>
       <td style="text-align: right;">{{accounts.currentBalance | number : '1.2-2'}}</td>
     </tr>
     <tr>
       <th >Total Expenses</th>
-      <td style="text-align: right;">{{totalExpense | number : '1.2-2'}}</td>
+      <td style="text-align: right;"><u>{{totalExpense | number : '1.2-2'}}</u></td>
     </tr>
     <tr >
       <th colspan="2" >&nbsp;</th>
     </tr>
     <tr>
       <th >Net Income</th>
-      <td style="text-align: right;">{{totalRevenue - totalExpense | number : '1.2-2'}}</td>
+      <td style="text-align: right;"><p class="newclass">{{'$'+(totalRevenue - totalExpense | number : '1.2-2')}}</p></td>
     </tr>
 
   </table>
