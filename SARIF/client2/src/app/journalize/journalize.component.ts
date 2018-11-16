@@ -295,7 +295,6 @@ export class JournalizeComponent implements OnInit {
   }
 
   removeDebit(index) {
-    this.checkRepeatDebitAccount();
     if (index > -1) {
       this.journalAccountsDebit.splice(index, 1);
     }
@@ -303,75 +302,76 @@ export class JournalizeComponent implements OnInit {
   }
 
   removeCredit(index) {
-    this.checkRepeatCreditAccount();
     if (index > -1) {
       this.journalAccountsCredit.splice(index, 1);
     }
   }
 
+  checkRepeatAccounts(){
+    //check debit repeats
+    for(let acc1 of this.journalAccountsDebit){
+      console.log(acc1.AccountName);
+      for(let acc2 of this.journalAccountsDebit){
+        if(acc1.AccountName == null || acc1.AccountName == undefined){
+          this.repeatCreditAccount = 1;
+        }
+        else if (this.journalAccountsDebit.indexOf(acc1) == this.journalAccountsDebit.indexOf(acc2)) {
+          this.repeatCreditAccount = 1;
+          console.log('nope debit');
+        }
+        else if(acc1.AccountName == acc2.AccountName){
+          this.repeatCreditAccount = 0;
+          return
+        }
+      }
 
-  checkRepeatDebitAccount() {
-    console.log('repeat');
-    for (let acc1 of this.journalAccountsDebit) {
-      for (let acc2 of this.journalAccountsDebit) {
-        if (this.journalAccountsDebit.indexOf(acc1) == this.journalAccountsDebit.indexOf(acc2)) {
-          this.repeatDebitAccount = 1;
+      for(let acc2 of this.journalAccountsCredit){
+        if(acc2.AccountName == null || acc2.AccountName == undefined){
+          this.repeatCreditAccount = 1;
         }
-        else if (acc1.AccountName == acc2.AccountName) {
-          this.repeatDebitAccount = 0;
-          console.log('Duplicate');
-          return;
-        }
-        else {
-          this.repeatDebitAccount = 1;
-        }
-        for (let acc3 of this.journalAccountsCredit) {
-          if (acc1.AccountName == acc3.AccountName) {
-            this.repeatDebitAccount = 0;
-            return;
-          }
-          else {
-            this.repeatDebitAccount = 1;
-          }
+       else if(acc1.AccountName == acc2.AccountName){
+          this.repeatCreditAccount = 0;
+          return
         }
       }
     }
-
-
-  }
-
-  checkRepeatCreditAccount() {
-    console.log('repeat');
-    for (let acc1 of this.journalAccountsCredit) {
-      for (let acc2 of this.journalAccountsCredit) {
-        if (this.journalAccountsCredit.indexOf(acc1) == this.journalAccountsCredit.indexOf(acc2)) {
+    //check credit repeats
+    for(let acc1 of this.journalAccountsCredit){
+      for(let acc2 of this.journalAccountsCredit){
+        if(acc1.AccountName == null || acc1.AccountName == undefined){
           this.repeatCreditAccount = 1;
         }
-        else if (acc1.AccountName == acc2.AccountName) {
+        else if (this.journalAccountsCredit.indexOf(acc1) == this.journalAccountsCredit.indexOf(acc2)) {
+          this.repeatCreditAccount = 1;
+        }
+        else if(acc1.AccountName == acc2.AccountName){
           this.repeatCreditAccount = 0;
-          console.log('Duplicate');
-          return;
-        }
-        else {
-          this.repeatCreditAccount = 1;
+          console.log('dup credit');
+          return
         }
       }
-      for (let acc3 of this.journalAccountsDebit) {
-        if (acc1.AccountName == acc3.AccountName) {
-          this.repeatCreditAccount = 0;
-          return;
-        }
-        else {
+      for(let acc2 of this.journalAccountsDebit){
+        if(acc2.AccountName == null || acc2.AccountName == undefined){
           this.repeatCreditAccount = 1;
+        }
+        else if(acc1.AccountName == acc2.AccountName){
+          this.repeatCreditAccount = 0;
+          return
         }
       }
     }
+    this.repeatCreditAccount = 1;
   }
+
+
 
   //posting and updating tables including: journal and journal accounts
   async submit() {
     if (this.totalDebit != this.totalCredit) {
       this.totalsmatch = 0;
+    }
+    else if(this.repeatCreditAccount == 0){
+      console.log('cannot continue');
     }
     else {
       let fileID= -1;

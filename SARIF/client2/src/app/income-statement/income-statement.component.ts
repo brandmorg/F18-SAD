@@ -20,6 +20,8 @@ export class IncomeStatementComponent implements OnInit {
   totalRevenue = 0;
   totalExpense = 0;
 
+  loss = '';
+
   constructor(
     private cserv: CoAService,
     private data: SharedDataService,
@@ -51,6 +53,10 @@ export class IncomeStatementComponent implements OnInit {
 
     for(let acc of this.expenseAccounts){
       this.totalExpense = +this.totalExpense + +acc.currentBalance;
+    }
+
+    if(this.totalRevenue > this.totalExpense){
+      this.loss = '(Loss)';
     }
   }
 
@@ -86,6 +92,8 @@ export class IncomeStatementComponent implements OnInit {
     let num3 = +this.totalRevenue - +this.totalExpense;
     let num4 = parseFloat(''+Math.round(num3 * 100) / 100).toFixed(2);
     rows.push(['Net Income', num4]);
+
+
 
 
 
