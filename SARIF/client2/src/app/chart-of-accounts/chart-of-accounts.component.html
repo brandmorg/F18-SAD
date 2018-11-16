@@ -86,9 +86,9 @@
       </div>
 
 
-      <button (click)="submit()" id="submitBtn" [disabled]="!addAccountForm.form.valid">Submit</button>
-      <input type="reset">
-      <button (click)="close()" id="closeModalBtn4">Cancel</button>
+      <button (click)="submit()" id="submitBtn" [disabled]="!addAccountForm.form.valid" class="btn btn-primary ">Submit</button>
+      <input type="reset" class="btn btn-info" style="position: relative; left: 5px">
+      <button (click)="close()" id="closeModalBtn4" class="btn btn-danger" style="position: relative; left: 10px">Cancel</button>
     </form>
   </div>
 </div>
@@ -172,9 +172,9 @@
         Balance must be in decimal format
       </div>
 
-      <button (click)="submitEdit()" id="submitEditBtn">Submit</button>
-      <button (click)="resetUpdate()" id="closeModalBtn3">Reset</button>
-      <button (click)="close2()" id="closeModalBtn">Cancel</button>
+      <button (click)="submitEdit()" id="submitEditBtn" class="btn btn-primary ">Submit</button>
+      <button (click)="resetUpdate()" id="closeModalBtn3" class="btn btn-info" style="position: relative; left: 5px">Reset</button>
+      <button (click)="close2()" id="closeModalBtn" class="btn btn-danger" style="position: relative; left: 10px">Cancel</button>
     </form>
   </div>
 </div>
