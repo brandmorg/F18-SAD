@@ -439,10 +439,10 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="133" />
-    <option name="y" value="145" />
+    <option name="x" value="206" />
+    <option name="y" value="51" />
     <option name="width" value="1551" />
-    <option name="height" value="930" />
+    <option name="height" value="973" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -565,7 +565,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
-    <property name="ts.external.directory.path" value="C:\Users\tyler\OneDrive\Documents\GitHub\F18-SAD\SARIF\client2\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="C:\Users\tyler_000\Documents\GitHub\F18-SAD\SARIF\client2\node_modules\typescript\lib" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
