@@ -1,13 +1,12 @@
 <div class="form-group">
   <table id="ledgerTable" style=" table-layout:fixed">
     <tr>
-      <th colspan="7" >
+      <th colspan="6" >
         <label>{{'Account #: '+ currentCoA.accountNumber}}</label>
         <label style="margin: auto; padding-left: 40%">{{account}}</label></th>
     <tr>
     <tr>
       <th >Date</th>
-      <th >Number</th>
       <th >Description</th>
       <th >REF</th>
       <th >Debit</th>
@@ -20,12 +19,10 @@
       <th ></th>
       <th ></th>
       <th ></th>
-      <th ></th>
       <th style="text-align: right;">0</th>
     </tr>
     <tr *ngFor="let account of accountList2">
       <td>{{ account.Date | date: 'MM/dd/yyyy'}}</td>
-      <td>{{ account.AccountNumber }}</td>
       <td *ngIf="account.Description != null">{{ account.Description }}</td>
       <td *ngIf="account.Description == null">None</td>
       <td >

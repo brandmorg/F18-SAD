@@ -37,10 +37,10 @@ export class IncomeStatementComponent implements OnInit {
     let result = await this.cserv.findAllSort('caId', 'ASC', 'All', null).toPromise();
     this.accounts = result;
     for(let acc of this.accounts){
-      if(acc.accountType == 'Revenue'){
+      if(acc.accountType == 'Revenue' && acc.currentBalance != 0){
         this.revenueAccounts.push(acc);
       }
-      else if(acc.accountType == 'Expenses' ){
+      else if(acc.accountType == 'Expenses' && acc.currentBalance != 0){
         this.expenseAccounts.push(acc);
       }else{
         console.log('neither')

@@ -48,20 +48,22 @@ export class TrialBalanceComponent implements OnInit {
     this.accounts = result;
     //arranging accounts by type
     for(let acc of this.accounts){
-      if(acc.accountType == 'Assets'){
+      if(acc.accountType == 'Assets' && acc.currentBalance != 0){
         this.assetslist.push(acc);
       }
-      else if(acc.accountType == 'Liability'){
+      else if(acc.accountType == 'Liability'  && acc.currentBalance != 0){
         this.liabilitiesList.push(acc);
       }
-      else if(acc.accountType == 'Equity'){
+      else if(acc.accountType == 'Equity'  && acc.currentBalance != 0){
         this.equitList.push(acc);
       }
-      else if(acc.accountType == 'Revenue'){
+      else if(acc.accountType == 'Revenue'  && acc.currentBalance != 0){
         this.revenueList.push(acc);
       }
       else{
-        this.expensesList.push(acc);
+        if(acc.currentBalance != 0) {
+          this.expensesList.push(acc);
+        }
       }
     }
 

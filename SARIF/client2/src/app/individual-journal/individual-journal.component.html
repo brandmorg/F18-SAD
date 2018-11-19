@@ -31,12 +31,8 @@
 
     <tr >
       <td style="vertical-align: top"  >{{ thisJournal.Date | date: 'MM/dd/yyyy'}}</td>
-      <td style="vertical-align: top">
-    <table>
-    <tr *ngFor="let jaccount of thisJournal.JournalAccounts" style=" background-color: transparent">
-      <td class="accountslist2">{{jaccount.Type}}</td>
-    </tr>
-    </table>
+    <td style="vertical-align: top">
+      Type
     </td>
     <td style="vertical-align: top" >{{ thisJournal.CreatedBy }}</td>
     <td>
@@ -63,17 +59,17 @@
     <td style="vertical-align: top">{{ thisJournal.Reference }}</td>
 
     <td style="vertical-align: top">
-      <table class="tableAlign" style="vertical-align: top">
+      <table  style="vertical-align: top">
         <tr *ngFor="let jaccount of thisJournal.JournalAccounts; let b = index" style=" background-color: transparent">
           <td class="accountslist"  *ngIf="jaccount.DebitAmount == null"  style="text-align: right;">&nbsp;</td>
-          <td class="accountslist"  *ngIf="jaccount.DebitAmount != null && b == 0"  style="float:right">{{"$"+(jaccount.DebitAmount | number : '1.2-2')}}</td>
+          <td class="accountslist"  *ngIf="jaccount.DebitAmount != null && b == 0"  style="text-align:right">{{"$"+(jaccount.DebitAmount | number : '1.2-2')}}</td>
           <td class="accountslist3"  *ngIf="jaccount.DebitAmount != null && b != 0"  style="text-align: right;">{{(jaccount.DebitAmount | number : '1.2-2')}}</td>
         </tr>
       </table>
     </td>
 
     <td style="vertical-align: top">
-      <table class="tableAlign" style="vertical-align: top">
+      <table  style="vertical-align: top">
         <tr *ngFor="let jaccount of thisJournal.JournalAccounts; let i = index" style=" background-color: transparent;">
           <td class="accountslist"  *ngIf="jaccount.CreditAmount == null"  style="text-align: right;">&nbsp;</td>
           <td class="accountslist"  *ngIf="jaccount.CreditAmount != null && i == getNumberDebits(thisJournal.JournalAccounts)"  style="text-align: right;">{{"$"+(jaccount.CreditAmount | number : '1.2-2')}}</td>

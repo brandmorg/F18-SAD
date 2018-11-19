@@ -1,3 +1,5 @@
+import { JournalAccount } from './journalAccount';
+
 export class Journal {
   JId: number;
   Date: Date;
@@ -5,5 +7,6 @@ export class Journal {
   Reference: string;
   CreatedBy: string;
   FileID: number;
+  JournalAccounts: JournalAccount[];
   acceptance: string;
 }

@@ -34,6 +34,15 @@
           <my-date-picker name="myDate" [options]="myDatePickerOptions" [(ngModel)]="model"  required></my-date-picker>
             </div>
 
+          <div>
+            <label>Account Type</label>
+            <select id="selectType" class="form-control" style="width: 200px" required>
+              <option selected>Normal</option>
+              <option>Adjusting</option>
+              <option>Post-Closing</option>
+            </select>
+          </div>
+
 
           <hr id="journalAccountAddTable">
           <table>

@@ -22,9 +22,9 @@ const httpOptions = {
 })
 export class IndividualJournalComponent implements OnInit {
   documentInfo = '';
-  private fileRetrieve = 'http://localhost:8080/api/retreiveJournalFiles';
-   thisJournal: any;
-  private journals = [];
+  fileRetrieve = 'http://localhost:8080/api/retreiveJournalFiles';
+   thisJournal: Journal;
+  journals = [];
 
   constructor(
     private journalServ: JournalizeService,
@@ -45,6 +45,7 @@ export class IndividualJournalComponent implements OnInit {
         for(let journ of this.journals){
           if(temp == journ.Reference){
             this.thisJournal = journ;
+            console.log(this.thisJournal);
             break
           }
         }

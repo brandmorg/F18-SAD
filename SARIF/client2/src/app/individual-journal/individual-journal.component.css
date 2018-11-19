@@ -1,6 +1,5 @@
 td, th {
   border: 1px solid #6e7d93;
-  text-align: left;
   padding: 8px;
 }
 tr:nth-child(even) {
@@ -51,6 +50,7 @@ table, h3, h2, td {
 }
 .accountslist3{
   background-color: transparent;
+  text-align: right;
   border: none;
 }
 .accountslist4{
